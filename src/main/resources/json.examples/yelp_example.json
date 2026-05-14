@@ -1,0 +1,571 @@
+{
+    "businesses": [
+        {
+            "alias": "viva-napoli-valència",
+            "attributes": {
+                "business_temp_closed": null,
+                "menu_url": null,
+                "open24_hours": null,
+                "waitlist_reservation": null
+            },
+            "business_hours": [
+                {
+                    "hours_type": "REGULAR",
+                    "is_open_now": false,
+                    "open": [
+                        {
+                            "day": 0,
+                            "end": "1600",
+                            "is_overnight": false,
+                            "start": "1330"
+                        },
+                        {
+                            "day": 0,
+                            "end": "2330",
+                            "is_overnight": false,
+                            "start": "2000"
+                        },
+                        {
+                            "day": 2,
+                            "end": "2330",
+                            "is_overnight": false,
+                            "start": "2000"
+                        },
+                        {
+                            "day": 3,
+                            "end": "1600",
+                            "is_overnight": false,
+                            "start": "1330"
+                        },
+                        {
+                            "day": 3,
+                            "end": "2330",
+                            "is_overnight": false,
+                            "start": "2000"
+                        },
+                        {
+                            "day": 4,
+                            "end": "1600",
+                            "is_overnight": false,
+                            "start": "1330"
+                        },
+                        {
+                            "day": 4,
+                            "end": "2330",
+                            "is_overnight": false,
+                            "start": "2000"
+                        },
+                        {
+                            "day": 5,
+                            "end": "1600",
+                            "is_overnight": false,
+                            "start": "1330"
+                        },
+                        {
+                            "day": 5,
+                            "end": "2330",
+                            "is_overnight": false,
+                            "start": "2000"
+                        },
+                        {
+                            "day": 6,
+                            "end": "1600",
+                            "is_overnight": false,
+                            "start": "1330"
+                        },
+                        {
+                            "day": 6,
+                            "end": "2330",
+                            "is_overnight": false,
+                            "start": "2000"
+                        }
+                    ]
+                }
+            ],
+            "categories": [
+                {
+                    "alias": "pizza",
+                    "title": "Pizza"
+                }
+            ],
+            "coordinates": {
+                "latitude": 39.4661516278412,
+                "longitude": -0.328824073076248
+            },
+            "display_phone": "+34 961 00 21 93",
+            "distance": 7102.360151050612,
+            "id": "6uxV1doh-h_RqxqjsbIOKg",
+            "image_url": "https://s3-media0.fl.yelpcdn.com/bphoto/2kfyH_EgJZWwXZZNtHXMxg/o.jpg",
+            "is_closed": false,
+            "location": {
+                "address1": "Carrer de la Reina, 60",
+                "address2": "",
+                "address3": null,
+                "city": "València",
+                "country": "ES",
+                "display_address": [
+                    "Carrer de la Reina, 60",
+                    "46011 València",
+                    "Spain"
+                ],
+                "state": "V",
+                "zip_code": "46011"
+            },
+            "name": "Viva Napoli",
+            "phone": "+34961002193",
+            "rating": 4.8,
+            "review_count": 4,
+            "transactions": [],
+            "url": "https://www.yelp.com/biz/viva-napoli-val%C3%A8ncia?adjust_creative=HAIt7t92ZaTB_C6N1kFuBg&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=HAIt7t92ZaTB_C6N1kFuBg"
+        },
+        {
+            "alias": "le-favole-valència",
+            "attributes": {
+                "business_temp_closed": null,
+                "menu_url": "https://lefavole.es/en/menu.php",
+                "open24_hours": null,
+                "waitlist_reservation": null
+            },
+            "business_hours": [
+                {
+                    "hours_type": "REGULAR",
+                    "is_open_now": true,
+                    "open": [
+                        {
+                            "day": 0,
+                            "end": "0100",
+                            "is_overnight": true,
+                            "start": "1200"
+                        },
+                        {
+                            "day": 1,
+                            "end": "0100",
+                            "is_overnight": true,
+                            "start": "1200"
+                        },
+                        {
+                            "day": 2,
+                            "end": "0100",
+                            "is_overnight": true,
+                            "start": "1200"
+                        },
+                        {
+                            "day": 3,
+                            "end": "0100",
+                            "is_overnight": true,
+                            "start": "1200"
+                        },
+                        {
+                            "day": 4,
+                            "end": "0100",
+                            "is_overnight": true,
+                            "start": "1200"
+                        },
+                        {
+                            "day": 5,
+                            "end": "0100",
+                            "is_overnight": true,
+                            "start": "1200"
+                        },
+                        {
+                            "day": 6,
+                            "end": "0100",
+                            "is_overnight": true,
+                            "start": "1200"
+                        }
+                    ]
+                }
+            ],
+            "categories": [
+                {
+                    "alias": "italian",
+                    "title": "Italian"
+                }
+            ],
+            "coordinates": {
+                "latitude": 39.472363,
+                "longitude": -0.378404
+            },
+            "display_phone": "+34 961 67 26 30",
+            "distance": 7376.958509204544,
+            "id": "_BUnMnWHUT-2J5TWwzz32w",
+            "image_url": "https://s3-media0.fl.yelpcdn.com/bphoto/iC1DX7jkBZfDIIzx7mo8-Q/o.jpg",
+            "is_closed": false,
+            "location": {
+                "address1": "Carrer de l'Hedra, 5",
+                "address2": "",
+                "address3": null,
+                "city": "València",
+                "country": "ES",
+                "display_address": [
+                    "Carrer de l'Hedra, 5",
+                    "46001 València",
+                    "Spain"
+                ],
+                "state": "V",
+                "zip_code": "46001"
+            },
+            "name": "Le Favole",
+            "phone": "+34961672630",
+            "rating": 4.9,
+            "review_count": 14,
+            "transactions": [],
+            "url": "https://www.yelp.com/biz/le-favole-val%C3%A8ncia?adjust_creative=HAIt7t92ZaTB_C6N1kFuBg&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=HAIt7t92ZaTB_C6N1kFuBg"
+        },
+        {
+            "alias": "la-finestra-valencia",
+            "attributes": {
+                "business_temp_closed": null,
+                "menu_url": null,
+                "open24_hours": null,
+                "waitlist_reservation": null
+            },
+            "business_hours": [
+                {
+                    "hours_type": "REGULAR",
+                    "is_open_now": true,
+                    "open": [
+                        {
+                            "day": 0,
+                            "end": "1500",
+                            "is_overnight": false,
+                            "start": "1000"
+                        },
+                        {
+                            "day": 0,
+                            "end": "0100",
+                            "is_overnight": true,
+                            "start": "1800"
+                        },
+                        {
+                            "day": 1,
+                            "end": "1500",
+                            "is_overnight": false,
+                            "start": "1000"
+                        },
+                        {
+                            "day": 1,
+                            "end": "0100",
+                            "is_overnight": true,
+                            "start": "1800"
+                        },
+                        {
+                            "day": 2,
+                            "end": "1500",
+                            "is_overnight": false,
+                            "start": "1000"
+                        },
+                        {
+                            "day": 2,
+                            "end": "0100",
+                            "is_overnight": true,
+                            "start": "1800"
+                        },
+                        {
+                            "day": 3,
+                            "end": "1500",
+                            "is_overnight": false,
+                            "start": "1000"
+                        },
+                        {
+                            "day": 3,
+                            "end": "0100",
+                            "is_overnight": true,
+                            "start": "1800"
+                        },
+                        {
+                            "day": 4,
+                            "end": "1500",
+                            "is_overnight": false,
+                            "start": "1000"
+                        },
+                        {
+                            "day": 4,
+                            "end": "0100",
+                            "is_overnight": true,
+                            "start": "1800"
+                        },
+                        {
+                            "day": 5,
+                            "end": "1500",
+                            "is_overnight": false,
+                            "start": "1000"
+                        },
+                        {
+                            "day": 5,
+                            "end": "0100",
+                            "is_overnight": true,
+                            "start": "1800"
+                        },
+                        {
+                            "day": 6,
+                            "end": "0100",
+                            "is_overnight": true,
+                            "start": "1800"
+                        }
+                    ]
+                }
+            ],
+            "categories": [
+                {
+                    "alias": "pizza",
+                    "title": "Pizza"
+                },
+                {
+                    "alias": "italian",
+                    "title": "Italian"
+                }
+            ],
+            "coordinates": {
+                "latitude": 39.4610882,
+                "longitude": -0.3716896
+            },
+            "display_phone": "+34 963 81 89 85",
+            "distance": 6041.239546312884,
+            "id": "F2lOobyvMz3QNs34d0Gnow",
+            "image_url": "https://s3-media0.fl.yelpcdn.com/bphoto/ONfeBAmUg5oqQAOXW5IcCA/o.jpg",
+            "is_closed": false,
+            "location": {
+                "address1": "Carrer dels Vivons, 16",
+                "address2": "",
+                "address3": "",
+                "city": "Valencia",
+                "country": "ES",
+                "display_address": [
+                    "Carrer dels Vivons, 16",
+                    "46004 Valencia",
+                    "Spain"
+                ],
+                "state": "V",
+                "zip_code": "46004"
+            },
+            "name": "La Finestra",
+            "phone": "+34963818985",
+            "price": "€",
+            "rating": 4.3,
+            "review_count": 32,
+            "transactions": [],
+            "url": "https://www.yelp.com/biz/la-finestra-valencia?adjust_creative=HAIt7t92ZaTB_C6N1kFuBg&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=HAIt7t92ZaTB_C6N1kFuBg"
+        },
+        {
+            "alias": "il-bocconcino-valencia",
+            "attributes": {
+                "business_temp_closed": null,
+                "menu_url": null,
+                "open24_hours": null,
+                "waitlist_reservation": null
+            },
+            "business_hours": [
+                {
+                    "hours_type": "REGULAR",
+                    "is_open_now": true,
+                    "open": [
+                        {
+                            "day": 1,
+                            "end": "1600",
+                            "is_overnight": false,
+                            "start": "1300"
+                        },
+                        {
+                            "day": 1,
+                            "end": "0100",
+                            "is_overnight": true,
+                            "start": "1930"
+                        },
+                        {
+                            "day": 2,
+                            "end": "1600",
+                            "is_overnight": false,
+                            "start": "1300"
+                        },
+                        {
+                            "day": 2,
+                            "end": "0100",
+                            "is_overnight": true,
+                            "start": "1930"
+                        },
+                        {
+                            "day": 3,
+                            "end": "1600",
+                            "is_overnight": false,
+                            "start": "1300"
+                        },
+                        {
+                            "day": 3,
+                            "end": "0100",
+                            "is_overnight": true,
+                            "start": "1930"
+                        },
+                        {
+                            "day": 4,
+                            "end": "1600",
+                            "is_overnight": false,
+                            "start": "1300"
+                        },
+                        {
+                            "day": 4,
+                            "end": "0100",
+                            "is_overnight": true,
+                            "start": "1930"
+                        },
+                        {
+                            "day": 5,
+                            "end": "0100",
+                            "is_overnight": true,
+                            "start": "1900"
+                        },
+                        {
+                            "day": 6,
+                            "end": "0100",
+                            "is_overnight": true,
+                            "start": "1900"
+                        }
+                    ]
+                }
+            ],
+            "categories": [
+                {
+                    "alias": "italian",
+                    "title": "Italian"
+                },
+                {
+                    "alias": "pizza",
+                    "title": "Pizza"
+                },
+                {
+                    "alias": "salad",
+                    "title": "Salad"
+                }
+            ],
+            "coordinates": {
+                "latitude": 39.4762001,
+                "longitude": -0.38094
+            },
+            "display_phone": "+34 963 23 03 98",
+            "distance": 7846.78153032424,
+            "id": "Ob8gJ-z7TLk104BZrOVS3g",
+            "image_url": "https://s3-media0.fl.yelpcdn.com/bphoto/Ugdfa5_nLxlrmUQY9b86Kw/o.jpg",
+            "is_closed": false,
+            "location": {
+                "address1": "Carrer de Quart, 13",
+                "address2": "",
+                "address3": "",
+                "city": "Valencia",
+                "country": "ES",
+                "display_address": [
+                    "Carrer de Quart, 13",
+                    "46003 Valencia",
+                    "Spain"
+                ],
+                "state": "V",
+                "zip_code": "46003"
+            },
+            "name": "Il Bocconcino",
+            "phone": "+34963230398",
+            "price": "€",
+            "rating": 4.4,
+            "review_count": 40,
+            "transactions": [],
+            "url": "https://www.yelp.com/biz/il-bocconcino-valencia?adjust_creative=HAIt7t92ZaTB_C6N1kFuBg&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=HAIt7t92ZaTB_C6N1kFuBg"
+        },
+        {
+            "alias": "italiamo-valència",
+            "attributes": {
+                "business_temp_closed": null,
+                "menu_url": null,
+                "open24_hours": null,
+                "waitlist_reservation": null
+            },
+            "business_hours": [
+                {
+                    "hours_type": "REGULAR",
+                    "is_open_now": true,
+                    "open": [
+                        {
+                            "day": 0,
+                            "end": "0130",
+                            "is_overnight": true,
+                            "start": "1800"
+                        },
+                        {
+                            "day": 1,
+                            "end": "0130",
+                            "is_overnight": true,
+                            "start": "1800"
+                        },
+                        {
+                            "day": 2,
+                            "end": "0130",
+                            "is_overnight": true,
+                            "start": "1800"
+                        },
+                        {
+                            "day": 3,
+                            "end": "0130",
+                            "is_overnight": true,
+                            "start": "1800"
+                        },
+                        {
+                            "day": 4,
+                            "end": "0130",
+                            "is_overnight": true,
+                            "start": "1800"
+                        },
+                        {
+                            "day": 5,
+                            "end": "0130",
+                            "is_overnight": true,
+                            "start": "1200"
+                        }
+                    ]
+                }
+            ],
+            "categories": [
+                {
+                    "alias": "pizza",
+                    "title": "Pizza"
+                },
+                {
+                    "alias": "italian",
+                    "title": "Italian"
+                }
+            ],
+            "coordinates": {
+                "latitude": 39.46064105165,
+                "longitude": -0.374391375298238
+            },
+            "display_phone": "+34 963 12 75 99",
+            "distance": 6031.412114418422,
+            "id": "9pXMF352LRfu61AarGnD9Q",
+            "image_url": "https://s3-media0.fl.yelpcdn.com/bphoto/PDa5YXOApS5MthleT-dbfA/o.jpg",
+            "is_closed": false,
+            "location": {
+                "address1": "Carrer de Sueca, 51",
+                "address2": "",
+                "address3": null,
+                "city": "València",
+                "country": "ES",
+                "display_address": [
+                    "Carrer de Sueca, 51",
+                    "46004 València",
+                    "Spain"
+                ],
+                "state": "V",
+                "zip_code": "46004"
+            },
+            "name": "Italiamo",
+            "phone": "+34963127599",
+            "rating": 5.0,
+            "review_count": 2,
+            "transactions": [],
+            "url": "https://www.yelp.com/biz/italiamo-val%C3%A8ncia?adjust_creative=HAIt7t92ZaTB_C6N1kFuBg&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=HAIt7t92ZaTB_C6N1kFuBg"
+        }
+    ],
+    "region": {
+        "center": {
+            "latitude": 39.4073682747548,
+            "longitude": -0.361175537109375
+        }
+    },
+    "total": 396
+}
