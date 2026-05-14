@@ -10,6 +10,37 @@
     <div class="container">
         <h1>Encuentralo App</h1>
         <p>Bienvenido a tu nueva aplicación.</p>
+        <form id="locationForm" th:action="@{/location}" method="post" th:object="${coordenadas}">
+            <input type="hidden" id="longitud" th:field="*{longitud}">
+            <input type="hidden" id="latitud" th:field="*{latitud}">
+
+            <button type="button" onclick="enviarUbicacion()">Enviar Ubicación</button>
+        </form>
     </div>
+    <script>
+        function enviarUbicacion() {
+            if (navigator.geolocation) {
+                // Mostramos un mensaje opcional de "cargando" si fuera necesario
+                navigator.geolocation.getCurrentPosition((position) => {
+                    // 1. Capturar datos
+                    const lat = position.coords.latitude;
+                    const lon = position.coords.longitude;
+
+                    // 2. Insertar en los inputs de Thymeleaf
+                    document.getElementById('longitud').value = lon;
+                    document.getElementById('latitud').value = lat;
+
+                    // 3. Enviar el formulario automáticamente
+                    document.getElementById('locationForm').submit();
+
+                }, (error) => {
+                    alert("Es necesario permitir la ubicación para continuar.");
+                    console.error(error);
+                });
+            } else {
+                alert("Tu navegador no soporta geolocalización.");
+            }
+        }
+    </script>
 </body>
 </html>
