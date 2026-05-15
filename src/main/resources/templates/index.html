@@ -3,44 +3,144 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Encuentralo App</title>
+    <title>Encuentralo App - Buscar</title>
     <link rel="stylesheet" href="../static/css/style.css" th:href="@{/css/style.css}">
+    <style>
+        /* Base */
+        body { font-family: sans-serif; background-color: #f4f7f6; padding: 10px; margin: 0; }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        h1 { color: #005088; font-size: 1.8rem; text-align: center; }
+        p { color: #666; text-align: center; font-size: 0.9rem; margin-bottom: 25px; }
+
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; color: #333; font-size: 0.9rem; }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 1rem; /* Evita el zoom automático en iOS */
+        }
+
+        /* Flexbox dinámico: se apila en móvil, se expande en tablet/pc */
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .row-item { flex: 1; min-width: 140px; }
+
+        fieldset {
+            border: 1px solid #eee;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            background-color: #fafafa;
+        }
+
+        .btn-geo {
+            background-color: #6c757d;
+            color: white;
+            border: none;
+            padding: 12px;
+            cursor: pointer;
+            border-radius: 8px;
+            width: 100%;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .btn-submit {
+            background-color: #005088;
+            color: white;
+            border: none;
+            padding: 15px;
+            cursor: pointer;
+            border-radius: 8px;
+            width: 100%;
+            margin-top: 25px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0,80,136,0.2);
+        }
+
+        /* Ajuste para pantallas muy pequeñas */
+        @media (max-width: 480px) {
+            .container { padding: 15px; }
+            h1 { font-size: 1.5rem; }
+            .row-item { min-width: 100%; } /* Fuerza el apilado total */
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Encuentralo App</h1>
-        <p>Bienvenido a tu nueva aplicación.</p>
-        <form id="locationForm" th:action="@{/location}" method="post" th:object="${coordenadas}">
-            <input type="hidden" id="longitud" th:field="*{longitud}">
-            <input type="hidden" id="latitud" th:field="*{latitud}">
+<div class="container">
+    <h1>Encuéntralo App</h1>
+    <p>Introduce los parámetros para localizar negocios cerca de ti.</p>
 
-            <button type="button" onclick="enviarUbicacion()">Enviar Ubicación</button>
-        </form>
-    </div>
-    <script>
-        function enviarUbicacion() {
-            if (navigator.geolocation) {
-                // Mostramos un mensaje opcional de "cargando" si fuera necesario
-                navigator.geolocation.getCurrentPosition((position) => {
-                    // 1. Capturar datos
-                    const lat = position.coords.latitude;
-                    const lon = position.coords.longitude;
+    <form id="locationForm" th:action="@{/location}" method="post" th:object="${busqueda}">
 
-                    // 2. Insertar en los inputs de Thymeleaf
-                    document.getElementById('longitud').value = lon;
-                    document.getElementById('latitud').value = lat;
+        <div class="form-group">
+            <label for="temino">¿Qué buscas?</label>
+            <input type="text" id="temino" th:field="*{temino}" placeholder="Ej: Pizza, Gimnasios..." required>
+        </div>
 
-                    // 3. Enviar el formulario automáticamente
-                    document.getElementById('locationForm').submit();
+        <div class="row">
+            <div class="form-group row-item">
+                <label for="radio">Radio (metros)</label>
+                <input type="number" id="radio" th:field="*{radio}" placeholder="5000">
+            </div>
+            <div class="form-group row-item">
+                <label for="limite">Máx. resultados</label>
+                <input type="number" id="limite" th:field="*{limite}" placeholder="10">
+            </div>
+        </div>
 
-                }, (error) => {
-                    alert("Es necesario permitir la ubicación para continuar.");
-                    console.error(error);
-                });
-            } else {
-                alert("Tu navegador no soporta geolocalización.");
-            }
+        <fieldset>
+            <legend style="padding: 0 10px; color: #888; font-size: 0.8rem; font-weight: bold; text-transform: uppercase;">Tu Ubicación</legend>
+            <div class="row">
+                <div class="form-group row-item">
+                    <label>Latitud</label>
+                    <input type="number" step="any" id="latitud" th:field="*{latitud}" required>
+                </div>
+                <div class="form-group row-item">
+                    <label>Longitud</label>
+                    <input type="number" step="any" id="longitud" th:field="*{longitud}" required>
+                </div>
+            </div>
+            <button type="button" class="btn-geo" onclick="obtenerUbicacion()">
+                📍 Obtener mi ubicación
+            </button>
+        </fieldset>
+
+        <button type="submit" class="btn-submit">BUSCAR AHORA</button>
+    </form>
+</div>
+
+<script>
+    function obtenerUbicacion() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition((position) => {
+                document.getElementById('latitud').value = position.coords.latitude;
+                document.getElementById('longitud').value = position.coords.longitude;
+            }, (error) => {
+                alert("Debes activar el GPS y dar permisos.");
+                console.error(error);
+            });
+        } else {
+            alert("Tu navegador no soporta GPS.");
         }
-    </script>
+    }
+</script>
 </body>
 </html>

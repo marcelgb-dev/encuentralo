@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-record BusinessDTO(
+public record BusinessDTO(
         String name,
         double rating,
         String url,
@@ -15,4 +15,11 @@ record BusinessDTO(
         LocationDTO location,
         CoordinatesDTO coordinates,
         List<CategoryDTO> categories
-) {}
+) {
+        public List<String> getCategoryTitles() {
+                return categories.stream()
+                        .map(CategoryDTO::title)
+                        .toList();
+        }
+}
+

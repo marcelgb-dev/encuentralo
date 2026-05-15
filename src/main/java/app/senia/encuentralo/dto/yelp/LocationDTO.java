@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-record LocationDTO(
+public record LocationDTO(
         @JsonProperty("display_address")
         List<String> displayAddress
 ) {}

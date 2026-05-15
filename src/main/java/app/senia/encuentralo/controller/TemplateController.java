@@ -1,5 +1,6 @@
 package app.senia.encuentralo.controller;
 
+import app.senia.encuentralo.model.SolicitudBusqueda;
 import app.senia.encuentralo.model.UserLocation;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,7 +11,7 @@ public class TemplateController {
 
     @GetMapping("/")
     public String getIndex(Model model) {
-        model.addAttribute("coordenadas", new UserLocation());
+        model.addAttribute("busqueda", new SolicitudBusqueda());
         return "index";
     }
 
