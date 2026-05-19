@@ -40,10 +40,10 @@
                 <span class="coords" th:text="'Lat: ' + ${res.latitud} + ' | Lon: ' + ${res.longitud}">Coords</span>
             </td>
             <td>
-                <span class="rating" th:text="${res.rating}">0.0</span>
+                <span class="valoracion" th:text="${res.valoracion}">0.0</span>
             </td>
             <td>
-                <span th:each="cat : ${res.categorias}" class="tag" th:text="${cat}">Categoría</span>
+                <span th:each="cat : ${res.categorias}" class="tag" th:text="${cat.nombre}">Categoría</span>
             </td>
             <td th:text="${res.direccion}">Dirección</td>
             <td th:text="${res.telefono}">Teléfono</td>

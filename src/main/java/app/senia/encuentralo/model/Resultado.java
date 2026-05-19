@@ -1,23 +1,27 @@
 package app.senia.encuentralo.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Resultado {
 
     // Atributos
+    private int id;
     private String nombre;
-    private double rating;
     private String url;
     private String telefono;
+    private String direccion;
+    private double valoracion;
+    private List<Categoria> categorias;
+
     private double longitud;
     private double latitud;
-    private String direccion;
-    private List<String> categorias;
 
     // Constructor
-    public Resultado(String nombre, double rating, String url, String telefono, double longitud, double latitud, String direccion, List<String> categorias) {
+    public Resultado(String nombre, double valoracion, String url, String telefono, double longitud, double latitud, String direccion, List<Categoria> categorias) {
+        this.id = id;
         this.nombre = nombre;
-        this.rating = rating;
+        this.valoracion = valoracion;
         this.url = url;
         this.telefono = telefono;
         this.longitud = longitud;
@@ -28,13 +32,20 @@ public class Resultado {
 
     @Override
     public String toString() {
-        return "Nombre: " + nombre +
-                "\nRating: " + rating +
+
+        List<String> categoriasString = new ArrayList<>();
+        for (Categoria c : categorias){
+            categoriasString.add(c.getNombre());
+        }
+
+        return "ID: " + id +
+                "\nNombre: " + nombre +
+                "\nRating: " + valoracion +
                 "\nUrl: " + url +
                 "\nTeléfono: " + telefono +
                 "\nCoordenadas: " + longitud + " long ," + latitud + " lat" +
                 "\nDireccion: " + direccion +
-                "\nCategorias: " + String.join(", ", categorias);
+                "\nCategorias: " + String.join(", ", categoriasString);
     }
 
     // Getters y Setters
@@ -46,12 +57,12 @@ public class Resultado {
         this.nombre = nombre;
     }
 
-    public double getRating() {
-        return rating;
+    public double getValoracion() {
+        return valoracion;
     }
 
-    public void setRating(double rating) {
-        this.rating = rating;
+    public void setValoracion(double valoracion) {
+        this.valoracion = valoracion;
     }
 
     public String getUrl() {
@@ -94,11 +105,19 @@ public class Resultado {
         this.direccion = direccion;
     }
 
-    public List<String> getCategorias() {
+    public List<Categoria> getCategorias() {
         return categorias;
     }
 
-    public void setCategorias(List<String> categorias) {
+    public void setCategorias(List<Categoria> categorias) {
         this.categorias = categorias;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

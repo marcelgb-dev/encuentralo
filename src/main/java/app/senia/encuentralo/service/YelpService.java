@@ -2,6 +2,8 @@ package app.senia.encuentralo.service;
 
 import app.senia.encuentralo.dto.yelp.BusinessDTO;
 import app.senia.encuentralo.dto.yelp.YelpResponse;
+import app.senia.encuentralo.model.Busqueda;
+import app.senia.encuentralo.model.Categoria;
 import app.senia.encuentralo.model.Resultado;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
@@ -10,22 +12,23 @@ import tools.jackson.databind.ObjectMapper;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class YelpService {
+public class YelpService implements ProviderService {
 
     private final RestClient restClient;
     private final ObjectMapper objectMapper;
 
-    // Spring inyecta automáticamente el Bean que configuramos arriba
-    public YelpService(RestClient restClient, ObjectMapper objectMapper) {
-        this.restClient = restClient;
+    // Constructor
+    public YelpService(RestClient yelpRestClient, ObjectMapper objectMapper) {
+        this.restClient = yelpRestClient;
         this.objectMapper = objectMapper;
     }
 
-    public List<Resultado> llamarApi(String termino, double latitud, double longitud, int radio, int limite) {
+    public Busqueda llamarApi(String termino, double latitud, double longitud, int radio, int limite) {
 
         // MOCKING (LLAMADA FALSA)
         return llamarApiMock();
@@ -44,7 +47,10 @@ public class YelpService {
 //
 //        // Gracias a Jackson, 'response' ya contiene toda la jerarquía de records mapeada
 //        if (response != null && response.businesses() != null) {
-//            return parsearDtos(response);
+//            Busqueda busqueda = new Busqueda(0, termino, latitud, longitud, LocalDateTime.now());
+//            busqueda.setResultados(parsearDtos(response));
+//
+//            return busqueda;
 //        }
 //
 //        System.out.println("ERROR: Respuesta de Yelp vacía");
@@ -64,7 +70,7 @@ public class YelpService {
             double longitud = dto.coordinates().longitude();
             double latitud = dto.coordinates().latitude();
             String direccion = String.join(", ", dto.location().displayAddress());
-            List<String> categorias = dto.getCategoryTitles();
+            List<Categoria> categorias = Categoria.toCategorias(dto.getCategoryTitles());
 
             Resultado resultado = new Resultado(nombre, rating, url, telefono, longitud, latitud, direccion, categorias);
 
@@ -75,7 +81,7 @@ public class YelpService {
 
     }
 
-    private List<Resultado> llamarApiMock() {
+    private Busqueda llamarApiMock() {
 
         System.out.println("WARNING: LLAMADA FALSA A LA API CON YelpService.llamarApiMock()");
 
@@ -89,7 +95,10 @@ public class YelpService {
                     YelpResponse.class
             );
 
-            return parsearDtos(response);
+            Busqueda busqueda = new Busqueda( "TEST", 0, 0, LocalDateTime.now());
+            busqueda.setResultados(parsearDtos(response));
+
+            return busqueda;
         } catch (IOException e) {
             throw new RuntimeException("No se pudo leer el archivo JSON", e);
         }

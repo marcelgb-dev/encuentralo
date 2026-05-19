@@ -2,7 +2,6 @@ package app.senia.encuentralo.controller;
 
 import app.senia.encuentralo.model.Resultado;
 import app.senia.encuentralo.model.SolicitudBusqueda;
-import app.senia.encuentralo.model.UserLocation;
 import app.senia.encuentralo.service.YelpService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,15 +14,15 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
-public class LocationController {
+public class BusquedaController {
 
     private final YelpService ys;
 
-    public LocationController(YelpService ys) {
+    public BusquedaController(YelpService ys) {
         this.ys = ys;
     }
 
-    @PostMapping("/location")
+    @PostMapping("/buscar")
     public String makeSearch(@ModelAttribute("busqueda") SolicitudBusqueda busqueda, Model model) {
 
         String termino = busqueda.getTemino();
@@ -33,7 +32,7 @@ public class LocationController {
         int limite = busqueda.getLimite();
 
 
-        List<Resultado> resultados = ys.llamarApi(termino, latitud, longitud, radio, limite);
+        List<Resultado> resultados = ys.llamarApi(termino, latitud, longitud, radio, limite).getResultados();
 
         System.out.println("Coordenadas: " + latitud + " lat / " + longitud + " long" );
 
