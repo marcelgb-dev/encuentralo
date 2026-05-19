@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestClient;
 
+// Configuración de RestTemplate para usar los datos de la API de Yelp
 @Configuration
 public class YelpConfig {
 

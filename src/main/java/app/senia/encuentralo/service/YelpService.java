@@ -57,6 +57,7 @@ public class YelpService implements ProviderService {
 //        return List.of();
     }
 
+    // Convierte datos del DTO YelpResponse a una Lista<Resultado>
     private List<Resultado> parsearDtos(YelpResponse yelpResponse) {
 
         List<BusinessDTO> listaDtos = yelpResponse.businesses();
@@ -81,20 +82,22 @@ public class YelpService implements ProviderService {
 
     }
 
+    // Método de pruebas que devuelve el objeto Busqueda correspondiente a los datos en resources/json/yelp_example.json
     private Busqueda llamarApiMock() {
 
         System.out.println("WARNING: LLAMADA FALSA A LA API CON YelpService.llamarApiMock()");
 
         try {
-            // En lugar de new File, usamos esto:
+            // Indicamos el path al JSON de pruebas en la carpeta de resources
             ClassPathResource resource = new ClassPathResource("json/yelp_example.json");
 
-            // Jackson puede leer directamente del InputStream del recurso
+            // Creamos una YelpResponse en base a los datos del JSON mediante el ObjectMapper de Jackson
             YelpResponse response = objectMapper.readValue(
                     resource.getInputStream(),
                     YelpResponse.class
             );
 
+            // Convertimos los datos de la YelpResponse al objeto Busqueda, añadiendo también los metadatos
             Busqueda busqueda = new Busqueda( "TEST", 0, 0, LocalDateTime.now());
             busqueda.setResultados(parsearDtos(response));
 
