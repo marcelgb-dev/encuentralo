@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Historial de Búsquedas | Encuentralo</title>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+  *, ::before, ::after {
+    box-sizing: border-box;
+    border-width: 0;
+    border-style: solid;
+    border-color: #e5e7eb;
+  }
+  html {
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    tab-size: 4;
+    font-family: 'Hanken Grotesk', sans-serif;
+  }
+  body {
+    margin: 0;
+    line-height: inherit;
+    font-family: 'Hanken Grotesk', sans-serif;
+    background-color: #f7f9fb;
+    color: #191c1e;
+  }
+  h1, h2, h3, p, a, label, input, button, span {
+    margin: 0;
+    padding: 0;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    color: inherit;
+    text-decoration: inherit;
+  }
+  button, input {
+    font-family: inherit;
+    font-size: 100%;
+    line-height: inherit;
+    margin: 0;
+    padding: 0;
+  }
+  button {
+    background-color: transparent;
+    background-image: none;
+    cursor: pointer;
+  }
+  img {
+    display: block;
+    vertical-align: middle;
+  }
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    display: inline-block;
+    line-height: 1;
+    vertical-align: middle;
+  }
+
+  .texto-headline-xl {
+    font-size: 40px;
+    line-height: 48px;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+  }
+  .texto-headline-lg {
+    font-size: 32px;
+    line-height: 40px;
+    letter-spacing: -0.01em;
+    font-weight: 600;
+  }
+  .texto-headline-md {
+    font-size: 24px;
+    line-height: 32px;
+    font-weight: 600;
+  }
+  .texto-headline-lg-movil {
+    font-size: 28px;
+    line-height: 36px;
+    font-weight: 600;
+  }
+  .texto-body-lg {
+    font-size: 18px;
+    line-height: 28px;
+    font-weight: 400;
+  }
+  .texto-body-md {
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 400;
+  }
+  .texto-body-sm {
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 400;
+  }
+  .texto-label-md {
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing: 0.01em;
+    font-weight: 600;
+  }
+  .texto-label-sm {
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 500;
+  }
+
+  .flex { display: flex; }
+  .grid { display: grid; }
+  .block { display: block; }
+  .hidden { display: none; }
+  .items-center { align-items: center; }
+  .justify-center { justify-content: center; }
+  .justify-between { justify-content: space-between; }
+  .flex-col { flex-direction: column; }
+  .flex-1 { flex: 1; }
+  .gap-1 { gap: 0.25rem; }
+  .gap-2 { gap: 0.5rem; }
+  .gap-3 { gap: 0.75rem; }
+  .gap-4 { gap: 1rem; }
+  .gap-6 { gap: 1.5rem; }
+  .gap-8 { gap: 2rem; }
+  .gap-gutter { gap: 24px; }
+  .ancho-completo { width: 100%; }
+  .max-w-contenedor { max-width: 1280px; }
+  .max-w-md { max-width: 28rem; }
+  .mx-auto { margin-left: auto; margin-right: auto; }
+  .p-2 { padding: 0.5rem; }
+  .p-6 { padding: 1.5rem; }
+  .p-8 { padding: 2rem; }
+  .px-2 { padding-left: 0.5rem; padding-right: 0.5rem; }
+  .px-3 { padding-left: 0.75rem; padding-right: 0.75rem; }
+  .px-4 { padding-left: 1rem; padding-right: 1rem; }
+  .px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+  .px-8 { padding-left: 2rem; padding-right: 2rem; }
+  .px-margen-movil { padding-left: 16px; padding-right: 16px; }
+  .px-margen-escritorio { padding-left: 48px; padding-right: 48px; }
+  .py-1 { padding-top: 0.25rem; padding-bottom: 0.25rem; }
+  .py-2 { padding-top: 0.5rem; padding-bottom: 0.5rem; }
+  .py-3 { padding-top: 0.75rem; padding-bottom: 0.75rem; }
+  .py-4 { padding-top: 1rem; padding-bottom: 1rem; }
+  .py-5 { padding-top: 1.25rem; padding-bottom: 1.25rem; }
+  .py-6 { padding-top: 1.5rem; padding-bottom: 1.5rem; }
+  .py-8 { padding-top: 2rem; padding-bottom: 2rem; }
+  .py-12 { padding-top: 3rem; padding-bottom: 3rem; }
+  .pl-12 { padding-left: 3rem; }
+  .pr-4 { padding-right: 1rem; }
+  .mb-1 { margin-bottom: 0.25rem; }
+  .mb-2 { margin-bottom: 0.5rem; }
+  .mb-3 { margin-bottom: 0.75rem; }
+  .mb-4 { margin-bottom: 1rem; }
+  .mb-6 { margin-bottom: 1.5rem; }
+  .mb-8 { margin-bottom: 2rem; }
+  .mb-10 { margin-bottom: 2.5rem; }
+  .mb-12 { margin-bottom: 3rem; }
+  .mt-2 { margin-top: 0.5rem; }
+  .mt-3 { margin-top: 0.75rem; }
+  .mt-4 { margin-top: 1rem; }
+  .mt-6 { margin-top: 1.5rem; }
+  .mt-8 { margin-top: 2rem; }
+  .mt-12 { margin-top: 3rem; }
+  .mt-auto { margin-top: auto; }
+  .h-8 { height: 2rem; }
+  .h-10 { height: 2.5rem; }
+  .h-12 { height: 3rem; }
+  .h-16 { height: 4rem; }
+  .h-full { height: 100%; }
+  .w-8 { width: 2rem; }
+  .w-10 { width: 2.5rem; }
+  .w-12 { width: 3rem; }
+  .w-14 { width: 3.5rem; }
+  .w-64 { width: 16rem; }
+  .min-h-screen { min-height: 100vh; }
+  .overflow-hidden { overflow: hidden; }
+  .overflow-x-auto { overflow-x: auto; }
+  .object-cover { object-fit: cover; }
+  .cursor-pointer { cursor: pointer; }
+  .transition { transition-property: all; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); transition-duration: 150ms; }
+  .transition-colors { transition-property: color, background-color, border-color; transition-duration: 150ms; }
+  .active\:scale-95:active { transform: scale(0.95); }
+  .relative { position: relative; }
+  .absolute { position: absolute; }
+  .fixed { position: fixed; }
+  .sticky { position: sticky; }
+  .top-0 { top: 0; }
+  .bottom-0 { bottom: 0; }
+  .left-0 { left: 0; }
+  .left-4 { left: 1rem; }
+  .top-1\/2 { top: 50%; }
+  .-translate-y-1\/2 { transform: translateY(-50%); }
+  .right-0 { right: 0; }
+  .inset-0 { top: 0; right: 0; bottom: 0; left: 0; }
+  .z-10 { z-index: 10; }
+  .z-40 { z-index: 40; }
+  .z-50 { z-index: 50; }
+  .border { border-width: 1px; }
+  .border-t { border-top-width: 1px; }
+  .border-b { border-bottom-width: 1px; }
+  .border-l { border-left-width: 1px; }
+  .border-r-4 { border-right-width: 4px; }
+  .border-none { border: none; }
+  .divide-y > :not([hidden]) ~ :not([hidden]) { border-top-width: 1px; border-color: rgba(197, 198, 205, 0.1); }
+  .text-left { text-align: left; }
+  .text-center { text-align: center; }
+  .text-right { text-align: right; }
+  .uppercase { text-transform: uppercase; }
+  .tracking-wider { letter-spacing: 0.05em; }
+  .font-bold { font-weight: 700; }
+  .font-semibold { font-weight: 600; }
+  .font-extrabold { font-weight: 800; }
+  .grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+  .grid-cols-12 { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+  .col-span-8 { grid-column: span 8 / span 8; }
+  .col-span-4 { grid-column: span 4 / span 4; }
+  .col-span-2 { grid-column: span 2 / span 2; }
+  .contenedor-max { max-width: 1280px; margin-left: auto; margin-right: auto; }
+  .pointer-events-none { pointer-events: none; }
+  .shadow-sm { box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); }
+  .shadow-suave { box-shadow: 0px 4px 20px rgba(30, 41, 59, 0.05); }
+  .sombra-inferior { box-shadow: 0 -4px 20px rgba(30, 41, 59, 0.05); }
+  .redondeado { border-radius: 0.25rem; }
+  .redondeado-lg { border-radius: 0.5rem; }
+  .redondeado-xl { border-radius: 0.75rem; }
+  .redondeado-completo { border-radius: 9999px; }
+  .bg-fondo { background-color: #f7f9fb; }
+  .bg-primario { background-color: #091426; }
+  .bg-primario-contenedor { background-color: #1e293b; }
+  .bg-superficie { background-color: #f7f9fb; }
+  .bg-superficie-baja { background-color: #f2f4f6; }
+  .bg-superficie-alta { background-color: #e6e8ea; }
+  .bg-superficie-mas-alta { background-color: #e0e3e5; }
+  .bg-superficie-mas-baja { background-color: #ffffff; }
+  .bg-secundario-contenedor { background-color: #d0e1fb; }
+  .bg-primario-fijo { background-color: #d8e3fb; }
+  .bg-terciario-fijo { background-color: #dae2fd; }
+  .bg-terciario-contenedor { background-color: #20283c; }
+  .bg-secundario-fijo { background-color: #d3e4fe; }
+  .bg-secundario-fijo-oscuro { background-color: #b7c8e1; }
+  .bg-terciario-fijo-oscuro { background-color: #bec6e0; }
+  .bg-error-contenedor { background-color: #ffdad6; }
+  .texto-base { color: #191c1e; }
+  .texto-variante { color: #45474c; }
+  .texto-secundario { color: #505f76; }
+  .texto-primario { color: #091426; }
+  .texto-blanco { color: #ffffff; }
+  .texto-error { color: #ba1a1a; }
+  .texto-verde { color: #059669; }
+  .borde-variante { border-color: #c5c6cd; }
+  .borde-superficie { border-color: #eceef0; }
+  .opacidad-10 { opacity: 0.1; }
+  .opacidad-20 { opacity: 0.2; }
+  .opacidad-80 { opacity: 0.8; }
+  .escala-150 { transform: scale(1.5); }
+  .translate-x-1 { transform: translateX(0.25rem); }
+  .desplazamiento-grupo:hover .opacidad-grupo { opacity: 1; }
+  .bg-gradiente { background: linear-gradient(to right, rgba(9, 20, 38, 0.9), transparent); }
+  .borde-lateral { border-left-width: 1px; }
+  .pb-seguro { padding-bottom: constant(safe-area-inset-bottom); padding-bottom: env(safe-area-inset-bottom); }
+  .mt-negativo { margin-top: -2px; }
+
+  @media (min-width: 768px) {
+    .md\:block { display: block; }
+    .md\:flex { display: flex; }
+    .md\:hidden { display: none; }
+    .md\:flex-row { flex-direction: row; }
+    .md\:items-center { align-items: center; }
+    .md\:px-margen-escritorio { padding-left: 48px; padding-right: 48px; }
+    .md\:py-12 { padding-top: 3rem; padding-bottom: 3rem; }
+  }
+
+  .vista-escritorio .barra-lateral {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 1rem;
+    background-color: #f2f4f6;
+    width: 16rem;
+    z-index: 20;
+  }
+  .vista-escritorio .contenido-principal-escritorio {
+    margin-left: 16rem;
+    min-height: 100vh;
+  }
+  .vista-escritorio .cabecera-superior {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background-color: #eceef0;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    height: 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 48px;
+    padding-right: 48px;
+  }
+  .tarjeta-sombra {
+    box-shadow: 0px 4px 20px rgba(30, 41, 59, 0.05);
+  }
+  .vista-escritorio .ancho-max-1400 {
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  
+  
+  @media (max-width: 767px) {
+    
+    
+  }
+
+  .flex-crecer { flex-grow: 1; }
+  .flex-envolver { flex-wrap: wrap; }
+  .items-inicio { align-items: flex-start; }
+  .justify-alrededor { justify-content: space-around; }
+  .flex-en-linea { display: inline-flex; }
+  
+  .bg-blanco { background-color: #ffffff; }
+  .bg-verde-claro { background-color: #d1fae5; }
+  
+  .border-b-2 { border-bottom-width: 2px; }
+  .border-primario { border-color: #091426; }
+  
+  .gap-1\.5 { gap: 0.375rem; }
+  
+  .grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  
+  .h-2 { height: 0.5rem; }
+  .w-2 { width: 0.5rem; }
+  .h-56 { height: 14rem; }
+  .ancho-ajustado { width: fit-content; }
+  
+  .-bottom-4 { bottom: -1rem; }
+  .-right-4 { right: -1rem; }
+  .-translate-y-1\.2 { transform: translateY(-50%); }
+  
+  .pb-2 { padding-bottom: 0.5rem; }
+  .pb-24 { padding-bottom: 6rem; }
+  .md\:pb-12 { padding-bottom: 3rem; }
+  .pl-4 { padding-left: 1rem; }
+  .pt-6 { padding-top: 1.5rem; }
+  .px-12 { padding-left: 3rem; padding-right: 3rem; }
+  .py-0\.5 { padding-top: 0.125rem; padding-bottom: 0.125rem; }
+  .py-1\.5 { padding-top: 0.375rem; padding-bottom: 0.375rem; }
+  
+  .redondeado-t-xl { border-top-left-radius: 0.75rem; border-top-right-radius: 0.75rem; }
+  
+  .space-y-1 > :not([hidden]) ~ :not([hidden]) { margin-top: 0.25rem; margin-bottom: 0; }
+  .space-y-4 > :not([hidden]) ~ :not([hidden]) { margin-top: 1rem; margin-bottom: 0; }
+  
+  .texto-inverse-primario { color: #f7f9fb; }
+  .texto-on-primario-contenedor { color: #d8e3fb; }
+  .texto-outline { color: #74777f; }
+  .texto-secundario-contenedor { color: #0d1d2d; }
+  .texto-secundario-fijo { color: #001d36; }
+  
+  .tracking-widest { letter-spacing: 0.1em; }
+  .espacio-sin-salto { white-space: nowrap; }
+  
+  .animacion-pulso { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .5; } }
+  
+  .opacidad-0 { opacity: 0; }
+  .deshabilitado\:opacidad-50:disabled { opacity: 0.5; }
+  
+  .hover\:bg-error-contenedor:hover { background-color: #ffdad6; }
+  .hover\:bg-primario:hover { background-color: #091426; }
+  .hover\:bg-superficie-alta:hover { background-color: #e6e8ea; }
+  .hover\:bg-superficie-baja:hover { background-color: #f2f4f6; }
+  .hover\:bg-superficie-variante:hover { background-color: #dfe2e6; }
+  .hover\:gap-2:hover { gap: 0.5rem; }
+  .hover\:opacity-90:hover { opacity: 0.9; }
+  .hover\:shadow-lg:hover { box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); }
+  .hover\:shadow-md:hover { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
+  .hover\:texto-blanco:hover { color: #ffffff; }
+  .hover\:texto-error:hover { color: #ba1a1a; }
+  
+  .focus\:bg-blanco:focus { background-color: #ffffff; }
+  .focus\:ring-2:focus { box-shadow: 0 0 0 2px rgba(9, 20, 38, 0.2); }
+  .focus\:ring-primario:focus { outline: none; }
+  
+  .grupo:hover .grupo-hover\:opacidad-100 { opacity: 1; }
+  .grupo:hover .grupo-hover\:escala-110 { transform: scale(1.1); }
+  
+  .active\:scale-95:active { transform: scale(0.95); }
+
+  .vista-escritorio { display: none; }
+  .vista-movil { display: block; }
+
+  @media (min-width: 768px) {
+    .vista-escritorio { display: block; }
+    .vista-movil { display: none; }
+  }
+
+</style>
+</head>
+<body>
+
+<div class="vista-movil">
+  <header class="bg-superficie shadow-sm sticky top-0 z-50">
+    <div class="flex justify-between items-center ancho-completo px-margen-movil py-2 max-w-contenedor mx-auto">
+      <div class="flex items-center gap-3 cursor-pointer active:scale-95 transition">
+        <span class="material-symbols-outlined texto-primario texto-headline-md">explore</span>
+        <span class="texto-headline-md font-bold texto-primario">Encuentralo</span>
+      </div>
+      <nav class="hidden md:flex items-center gap-8">
+        <a class="texto-secundario hover:bg-superficie-alta transition-colors px-3 py-2 redondeado-lg texto-body-md" href="#">Búsqueda</a>
+        <a class="texto-primario font-bold border-b-2 border-primario px-3 py-2 texto-body-md" href="#">Historial</a>
+        <a class="texto-secundario hover:bg-superficie-alta transition-colors px-3 py-2 redondeado-lg texto-body-md" href="#">Favoritos</a>
+        <a class="texto-secundario hover:bg-superficie-alta transition-colors px-3 py-2 redondeado-lg texto-body-md" href="#">Panel</a>
+      </nav>
+      <div class="w-10 h-10 redondeado-completo bg-secundario-contenedor flex items-center justify-center overflow-hidden cursor-pointer active:scale-95 transition">
+        <img alt="Perfil" class="ancho-completo h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuASQrHusKTXsnMY0BaH-YyQMS6sRX2exbAdgltdrDrO3x9fbFeyn9W7aDLz-mUTN0M8DM3hugq-6UD6N1n7Zbjikx74NERMICIBnaQbPfylSD6uDIxyaHvLZjUc9QidKx506HkniUDxchu5ixO02fjiNUgUnL7tOWrS3IY25xKITn2efmjVbd5RvS1opUNQ-16_AI8ZSoNRpep2baIvKTP_Z-hYO7P3eic3esBMNBFuRdFOigmkH2O-MRP9U5NPNlAONIh9dyBkxNo">
+      </div>
+    </div>
+  </header>
+
+  <main class="flex-crecer max-w-contenedor mx-auto ancho-completo px-margen-movil py-12">
+    <div class="mb-12">
+      <h1 class="texto-headline-xl texto-primario mb-2">Historial de Búsquedas</h1>
+      <p class="texto-body-lg texto-secundario">Revisa y gestiona tus consultas anteriores de extracción de datos.</p>
+    </div>
+
+    <div class="flex flex-col md:flex-row gap-gutter mb-8">
+      <div class="flex-crecer relative">
+        <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 texto-outline">search</span>
+        <input class="ancho-completo pl-12 pr-4 py-3 bg-superficie-baja redondeado-xl border-none focus:ring-2 focus:ring-primario focus:bg-blanco transition texto-body-md" placeholder="Filtrar por término o fuente..." type="text">
+      </div>
+      <button class="flex items-center justify-center gap-2 px-6 py-3 bg-primario texto-blanco redondeado-xl texto-label-md hover:shadow-lg transition">
+        <span class="material-symbols-outlined">filter_list</span>
+        Filtros avanzados
+      </button>
+    </div>
+
+    <div class="space-y-4">
+      <div class="texto-label-sm texto-outline uppercase tracking-wider mb-2">Hoy</div>
+      <div class="bg-blanco p-6 redondeado-xl tarjeta-sombra border borde-superficie flex flex-col md:flex-row md:items-center justify-between gap-4 hover:shadow-md transition grupo">
+        <div class="flex items-inicio gap-4">
+          <div class="w-12 h-12 redondeado-lg bg-primario-contenedor flex items-center justify-center">
+            <span class="material-symbols-outlined texto-blanco">public</span>
+          </div>
+          <div>
+            <h3 class="texto-body-lg texto-primario mb-1 font-semibold">Empresas de logística en Madrid</h3>
+            <div class="flex flex-envolver items-center gap-3">
+              <span class="bg-secundario-fijo texto-secundario-fijo px-2 py-0.5 redondeado texto-label-sm">Google Maps</span>
+              <span class="texto-outline texto-body-sm flex items-center gap-1">
+                <span class="material-symbols-outlined">schedule</span>
+                10:45 AM
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="flex items-center gap-3 opacidad-0 grupo-hover:opacidad-100 transition">
+          <button class="flex items-center gap-2 px-4 py-2 bg-primario texto-blanco redondeado-lg texto-label-sm active:scale-95 transition">
+            <span class="material-symbols-outlined">refresh</span>
+            Repetir Búsqueda
+          </button>
+          <button class="p-2 texto-outline hover:texto-error hover:bg-error-contenedor redondeado-lg transition">
+            <span class="material-symbols-outlined">delete</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="bg-blanco p-6 redondeado-xl tarjeta-sombra border borde-superficie flex flex-col md:flex-row md:items-center justify-between gap-4 hover:shadow-md transition grupo">
+        <div class="flex items-inicio gap-4">
+          <div class="w-12 h-12 redondeado-lg bg-secundario-contenedor flex items-center justify-center">
+            <span class="material-symbols-outlined texto-primario">apartment</span>
+          </div>
+          <div>
+            <h3 class="texto-body-lg texto-primario mb-1 font-semibold">Inmobiliarias con más de 50 reseñas</h3>
+            <div class="flex flex-envolver items-center gap-3">
+              <span class="bg-secundario-fijo texto-secundario-fijo px-2 py-0.5 redondeado texto-label-sm">TripAdvisor</span>
+              <span class="texto-outline texto-body-sm flex items-center gap-1">
+                <span class="material-symbols-outlined">schedule</span>
+                08:30 AM
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="flex items-center gap-3 opacidad-0 grupo-hover:opacidad-100 transition">
+          <button class="flex items-center gap-2 px-4 py-2 bg-primario texto-blanco redondeado-lg texto-label-sm active:scale-95 transition">
+            <span class="material-symbols-outlined">refresh</span>
+            Repetir Búsqueda
+          </button>
+          <button class="p-2 texto-outline hover:texto-error hover:bg-error-contenedor redondeado-lg transition">
+            <span class="material-symbols-outlined">delete</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="texto-label-sm texto-outline uppercase tracking-wider mt-8 mb-2">Ayer</div>
+      <div class="bg-blanco p-6 redondeado-xl tarjeta-sombra border borde-superficie flex flex-col md:flex-row md:items-center justify-between gap-4 hover:shadow-md transition grupo">
+        <div class="flex items-inicio gap-4">
+          <div class="w-12 h-12 redondeado-lg bg-superficie-alta flex items-center justify-center">
+            <span class="material-symbols-outlined texto-secundario">storefront</span>
+          </div>
+          <div>
+            <h3 class="texto-body-lg texto-primario mb-1 font-semibold">Restaurantes italianos en Barcelona</h3>
+            <div class="flex flex-envolver items-center gap-3">
+              <span class="bg-secundario-fijo texto-secundario-fijo px-2 py-0.5 redondeado texto-label-sm">Foursquare</span>
+              <span class="texto-outline texto-body-sm flex items-center gap-1">
+                <span class="material-symbols-outlined">calendar_today</span>
+                23 Oct, 2023
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="flex items-center gap-3 opacidad-0 grupo-hover:opacidad-100 transition">
+          <button class="flex items-center gap-2 px-4 py-2 bg-primario texto-blanco redondeado-lg texto-label-sm active:scale-95 transition">
+            <span class="material-symbols-outlined">refresh</span>
+            Repetir Búsqueda
+          </button>
+          <button class="p-2 texto-outline hover:texto-error hover:bg-error-contenedor redondeado-lg transition">
+            <span class="material-symbols-outlined">delete</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="bg-blanco p-6 redondeado-xl tarjeta-sombra border borde-superficie flex flex-col md:flex-row md:items-center justify-between gap-4 hover:shadow-md transition grupo">
+        <div class="flex items-inicio gap-4">
+          <div class="w-12 h-12 redondeado-lg bg-terciario-contenedor flex items-center justify-center">
+            <span class="material-symbols-outlined texto-blanco">medical_services</span>
+          </div>
+          <div>
+            <h3 class="texto-body-lg texto-primario mb-1 font-semibold">Clínicas dentales abiertas 24h</h3>
+            <div class="flex flex-envolver items-center gap-3">
+              <span class="bg-secundario-fijo texto-secundario-fijo px-2 py-0.5 redondeado texto-label-sm">Google Maps</span>
+              <span class="texto-outline texto-body-sm flex items-center gap-1">
+                <span class="material-symbols-outlined">calendar_today</span>
+                23 Oct, 2023
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="flex items-center gap-3 opacidad-0 grupo-hover:opacidad-100 transition">
+          <button class="flex items-center gap-2 px-4 py-2 bg-primario texto-blanco redondeado-lg texto-label-sm active:scale-95 transition">
+            <span class="material-symbols-outlined">refresh</span>
+            Repetir Búsqueda
+          </button>
+          <button class="p-2 texto-outline hover:texto-error hover:bg-error-contenedor redondeado-lg transition">
+            <span class="material-symbols-outlined">delete</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-12 flex justify-center">
+      <button class="px-8 py-3 border borde-variante texto-primario texto-label-md redondeado-xl hover:bg-superficie-baja transition active:scale-95">
+        Cargar más historial
+      </button>
+    </div>
+  </main>
+
+  <nav class="md:hidden fixed bottom-0 left-0 ancho-completo z-50 flex justify-alrededor items-center px-4 py-2 pb-seguro bg-superficie-mas-baja sombra-inferior redondeado-t-xl">
+    <a class="flex flex-col items-center justify-center texto-variante px-3 py-1 hover:bg-superficie-variante transition" href="#">
+      <span class="material-symbols-outlined">search</span>
+      <span class="texto-label-sm">Búsqueda</span>
+    </a>
+    <a class="flex flex-col items-center justify-center bg-primario-contenedor texto-blanco redondeado-xl px-3 py-1 active:scale-95 transition" href="#">
+      <span class="material-symbols-outlined">history</span>
+      <span class="texto-label-sm">Historial</span>
+    </a>
+    <a class="flex flex-col items-center justify-center texto-variante px-3 py-1 hover:bg-superficie-variante transition" href="#">
+      <span class="material-symbols-outlined">star</span>
+      <span class="texto-label-sm">Favoritos</span>
+    </a>
+    <a class="flex flex-col items-center justify-center texto-variante px-3 py-1 hover:bg-superficie-variante transition" href="#">
+      <span class="material-symbols-outlined">dashboard</span>
+      <span class="texto-label-sm">Panel</span>
+    </a>
+  </nav>
+  <div class="pb-24 md:pb-12"></div>
+</div>
+
+<div class="vista-escritorio">
+  <aside class="barra-lateral">
+    <div class="mb-10 px-2">
+      <h1 class="texto-headline-md font-extrabold texto-primario">Encuentralo</h1>
+      <p class="texto-body-sm texto-secundario">Business Edition</p>
+    </div>
+    <button class="mb-8 flex items-center justify-center gap-2 bg-primario texto-blanco py-3 px-4 redondeado-xl texto-label-md hover:opacity-90 transition">
+      <span class="material-symbols-outlined">add</span>
+      Nueva Prospección
+    </button>
+    <nav class="flex-1 space-y-1">
+      <a class="flex items-center gap-3 px-4 py-3 redondeado-lg texto-secundario texto-label-md hover:bg-superficie-variante transition" href="#">
+        <span class="material-symbols-outlined">search</span>
+        Búsqueda
+      </a>
+      <a class="flex items-center gap-3 px-4 py-3 redondeado-lg texto-primario border-r-4 border-primario bg-secundario-contenedor texto-label-md transition translate-x-1" href="#">
+        <span class="material-symbols-outlined">history</span>
+        Historial
+      </a>
+      <a class="flex items-center gap-3 px-4 py-3 redondeado-lg texto-secundario texto-label-md hover:bg-superficie-variante transition" href="#">
+        <span class="material-symbols-outlined">star</span>
+        Favoritos
+      </a>
+      <a class="flex items-center gap-3 px-4 py-3 redondeado-lg texto-secundario texto-label-md hover:bg-superficie-variante transition" href="#">
+        <span class="material-symbols-outlined">ios_share</span>
+        Exportación
+      </a>
+      <a class="flex items-center gap-3 px-4 py-3 redondeado-lg texto-secundario texto-label-md hover:bg-superficie-variante transition" href="#">
+        <span class="material-symbols-outlined">settings</span>
+        Administración
+      </a>
+    </nav>
+    <div class="pt-6 mt-6 border-t borde-variante space-y-1">
+      <a class="flex items-center gap-3 px-4 py-3 redondeado-lg texto-secundario texto-label-md hover:bg-superficie-variante transition" href="#">
+        <span class="material-symbols-outlined">help</span>
+        Ayuda
+      </a>
+      <a class="flex items-center gap-3 px-4 py-3 redondeado-lg texto-secundario texto-label-md hover:bg-superficie-variante transition" href="#">
+        <span class="material-symbols-outlined">logout</span>
+        Cerrar Sesión
+      </a>
+    </div>
+  </aside>
+
+  <main class="contenido-principal-escritorio">
+    <header class="cabecera-superior">
+      <div class="flex items-center gap-4">
+        <h2 class="texto-headline-md font-bold texto-primario">Historial de Búsquedas</h2>
+      </div>
+      <div class="flex items-center gap-6">
+        <button class="texto-variante hover:bg-superficie-alta p-2 redondeado-completo transition">
+          <span class="material-symbols-outlined">notifications</span>
+        </button>
+        <div class="flex items-center gap-3 pl-4 border-l borde-variante">
+          <div class="text-right">
+            <p class="texto-label-md texto-primario">Carlos Méndez</p>
+            <p class="texto-body-sm texto-secundario">Admin</p>
+          </div>
+          <span class="material-symbols-outlined texto-primario">account_circle</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="px-margen-escritorio py-8 ancho-max-1400">
+      <div class="grid grid-cols-12 gap-gutter mb-10">
+        <div class="col-span-8 bg-superficie-mas-baja p-6 redondeado-xl tarjeta-sombra">
+          <div class="flex items-center gap-4 mb-6">
+            <div class="relative flex-1">
+              <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 texto-secundario">search</span>
+              <input class="ancho-completo pl-12 pr-4 py-3 bg-superficie-baja border-none redondeado-lg focus:ring-2 focus:ring-primario transition texto-body-md" placeholder="Buscar por término o fuente..." type="text">
+            </div>
+            <button class="bg-primario texto-blanco px-6 py-3 redondeado-lg texto-label-md flex items-center gap-2">
+              Filtrar
+              <span class="material-symbols-outlined">filter_list</span>
+            </button>
+          </div>
+          <div class="flex gap-3 overflow-x-auto pb-2">
+            <span class="px-4 py-1.5 redondeado-completo bg-secundario-contenedor texto-secundario-contenedor texto-label-md flex items-center gap-2 espacio-sin-salto">
+              Últimos 30 días <span class="material-symbols-outlined">close</span>
+            </span>
+            <span class="px-4 py-1.5 redondeado-completo bg-secundario-contenedor texto-secundario-contenedor texto-label-md flex items-center gap-2 espacio-sin-salto">
+              Estado: Completado <span class="material-symbols-outlined">close</span>
+            </span>
+            <span class="px-4 py-1.5 redondeado-completo bg-superficie-alta texto-secundario texto-label-md flex items-center gap-2 espacio-sin-salto">
+              Fuente: Google Maps <span class="material-symbols-outlined">close</span>
+            </span>
+          </div>
+        </div>
+        <div class="col-span-4 bg-primario-contenedor p-6 redondeado-xl tarjeta-sombra relative overflow-hidden grupo">
+          <div class="relative z-10 h-full flex flex-col justify-between">
+            <div>
+              <p class="texto-on-primario-contenedor texto-label-md opacidad-80 mb-1">Total de registros</p>
+              <h3 class="texto-blanco texto-headline-xl">1,284</h3>
+            </div>
+            <div class="flex items-center gap-2 texto-on-primario-contenedor texto-body-sm">
+              <span class="material-symbols-outlined texto-verde">trending_up</span>
+              +12% respecto al mes anterior
+            </div>
+          </div>
+          <div class="absolute -right-4 -bottom-4 opacidad-10 escala-150 grupo-hover:escala-110 transition">
+            <span class="material-symbols-outlined texto-blanco">analytics</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-superficie-mas-baja redondeado-xl tarjeta-sombra overflow-hidden">
+        <div class="px-8 py-6 border-b borde-variante flex justify-between items-center">
+          <h3 class="texto-headline-md texto-primario">Registros de Actividad</h3>
+          <div class="flex items-center gap-2">
+            <button class="p-2 hover:bg-superficie-alta redondeado-lg transition texto-secundario">
+              <span class="material-symbols-outlined">download</span>
+            </button>
+            <button class="p-2 hover:bg-superficie-alta redondeado-lg transition texto-secundario">
+              <span class="material-symbols-outlined">more_vert</span>
+            </button>
+          </div>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="ancho-completo text-left">
+            <thead>
+              <tr class="bg-superficie-baja">
+                <th class="px-8 py-4 texto-label-md texto-secundario uppercase tracking-wider">Fecha</th>
+                <th class="px-8 py-4 texto-label-md texto-secundario uppercase tracking-wider">Término de Búsqueda</th>
+                <th class="px-8 py-4 texto-label-md texto-secundario uppercase tracking-wider">Fuente</th>
+                <th class="px-8 py-4 texto-label-md texto-secundario uppercase tracking-wider text-center">Resultados</th>
+                <th class="px-8 py-4 texto-label-md texto-secundario uppercase tracking-wider">Estado</th>
+                <th class="px-8 py-4 texto-label-md texto-secundario uppercase tracking-wider text-right">Acciones</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y borde-variante">
+              <tr class="hover:bg-superficie-baja transition">
+                <td class="px-8 py-5">
+                  <div class="texto-body-md texto-primario">24 May 2024</div>
+                  <div class="texto-body-sm texto-secundario">14:32 PM</div>
+                </td>
+                <td class="px-8 py-5">
+                  <div class="texto-body-md texto-primario font-semibold">Agencias de Marketing Digital</div>
+                  <div class="texto-body-sm texto-secundario">Ubicación: Madrid, ES</div>
+                </td>
+                <td class="px-8 py-5">
+                  <span class="flex-en-linea items-center gap-1.5 px-3 py-1 redondeado-completo bg-secundario-contenedor texto-secundario-contenedor texto-label-md">
+                    <span class="material-symbols-outlined">public</span> Google Maps
+                  </span>
+                </td>
+                <td class="px-8 py-5 text-center">
+                  <div class="texto-headline-md texto-primario">142</div>
+                </td>
+                <td class="px-8 py-5">
+                  <span class="flex-en-linea items-center justify-center text-center px-3 py-1 redondeado-completo bg-verde-claro texto-verde texto-label-md ancho-ajustado">Completado</span>
+                </td>
+                <td class="px-8 py-5 text-right">
+                  <button class="flex-en-linea items-center gap-2 bg-superficie-alta px-4 py-2 redondeado-lg texto-primario texto-label-md hover:bg-primario hover:texto-blanco transition">
+                    <span class="material-symbols-outlined">replay</span>
+                    Repetir
+                  </button>
+                </td>
+              </tr>
+              <tr class="hover:bg-superficie-baja transition">
+                <td class="px-8 py-5">
+                  <div class="texto-body-md texto-primario">23 May 2024</div>
+                  <div class="texto-body-sm texto-secundario">09:15 AM</div>
+                </td>
+                <td class="px-8 py-5">
+                  <div class="texto-body-md texto-primario font-semibold">Inmobiliarias Premium</div>
+                  <div class="texto-body-sm texto-secundario">Ubicación: Marbella, ES</div>
+                </td>
+                <td class="px-8 py-5">
+                  <span class="flex-en-linea items-center gap-1.5 px-3 py-1 redondeado-completo bg-secundario-contenedor texto-secundario-contenedor texto-label-md">
+                    <span class="material-symbols-outlined">business_center</span> LinkedIn
+                  </span>
+                </td>
+                <td class="px-8 py-5 text-center">
+                  <div class="texto-headline-md texto-primario">85</div>
+                </td>
+                <td class="px-8 py-5">
+                  <span class="flex-en-linea items-center justify-center text-center px-3 py-1 redondeado-completo bg-verde-claro texto-verde texto-label-md ancho-ajustado">Completado</span>
+                </td>
+                <td class="px-8 py-5 text-right">
+                  <button class="flex-en-linea items-center gap-2 bg-superficie-alta px-4 py-2 redondeado-lg texto-primario texto-label-md hover:bg-primario hover:texto-blanco transition">
+                    <span class="material-symbols-outlined">replay</span>
+                    Repetir
+                  </button>
+                </td>
+              </tr>
+              <tr class="hover:bg-superficie-baja transition">
+                <td class="px-8 py-5">
+                  <div class="texto-body-md texto-primario">23 May 2024</div>
+                  <div class="texto-body-sm texto-secundario">18:45 PM</div>
+                </td>
+                <td class="px-8 py-5">
+                  <div class="texto-body-md texto-primario font-semibold">Restaurantes Estrella Michelin</div>
+                  <div class="texto-body-sm texto-secundario">Ubicación: Barcelona, ES</div>
+                </td>
+                <td class="px-8 py-5">
+                  <span class="flex-en-linea items-center gap-1.5 px-3 py-1 redondeado-completo bg-secundario-contenedor texto-secundario-contenedor texto-label-md">
+                    <span class="material-symbols-outlined">travel_explore</span> Bing Places
+                  </span>
+                </td>
+                <td class="px-8 py-5 text-center">
+                  <div class="texto-headline-md texto-secundario">--</div>
+                </td>
+                <td class="px-8 py-5">
+                  <span class="flex items-center gap-2 texto-primario texto-label-md">
+                    <span class="w-2 h-2 redondeado-completo bg-primario animacion-pulso"></span> Procesando
+                  </span>
+                </td>
+                <td class="px-8 py-5 text-right">
+                  <button class="p-2 texto-secundario hover:texto-error transition">
+                    <span class="material-symbols-outlined">block</span>
+                  </button>
+                </td>
+              </tr>
+              <tr class="hover:bg-superficie-baja transition">
+                <td class="px-8 py-5">
+                  <div class="texto-body-md texto-primario">22 May 2024</div>
+                  <div class="texto-body-sm texto-secundario">11:02 AM</div>
+                </td>
+                <td class="px-8 py-5">
+                  <div class="texto-body-md texto-primario font-semibold">Clínicas Dentales</div>
+                  <div class="texto-body-sm texto-secundario">Ubicación: Valencia, ES</div>
+                </td>
+                <td class="px-8 py-5">
+                  <span class="flex-en-linea items-center gap-1.5 px-3 py-1 redondeado-completo bg-secundario-contenedor texto-secundario-contenedor texto-label-md">
+                    <span class="material-symbols-outlined">public</span> Google Maps
+                  </span>
+                </td>
+                <td class="px-8 py-5 text-center">
+                  <div class="texto-headline-md texto-primario">0</div>
+                </td>
+                <td class="px-8 py-5">
+                  <span class="flex-en-linea items-center justify-center text-center px-3 py-1 redondeado-completo bg-error-contenedor texto-error texto-label-md ancho-ajustado">Error de conexión</span>
+                </td>
+                <td class="px-8 py-5 text-right">
+                  <button class="flex-en-linea items-center gap-2 bg-superficie-alta px-4 py-2 redondeado-lg texto-primario texto-label-md hover:bg-primario hover:texto-blanco transition">
+                    <span class="material-symbols-outlined">replay</span>
+                    Reintentar
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="px-8 py-6 border-t borde-variante flex justify-between items-center bg-superficie-baja">
+          <p class="texto-body-sm texto-secundario">Mostrando 1-10 de 1,284 resultados</p>
+          <div class="flex items-center gap-2">
+            <button class="p-2 border borde-variante redondeado-lg hover:bg-superficie-alta transition texto-secundario deshabilitado:opacidad-50" disabled>
+              <span class="material-symbols-outlined">chevron_left</span>
+            </button>
+            <button class="px-3 py-1 redondeado-lg bg-primario texto-blanco texto-label-md">1</button>
+            <button class="px-3 py-1 redondeado-lg hover:bg-superficie-alta texto-label-md">2</button>
+            <button class="px-3 py-1 redondeado-lg hover:bg-superficie-alta texto-label-md">3</button>
+            <span class="texto-secundario px-2">...</span>
+            <button class="px-3 py-1 redondeado-lg hover:bg-superficie-alta texto-label-md">129</button>
+            <button class="p-2 border borde-variante redondeado-lg hover:bg-superficie-alta transition texto-secundario">
+              <span class="material-symbols-outlined">chevron_right</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-12 grid grid-cols-3 gap-gutter">
+        <div class="bg-blanco p-8 redondeado-xl tarjeta-sombra flex flex-col items-center text-center border borde-variante">
+          <div class="w-12 h-12 bg-secundario-contenedor redondeado-completo flex items-center justify-center mb-4">
+            <span class="material-symbols-outlined texto-primario">auto_awesome</span>
+          </div>
+          <h4 class="texto-headline-md texto-primario mb-2">Análisis de Tendencias</h4>
+          <p class="texto-body-sm texto-secundario mb-6">Visualiza qué términos están obteniendo mejores resultados en tu sector este mes.</p>
+          <button class="texto-primario texto-label-md flex items-center gap-1 hover:gap-2 transition">
+            Ver informe completo <span class="material-symbols-outlined">arrow_forward</span>
+          </button>
+        </div>
+        <div class="col-span-2 relative h-56 redondeado-xl overflow-hidden tarjeta-sombra">
+          <img alt="Panel de análisis" class="absolute inset-0 ancho-completo h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCqFCy31oXzhsDTgCasfaOjYy8WnsXceG8lmLn-3JlUhWvhJ8Xip_vjpI99apr-oVyTmj80l4RRiHrud0cMjqHxEJ3uk1yk64e3CDcntK94I2ev1TSNPqqWFVMfbm0Rr5y1NXDYPhFaC91NVfoEeGVEg6v8Oj7TepauDAt3OOKXpI-O73YptWmwSCYToktd5xOqW1NVLjV-G30UDBrz1uR42R26grQoCw8i9O3aUb5pMQYr42WP6aprRCII3igdJvxGiwqdKsXzJf4">
+          <div class="absolute inset-0 bg-gradiente flex flex-col justify-center px-12 texto-blanco">
+            <span class="texto-label-md texto-inverse-primario mb-2 uppercase tracking-widest">Novedad</span>
+            <h3 class="texto-headline-lg mb-4 max-w-md">Exportación programada ahora disponible para cuentas Business.</h3>
+            <button class="bg-blanco texto-primario px-8 py-3 redondeado-lg texto-label-md ancho-ajustado hover:bg-superficie-alta transition">
+              Configurar ahora
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Panel de Exportación | Encuentralo</title>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+  *, ::before, ::after {
+    box-sizing: border-box;
+    border-width: 0;
+    border-style: solid;
+    border-color: #e5e7eb;
+  }
+  html {
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    tab-size: 4;
+    font-family: 'Hanken Grotesk', sans-serif;
+  }
+  body {
+    margin: 0;
+    line-height: inherit;
+    font-family: 'Hanken Grotesk', sans-serif;
+    background-color: #f7f9fb;
+    color: #191c1e;
+  }
+  h1, h2, h3, h4, p, a, label, input, button, span {
+    margin: 0;
+    padding: 0;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    color: inherit;
+    text-decoration: inherit;
+  }
+  button, input {
+    font-family: inherit;
+    font-size: 100%;
+    line-height: inherit;
+    margin: 0;
+    padding: 0;
+  }
+  button {
+    background-color: transparent;
+    background-image: none;
+    cursor: pointer;
+  }
+  img {
+    display: block;
+    vertical-align: middle;
+  }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    display: inline-block;
+    line-height: 1;
+    vertical-align: middle;
+  }
+
+  .texto-headline-xl {
+    font-size: 40px;
+    line-height: 48px;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+  }
+  .texto-headline-lg {
+    font-size: 32px;
+    line-height: 40px;
+    letter-spacing: -0.01em;
+    font-weight: 600;
+  }
+  .texto-headline-md {
+    font-size: 24px;
+    line-height: 32px;
+    font-weight: 600;
+  }
+  .texto-headline-lg-movil {
+    font-size: 28px;
+    line-height: 36px;
+    font-weight: 600;
+  }
+  .texto-body-lg {
+    font-size: 18px;
+    line-height: 28px;
+    font-weight: 400;
+  }
+  .texto-body-md {
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 400;
+  }
+  .texto-body-sm {
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 400;
+  }
+  .texto-label-md {
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing: 0.01em;
+    font-weight: 600;
+  }
+  .texto-label-sm {
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 500;
+  }
+
+  .flex { display: flex; }
+  .grid { display: grid; }
+  .block { display: block; }
+  .hidden { display: none; }
+  .items-center { align-items: center; }
+  .justify-center { justify-content: center; }
+  .justify-between { justify-content: space-between; }
+  .flex-col { flex-direction: column; }
+  .flex-1 { flex: 1; }
+  .gap-1 { gap: 0.25rem; }
+  .gap-2 { gap: 0.5rem; }
+  .gap-3 { gap: 0.75rem; }
+  .gap-4 { gap: 1rem; }
+  .gap-6 { gap: 1.5rem; }
+  .gap-8 { gap: 2rem; }
+  .gap-gutter { gap: 24px; }
+  .ancho-completo { width: 100%; }
+  .max-w-contenedor { max-width: 1280px; }
+  .max-w-7xl { max-width: 80rem; }
+  .mx-auto { margin-left: auto; margin-right: auto; }
+  .p-1 { padding: 0.25rem; }
+  .p-2 { padding: 0.5rem; }
+  .p-4 { padding: 1rem; }
+  .p-6 { padding: 1.5rem; }
+  .p-8 { padding: 2rem; }
+  .px-1 { padding-left: 0.25rem; padding-right: 0.25rem; }
+  .px-2 { padding-left: 0.5rem; padding-right: 0.5rem; }
+  .px-3 { padding-left: 0.75rem; padding-right: 0.75rem; }
+  .px-4 { padding-left: 1rem; padding-right: 1rem; }
+  .px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+  .px-margen-movil { padding-left: 16px; padding-right: 16px; }
+  .px-margen-escritorio { padding-left: 48px; padding-right: 48px; }
+  .py-1 { padding-top: 0.25rem; padding-bottom: 0.25rem; }
+  .py-2 { padding-top: 0.5rem; padding-bottom: 0.5rem; }
+  .py-3 { padding-top: 0.75rem; padding-bottom: 0.75rem; }
+  .py-4 { padding-top: 1rem; padding-bottom: 1rem; }
+  .py-6 { padding-top: 1.5rem; padding-bottom: 1.5rem; }
+  .py-8 { padding-top: 2rem; padding-bottom: 2rem; }
+  .py-12 { padding-top: 3rem; padding-bottom: 3rem; }
+  .pt-16 { padding-top: 4rem; }
+  .pb-24 { padding-bottom: 6rem; }
+  .pb-seguro { padding-bottom: constant(safe-area-inset-bottom); padding-bottom: env(safe-area-inset-bottom); }
+  .mb-1 { margin-bottom: 0.25rem; }
+  .mb-2 { margin-bottom: 0.5rem; }
+  .mb-3 { margin-bottom: 0.75rem; }
+  .mb-4 { margin-bottom: 1rem; }
+  .mb-6 { margin-bottom: 1.5rem; }
+  .mb-8 { margin-bottom: 2rem; }
+  .mb-10 { margin-bottom: 2.5rem; }
+  .mb-12 { margin-bottom: 3rem; }
+  .mt-2 { margin-top: 0.5rem; }
+  .mt-4 { margin-top: 1rem; }
+  .mt-6 { margin-top: 1.5rem; }
+  .mt-8 { margin-top: 2rem; }
+  .mt-12 { margin-top: 3rem; }
+  .mt-16 { margin-top: 4rem; }
+  .mr-1 { margin-right: 0.25rem; }
+  .ml-3 { margin-left: 0.75rem; }
+  .ml-64 { margin-left: 16rem; }
+  .pt-20 { padding-top: 5rem; }
+  .sticky { position: sticky; }
+  .top-0 { top: 0; }
+  .top-28 { top: 7rem; }
+  .top-\[88px\] { top: 88px; }
+  .bottom-0 { bottom: 0; }
+  .left-0 { left: 0; }
+  .right-0 { right: 0; }
+  .absolute { position: absolute; }
+  .relative { position: relative; }
+  .fixed { position: fixed; }
+  .inset-0 { top: 0; right: 0; bottom: 0; left: 0; }
+  .z-10 { z-index: 10; }
+  .z-40 { z-index: 40; }
+  .z-50 { z-index: 50; }
+  .border { border-width: 1px; }
+  .border-t { border-top-width: 1px; }
+  .border-b { border-bottom-width: 1px; }
+  .border-r { border-right-width: 1px; }
+  .border-l { border-left-width: 1px; }
+  .border-r-4 { border-right-width: 4px; }
+  .border-none { border: none; }
+  .divide-y > :not([hidden]) ~ :not([hidden]) { border-top-width: 1px; border-color: rgba(197, 198, 205, 0.3); }
+  .text-left { text-align: left; }
+  .text-center { text-align: center; }
+  .text-right { text-align: right; }
+  .uppercase { text-transform: uppercase; }
+  .tracking-wider { letter-spacing: 0.05em; }
+  .font-bold { font-weight: 700; }
+  .font-semibold { font-weight: 600; }
+  .font-extrabold { font-weight: 800; }
+  .italic { font-style: italic; }
+  .grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+  .grid-cols-12 { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+  .col-span-12 { grid-column: span 12 / span 12; }
+  .col-span-8 { grid-column: span 8 / span 8; }
+  .col-span-4 { grid-column: span 4 / span 4; }
+  .col-span-2 { grid-column: span 2 / span 2; }
+
+  .contenedor-max { max-width: 1280px; margin-left: auto; margin-right: auto; }
+  .pointer-events-none { pointer-events: none; }
+  .shadow-sm { box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); }
+  .sombra-suave { box-shadow: 0px 4px 20px rgba(30, 41, 59, 0.05); }
+  .sombra-fuerte { box-shadow: 0px 4px 30px rgba(9, 20, 38, 0.2); }
+  .sombra-inferior { box-shadow: 0 -4px 20px rgba(30, 41, 59, 0.05); }
+  .redondeado { border-radius: 0.25rem; }
+  .redondeado-lg { border-radius: 0.5rem; }
+  .redondeado-xl { border-radius: 0.75rem; }
+  .redondeado-completo { border-radius: 9999px; }
+  .bg-fondo { background-color: #f7f9fb; }
+  .bg-primario { background-color: #091426; }
+  .bg-primario-contenedor { background-color: #1e293b; }
+  .bg-superficie { background-color: #f7f9fb; }
+  .bg-superficie-baja { background-color: #f2f4f6; }
+  .bg-superficie-alta { background-color: #e6e8ea; }
+  .bg-superficie-mas-alta { background-color: #e0e3e5; }
+  .bg-superficie-mas-baja { background-color: #ffffff; }
+  .bg-secundario-contenedor { background-color: #d0e1fb; }
+  .bg-primario-fijo { background-color: #d8e3fb; }
+  .bg-terciario-fijo { background-color: #dae2fd; }
+  .bg-terciario-contenedor { background-color: #20283c; }
+  .bg-secundario-fijo { background-color: #d3e4fe; }
+  .bg-error-contenedor { background-color: #ffdad6; }
+  .texto-base { color: #191c1e; }
+  .texto-variante { color: #45474c; }
+  .texto-secundario { color: #505f76; }
+  .texto-primario { color: #091426; }
+  .texto-blanco { color: #ffffff; }
+  .texto-error { color: #ba1a1a; }
+  .texto-on-primario-contenedor { color: #8590a6; }
+  .borde-variante { border-color: #c5c6cd; }
+  .borde-superficie { border-color: #eceef0; }
+  .opacidad-10 { opacity: 0.1; }
+  .opacidad-20 { opacity: 0.2; }
+  .opacidad-40 { opacity: 0.4; }
+  .opacidad-50 { opacity: 0.5; }
+  .opacidad-70 { opacity: 0.7; }
+  .translate-x-1 { transform: translateX(0.25rem); }
+
+  .transition { transition-property: all; transition-duration: 150ms; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); }
+  .transition-colors { transition-property: color, background-color, border-color; transition-duration: 150ms; }
+
+
+
+  .barra-lateral {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 1rem;
+    background-color: #f2f4f6;
+    width: 16rem;
+    z-index: 40;
+    border-right-width: 1px;
+    border-color: rgba(197, 198, 205, 0.2);
+  }
+  .contenido-principal-escritorio {
+    margin-left: 16rem;
+    min-height: 100vh;
+    background-color: #f7f9fb;
+  }
+  .cabecera-superior {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4rem;
+    background-color: #eceef0;
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 48px;
+    padding-right: 48px;
+    z-index: 50;
+  }
+  .tarjeta-sombra {
+    box-shadow: 0px 4px 20px rgba(30, 41, 59, 0.05);
+  }
+  .fondo-gradiente {
+    background: linear-gradient(to top, rgba(9, 20, 38, 0.8), transparent);
+  }
+
+
+
+  .cursor-pointer { cursor: pointer; }
+  .overflow-hidden { overflow: hidden; }
+  .h-full { height: 100%; }
+  .w-10 { width: 2.5rem; }
+  .h-10 { height: 2.5rem; }
+  .w-8 { width: 2rem; }
+  .h-8 { height: 2rem; }
+  .w-5 { width: 1.25rem; }
+  .h-5 { height: 1.25rem; }
+  .object-cover { object-fit: cover; }
+  .flex-wrap { flex-wrap: wrap; }
+  .min-w-36 { min-width: 9rem; }
+  .items-start { align-items: flex-start; }
+  .items-end { align-items: flex-end; }
+  .justify-around { justify-content: space-around; }
+  .border-2 { border-width: 2px; }
+  .border-b-2 { border-bottom-width: 2px; }
+  .border-primario { border-color: #091426; }
+  .border-transparent { border-color: transparent; }
+  .redondeado-2xl { border-radius: 1rem; }
+  .redondeado-t-xl { border-top-left-radius: 0.75rem; border-top-right-radius: 0.75rem; }
+  .h-80 { height: 20rem; }
+  .h-32 { height: 8rem; }
+  .font-medium { font-weight: 500; }
+  .mt-auto { margin-top: auto; }
+  .pt-4 { padding-top: 1rem; }
+  .pb-3 { padding-bottom: 0.75rem; }
+  .pb-4 { padding-bottom: 1rem; }
+  .py-0\.5 { padding-top: 0.125rem; padding-bottom: 0.125rem; }
+  .shadow-lg { box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1); }
+  .opacity-0 { opacity: 0; }
+  .opacidad-90 { opacity: 0.9; }
+  .bg-blanco { background-color: #ffffff; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border-width: 0; }
+  .space-y-1 > :not([hidden]) ~ :not([hidden]) { margin-top: 0.25rem; }
+  .space-y-3 > :not([hidden]) ~ :not([hidden]) { margin-top: 0.75rem; }
+  .space-y-4 > :not([hidden]) ~ :not([hidden]) { margin-top: 1rem; }
+  .space-y-6 > :not([hidden]) ~ :not([hidden]) { margin-top: 1.5rem; }
+  .space-y-gutter > :not([hidden]) ~ :not([hidden]) { margin-top: 24px; }
+  .texto-blanco\/70 { color: rgba(255,255,255,0.7); }
+  .texto-blanco\/50 { color: rgba(255,255,255,0.5); }
+  .texto-primario\/40 { color: rgba(9,20,38,0.4); }
+  .texto-variante\/40 { color: rgba(69,71,76,0.4); }
+  .border-blanco\/10 { border-color: rgba(255,255,255,0.1); }
+  .bg-primario\/5 { background-color: rgba(9,20,38,0.05); }
+  .hover\:bg-blanco:hover { background-color: #ffffff; }
+  .hover\:bg-superficie-alta:hover { background-color: #e6e8ea; }
+  .hover\:bg-superficie-baja:hover { background-color: #f2f4f6; }
+  .hover\:bg-superficie-variante:hover { background-color: #e0e3e5; }
+  .hover\:bg-primario-fijo:hover { background-color: #d8e3fb; }
+  .hover\:border-primario:hover { border-color: #091426; }
+  .hover\:border-primario\/20:hover { border-color: rgba(9,20,38,0.2); }
+  .hover\:opacity-90:hover { opacity: 0.9; }
+  .active\:opacity-80:active { opacity: 0.8; }
+  .active\:scale-95:active { transform: scale(0.95); }
+  .active\:scale-98:active { transform: scale(0.98); }
+  .focus\:ring-primario:focus { outline: 2px solid #091426; outline-offset: 2px; }
+  .peer:checked ~ .peer-checked\:border-primario { border-color: #091426; }
+  .peer:checked ~ .peer-checked\:bg-secundario-contenedor { background-color: #d0e1fb; }
+  .peer:checked ~ .peer-checked\:bg-primario\/5 { background-color: rgba(9,20,38,0.05); }
+  .peer:checked ~ .peer-checked\:texto-primario { color: #091426; }
+  .peer:checked ~ div .peer-checked\:opacity-100 { opacity: 1; }
+
+
+  .vista-movil {
+    display: block;
+  }
+  .vista-escritorio {
+    display: none;
+  }
+  @media (min-width: 768px) {
+    .vista-movil {
+      display: none;
+    }
+    .vista-escritorio {
+      display: block;
+    }
+    .md\:block { display: block; }
+    .md\:flex { display: flex; }
+    .md\:hidden { display: none; }
+    .md\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .md\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .md\:px-margen-escritorio { padding-left: 48px; padding-right: 48px; }
+    .sm\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (min-width: 1024px) {
+    .lg\:col-span-8 { grid-column: span 8 / span 8; }
+    .lg\:col-span-4 { grid-column: span 4 / span 4; }
+    .lg\:grid-cols-12 { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+  }
+
+</style>
+</head>
+<body>
+
+<div class="vista-movil">
+  <header class="bg-superficie shadow-sm sticky top-0 z-50">
+    <div class="flex justify-between items-center ancho-completo px-margen-movil py-2 max-w-contenedor mx-auto">
+      <div class="flex items-center gap-4">
+        <span class="material-symbols-outlined texto-primario">explore</span>
+        <h1 class="texto-headline-md font-bold texto-primario">Encuentralo</h1>
+      </div>
+      <nav class="hidden md:flex gap-8">
+        <a class="texto-secundario hover:bg-superficie-alta transition-colors px-2 py-1 cursor-pointer" href="#">Búsqueda</a>
+        <a class="texto-secundario hover:bg-superficie-alta transition-colors px-2 py-1 cursor-pointer" href="#">Historial</a>
+        <a class="texto-secundario hover:bg-superficie-alta transition-colors px-2 py-1 cursor-pointer" href="#">Favoritos</a>
+        <a class="texto-primario font-bold border-b-2 border-primario px-2 py-1 cursor-pointer" href="#">Panel</a>
+      </nav>
+      <div class="flex items-center gap-2 cursor-pointer active:scale-95 transition">
+        <div class="w-10 h-10 redondeado-completo bg-superficie flex items-center justify-center overflow-hidden">
+          <img alt="Usuario" class="ancho-completo h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuATeiL_HBrV2EJZCOQD4ABQ0WbvoYJkEfVEFWd_N2ohGO5D8Cz0m-IO5QbpSO1OOUWq_R0rTsHuvnzTjZ-lBIzPQlR5Ne5hqUXeFhglUvbJ87IeIVIIgz4ldE2DGk3XSuOOxV4BW81O19g0djZQXCFPiP4yr2RXyKxXbVPwJ6prNdLgRjFKCpQk8RLDZtpGS46sPnnerwZe22QVAp57oSGSgq4wnhUMH_MPe8sn5uNTq1YdjtnJDpOzF3Og0WDxnIXKBc7dVaYQDLI">
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-contenedor mx-auto px-margen-movil py-12 pb-24">
+    <div class="mb-12">
+      <h2 class="texto-headline-xl mb-2">Panel de Exportación</h2>
+      <p class="texto-body-lg texto-variante">Configura y descarga los datos obtenidos para tu análisis de mercado.</p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+      <div class="lg:col-span-8 space-y-gutter">
+        <section class="bg-superficie-mas-baja redondeado-xl p-8 tarjeta-sombra">
+          <div class="flex items-center gap-3 mb-8">
+            <span class="material-symbols-outlined texto-primario">checklist</span>
+            <h3 class="texto-headline-md">Seleccionar Campos</h3>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            <label class="group flex items-center p-4 redondeado-lg bg-superficie border border-transparent hover:border-primario/20 hover:bg-blanco transition cursor-pointer">
+              <input checked class="w-5 h-5 redondeado borde-variante texto-primario focus:ring-primario" type="checkbox">
+              <span class="ml-3 texto-body-md">Nombre Comercial</span>
+            </label>
+            <label class="group flex items-center p-4 redondeado-lg bg-superficie border border-transparent hover:border-primario/20 hover:bg-blanco transition cursor-pointer">
+              <input checked class="w-5 h-5 redondeado borde-variante texto-primario focus:ring-primario" type="checkbox">
+              <span class="ml-3 texto-body-md">Dirección Completa</span>
+            </label>
+            <label class="group flex items-center p-4 redondeado-lg bg-superficie border border-transparent hover:border-primario/20 hover:bg-blanco transition cursor-pointer">
+              <input checked class="w-5 h-5 redondeado borde-variante texto-primario focus:ring-primario" type="checkbox">
+              <span class="ml-3 texto-body-md">Teléfono</span>
+            </label>
+            <label class="group flex items-center p-4 redondeado-lg bg-superficie border border-transparent hover:border-primario/20 hover:bg-blanco transition cursor-pointer">
+              <input class="w-5 h-5 redondeado borde-variante texto-primario focus:ring-primario" type="checkbox">
+              <span class="ml-3 texto-body-md">Correo Electrónico</span>
+            </label>
+            <label class="group flex items-center p-4 redondeado-lg bg-superficie border border-transparent hover:border-primario/20 hover:bg-blanco transition cursor-pointer">
+              <input checked class="w-5 h-5 redondeado borde-variante texto-primario focus:ring-primario" type="checkbox">
+              <span class="ml-3 texto-body-md">Categoría / Giro</span>
+            </label>
+            <label class="group flex items-center p-4 redondeado-lg bg-superficie border border-transparent hover:border-primario/20 hover:bg-blanco transition cursor-pointer">
+              <input class="w-5 h-5 redondeado borde-variante texto-primario focus:ring-primario" type="checkbox">
+              <span class="ml-3 texto-body-md">Sitio Web</span>
+            </label>
+            <label class="group flex items-center p-4 redondeado-lg bg-superficie border border-transparent hover:border-primario/20 hover:bg-blanco transition cursor-pointer">
+              <input class="w-5 h-5 redondeado borde-variante texto-primario focus:ring-primario" type="checkbox">
+              <span class="ml-3 texto-body-md">Calificación</span>
+            </label>
+            <label class="group flex items-center p-4 redondeado-lg bg-superficie border border-transparent hover:border-primario/20 hover:bg-blanco transition cursor-pointer">
+              <input class="w-5 h-5 redondeado borde-variante texto-primario focus:ring-primario" type="checkbox">
+              <span class="ml-3 texto-body-md">Coordenadas GPS</span>
+            </label>
+          </div>
+        </section>
+
+        <section class="bg-superficie-mas-baja redondeado-xl p-8 tarjeta-sombra">
+          <div class="flex items-center gap-3 mb-8">
+            <span class="material-symbols-outlined texto-primario">format_list_bulleted</span>
+            <h3 class="texto-headline-md">Formato de Archivo</h3>
+          </div>
+          <div class="flex flex-wrap gap-4">
+            <button class="flex-1 min-w-36 flex flex-col items-center gap-3 p-6 redondeado-xl border-2 border-primario bg-primario/5 transition">
+              <span class="material-symbols-outlined texto-primario">description</span>
+              <span class="texto-label-md">CSV (Universal)</span>
+            </button>
+            <button class="flex-1 min-w-36 flex flex-col items-center gap-3 p-6 redondeado-xl border borde-variante hover:border-primario transition">
+              <span class="material-symbols-outlined texto-variante">table_chart</span>
+              <span class="texto-label-md">Excel (.xlsx)</span>
+            </button>
+            <button class="flex-1 min-w-36 flex flex-col items-center gap-3 p-6 redondeado-xl border borde-variante hover:border-primario transition">
+              <span class="material-symbols-outlined texto-variante">code</span>
+              <span class="texto-label-md">JSON (Devs)</span>
+            </button>
+          </div>
+        </section>
+      </div>
+
+      <aside class="lg:col-span-4">
+        <div class="bg-primario texto-blanco redondeado-xl p-8 sombra-fuerte sticky top-28">
+          <h3 class="texto-headline-md mb-6 pb-4 border-b border-blanco/10">Resumen de Exportación</h3>
+          <div class="space-y-6 mb-8">
+            <div class="flex justify-between items-center">
+              <span class="texto-blanco/70 texto-body-md">Registros totales</span>
+              <span class="texto-headline-md">1,248</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="texto-blanco/70 texto-body-md">Campos seleccionados</span>
+              <span class="texto-headline-md">4</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="texto-blanco/70 texto-body-md">Formato de salida</span>
+              <span class="texto-headline-md">CSV</span>
+            </div>
+            <div class="pt-4 border-t border-blanco/10">
+              <div class="flex justify-between items-center">
+                <span class="texto-blanco/70 texto-body-md">Tamaño estimado</span>
+                <span class="texto-body-md">452 KB</span>
+              </div>
+            </div>
+          </div>
+          <button class="ancho-completo bg-blanco texto-primario py-4 redondeado-lg texto-label-md flex items-center justify-center gap-3 hover:bg-primario-fijo transition active:scale-98">
+            <span class="material-symbols-outlined">download</span>
+            Descargar Reporte
+          </button>
+          <p class="mt-6 text-center texto-blanco/50 texto-label-sm">La descarga comenzará automáticamente una vez procesados los datos.</p>
+        </div>
+        <div class="mt-6 p-6 redondeado-xl bg-superficie-baja border borde-variante">
+          <div class="flex gap-4 items-start">
+            <span class="material-symbols-outlined texto-secundario">info</span>
+            <div>
+              <h4 class="texto-label-md texto-primario mb-1">Información de Privacidad</h4>
+              <p class="texto-body-sm texto-variante">Asegúrese de manejar esta información de acuerdo con las políticas de tratamiento de datos de su organización.</p>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <div class="mt-16 redondeado-2xl h-80 overflow-hidden relative">
+      <img class="ancho-completo h-full object-cover opacidad-10" alt="Visualización de datos" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBrTDPylaRE2gXvWR09w3uxXTbyOYw8C1QAAaE3zsrlzCbADBl1qHf4MBrRdyqORFEvDSnJnKAYrtSUWv5nvhwJMeatBMuYc9UxtmFlluzIc4Z3nX9XQXr50mLG8dmEx9r_Cdip89FxSpQbRR_hBNrhBI2WoYAHYlOGBM0XcMNqpkRre026QNGfY9yMSjztPGfglNrk1ZVrrdIaoUcbjcneESgvcRchpxk4U8jjjNqCGdDdnX27MwC3oTKTljwlksRB6baAh9ihuJI">
+      <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-8">
+        <h3 class="texto-headline-lg texto-primario/40 mb-2">Precisión en cada dato</h3>
+        <p class="texto-body-md texto-variante/40">Encuentralo potencia tu prospección comercial con datos verificados.</p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="md:hidden">
+    <nav class="fixed bottom-0 left-0 ancho-completo z-50 flex justify-around items-center px-4 py-2 pb-seguro bg-superficie-mas-baja sombra-inferior redondeado-t-xl">
+      <a class="flex flex-col items-center justify-center texto-variante px-3 py-1" href="#">
+        <span class="material-symbols-outlined">search</span>
+        <span class="texto-label-sm">Búsqueda</span>
+      </a>
+      <a class="flex flex-col items-center justify-center texto-variante px-3 py-1" href="#">
+        <span class="material-symbols-outlined">history</span>
+        <span class="texto-label-sm">Historial</span>
+      </a>
+      <a class="flex flex-col items-center justify-center texto-variante px-3 py-1" href="#">
+        <span class="material-symbols-outlined">star</span>
+        <span class="texto-label-sm">Favoritos</span>
+      </a>
+      <a class="flex flex-col items-center justify-center bg-primario-contenedor texto-blanco redondeado-xl px-3 py-1 active:scale-95 transition" href="#">
+        <span class="material-symbols-outlined">dashboard</span>
+        <span class="texto-label-sm">Panel</span>
+      </a>
+    </nav>
+  </footer>
+</div>
+
+<div class="vista-escritorio">
+  <header class="cabecera-superior">
+    <div class="flex items-center gap-4">
+      <span class="texto-headline-md font-bold texto-primario">Encuentralo</span>
+    </div>
+    <div class="flex items-center gap-4">
+      <button class="p-2 redondeado-completo hover:bg-superficie-alta transition active:opacity-80">
+        <span class="material-symbols-outlined texto-primario">notifications</span>
+      </button>
+      <button class="p-2 redondeado-completo hover:bg-superficie-alta transition active:opacity-80">
+        <span class="material-symbols-outlined texto-primario">account_circle</span>
+      </button>
+    </div>
+  </header>
+
+  <aside class="barra-lateral pt-20">
+    <div class="mb-8 px-2">
+      <h2 class="texto-headline-md font-extrabold texto-primario">Encuentralo</h2>
+      <p class="texto-body-sm texto-secundario">Business Edition</p>
+    </div>
+    <button class="mb-6 ancho-completo py-3 px-4 bg-primario texto-blanco redondeado-xl texto-label-md flex items-center justify-center gap-2 hover:opacity-90 transition">
+      <span class="material-symbols-outlined">add</span>
+      Nueva Prospección
+    </button>
+    <nav class="flex-1 space-y-1">
+      <a class="flex items-center gap-3 px-4 py-3 redondeado-lg texto-secundario texto-label-md hover:bg-superficie-variante transition" href="#">
+        <span class="material-symbols-outlined">search</span>
+        Búsqueda
+      </a>
+      <a class="flex items-center gap-3 px-4 py-3 redondeado-lg texto-secundario texto-label-md hover:bg-superficie-variante transition" href="#">
+        <span class="material-symbols-outlined">history</span>
+        Historial
+      </a>
+      <a class="flex items-center gap-3 px-4 py-3 redondeado-lg texto-secundario texto-label-md hover:bg-superficie-variante transition" href="#">
+        <span class="material-symbols-outlined">star</span>
+        Favoritos
+      </a>
+      <a class="flex items-center gap-3 px-4 py-3 redondeado-lg texto-primario border-r-4 border-primario bg-secundario-contenedor texto-label-md transition translate-x-1" href="#">
+        <span class="material-symbols-outlined">ios_share</span>
+        Exportación
+      </a>
+      <a class="flex items-center gap-3 px-4 py-3 redondeado-lg texto-secundario texto-label-md hover:bg-superficie-variante transition" href="#">
+        <span class="material-symbols-outlined">settings</span>
+        Administración
+      </a>
+    </nav>
+    <div class="mt-auto pt-4 border-t borde-variante space-y-1">
+      <a class="flex items-center gap-3 px-4 py-3 redondeado-lg texto-secundario texto-label-md hover:bg-superficie-variante transition" href="#">
+        <span class="material-symbols-outlined">help</span>
+        Ayuda
+      </a>
+      <a class="flex items-center gap-3 px-4 py-3 redondeado-lg texto-secundario texto-label-md hover:bg-superficie-variante transition" href="#">
+        <span class="material-symbols-outlined">logout</span>
+        Cerrar Sesión
+      </a>
+    </div>
+  </aside>
+
+  <main class="contenido-principal-escritorio pt-16">
+    <div class="max-w-7xl mx-auto px-margen-escritorio py-8 grid grid-cols-12 gap-gutter">
+      <div class="col-span-12 lg:col-span-8 space-y-gutter">
+        <header class="flex flex-col gap-1">
+          <h1 class="texto-headline-lg texto-primario">Exportación de Datos</h1>
+          <p class="texto-body-md texto-secundario">Configura y personaliza la estructura de tus archivos finales para integración CRM.</p>
+        </header>
+
+        <section class="bg-superficie-mas-baja p-6 redondeado-xl tarjeta-sombra">
+          <div class="flex items-center gap-3 mb-6">
+            <span class="w-8 h-8 redondeado-completo bg-primario-contenedor texto-blanco flex items-center justify-center font-bold texto-label-md">1</span>
+            <h2 class="texto-headline-md texto-primario">Selección de Canales</h2>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <label class="relative group cursor-pointer">
+              <input checked class="peer sr-only" type="checkbox">
+              <div class="p-4 redondeado-xl border borde-variante bg-superficie peer-checked:border-primario peer-checked:bg-secundario-contenedor transition">
+                <div class="flex justify-between items-start mb-3">
+                  <span class="material-symbols-outlined texto-primario">map</span>
+                  <span class="material-symbols-outlined texto-primario opacity-0 peer-checked:opacity-100">check_circle</span>
+                </div>
+                <p class="texto-label-md texto-primario">Google Maps</p>
+                <p class="texto-body-sm texto-secundario">4,280 registros</p>
+              </div>
+            </label>
+            <label class="relative group cursor-pointer">
+              <input class="peer sr-only" type="checkbox">
+              <div class="p-4 redondeado-xl border borde-variante bg-superficie peer-checked:border-primario peer-checked:bg-secundario-contenedor transition">
+                <div class="flex justify-between items-start mb-3">
+                  <span class="material-symbols-outlined texto-primario">work</span>
+                  <span class="material-symbols-outlined texto-primario opacity-0 peer-checked:opacity-100">check_circle</span>
+                </div>
+                <p class="texto-label-md texto-primario">Yellow Pages</p>
+                <p class="texto-body-sm texto-secundario">1,150 registros</p>
+              </div>
+            </label>
+            <label class="relative group cursor-pointer">
+              <input checked class="peer sr-only" type="checkbox">
+              <div class="p-4 redondeado-xl border borde-variante bg-superficie peer-checked:border-primario peer-checked:bg-secundario-contenedor transition">
+                <div class="flex justify-between items-start mb-3">
+                  <span class="material-symbols-outlined texto-primario">groups</span>
+                  <span class="material-symbols-outlined texto-primario opacity-0 peer-checked:opacity-100">check_circle</span>
+                </div>
+                <p class="texto-label-md texto-primario">LinkedIn Sales</p>
+                <p class="texto-body-sm texto-secundario">840 registros</p>
+              </div>
+            </label>
+          </div>
+        </section>
+
+        <section class="bg-superficie-mas-baja p-6 redondeado-xl tarjeta-sombra">
+          <div class="flex items-center justify-between mb-6">
+            <div class="flex items-center gap-3">
+              <span class="w-8 h-8 redondeado-completo bg-primario-contenedor texto-blanco flex items-center justify-center font-bold texto-label-md">2</span>
+              <h2 class="texto-headline-md texto-primario">Estructura del Archivo</h2>
+            </div>
+            <button class="texto-primario texto-label-md flex items-center gap-1">
+              <span class="material-symbols-outlined">settings_backup_restore</span>
+              Restablecer
+            </button>
+          </div>
+          <div class="overflow-hidden border borde-variante redondeado-lg">
+            <table class="ancho-completo text-left texto-body-sm">
+              <thead class="bg-superficie texto-variante border-b borde-variante">
+                <tr>
+                  <th class="px-4 py-3 font-semibold">Incluir</th>
+                  <th class="px-4 py-3 font-semibold">Nombre de Columna</th>
+                  <th class="px-4 py-3 font-semibold">Tipo de Dato</th>
+                  <th class="px-4 py-3 font-semibold">Previsualización (Fila 1)</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y borde-variante">
+                <tr class="hover:bg-superficie-baja transition">
+                  <td class="px-4 py-3"><input checked class="redondeado borde-variante texto-primario focus:ring-primario" type="checkbox"></td>
+                  <td class="px-4 py-3 font-medium texto-primario">company_name</td>
+                  <td class="px-4 py-3 texto-secundario">Texto</td>
+                  <td class="px-4 py-3 texto-variante italic">TechSolutions SL</td>
+                </tr>
+                <tr class="bg-superficie-baja hover:bg-superficie-baja transition">
+                  <td class="px-4 py-3"><input checked class="redondeado borde-variante texto-primario focus:ring-primario" type="checkbox"></td>
+                  <td class="px-4 py-3 font-medium texto-primario">primary_phone</td>
+                  <td class="px-4 py-3 texto-secundario">Número</td>
+                  <td class="px-4 py-3 texto-variante italic">+34 912 345 678</td>
+                </tr>
+                <tr class="hover:bg-superficie-baja transition">
+                  <td class="px-4 py-3"><input checked class="redondeado borde-variante texto-primario focus:ring-primario" type="checkbox"></td>
+                  <td class="px-4 py-3 font-medium texto-primario">email_address</td>
+                  <td class="px-4 py-3 texto-secundario">Email</td>
+                  <td class="px-4 py-3 texto-variante italic">contact@techsolutions.es</td>
+                </tr>
+                <tr class="bg-superficie-baja hover:bg-superficie-baja transition">
+                  <td class="px-4 py-3"><input class="redondeado borde-variante texto-primario focus:ring-primario" type="checkbox"></td>
+                  <td class="px-4 py-3 font-medium texto-primario">social_linkedin</td>
+                  <td class="px-4 py-3 texto-secundario">URL</td>
+                  <td class="px-4 py-3 texto-variante italic">linkedin.com/company/...</td>
+                </tr>
+                <tr class="hover:bg-superficie-baja transition">
+                  <td class="px-4 py-3"><input checked class="redondeado borde-variante texto-primario focus:ring-primario" type="checkbox"></td>
+                  <td class="px-4 py-3 font-medium texto-primario">geolocation_lat_long</td>
+                  <td class="px-4 py-3 texto-secundario">Coordenadas</td>
+                  <td class="px-4 py-3 texto-variante italic">40.4168, -3.7038</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="bg-superficie-mas-baja p-6 redondeado-xl tarjeta-sombra">
+          <div class="flex items-center gap-3 mb-6">
+            <span class="w-8 h-8 redondeado-completo bg-primario-contenedor texto-blanco flex items-center justify-center font-bold texto-label-md">3</span>
+            <h2 class="texto-headline-md texto-primario">Formato de Salida</h2>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <label class="cursor-pointer">
+              <input checked class="peer sr-only" name="formato" type="radio" value="csv">
+              <div class="flex flex-col items-center justify-center p-6 border borde-variante redondeado-xl peer-checked:border-primario peer-checked:bg-primario/5 transition texto-secundario peer-checked:texto-primario">
+                <span class="material-symbols-outlined">csv</span>
+                <span class="texto-label-md mt-2">CSV Standard</span>
+              </div>
+            </label>
+            <label class="cursor-pointer">
+              <input class="peer sr-only" name="formato" type="radio" value="xlsx">
+              <div class="flex flex-col items-center justify-center p-6 border borde-variante redondeado-xl peer-checked:border-primario peer-checked:bg-primario/5 transition texto-secundario peer-checked:texto-primario">
+                <span class="material-symbols-outlined">table_chart</span>
+                <span class="texto-label-md mt-2">Excel (.xlsx)</span>
+              </div>
+            </label>
+            <label class="cursor-pointer">
+              <input class="peer sr-only" name="formato" type="radio" value="json">
+              <div class="flex flex-col items-center justify-center p-6 border borde-variante redondeado-xl peer-checked:border-primario peer-checked:bg-primario/5 transition texto-secundario peer-checked:texto-primario">
+                <span class="material-symbols-outlined">javascript</span>
+                <span class="texto-label-md mt-2">JSON (API)</span>
+              </div>
+            </label>
+            <label class="cursor-pointer">
+              <input class="peer sr-only" name="formato" type="radio" value="pdf">
+              <div class="flex flex-col items-center justify-center p-6 border borde-variante redondeado-xl peer-checked:border-primario peer-checked:bg-primario/5 transition texto-secundario peer-checked:texto-primario">
+                <span class="material-symbols-outlined">picture_as_pdf</span>
+                <span class="texto-label-md mt-2">Reporte PDF</span>
+              </div>
+            </label>
+          </div>
+        </section>
+      </div>
+
+      <div class="col-span-12 lg:col-span-4">
+        <div class="sticky top-28 bg-superficie-baja p-6 redondeado-xl tarjeta-sombra space-y-6">
+          <h3 class="texto-headline-md texto-primario">Resumen de Exportación</h3>
+          <div class="space-y-4">
+            <div class="flex justify-between items-center pb-3 border-b borde-variante">
+              <span class="texto-body-md texto-secundario">Total registros</span>
+              <span class="texto-label-md texto-primario">5,120 leads</span>
+            </div>
+            <div class="flex justify-between items-center pb-3 border-b borde-variante">
+              <span class="texto-body-md texto-secundario">Columnas seleccionadas</span>
+              <span class="texto-label-md texto-primario">12 de 24</span>
+            </div>
+            <div class="flex justify-between items-center pb-3 border-b borde-variante">
+              <span class="texto-body-md texto-secundario">Formato</span>
+              <span class="px-2 py-0.5 bg-primario-fijo texto-primario redondeado texto-label-sm">CSV</span>
+            </div>
+            <div class="flex justify-between items-center pb-3 border-b borde-variante">
+              <span class="texto-body-md texto-secundario">Peso est.</span>
+              <span class="texto-label-md texto-primario">4.2 MB</span>
+            </div>
+          </div>
+          <div class="p-4 bg-secundario-contenedor redondeado-lg space-y-3">
+            <p class="texto-label-md texto-primario flex items-center gap-2">
+              <span class="material-symbols-outlined">info</span>
+              Integración CRM Directa
+            </p>
+            <p class="texto-body-sm texto-secundario">Los datos están formateados para cumplir con los requisitos de Salesforce, HubSpot y Pipedrive.</p>
+          </div>
+          <div class="space-y-3">
+            <button class="ancho-completo py-4 bg-primario texto-blanco redondeado-xl texto-headline-md flex items-center justify-center gap-3 hover:opacity-90 transition shadow-lg active:scale-98">
+              <span class="material-symbols-outlined">download</span>
+              Iniciar Descarga
+            </button>
+            <button class="ancho-completo py-3 border borde-variante texto-primario redondeado-xl texto-label-md flex items-center justify-center gap-2 hover:bg-superficie-variante transition">
+              <span class="material-symbols-outlined">mail</span>
+              Enviar por Email
+            </button>
+          </div>
+          <div class="relative h-32 redondeado-xl overflow-hidden mt-6">
+            <img alt="Visualización de datos" class="ancho-completo h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAPF94hYdPMO3akvbUj0vktQU3MSg69YPELnBlDcN_zBz5V4HtdM8WOmtOQB4POslRy0CuFqJ3p-w9y3EWU-k6n8b-5tU9E_HJQWOM81w4pw84XpnxTjyxkL3MQVHTK9DWqx5w0M3Jo2G_afedkB4QPMvN70XjzQFuHKcttkQaT_v4hP2KwoSfNrPp1Eob1TuS3wooCrJhlI2XuKn8xArylUpp0gxcBxEFqcldCVNVYhNqexzl3miok9YAzX1tTBbgTkkZJykgUz4c">
+            <div class="absolute inset-0 fondo-gradiente flex items-end p-4">
+              <p class="texto-blanco texto-label-sm opacidad-90">Análisis Geo-Espacial incluido en metadatos.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+</body>
+</html>

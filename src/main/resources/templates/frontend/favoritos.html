@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Lugares Guardados | Encuentralo</title>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+  *, ::before, ::after {
+    box-sizing: border-box;
+    border-width: 0;
+    border-style: solid;
+    border-color: #e5e7eb;
+  }
+  html {
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    tab-size: 4;
+    font-family: 'Hanken Grotesk', sans-serif;
+  }
+  body {
+    margin: 0;
+    line-height: inherit;
+    font-family: 'Hanken Grotesk', sans-serif;
+    background-color: #f7f9fb;
+    color: #191c1e;
+  }
+  h1, h2, h3, h4, p, a, label, input, button, span {
+    margin: 0;
+    padding: 0;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    color: inherit;
+    text-decoration: inherit;
+  }
+  button, input, select {
+    font-family: inherit;
+    font-size: 100%;
+    line-height: inherit;
+    margin: 0;
+    padding: 0;
+  }
+  button {
+    background-color: transparent;
+    background-image: none;
+    cursor: pointer;
+  }
+  img {
+    display: block;
+    vertical-align: middle;
+  }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    display: inline-block;
+    line-height: 1;
+    vertical-align: middle;
+  }
+  .icono-lleno {
+    font-variation-settings: 'FILL' 1;
+  }
+
+  .texto-headline-xl {
+    font-size: 40px;
+    line-height: 48px;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+  }
+  .texto-headline-lg {
+    font-size: 32px;
+    line-height: 40px;
+    letter-spacing: -0.01em;
+    font-weight: 600;
+  }
+  .texto-headline-md {
+    font-size: 24px;
+    line-height: 32px;
+    font-weight: 600;
+  }
+  .texto-headline-lg-movil {
+    font-size: 28px;
+    line-height: 36px;
+    font-weight: 600;
+  }
+  .texto-body-lg {
+    font-size: 18px;
+    line-height: 28px;
+    font-weight: 400;
+  }
+  .texto-body-md {
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 400;
+  }
+  .texto-body-sm {
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 400;
+  }
+  .texto-label-md {
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing: 0.01em;
+    font-weight: 600;
+  }
+  .texto-label-sm {
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 500;
+  }
+
+  .flex { display: flex; }
+  .grid { display: grid; }
+  .block { display: block; }
+  .hidden { display: none; }
+  .items-center { align-items: center; }
+  .justify-center { justify-content: center; }
+  .justify-between { justify-content: space-between; }
+  .flex-col { flex-direction: column; }
+  .flex-1 { flex: 1; }
+  .gap-1 { gap: 0.25rem; }
+  .gap-2 { gap: 0.5rem; }
+  .gap-3 { gap: 0.75rem; }
+  .gap-4 { gap: 1rem; }
+  .gap-6 { gap: 1.5rem; }
+  .gap-gutter { gap: 24px; }
+  .ancho-completo { width: 100%; }
+  .max-w-contenedor { max-width: 1280px; }
+  .max-w-7xl { max-width: 80rem; }
+  .mx-auto { margin-left: auto; margin-right: auto; }
+  .p-1 { padding: 0.25rem; }
+  .p-2 { padding: 0.5rem; }
+  .p-3 { padding: 0.75rem; }
+  .p-4 { padding: 1rem; }
+  .p-6 { padding: 1.5rem; }
+  .p-8 { padding: 2rem; }
+  .px-1 { padding-left: 0.25rem; padding-right: 0.25rem; }
+  .px-2 { padding-left: 0.5rem; padding-right: 0.5rem; }
+  .px-3 { padding-left: 0.75rem; padding-right: 0.75rem; }
+  .px-4 { padding-left: 1rem; padding-right: 1rem; }
+  .px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+  .px-margen-movil { padding-left: 16px; padding-right: 16px; }
+  .px-margen-escritorio { padding-left: 48px; padding-right: 48px; }
+  .py-1 { padding-top: 0.25rem; padding-bottom: 0.25rem; }
+  .py-2 { padding-top: 0.5rem; padding-bottom: 0.5rem; }
+  .py-3 { padding-top: 0.75rem; padding-bottom: 0.75rem; }
+  .py-4 { padding-top: 1rem; padding-bottom: 1rem; }
+  .py-6 { padding-top: 1.5rem; padding-bottom: 1.5rem; }
+  .py-8 { padding-top: 2rem; padding-bottom: 2rem; }
+  .py-12 { padding-top: 3rem; padding-bottom: 3rem; }
+  .pt-4 { padding-top: 1rem; }
+  .pt-6 { padding-top: 1.5rem; }
+  .pt-20 { padding-top: 5rem; }
+  .pt-24 { padding-top: 6rem; }
+  .pb-24 { padding-bottom: 6rem; }
+  .pb-32 { padding-bottom: 8rem; }
+  .pb-seguro { padding-bottom: constant(safe-area-inset-bottom); padding-bottom: env(safe-area-inset-bottom); }
+  .mb-1 { margin-bottom: 0.25rem; }
+  .mb-2 { margin-bottom: 0.5rem; }
+  .mb-3 { margin-bottom: 0.75rem; }
+  .mb-4 { margin-bottom: 1rem; }
+  .mb-5 { margin-bottom: 1.25rem; }
+  .mb-6 { margin-bottom: 1.5rem; }
+  .mb-8 { margin-bottom: 2rem; }
+  .mb-10 { margin-bottom: 2.5rem; }
+  .mt-1 { margin-top: 0.25rem; }
+  .mt-2 { margin-top: 0.5rem; }
+  .mt-4 { margin-top: 1rem; }
+  .mt-6 { margin-top: 1.5rem; }
+  .mt-8 { margin-top: 2rem; }
+  .mt-auto { margin-top: auto; }
+  .ml-auto { margin-left: auto; }
+  .mr-2 { margin-right: 0.5rem; }
+  .h-8 { height: 2rem; }
+  .h-10 { height: 2.5rem; }
+  .h-12 { height: 3rem; }
+  .h-16 { height: 4rem; }
+  .h-32 { height: 8rem; }
+  .h-48 { height: 12rem; }
+  .h-64 { height: 16rem; }
+  .h-full { height: 100%; }
+  .w-8 { width: 2rem; }
+  .w-10 { width: 2.5rem; }
+  .w-12 { width: 3rem; }
+  .w-64 { width: 16rem; }
+  .w-full { width: 100%; }
+  .min-h-screen { min-height: 100vh; }
+  .overflow-hidden { overflow: hidden; }
+  .overflow-x-auto { overflow-x: auto; }
+  .object-cover { object-fit: cover; }
+  .cursor-pointer { cursor: pointer; }
+  .transition { transition-property: all; transition-duration: 150ms; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); }
+  .transition-colors { transition-property: color, background-color, border-color; transition-duration: 150ms; }
+  .hover\:opacity-90:hover { opacity: 0.9; }
+  .hover\:underline:hover { text-decoration: underline; }
+  .active\:scale-95:active { transform: scale(0.95); }
+  .group:hover .grupo-hover\:shadow-md { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); }
+  .sticky { position: sticky; }
+  .fixed { position: fixed; }
+  .absolute { position: absolute; }
+  .relative { position: relative; }
+  .top-0 { top: 0; }
+  .left-0 { left: 0; }
+  .bottom-0 { bottom: 0; }
+  .right-0 { right: 0; }
+  .inset-0 { top: 0; right: 0; bottom: 0; left: 0; }
+  .top-4 { top: 1rem; }
+  .left-4 { left: 1rem; }
+  .top-2 { top: 0.5rem; }
+  .right-2 { right: 0.5rem; }
+  .z-10 { z-index: 10; }
+  .z-40 { z-index: 40; }
+  .z-50 { z-index: 50; }
+  .border { border-width: 1px; }
+  .border-t { border-top-width: 1px; }
+  .border-b { border-bottom-width: 1px; }
+  .border-l-4 { border-left-width: 4px; }
+  .border-r-4 { border-right-width: 4px; }
+  .border-none { border: none; }
+  .divide-y > :not([hidden]) ~ :not([hidden]) { border-top-width: 1px; border-color: rgba(197, 198, 205, 0.3); }
+  .text-left { text-align: left; }
+  .text-center { text-align: center; }
+  .text-right { text-align: right; }
+  .uppercase { text-transform: uppercase; }
+  .tracking-wider { letter-spacing: 0.05em; }
+  .font-bold { font-weight: 700; }
+  .font-semibold { font-weight: 600; }
+  .font-extrabold { font-weight: 800; }
+  .italic { font-style: italic; }
+  .grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+  .grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .contenedor-max { max-width: 1280px; margin-left: auto; margin-right: auto; }
+  .pointer-events-none { pointer-events: none; }
+  .shadow-sm { box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); }
+  .shadow-lg { box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); }
+  .sombra-suave { box-shadow: 0px 4px 20px rgba(30, 41, 59, 0.05); }
+  .sombra-inferior { box-shadow: 0 -4px 20px rgba(30, 41, 59, 0.05); }
+  .redondeado { border-radius: 0.25rem; }
+  .redondeado-lg { border-radius: 0.5rem; }
+  .redondeado-xl { border-radius: 0.75rem; }
+  .redondeado-completo { border-radius: 9999px; }
+  .redondeado-t-xl { border-top-left-radius: 0.75rem; border-top-right-radius: 0.75rem; }
+  .inline-block { display: inline-block; }
+  .flex-shrink-0 { flex-shrink: 0; }
+  .flex-wrap { flex-wrap: wrap; }
+  .flex-grow { flex-grow: 1; }
+  .appearance-none { appearance: none; -webkit-appearance: none; }
+  .bg-transparent { background-color: transparent; }
+  .text-4xl { font-size: 2.25rem; line-height: 2.5rem; }
+  .text-\[10px\] { font-size: 10px; }
+  .space-y-1 > :not([hidden]) ~ :not([hidden]) { margin-top: 0.25rem; }
+  .space-y-2 > :not([hidden]) ~ :not([hidden]) { margin-top: 0.5rem; }
+  .space-y-4 > :not([hidden]) ~ :not([hidden]) { margin-top: 1rem; }
+  .py-0\.5 { padding-top: 0.125rem; padding-bottom: 0.125rem; }
+  .py-1\.5 { padding-top: 0.375rem; padding-bottom: 0.375rem; }
+  .mt-0\.5 { margin-top: 0.125rem; }
+  .pr-8 { padding-right: 2rem; }
+  .w-2 { width: 0.5rem; }
+  .h-2 { height: 0.5rem; }
+  .bg-fondo { background-color: #f7f9fb; }
+  .bg-primario { background-color: #091426; }
+  .bg-primario-contenedor { background-color: #1e293b; }
+  .bg-superficie { background-color: #f7f9fb; }
+  .bg-superficie-baja { background-color: #f2f4f6; }
+  .bg-superficie-alta { background-color: #e6e8ea; }
+  .bg-superficie-mas-alta { background-color: #e0e3e5; }
+  .bg-superficie-mas-baja { background-color: #ffffff; }
+  .bg-secundario-contenedor { background-color: #d0e1fb; }
+  .bg-primario-fijo { background-color: #d8e3fb; }
+  .bg-terciario-fijo { background-color: #dae2fd; }
+  .bg-terciario-contenedor { background-color: #20283c; }
+  .bg-secundario-fijo { background-color: #d3e4fe; }
+  .bg-error-contenedor { background-color: #ffdad6; }
+  .bg-error { background-color: #ba1a1a; }
+  .texto-base { color: #191c1e; }
+  .texto-variante { color: #45474c; }
+  .texto-secundario { color: #505f76; }
+  .texto-primario { color: #091426; }
+  .texto-blanco { color: #ffffff; }
+  .texto-error { color: #ba1a1a; }
+  .texto-emerald-600 { color: #059669; }
+  .texto-emerald-800 { color: #065f46; }
+  .texto-blue-800 { color: #1e40af; }
+  .borde-variante { border-color: #c5c6cd; }
+  .borde-superficie { border-color: #eceef0; }
+  .border-primario { border-color: #091426; }
+  .border-primario-fijo-dim { border-color: #d8e3fb; }
+  .border-terciario { border-color: #dae2fd; }
+  .border-superficie { border-color: #eceef0; }
+  .opacidad-80 { opacity: 0.8; }
+  .bg-azul-claro { background-color: #dbeafe; }
+  .bg-esmeralda-claro { background-color: #d1fae5; }
+  .fondo-oscuro-80 { background-color: rgba(9, 20, 38, 0.8); }
+  .filtro-desenfoque { backdrop-filter: blur(4px); }
+  .traslacion-x-1 { transform: translateX(0.25rem); }
+  .focus\:ring-0:focus { outline: none; box-shadow: none; }
+  .hover\:translate-y-\[-4px\]:hover { transform: translateY(-4px); }
+  .hover\:bg-superficie-variante:hover { background-color: #e6e8ea; }
+  .hover\:texto-primario:hover { color: #091426; }
+  .hover\:texto-error:hover { color: #ba1a1a; }
+  .hover\:texto-blanco:hover { color: #ffffff; }
+  .hover\:bg-primario:hover { background-color: #091426; }
+  .hover\:bg-error-contenedor:hover { background-color: #ffdad6; }
+  .hover\:bg-superficie:hover { background-color: #f7f9fb; }
+  .hover\:bg-superficie-alta:hover { background-color: #e6e8ea; }
+  .hover\:shadow-md:hover { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); }
+  .border-b-2 { border-bottom-width: 2px; }
+
+  .vista-movil {
+    display: block;
+  }
+  .vista-escritorio {
+    display: none;
+  }
+  @media (min-width: 768px) {
+    .vista-movil {
+      display: none !important;
+    }
+    .vista-escritorio {
+      display: block !important;
+    }
+    .md\:block { display: block; }
+    .md\:flex { display: flex; }
+    .md\:hidden { display: none; }
+    .md\:flex-row { flex-direction: row; }
+    .md\:items-center { align-items: center; }
+    .md\:items-end { align-items: flex-end; }
+    .md\:justify-between { justify-content: space-between; }
+    .md\:px-margen-escritorio { padding-left: 48px; padding-right: 48px; }
+    .md\:py-12 { padding-top: 3rem; padding-bottom: 3rem; }
+    .md\:text-headline-lg { font-size: 32px; line-height: 40px; font-weight: 600; letter-spacing: -0.01em; }
+    .md\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .md\:w-48 { width: 12rem; }
+    .md\:w-1\/2 { width: 50%; }
+    .md\:h-auto { height: auto; }
+    .md\:p-6 { padding: 1.5rem; }
+  }
+  @media (min-width: 1024px) {
+    .lg\:block { display: block; }
+    .lg\:col-span-3 { grid-column: span 3 / span 3; }
+    .lg\:col-span-4 { grid-column: span 4 / span 4; }
+    .lg\:col-span-8 { grid-column: span 8 / span 8; }
+    .lg\:col-span-9 { grid-column: span 9 / span 9; }
+    .lg\:grid-cols-12 { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+  }
+
+  .barra-lateral {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 1rem;
+    background-color: #f2f4f6;
+    width: 16rem;
+    z-index: 50;
+  }
+  .contenido-principal-escritorio {
+    margin-left: 16rem;
+    min-height: 100vh;
+    background-color: #f7f9fb;
+  }
+  .cabecera-superior {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding-left: 48px;
+    padding-right: 48px;
+    height: 4rem;
+    background-color: #eceef0;
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,0.05);
+    position: sticky;
+    top: 0;
+    z-index: 40;
+  }
+  .tarjeta-sombra {
+    box-shadow: 0px 4px 20px rgba(30, 41, 59, 0.05);
+  }
+  .max-w-1440 {
+    max-width: 1440px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+</style>
+</head>
+<body>
+
+<div class="vista-movil">
+  <header class="fixed top-0 left-0 ancho-completo z-50 bg-superficie shadow-sm">
+    <div class="flex justify-between items-center ancho-completo px-margen-movil py-2 max-w-contenedor mx-auto">
+      <div class="flex items-center gap-3">
+        <span class="material-symbols-outlined texto-primario">explore</span>
+        <h1 class="texto-headline-md font-bold texto-primario">Encuentralo</h1>
+      </div>
+      <div class="flex items-center gap-6">
+        <nav class="hidden md:flex gap-8">
+          <span class="texto-secundario cursor-pointer hover:bg-superficie-alta transition-colors px-3 py-1 redondeado-lg texto-label-md">Búsqueda</span>
+          <span class="texto-secundario cursor-pointer hover:bg-superficie-alta transition-colors px-3 py-1 redondeado-lg texto-label-md">Historial</span>
+          <span class="texto-primario font-bold border-b-2 border-primario cursor-pointer px-3 py-1 texto-label-md">Favoritos</span>
+          <span class="texto-secundario cursor-pointer hover:bg-superficie-alta transition-colors px-3 py-1 redondeado-lg texto-label-md">Panel</span>
+        </nav>
+        <div class="w-10 h-10 redondeado-completo overflow-hidden bg-superficie shadow-sm border borde-variante cursor-pointer active:scale-95 transition">
+          <img alt="Avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAT83R_VFn1gFiKxsfl1ohTBSdmZ0jrObI0_QIWcZBdOg_VVeIf7f5i3VXLZ2yAUPjKFgLnUaVaRUC1vSTIx5RuOzqIxTY-mQe0b08__8ms8QlwXZG_6IeROFY6N8kKGswFZMt3-Wn9qvlGON2i4wgj-SzEZ71q5eQANpejusFEXvwUof2TmWbF1zX2Ltm7lynZyuqA9NGHzQ1J-y73eqXH3jVEPRy-t2t8Q-FPRv2NC3Z6LytiU7KoJuYLMWXoagtnz-WSB8IzXXM">
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="pt-24 pb-32 px-margen-movil max-w-contenedor mx-auto">
+    <div class="mb-6 flex flex-col md:flex-row md:items-end justify-between gap-4">
+      <div>
+        <h2 class="texto-headline-lg-movil md:texto-headline-lg texto-primario">Lugares Guardados</h2>
+        <p class="texto-body-md texto-secundario mt-2">Gestiona tus prospectos territoriales y puntos de interés estratégicos.</p>
+      </div>
+      <div class="flex gap-2">
+        <button class="bg-primario texto-blanco px-6 py-2 redondeado-xl flex items-center gap-2 texto-label-md hover:opacity-90 transition cursor-pointer shadow-sm">
+          <span class="material-symbols-outlined">filter_list</span>
+          Filtrar
+        </button>
+        <button class="border borde-variante texto-secundario px-6 py-2 redondeado-xl flex items-center gap-2 texto-label-md hover:bg-superficie transition cursor-pointer">
+          <span class="material-symbols-outlined">download</span>
+          Exportar
+        </button>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+      <aside class="hidden lg:block lg:col-span-3 space-y-4">
+        <div class="bg-superficie-mas-baja redondeado-xl p-4 sombra-suave">
+          <h3 class="texto-label-md texto-primario mb-4 px-2">CATEGORÍAS</h3>
+          <ul class="space-y-1">
+            <li class="flex items-center justify-between p-2 bg-secundario-contenedor texto-primario redondeado-lg texto-label-sm cursor-pointer">
+              <span class="flex items-center gap-2"><span class="material-symbols-outlined">all_inclusive</span> Todos</span>
+              <span class="bg-superficie-mas-baja px-2 py-0.5 redondeado-completo">24</span>
+            </li>
+            <li class="flex items-center justify-between p-2 hover:bg-superficie texto-secundario redondeado-lg texto-label-sm cursor-pointer transition-colors">
+              <span class="flex items-center gap-2"><span class="material-symbols-outlined">factory</span> Industrial</span>
+              <span>12</span>
+            </li>
+            <li class="flex items-center justify-between p-2 hover:bg-superficie texto-secundario redondeado-lg texto-label-sm cursor-pointer transition-colors">
+              <span class="flex items-center gap-2"><span class="material-symbols-outlined">storefront</span> Retail</span>
+              <span>8</span>
+            </li>
+            <li class="flex items-center justify-between p-2 hover:bg-superficie texto-secundario redondeado-lg texto-label-sm cursor-pointer transition-colors">
+              <span class="flex items-center gap-2"><span class="material-symbols-outlined">apartment</span> Oficinas</span>
+              <span>4</span>
+            </li>
+          </ul>
+        </div>
+        <div class="bg-primario-contenedor texto-blanco redondeado-xl p-6 shadow-lg">
+          <p class="texto-headline-md texto-blanco mb-2">Análisis Pro</p>
+          <p class="texto-on-primario-contenedor texto-body-sm opacidad-80 mb-4">Desbloquea mapas de calor y reportes de tráfico para tus favoritos.</p>
+          <button class="ancho-completo bg-superficie-mas-baja texto-primario py-2 redondeado-lg texto-label-md">Actualizar Plan</button>
+        </div>
+      </aside>
+
+      <section class="lg:col-span-9 space-y-4">
+        <div class="bg-superficie-mas-baja redondeado-xl p-4 md:p-6 sombra-suave border-l-4 border-primario hover:shadow-md transition">
+          <div class="flex flex-col md:flex-row gap-6">
+            <div class="w-full md:w-48 h-32 redondeado-lg overflow-hidden flex-shrink-0">
+              <img alt="Parque Logístico" class="ancho-completo h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDa81K1b9lPI4CwKKIMoC_lf48dnE0aanb1Gvdl8CGReAy2nbHSqGE7hkiYZIs-t6SQ0XCOMPThk509KTeMv7pyicp2TtpIT6MOo_7h_4TxrPR-fRwtPh4gQa965mV-41HMKUI2dcWcWfSc-eMS1PtB2Mf4Jb_LWKu-vE4IcIJfesa7zGlQgdg3Xz76ZkkazzZv4SmfRoEu79E8FA232L4VqXAZbLMbE9cnPBAp_b-yJgrSZMAbh37ixPWXLQkPqI65OJP-XaWXuN0">
+            </div>
+            <div class="flex-grow flex flex-col justify-between">
+              <div class="flex justify-between items-start">
+                <div>
+                  <div class="flex items-center gap-2 mb-1">
+                    <span class="bg-secundario-contenedor texto-primario text-[10px] px-2 py-0.5 redondeado-completo texto-label-md uppercase tracking-wider">Industrial</span>
+                    <span class="texto-body-sm texto-secundario">ID: EXT-4492</span>
+                  </div>
+                  <h3 class="texto-headline-md texto-primario">Parque Logístico Norte - Fase II</h3>
+                  <p class="texto-body-sm texto-secundario flex items-center gap-1 mt-1">
+                    <span class="material-symbols-outlined">location_on</span>
+                    Polígono Ind. San Fernando, Madrid
+                  </p>
+                </div>
+                <div class="flex gap-2">
+                  <button class="p-2 texto-error hover:bg-error-contenedor redondeado-completo transition" title="Eliminar de favoritos">
+                    <span class="material-symbols-outlined icono-lleno">star</span>
+                  </button>
+                  <button class="p-2 texto-secundario hover:bg-superficie redondeado-completo transition">
+                    <span class="material-symbols-outlined">more_vert</span>
+                  </button>
+                </div>
+              </div>
+              <div class="mt-4 flex flex-wrap items-center gap-4 border-t border-superficie pt-4">
+                <div class="flex items-center gap-2">
+                  <span class="material-symbols-outlined texto-secundario">straighten</span>
+                  <span class="texto-label-sm">12,500 m²</span>
+                </div>
+                <div class="flex items-center gap-2 border-l border-superficie pl-4">
+                  <span class="material-symbols-outlined texto-secundario">payments</span>
+                  <span class="texto-label-sm">€4.5M - Est.</span>
+                </div>
+                <div class="flex items-center gap-2 border-l border-superficie pl-4">
+                  <span class="material-symbols-outlined texto-secundario">event</span>
+                  <span class="texto-label-sm">Agregado: 12 Oct</span>
+                </div>
+                <button class="ml-auto flex items-center gap-1 texto-primario hover:underline texto-label-sm">
+                  <span class="material-symbols-outlined">note_add</span>
+                  Añadir Nota
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-superficie-mas-baja redondeado-xl p-4 md:p-6 sombra-suave border-l-4 border-primario-fijo-dim hover:shadow-md transition">
+          <div class="flex flex-col md:flex-row gap-6">
+            <div class="w-full md:w-48 h-32 redondeado-lg overflow-hidden flex-shrink-0">
+              <img alt="Torre Oficinas" class="ancho-completo h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDelXplYd-nOhSuFZOXMp10I2ggwFQ3qSYnLnrfkeqO6Az9bQNrnLN6f_2sEswRtiWAtRZzcEbdRAFmEhBkWbaXekrA_hEQiQg1HpwTtzMoBL6OlQA9KvoPdXtP5LhfKbkZb8NeG8F7rWd0MaGNsUa4TVP07B-kyuTPObMwUAMSh07HIKLDgW9syK7-FifNF0-hRLxJ2AxQJ4g_yldRvdw69lbqeN8HRUm3Z5AlZ_IVmVEy0AnKLYThPG6eLnqJbUnYe6lpp9OdX_E">
+            </div>
+            <div class="flex-grow flex flex-col justify-between">
+              <div class="flex justify-between items-start">
+                <div>
+                  <div class="flex items-center gap-2 mb-1">
+                    <span class="bg-secundario-contenedor texto-primario text-[10px] px-2 py-0.5 redondeado-completo texto-label-md uppercase tracking-wider">Oficinas</span>
+                    <span class="texto-body-sm texto-secundario">ID: EXT-9921</span>
+                  </div>
+                  <h3 class="texto-headline-md texto-primario">Torre Empresarial Castellana</h3>
+                  <p class="texto-body-sm texto-secundario flex items-center gap-1 mt-1">
+                    <span class="material-symbols-outlined">location_on</span>
+                    Paseo de la Castellana, Madrid
+                  </p>
+                </div>
+                <div class="flex gap-2">
+                  <button class="p-2 texto-error hover:bg-error-contenedor redondeado-completo transition">
+                    <span class="material-symbols-outlined icono-lleno">star</span>
+                  </button>
+                  <button class="p-2 texto-secundario hover:bg-superficie redondeado-completo transition">
+                    <span class="material-symbols-outlined">more_vert</span>
+                  </button>
+                </div>
+              </div>
+              <div class="mt-4 p-3 bg-superficie-baja redondeado-lg">
+                <p class="texto-body-sm italic">"Nota: Revisar disponibilidad de parking para clientes VIP. Interés alto para expansión Q4."</p>
+              </div>
+              <div class="mt-4 flex flex-wrap items-center gap-4 border-t border-superficie pt-4">
+                <div class="flex items-center gap-2">
+                  <span class="material-symbols-outlined texto-secundario">groups</span>
+                  <span class="texto-label-sm">Cap. 450</span>
+                </div>
+                <div class="flex items-center gap-2 border-l border-superficie pl-4">
+                  <span class="material-symbols-outlined texto-secundario">trending_up</span>
+                  <span class="texto-label-sm">Plusvalía +12%</span>
+                </div>
+                <button class="ml-auto flex items-center gap-1 texto-primario hover:underline texto-label-sm">
+                  <span class="material-symbols-outlined">edit</span>
+                  Editar Nota
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-superficie-mas-baja redondeado-xl p-4 md:p-6 sombra-suave border-l-4 border-terciario hover:shadow-md transition">
+          <div class="flex flex-col md:flex-row gap-6">
+            <div class="w-full md:w-48 h-32 redondeado-lg overflow-hidden flex-shrink-0">
+              <img alt="Local Retail" class="ancho-completo h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCuNCf0bRxQc3MeKnrlI0_6ORpQSqZqzU7s9OuFwae2IkFwZg1SI1-uh0MjyNIiR7G04DLCt2d3dqlt86DQamsCaPg2dUbmcc1BlDGVrDsKy1E_cvoQCuBU53HxeHlSucOD9RmZ5GFi5wK57Y6gTIvm_vZLNvvMS9kqf9q8T6JmTOXfkw6Jy9YVxNkjB8-qMIzFL8gWCy13Rib6PeGRtwM_nL-sSMDK8Putxe3iEDlmW5hm7C43JbvH65NBIcrmDJHfn6KYJrJrZ4c">
+            </div>
+            <div class="flex-grow flex flex-col justify-between">
+              <div class="flex justify-between items-start">
+                <div>
+                  <div class="flex items-center gap-2 mb-1">
+                    <span class="bg-secundario-contenedor texto-primario text-[10px] px-2 py-0.5 redondeado-completo texto-label-md uppercase tracking-wider">Retail</span>
+                    <span class="texto-body-sm texto-secundario">ID: EXT-2105</span>
+                  </div>
+                  <h3 class="texto-headline-md texto-primario">Local Premium Barrio Salamanca</h3>
+                  <p class="texto-body-sm texto-secundario flex items-center gap-1 mt-1">
+                    <span class="material-symbols-outlined">location_on</span>
+                    Calle Serrano, Madrid
+                  </p>
+                </div>
+                <div class="flex gap-2">
+                  <button class="p-2 texto-error hover:bg-error-contenedor redondeado-completo transition">
+                    <span class="material-symbols-outlined icono-lleno">star</span>
+                  </button>
+                  <button class="p-2 texto-secundario hover:bg-superficie redondeado-completo transition">
+                    <span class="material-symbols-outlined">more_vert</span>
+                  </button>
+                </div>
+              </div>
+              <div class="mt-4 flex flex-wrap items-center gap-4 border-t border-superficie pt-4">
+                <div class="flex items-center gap-2">
+                  <span class="material-symbols-outlined texto-secundario">footprint</span>
+                  <span class="texto-label-sm">Tráfico: Muy Alto</span>
+                </div>
+                <div class="flex items-center gap-2 border-l border-superficie pl-4">
+                  <span class="material-symbols-outlined texto-secundario">shopping_bag</span>
+                  <span class="texto-label-sm">Escaparate: 15m</span>
+                </div>
+                <button class="ml-auto flex items-center gap-1 texto-primario hover:underline texto-label-sm">
+                  <span class="material-symbols-outlined">note_add</span>
+                  Añadir Nota
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <nav class="fixed bottom-0 left-0 ancho-completo z-50 flex justify-around items-center px-4 py-2 pb-seguro md:hidden bg-superficie-mas-baja sombra-inferior redondeado-t-xl">
+    <div class="flex flex-col items-center justify-center texto-variante px-3 py-1 cursor-pointer">
+      <span class="material-symbols-outlined">search</span>
+      <span class="texto-label-sm mt-1">Búsqueda</span>
+    </div>
+    <div class="flex flex-col items-center justify-center texto-variante px-3 py-1 cursor-pointer">
+      <span class="material-symbols-outlined">history</span>
+      <span class="texto-label-sm mt-1">Historial</span>
+    </div>
+    <div class="flex flex-col items-center justify-center bg-primario-contenedor texto-blanco redondeado-xl px-4 py-1.5 active:scale-95 transition cursor-pointer">
+      <span class="material-symbols-outlined icono-lleno">star</span>
+      <span class="texto-label-sm mt-0.5">Favoritos</span>
+    </div>
+    <div class="flex flex-col items-center justify-center texto-variante px-3 py-1 cursor-pointer">
+      <span class="material-symbols-outlined">dashboard</span>
+      <span class="texto-label-sm mt-1">Panel</span>
+    </div>
+  </nav>
+</div>
+
+<div class="vista-escritorio">
+  <aside class="barra-lateral">
+    <div class="mb-10 px-4">
+      <h1 class="texto-headline-md font-extrabold texto-primario">Encuentralo</h1>
+      <p class="texto-label-md texto-secundario">Business Edition</p>
+    </div>
+    <nav class="flex-1 space-y-2">
+      <a class="flex items-center gap-3 px-4 py-3 redondeado-lg texto-secundario hover:bg-superficie-variante transition texto-label-md" href="#">
+        <span class="material-symbols-outlined">search</span>
+        Búsqueda
+      </a>
+      <a class="flex items-center gap-3 px-4 py-3 redondeado-lg texto-secundario hover:bg-superficie-variante transition texto-label-md" href="#">
+        <span class="material-symbols-outlined">history</span>
+        Historial
+      </a>
+      <a class="flex items-center gap-3 px-4 py-3 redondeado-lg texto-primario border-r-4 border-primario bg-secundario-contenedor transition texto-label-md" href="#">
+        <span class="material-symbols-outlined icono-lleno">star</span>
+        Favoritos
+      </a>
+      <a class="flex items-center gap-3 px-4 py-3 redondeado-lg texto-secundario hover:bg-superficie-variante transition texto-label-md" href="#">
+        <span class="material-symbols-outlined">ios_share</span>
+        Exportación
+      </a>
+      <a class="flex items-center gap-3 px-4 py-3 redondeado-lg texto-secundario hover:bg-superficie-variante transition texto-label-md" href="#">
+        <span class="material-symbols-outlined">settings</span>
+        Administración
+      </a>
+    </nav>
+    <div class="mt-auto space-y-4 px-4 pt-6 border-t borde-variante">
+      <button class="ancho-completo flex items-center justify-center gap-2 bg-primario texto-blanco py-3 px-4 redondeado-lg texto-label-md hover:opacity-90 transition">
+        <span class="material-symbols-outlined">add</span>
+        Nueva Prospección
+      </button>
+      <div class="space-y-1">
+        <a class="flex items-center gap-3 py-2 texto-secundario texto-label-md hover:texto-primario" href="#">
+          <span class="material-symbols-outlined">help</span>
+          Ayuda
+        </a>
+        <a class="flex items-center gap-3 py-2 texto-secundario texto-label-md hover:texto-error" href="#">
+          <span class="material-symbols-outlined">logout</span>
+          Cerrar Sesión
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <main class="contenido-principal-escritorio">
+    <header class="cabecera-superior">
+      <div class="flex items-center gap-2">
+        <span class="texto-headline-md font-bold texto-primario">Favoritos</span>
+      </div>
+      <div class="flex items-center gap-6">
+        <button class="relative p-2 redondeado-completo hover:bg-superficie-alta transition-colors">
+          <span class="material-symbols-outlined texto-primario">notifications</span>
+          <span class="absolute top-2 right-2 w-2 h-2 bg-error redondeado-completo"></span>
+        </button>
+        <div class="flex items-center gap-3">
+          <div class="text-right">
+            <p class="texto-label-md">Admin User</p>
+            <p class="texto-body-sm texto-secundario">Premium Account</p>
+          </div>
+          <img alt="Perfil" class="w-10 h-10 redondeado-completo object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCizqC5w5WzRd7_wNdEukDrzVFbLVrHJHIiQ-qeZZRCqL6RGaJhDBl69ouALr5U4qHKZWMb6IFQWiik-xY3tsAbTI_0Eel-uYWaBzx6g09fcVFMIp15K4b4sc4YPNvbxqW0HqbAKc6GdhrQ9kmCiaoUNgxdVN_lLIeN6cLa4z6oB08Fnp5lPkLFldVrBxHlgARie9dH_GMBGNACh66vbHdC6_Y39joZeVxA8cm7lPQloRjacqbgEkx7lvuIV9VQEvB9UCxv7V0Gipkk">
+        </div>
+      </div>
+    </header>
+
+    <section class="px-margen-escritorio py-8 max-w-1440">
+      <div class="flex flex-col md:flex-row md:items-center justify-between mb-10 gap-4">
+        <div>
+          <h2 class="texto-headline-lg texto-primario mb-1">Lugares Guardados</h2>
+          <p class="texto-body-md texto-secundario">Gestiona y analiza tus prospectos inmobiliarios prioritarios.</p>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="flex items-center bg-superficie-mas-baja redondeado-lg border borde-variante px-3 py-2 shadow-sm">
+            <span class="material-symbols-outlined texto-secundario mr-2">filter_list</span>
+            <select class="bg-transparent border-none focus:ring-0 texto-label-md appearance-none pr-8">
+              <option>Todos los sectores</option>
+              <option>Logístico</option>
+              <option>Oficinas</option>
+              <option>Retail</option>
+            </select>
+          </div>
+          <button class="flex items-center gap-2 px-4 py-2 redondeado-lg border borde-variante texto-secundario texto-label-md hover:bg-superficie-alta transition-colors">
+            <span class="material-symbols-outlined">download</span>
+            Exportar CSV
+          </button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+        <article class="lg:col-span-8 bg-superficie-mas-baja redondeado-xl overflow-hidden tarjeta-sombra group transition hover:translate-y-[-4px]">
+          <div class="flex flex-col md:flex-row h-full">
+            <div class="md:w-1/2 relative h-64 md:h-auto">
+              <img alt="Parque Logístico Norte" class="ancho-completo h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBUDjaQ7BphQpOFkly7aEWBRL0QJ7J0-UXvjEuPB8HmkG_SZtQdyx16q0JJ9_VQRlOR4P4WA3JWEmpOi1KWg7P7lrrbD5ODMRUqe53idtNdazSzB0tGLmYjzX-z9VWJ1U1Jyf-p4bjdYb7H50br9SRHMpnn4LTHr1r-HQI5HEZx7s-IW1aso8Tkb21rDVvsvNYI0r27Yew0DZcNniNf6gJPZHn0Ovkn7OdTMld1812I6nYEKnXj514l89Wtca2IdTFPwF7P0ou9sYEc">
+              <div class="absolute top-4 left-4 fondo-oscuro-80 filtro-desenfoque texto-blanco px-3 py-1 redondeado-completo texto-label-sm">ID: LOG-2024-08</div>
+            </div>
+            <div class="md:w-1/2 p-6 flex flex-col justify-between">
+              <div>
+                <div class="flex justify-between items-start mb-2">
+                  <span class="inline-block px-3 py-1 redondeado-completo bg-secundario-contenedor texto-primario texto-label-sm">Logístico</span>
+                  <span class="material-symbols-outlined texto-primario cursor-pointer icono-lleno">star</span>
+                </div>
+                <h3 class="texto-headline-md texto-primario mb-2">Parque Logístico Norte</h3>
+                <div class="flex items-center gap-2 texto-secundario texto-body-sm mb-4">
+                  <span class="material-symbols-outlined">location_on</span>
+                  San Sebastián de los Reyes, Madrid
+                </div>
+                <div class="grid grid-cols-2 gap-4 mb-6">
+                  <div>
+                    <p class="texto-secundario texto-label-sm uppercase tracking-wider mb-1">Superficie</p>
+                    <p class="texto-primario texto-headline-md">12,500 m²</p>
+                  </div>
+                  <div>
+                    <p class="texto-secundario texto-label-sm uppercase tracking-wider mb-1">Valor Est.</p>
+                    <p class="texto-primario texto-headline-md">€14.2M</p>
+                  </div>
+                </div>
+                <div class="bg-superficie-baja p-3 redondeado-lg border-l-4 border-primario">
+                  <p class="texto-body-sm italic texto-secundario">"Ubicación estratégica con acceso directo a la A-1. Alta demanda para última milla."</p>
+                </div>
+              </div>
+              <div class="mt-6 flex gap-2">
+                <button class="flex-1 bg-primario texto-blanco py-2 redondeado-lg texto-label-md hover:opacity-90 transition">Ver Detalles</button>
+                <button class="p-2 redondeado-lg border borde-variante hover:bg-superficie-alta transition-colors">
+                  <span class="material-symbols-outlined">share</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="lg:col-span-4 bg-superficie-mas-baja redondeado-xl overflow-hidden tarjeta-sombra group transition hover:translate-y-[-4px]">
+          <div class="h-48 relative">
+            <img alt="Torre Empresarial Castellana" class="ancho-completo h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDunflm_wIn8gBS-gLOtuM-glKO3C-pPmE3TdEGX8x5OCwnNQxAtA2kciAFOP2Rp61KSifEaH-07YNvVLPgR7kG-8AvQUXx6QuLWLG3vCaMZpd9J5DBCJGBqXfQsb8e0g47jiMZTwQWZdmGtTExzXyt_KWsPM_-56Reb4SFKxlCFRvhCWx4VwpyvCeksrubx_XT-B5gOGfdfoPK1YE9xlVXF9mWbWyin75MIJzPOW3Fsv9l13H7gcWnVK0CPozZ-l90gS3jqy9NXuqa">
+            <div class="absolute top-4 left-4 fondo-oscuro-80 filtro-desenfoque texto-blanco px-3 py-1 redondeado-completo texto-label-sm">ID: OFI-9921</div>
+          </div>
+          <div class="p-6">
+            <div class="flex justify-between items-start mb-4">
+              <span class="inline-block px-3 py-1 redondeado-completo bg-azul-claro texto-blue-800 texto-label-sm">Oficinas</span>
+              <span class="material-symbols-outlined texto-primario icono-lleno">star</span>
+            </div>
+            <h3 class="texto-headline-md texto-primario mb-1">Torre Empresarial Castellana</h3>
+            <div class="flex items-center gap-1 texto-secundario texto-body-sm mb-4">
+              <span class="material-symbols-outlined">location_on</span>
+              Paseo de la Castellana, Madrid
+            </div>
+            <div class="space-y-2 mb-6">
+              <div class="flex justify-between texto-body-sm">
+                <span class="texto-secundario">Capacidad:</span>
+                <span class="texto-primario font-semibold">850 personas</span>
+              </div>
+              <div class="flex justify-between texto-body-sm">
+                <span class="texto-secundario">Renta Anual:</span>
+                <span class="texto-primario font-semibold">€480,000</span>
+              </div>
+            </div>
+            <button class="ancho-completo border border-primario texto-primario py-2 redondeado-lg texto-label-md hover:bg-primario hover:texto-blanco transition">Ver Prospecto</button>
+          </div>
+        </article>
+
+        <article class="lg:col-span-4 bg-superficie-mas-baja redondeado-xl overflow-hidden tarjeta-sombra group transition hover:translate-y-[-4px]">
+          <div class="h-48 relative">
+            <img alt="Local Premium Barrio Salamanca" class="ancho-completo h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBx5JUs5QT_20C9iqVTqGsoO4pnoqYCNMuwOEPts67HIJkYUEiJzXMTEgsP5leOupZGoV6Y2oy65TSX8NoTjZ_W1GGKF0NZNbESl379zAmJv-mRDBT9Z90iOS43XmXkLQJ8FPMWIyyUBnVxHo5sfBD9O833MEkNkc-UVI5DDoZjN6Y7OwnWC64FNnXo_70wwqeIeAK9LavccKjw3BAwU8ktvlPcfdp4r3HCx_sus5IJDhdzep-BMNESTveq46LLvoaZyS3dMNGUB0Z3">
+            <div class="absolute top-4 left-4 fondo-oscuro-80 filtro-desenfoque texto-blanco px-3 py-1 redondeado-completo texto-label-sm">ID: RET-5540</div>
+          </div>
+          <div class="p-6">
+            <div class="flex justify-between items-start mb-4">
+              <span class="inline-block px-3 py-1 redondeado-completo bg-esmeralda-claro texto-emerald-800 texto-label-sm">Retail</span>
+              <span class="material-symbols-outlined texto-primario icono-lleno">star</span>
+            </div>
+            <h3 class="texto-headline-md texto-primario mb-1">Local Premium Barrio Salamanca</h3>
+            <div class="flex items-center gap-1 texto-secundario texto-body-sm mb-4">
+              <span class="material-symbols-outlined">location_on</span>
+              Calle Serrano, Madrid
+            </div>
+            <div class="space-y-2 mb-6">
+              <div class="flex justify-between texto-body-sm">
+                <span class="texto-secundario">Área:</span>
+                <span class="texto-primario font-semibold">215 m²</span>
+              </div>
+              <div class="flex justify-between texto-body-sm">
+                <span class="texto-secundario">Valoración:</span>
+                <span class="texto-primario font-semibold">€3.5M</span>
+              </div>
+            </div>
+            <button class="ancho-completo border border-primario texto-primario py-2 redondeado-lg texto-label-md hover:bg-primario hover:texto-blanco transition">Ver Prospecto</button>
+          </div>
+        </article>
+
+        <aside class="lg:col-span-8 bg-superficie p-6 redondeado-xl border borde-variante">
+          <h4 class="texto-headline-md texto-primario mb-6">Resumen de Cartera Favorita</h4>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-superficie-mas-baja p-4 redondeado-lg shadow-sm">
+              <p class="texto-secundario texto-label-sm uppercase mb-1">Total Prospectos</p>
+              <p class="texto-primario font-bold text-4xl">12</p>
+              <div class="mt-2 texto-emerald-600 flex items-center texto-body-sm">
+                <span class="material-symbols-outlined mr-1">trending_up</span>
+                +3 este mes
+              </div>
+            </div>
+            <div class="bg-superficie-mas-baja p-4 redondeado-lg shadow-sm">
+              <p class="texto-secundario texto-label-sm uppercase mb-1">Valoración Total</p>
+              <p class="texto-primario font-bold text-4xl">€28.4M</p>
+              <p class="mt-2 texto-secundario texto-body-sm">Basado en m² promedio</p>
+            </div>
+            <div class="bg-superficie-mas-baja p-4 redondeado-lg shadow-sm">
+              <p class="texto-secundario texto-label-sm uppercase mb-1">Eficiencia de Área</p>
+              <p class="texto-primario font-bold text-4xl">94%</p>
+              <div class="mt-2 texto-variante flex items-center texto-body-sm">
+                <span class="material-symbols-outlined mr-1">check_circle</span>
+                Datos actualizados
+              </div>
+            </div>
+          </div>
+          <div class="mt-8 overflow-x-auto">
+            <table class="ancho-completo text-left">
+              <thead>
+                <tr class="border-b borde-variante">
+                  <th class="pb-3 texto-label-md texto-secundario uppercase tracking-wider">Última Nota de Análisis</th>
+                  <th class="pb-3 texto-label-md texto-secundario uppercase tracking-wider">Fecha</th>
+                  <th class="pb-3 texto-label-md texto-secundario uppercase tracking-wider">Status</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y borde-variante">
+                <tr class="hover:bg-superficie-alta transition-colors">
+                  <td class="py-4 texto-body-md">Revisión de normativa urbanística completada para el sector norte.</td>
+                  <td class="py-4 texto-body-sm texto-secundario">12 Oct, 2023</td>
+                  <td class="py-4"><span class="px-2 py-1 bg-azul-claro texto-blue-800 redondeado texto-label-sm">En Revisión</span></td>
+                </tr>
+                <tr class="hover:bg-superficie-alta transition-colors">
+                  <td class="py-4 texto-body-md">Validación de accesibilidad transporte público para oficinas.</td>
+                  <td class="py-4 texto-body-sm texto-secundario">08 Oct, 2023</td>
+                  <td class="py-4"><span class="px-2 py-1 bg-esmeralda-claro texto-emerald-800 redondeado texto-label-sm">Verificado</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+</div>
+
+</body>
+</html>

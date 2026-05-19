@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Resultados de Búsqueda | Encuentralo</title>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+  *, ::before, ::after {
+    box-sizing: border-box;
+    border-width: 0;
+    border-style: solid;
+    border-color: #e5e7eb;
+  }
+  html {
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    tab-size: 4;
+    font-family: 'Hanken Grotesk', sans-serif;
+  }
+  body {
+    margin: 0;
+    line-height: inherit;
+    font-family: 'Hanken Grotesk', sans-serif;
+    background-color: #f7f9fb;
+    color: #191c1e;
+  }
+  h1, h2, h3, h4, p, a, label, input, button, span {
+    margin: 0;
+    padding: 0;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    color: inherit;
+    text-decoration: inherit;
+  }
+  button, input, select {
+    font-family: inherit;
+    font-size: 100%;
+    line-height: inherit;
+    margin: 0;
+    padding: 0;
+  }
+  button {
+    background-color: transparent;
+    background-image: none;
+    cursor: pointer;
+  }
+  img {
+    display: block;
+    vertical-align: middle;
+  }
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+    display: inline-block;
+    line-height: 1;
+    vertical-align: middle;
+  }
+  .icono-lleno {
+    font-variation-settings: 'FILL' 1;
+  }
+  .escala-125 {
+    transform: scale(1.25);
+  }
+
+  .texto-headline-xl {
+    font-size: 40px;
+    line-height: 48px;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+  }
+  .texto-headline-lg {
+    font-size: 32px;
+    line-height: 40px;
+    letter-spacing: -0.01em;
+    font-weight: 600;
+  }
+  .texto-headline-md {
+    font-size: 24px;
+    line-height: 32px;
+    font-weight: 600;
+  }
+  .texto-headline-lg-movil {
+    font-size: 28px;
+    line-height: 36px;
+    font-weight: 600;
+  }
+  .texto-body-lg {
+    font-size: 18px;
+    line-height: 28px;
+    font-weight: 400;
+  }
+  .texto-body-md {
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 400;
+  }
+  .texto-body-sm {
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 400;
+  }
+  .texto-label-md {
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing: 0.01em;
+    font-weight: 600;
+  }
+  .texto-label-sm {
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 500;
+  }
+
+  .flex { display: flex; }
+  .grid { display: grid; }
+  .block { display: block; }
+  .hidden { display: none; }
+  .items-center { align-items: center; }
+  .justify-center { justify-content: center; }
+  .justify-between { justify-content: space-between; }
+  .flex-col { flex-direction: column; }
+  .flex-1 { flex: 1; }
+  .gap-1 { gap: 0.25rem; }
+  .gap-2 { gap: 0.5rem; }
+  .gap-3 { gap: 0.75rem; }
+  .gap-4 { gap: 1rem; }
+  .gap-6 { gap: 1.5rem; }
+  .gap-gutter { gap: 24px; }
+  .ancho-completo { width: 100%; }
+  .max-w-contenedor { max-width: 1280px; }
+  .mx-auto { margin-left: auto; margin-right: auto; }
+  .p-1 { padding: 0.25rem; }
+  .p-2 { padding: 0.5rem; }
+  .p-3 { padding: 0.75rem; }
+  .p-4 { padding: 1rem; }
+  .p-6 { padding: 1.5rem; }
+  .p-8 { padding: 2rem; }
+  .px-1 { padding-left: 0.25rem; padding-right: 0.25rem; }
+  .px-2 { padding-left: 0.5rem; padding-right: 0.5rem; }
+  .px-3 { padding-left: 0.75rem; padding-right: 0.75rem; }
+  .px-4 { padding-left: 1rem; padding-right: 1rem; }
+  .px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+  .px-margen-movil { padding-left: 16px; padding-right: 16px; }
+  .px-margen-escritorio { padding-left: 48px; padding-right: 48px; }
+  .py-1 { padding-top: 0.25rem; padding-bottom: 0.25rem; }
+  .py-2 { padding-top: 0.5rem; padding-bottom: 0.5rem; }
+  .py-3 { padding-top: 0.75rem; padding-bottom: 0.75rem; }
+  .py-4 { padding-top: 1rem; padding-bottom: 1rem; }
+  .py-6 { padding-top: 1.5rem; padding-bottom: 1.5rem; }
+  .py-8 { padding-top: 2rem; padding-bottom: 2rem; }
+  .pt-24 { padding-top: 6rem; }
+  .pb-20 { padding-bottom: 5rem; }
+  .pb-2 { padding-bottom: 0.5rem; }
+  .mb-1 { margin-bottom: 0.25rem; }
+  .mb-2 { margin-bottom: 0.5rem; }
+  .mb-3 { margin-bottom: 0.75rem; }
+  .mb-4 { margin-bottom: 1rem; }
+  .mb-6 { margin-bottom: 1.5rem; }
+  .mb-8 { margin-bottom: 2rem; }
+  .mb-10 { margin-bottom: 2.5rem; }
+  .mt-1 { margin-top: 0.25rem; }
+  .mt-2 { margin-top: 0.5rem; }
+  .mt-12 { margin-top: 3rem; }
+  .mt-auto { margin-top: auto; }
+  .ml-1 { margin-left: 0.25rem; }
+  .ml-64 { margin-left: 16rem; }
+  .h-8 { height: 2rem; }
+  .h-10 { height: 2.5rem; }
+  .h-14 { height: 3.5rem; }
+  .h-full { height: 100%; }
+  .w-8 { width: 2rem; }
+  .w-10 { width: 2.5rem; }
+  .w-14 { width: 3.5rem; }
+  .w-64 { width: 16rem; }
+  .w-72 { width: 18rem; }
+  .min-h-screen { min-height: 100vh; }
+  .overflow-hidden { overflow: hidden; }
+  .overflow-x-auto { overflow-x: auto; }
+  .overflow-y-auto { overflow-y: auto; }
+  .object-cover { object-fit: cover; }
+  .cursor-pointer { cursor: pointer; }
+  .transition { transition-property: all; transition-duration: 150ms; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); }
+  .transition-colors { transition-property: color, background-color, border-color; transition-duration: 150ms; }
+
+  .hover-opacidad-90:hover { opacity: 0.9; }
+  .hover-subrayado:hover { text-decoration: underline; }
+  .active-escala-95:active { transform: scale(0.95); }
+  .grupo:hover .grupo-hover-trasladar-x-1 { transform: translateX(0.25rem); }
+  .hover-trasladar-x-1:hover { transform: translateX(0.25rem); }
+  .hover-bg-superficie-alta:hover { background-color: #e6e8ea; }
+  .hover-bg-superficie-baja:hover { background-color: #f2f4f6; }
+  .hover-bg-superficie-variante:hover { background-color: #e6e8ea; }
+  .hover-bg-primario:hover { background-color: #091426; }
+  .hover-texto-primario:hover { color: #091426; }
+  .hover-texto-error:hover { color: #ba1a1a; }
+  .hover-texto-blanco:hover { color: #ffffff; }
+  .hover-borde-variante:hover { border-color: #c5c6cd; }
+  .hover-sombra-lg:hover { box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); }
+  .sticky { position: sticky; }
+  .fixed { position: fixed; }
+  .absolute { position: absolute; }
+  .relative { position: relative; }
+  .top-0 { top: 0; }
+  .left-0 { left: 0; }
+  .right-0 { right: 0; }
+  .bottom-0 { bottom: 0; }
+  .top-2 { top: 0.5rem; }
+  .top-16 { top: 4rem; }
+  .top-2\.5 { top: 0.625rem; }
+  .centro-vertical-absoluto { position: absolute; top: 50%; transform: translateY(-50%); }
+  .apariencia-ninguna { appearance: none; -webkit-appearance: none; }
+  .contorno-ninguno { outline: none; }
+  .eventos-nulos { pointer-events: none; }
+  .pl-4 { padding-left: 1rem; }
+  .pl-10 { padding-left: 2.5rem; }
+  .pr-4 { padding-right: 1rem; }
+  .pr-10 { padding-right: 2.5rem; }
+  .selector-relevantes { padding-left: 12px; padding-right: 32px; }
+  .right-2 { right: 0.5rem; }
+  .right-0 { right: 0; }
+  .left-4 { left: 1rem; }
+  .left-3 { left: 0.75rem; }
+  .z-10 { z-index: 10; }
+  .z-40 { z-index: 40; }
+  .z-50 { z-index: 50; }
+  .border { border-width: 1px; }
+  .border-t { border-top-width: 1px; }
+  .border-r-4 { border-right-width: 4px; }
+  .border-l { border-left-width: 1px; }
+  .border-b-2 { border-bottom-width: 2px; }
+  .border-none { border: none; }
+  .divide-y > :not([hidden]) ~ :not([hidden]) { border-top-width: 1px; border-color: rgba(197, 198, 205, 0.3); }
+
+  .espaciado-y-1 > :not([hidden]) ~ :not([hidden]) { margin-top: 0.25rem; }
+  .espaciado-y-2 > :not([hidden]) ~ :not([hidden]) { margin-top: 0.5rem; }
+  .espaciado-y-3 > :not([hidden]) ~ :not([hidden]) { margin-top: 0.75rem; }
+  .espaciado-y-8 > :not([hidden]) ~ :not([hidden]) { margin-top: 2rem; }
+
+  .text-left { text-align: left; }
+  .text-center { text-align: center; }
+  .text-right { text-align: right; }
+  .uppercase { text-transform: uppercase; }
+  .tracking-wider { letter-spacing: 0.05em; }
+  .font-bold { font-weight: 700; }
+  .font-semibold { font-weight: 600; }
+  .font-extrabold { font-weight: 800; }
+  .italic { font-style: italic; }
+  .grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+  .md\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .lg\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .columnas-grid-xl { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .contenedor-max { max-width: 1280px; margin-left: auto; margin-right: auto; }
+  .shadow-sm { box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); }
+  .sombra-suave { box-shadow: 0px 4px 20px rgba(30, 41, 59, 0.05); }
+  .sombra-inferior { box-shadow: 0 -4px 20px rgba(30, 41, 59, 0.05); }
+  .redondeado { border-radius: 0.25rem; }
+  .redondeado-lg { border-radius: 0.5rem; }
+  .redondeado-xl { border-radius: 0.75rem; }
+  .redondeado-completo { border-radius: 9999px; }
+  .bg-fondo { background-color: #f7f9fb; }
+  .bg-primario { background-color: #091426; }
+  .bg-primario-contenedor { background-color: #1e293b; }
+  .bg-superficie { background-color: #f7f9fb; }
+  .bg-superficie-baja { background-color: #f2f4f6; }
+  .bg-superficie-alta { background-color: #e6e8ea; }
+  .bg-superficie-mas-alta { background-color: #e0e3e5; }
+  .bg-superficie-mas-baja { background-color: #ffffff; }
+  .bg-secundario-contenedor { background-color: #d0e1fb; }
+  .bg-primario-fijo { background-color: #d8e3fb; }
+  .bg-terciario-fijo { background-color: #dae2fd; }
+  .bg-terciario-contenedor { background-color: #20283c; }
+  .bg-secundario-fijo { background-color: #d3e4fe; }
+  .bg-error-contenedor { background-color: #ffdad6; }
+  .bg-amber-400 { background-color: #fbbf24; }
+  .texto-base { color: #191c1e; }
+  .texto-variante { color: #45474c; }
+  .texto-secundario { color: #505f76; }
+  .texto-primario { color: #091426; }
+  .texto-blanco { color: #ffffff; }
+  .texto-error { color: #ba1a1a; }
+  .texto-amber-400 { color: #fbbf24; }
+  .borde-variante { border-color: #c5c6cd; }
+  .borde-superficie { border-color: #eceef0; }
+  .opacidad-20 { opacity: 0.2; }
+  .bg-blanco { background-color: #ffffff; }
+
+
+  @media (min-width: 1280px) {
+    .columnas-grid-xl { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (min-width: 1536px) {
+    .columnas-grid-2xl { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  }
+
+  .vista-escritorio .barra-lateral {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 1rem;
+    background-color: #f2f4f6;
+    width: 16rem;
+    z-index: 50;
+  }
+  .vista-escritorio .contenido-principal-escritorio {
+    margin-left: 16rem;
+    min-height: 100vh;
+  }
+  .vista-escritorio .cabecera-superior {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 16rem;
+    height: 4rem;
+    background-color: #eceef0;
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 48px;
+    padding-right: 48px;
+    z-index: 40;
+  }
+  .vista-escritorio .filtros-laterales {
+    width: 18rem;
+    background-color: #ffffff;
+    padding: 2rem;
+    border-right: 1px solid #c5c6cd;
+    position: sticky;
+    top: 4rem;
+    height: calc(100vh - 4rem);
+    overflow-y: auto;
+  }
+  .tarjeta-sombra {
+    box-shadow: 0px 4px 20px rgba(30, 41, 59, 0.05);
+  }
+  .altura-completa {
+    height: 100%;
+  }
+  .relleno-superior {
+    padding-top: 4rem;
+  }
+  .pb-seguro {
+    padding-bottom: constant(safe-area-inset-bottom);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  /* Estilos específicos de vista */
+  .vista-movil {
+    display: block;
+  }
+  .vista-escritorio {
+    display: none;
+  }
+  @media (min-width: 768px) {
+    .vista-movil {
+      display: none;
+    }
+    .vista-escritorio {
+      display: block;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="vista-movil">
+  <header class="fixed top-0 left-0 right-0 z-50 bg-superficie shadow-sm">
+    <div class="flex justify-between items-center ancho-completo px-margen-movil py-2 max-w-contenedor mx-auto">
+      <div class="flex items-center gap-3 cursor-pointer active-escala-95 transition">
+        <span class="material-symbols-outlined texto-primario">explore</span>
+        <h1 class="texto-headline-md font-bold texto-primario">Encuentralo</h1>
+      </div>
+      <div class="hidden">
+        <nav class="flex gap-4">
+          <a class="texto-primario font-bold border-b-2 border-primario py-2 px-1 texto-label-md" href="#">Búsqueda</a>
+          <a class="texto-secundario hover-bg-superficie-alta transition-colors py-2 px-1 texto-label-md" href="#">Historial</a>
+          <a class="texto-secundario hover-bg-superficie-alta transition-colors py-2 px-1 texto-label-md" href="#">Favoritos</a>
+          <a class="texto-secundario hover-bg-superficie-alta transition-colors py-2 px-1 texto-label-md" href="#">Panel</a>
+        </nav>
+        <div class="w-10 h-10 redondeado-completo bg-superficie-mas-alta overflow-hidden border borde-variante">
+          <img alt="Perfil" class="ancho-completo h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0K3kj-WOHYz50oec6zenoBW3_hgwDUQdNM0xnAG2_B7ageYTK3T83eVxBRsm5MhzcSGmVFZSd_KT7m1OGS1Gg_BQTh_nKDG35sNW_O4n7vZ_3j9ZQ0kuqRqdYy7e6CcahBzzqzocKVgQQ7StvP2_H3NYiEsFabDE0KzcQVrDya7ejWioTZrXzdHsrhg2-cBqhdlrpjmRGZfdc0-HBRBpvic4KDydrRvSgjhNr74iurU3JPpcKeYpmu5pk32n-GdPP19wniiZBOtk">
+        </div>
+      </div>
+      <div class="w-8 h-8 redondeado-completo bg-superficie-mas-alta overflow-hidden">
+        <img alt="Perfil" class="ancho-completo h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJiwLNp_Po-sa-VemeehvUFJRAXcZYfXrwt27N-T9_aSH2Y5YatsOvtl5arB6udJKQlcmNZRJPRZWUzif5l0_DeDXyKDIHi7YG6aR6XNdF7U0MJGosav2GoXnpiB9ircqj9Hg5by2BMQfpUAcizx--j8n-4UnGcxzF24I5j8EQUW5qnhDFqWc0FhWI7yRoYbyPpVvSx1aXqk12WwuK1Ia_nusMxghV4nVnkYRruy7fXYqvcKYrCGmO2SWsmP3cRokF8mJpJDnSf-Y">
+      </div>
+    </div>
+  </header>
+
+  <main class="pt-24 pb-20 px-margen-movil max-w-contenedor mx-auto">
+    <section class="mb-6">
+      <div class="flex flex-col justify-between gap-4">
+        <div>
+          <h2 class="texto-headline-lg-movil texto-primario">Resultados de Prospección</h2>
+          <p class="texto-body-sm texto-variante mt-1">24 establecimientos encontrados en el sector seleccionado.</p>
+        </div>
+        <div class="flex items-center gap-2 overflow-x-auto pb-2">
+          <button class="flex items-center gap-2 px-4 py-2 bg-superficie-baja redondeado-completo texto-label-md texto-variante border borde-variante hover-bg-superficie-alta transition-colors">
+            <span class="material-symbols-outlined">star</span>
+            Rating
+            <span class="material-symbols-outlined">expand_more</span>
+          </button>
+          <button class="flex items-center gap-2 px-4 py-2 bg-superficie-baja redondeado-completo texto-label-md texto-variante border borde-variante hover-bg-superficie-alta transition-colors">
+            <span class="material-symbols-outlined">distance</span>
+            Distancia
+            <span class="material-symbols-outlined">expand_more</span>
+          </button>
+          <button class="flex items-center gap-2 px-4 py-2 bg-superficie-baja redondeado-completo texto-label-md texto-variante border borde-variante hover-bg-superficie-alta transition-colors">
+            <span class="material-symbols-outlined">filter_list</span>
+            Filtros
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <div class="grid grid-cols-1  gap-gutter">
+      <article class="bg-superficie-mas-baja redondeado-xl sombra-suave p-6 flex flex-col hover-sombra-lg transition">
+        <div class="flex justify-between items-start mb-4">
+          <span class="px-3 py-1 bg-secundario-contenedor texto-primario texto-label-sm redondeado-completo">Consultoría Legal</span>
+          <button class="texto-secundario hover-texto-primario transition-colors">
+            <span class="material-symbols-outlined icono-lleno">star</span>
+          </button>
+        </div>
+        <h3 class="texto-body-lg font-bold texto-primario mb-1">Gómez &amp; Asociados</h3>
+        <div class="flex items-center gap-1 mb-3">
+          <span class="texto-variante texto-label-sm font-bold">4.8</span>
+          <div class="flex texto-amber-400">
+            <span class="material-symbols-outlined icono-lleno">star</span>
+            <span class="material-symbols-outlined icono-lleno">star</span>
+            <span class="material-symbols-outlined icono-lleno">star</span>
+            <span class="material-symbols-outlined icono-lleno">star</span>
+            <span class="material-symbols-outlined icono-lleno">star_half</span>
+          </div>
+          <span class="texto-variante texto-label-sm ml-1">(124 reseñas)</span>
+        </div>
+        <div class="flex items-start gap-2 mb-6">
+          <span class="material-symbols-outlined texto-variante">location_on</span>
+          <p class="texto-body-sm texto-variante leading-tight">Paseo de la Castellana 95, 28046 Madrid, España</p>
+        </div>
+        <div class="mt-auto flex gap-3">
+          <button class="flex-1 px-4 py-2 bg-primario texto-blanco texto-label-md redondeado-lg font-semibold active-escala-95 transition">Ver Detalles</button>
+          <button class="px-3 py-2 border borde-variante texto-secundario texto-label-md redondeado-lg hover-bg-superficie-baja transition-colors">
+            <span class="material-symbols-outlined">bookmark_add</span>
+          </button>
+        </div>
+      </article>
+
+      <article class="bg-superficie-mas-baja redondeado-xl sombra-suave p-6 flex flex-col hover-sombra-lg transition">
+        <div class="flex justify-between items-start mb-4">
+          <span class="px-3 py-1 bg-terciario-contenedor texto-blanco texto-label-sm redondeado-completo">Tecnología</span>
+          <button class="texto-secundario hover-texto-primario transition-colors">
+            <span class="material-symbols-outlined">star</span>
+          </button>
+        </div>
+        <h3 class="texto-body-lg font-bold texto-primario mb-1">Nexus Systems SL</h3>
+        <div class="flex items-center gap-1 mb-3">
+          <span class="texto-variante texto-label-sm font-bold">4.5</span>
+          <div class="flex texto-amber-400">
+            <span class="material-symbols-outlined icono-lleno">star</span>
+            <span class="material-symbols-outlined icono-lleno">star</span>
+            <span class="material-symbols-outlined icono-lleno">star</span>
+            <span class="material-symbols-outlined icono-lleno">star</span>
+            <span class="material-symbols-outlined icono-lleno">star_half</span>
+          </div>
+          <span class="texto-variante texto-label-sm ml-1">(89 reseñas)</span>
+        </div>
+        <div class="flex items-start gap-2 mb-6">
+          <span class="material-symbols-outlined texto-variante">location_on</span>
+          <p class="texto-body-sm texto-variante leading-tight">Calle Serrano 45, 28001 Madrid, España</p>
+        </div>
+        <div class="mt-auto flex gap-3">
+          <button class="flex-1 px-4 py-2 bg-primario texto-blanco texto-label-md redondeado-lg font-semibold active-escala-95 transition">Ver Detalles</button>
+          <button class="px-3 py-2 border borde-variante texto-secundario texto-label-md redondeado-lg hover-bg-superficie-baja transition-colors">
+            <span class="material-symbols-outlined">bookmark_add</span>
+          </button>
+        </div>
+      </article>
+
+      <article class="bg-superficie-mas-baja redondeado-xl sombra-suave p-6 flex flex-col hover-sombra-lg transition">
+        <div class="flex justify-between items-start mb-4">
+          <span class="px-3 py-1 bg-secundario-contenedor texto-primario texto-label-sm redondeado-completo">Logística</span>
+          <button class="texto-secundario hover-texto-primario transition-colors">
+            <span class="material-symbols-outlined">star</span>
+          </button>
+        </div>
+        <h3 class="texto-body-lg font-bold texto-primario mb-1">LogiTrans Express</h3>
+        <div class="flex items-center gap-1 mb-3">
+          <span class="texto-variante texto-label-sm font-bold">4.2</span>
+          <div class="flex texto-amber-400">
+            <span class="material-symbols-outlined icono-lleno">star</span>
+            <span class="material-symbols-outlined icono-lleno">star</span>
+            <span class="material-symbols-outlined icono-lleno">star</span>
+            <span class="material-symbols-outlined icono-lleno">star</span>
+            <span class="material-symbols-outlined">star</span>
+          </div>
+          <span class="texto-variante texto-label-sm ml-1">(210 reseñas)</span>
+        </div>
+        <div class="flex items-start gap-2 mb-6">
+          <span class="material-symbols-outlined texto-variante">location_on</span>
+          <p class="texto-body-sm texto-variante leading-tight">Polígono Industrial Las Rozas, Nave 12, España</p>
+        </div>
+        <div class="mt-auto flex gap-3">
+          <button class="flex-1 px-4 py-2 bg-primario texto-blanco texto-label-md redondeado-lg font-semibold active-escala-95 transition">Ver Detalles</button>
+          <button class="px-3 py-2 border borde-variante texto-secundario texto-label-md redondeado-lg hover-bg-superficie-baja transition-colors">
+            <span class="material-symbols-outlined">bookmark_add</span>
+          </button>
+        </div>
+      </article>
+
+      <article class="bg-superficie-mas-baja redondeado-xl sombra-suave p-6 flex flex-col hover-sombra-lg transition">
+        <div class="flex justify-between items-start mb-4">
+          <span class="px-3 py-1 bg-terciario-contenedor texto-blanco texto-label-sm redondeado-completo">Finanzas</span>
+          <button class="texto-secundario hover-texto-primario transition-colors">
+            <span class="material-symbols-outlined">star</span>
+          </button>
+        </div>
+        <h3 class="texto-body-lg font-bold texto-primario mb-1">Global Wealth Advisors</h3>
+        <div class="flex items-center gap-1 mb-3">
+          <span class="texto-variante texto-label-sm font-bold">4.9</span>
+          <div class="flex texto-amber-400">
+            <span class="material-symbols-outlined icono-lleno">star</span>
+            <span class="material-symbols-outlined icono-lleno">star</span>
+            <span class="material-symbols-outlined icono-lleno">star</span>
+            <span class="material-symbols-outlined icono-lleno">star</span>
+            <span class="material-symbols-outlined icono-lleno">star</span>
+          </div>
+          <span class="texto-variante texto-label-sm ml-1">(56 reseñas)</span>
+        </div>
+        <div class="flex items-start gap-2 mb-6">
+          <span class="material-symbols-outlined texto-variante">location_on</span>
+          <p class="texto-body-sm texto-variante leading-tight">Calle Velázquez 12, 28001 Madrid, España</p>
+        </div>
+        <div class="mt-auto flex gap-3">
+          <button class="flex-1 px-4 py-2 bg-primario texto-blanco texto-label-md redondeado-lg font-semibold active-escala-95 transition">Ver Detalles</button>
+          <button class="px-3 py-2 border borde-variante texto-secundario texto-label-md redondeado-lg hover-bg-superficie-baja transition-colors">
+            <span class="material-symbols-outlined">bookmark_add</span>
+          </button>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <nav class="fixed bottom-0 left-0 ancho-completo z-50 flex justify-around items-center px-4 py-2 pb-seguro bg-superficie-mas-baja sombra-inferior redondeado-t-xl">
+    <a class="flex flex-col items-center justify-center bg-primario-contenedor texto-blanco redondeado-xl px-3 py-1 active-escala-95 transition" href="#">
+      <span class="material-symbols-outlined">search</span>
+      <span class="texto-label-sm">Búsqueda</span>
+    </a>
+    <a class="flex flex-col items-center justify-center texto-variante px-3 py-1 hover-bg-superficie-variante transition-colors" href="#">
+      <span class="material-symbols-outlined">history</span>
+      <span class="texto-label-sm">Historial</span>
+    </a>
+    <a class="flex flex-col items-center justify-center texto-variante px-3 py-1 hover-bg-superficie-variante transition-colors" href="#">
+      <span class="material-symbols-outlined">star</span>
+      <span class="texto-label-sm">Favoritos</span>
+    </a>
+    <a class="flex flex-col items-center justify-center texto-variante px-3 py-1 hover-bg-superficie-variante transition-colors" href="#">
+      <span class="material-symbols-outlined">dashboard</span>
+      <span class="texto-label-sm">Panel</span>
+    </a>
+  </nav>
+</div>
+
+<div class="vista-escritorio">
+  <aside class="barra-lateral">
+    <div class="mb-8 px-2">
+      <h1 class="texto-headline-md font-extrabold texto-primario">Encuentralo</h1>
+      <p class="texto-body-sm texto-secundario">Business Edition</p>
+    </div>
+    <button class="mb-8 ancho-completo py-3 px-4 bg-primario texto-blanco redondeado-xl texto-label-md flex items-center justify-center gap-2 hover-opacidad-90 transition">
+      <span class="material-symbols-outlined">add</span>
+      Nueva Prospección
+    </button>
+    <nav class="flex-1 espaciado-y-1">
+      <a class="flex items-center gap-3 px-4 py-3 redondeado-lg texto-primario font-bold border-r-4 border-primario bg-secundario-contenedor transition hover-trasladar-x-1" href="#">
+        <span class="material-symbols-outlined">search</span>
+        <span class="texto-label-md">Búsqueda</span>
+      </a>
+      <a class="flex items-center gap-3 px-4 py-3 redondeado-lg texto-secundario hover-bg-superficie-variante transition" href="#">
+        <span class="material-symbols-outlined">history</span>
+        <span class="texto-label-md">Historial</span>
+      </a>
+      <a class="flex items-center gap-3 px-4 py-3 redondeado-lg texto-secundario hover-bg-superficie-variante transition" href="#">
+        <span class="material-symbols-outlined">star</span>
+        <span class="texto-label-md">Favoritos</span>
+      </a>
+      <a class="flex items-center gap-3 px-4 py-3 redondeado-lg texto-secundario hover-bg-superficie-variante transition" href="#">
+        <span class="material-symbols-outlined">ios_share</span>
+        <span class="texto-label-md">Exportación</span>
+      </a>
+      <a class="flex items-center gap-3 px-4 py-3 redondeado-lg texto-secundario hover-bg-superficie-variante transition" href="#">
+        <span class="material-symbols-outlined">settings</span>
+        <span class="texto-label-md">Administración</span>
+      </a>
+    </nav>
+    <div class="pt-4 border-t borde-variante espaciado-y-1">
+      <a class="flex items-center gap-3 px-4 py-3 redondeado-lg texto-secundario hover-bg-superficie-variante transition" href="#">
+        <span class="material-symbols-outlined">help</span>
+        <span class="texto-label-md">Ayuda</span>
+      </a>
+      <a class="flex items-center gap-3 px-4 py-3 redondeado-lg texto-secundario hover-bg-superficie-variante transition" href="#">
+        <span class="material-symbols-outlined">logout</span>
+        <span class="texto-label-md">Cerrar Sesión</span>
+      </a>
+    </div>
+  </aside>
+
+  <header class="cabecera-superior">
+    <div class="flex items-center gap-4">
+      <span class="texto-headline-md font-bold texto-primario">Resultados de Búsqueda</span>
+    </div>
+    <div class="flex items-center gap-6">
+      <button class="texto-variante hover-bg-superficie-alta p-2 redondeado-completo transition-colors">
+        <span class="material-symbols-outlined">notifications</span>
+      </button>
+      <div class="flex items-center gap-3 pl-4">
+        <div class="text-right">
+          <p class="texto-label-md texto-primario">Ana García</p>
+          <p class="texto-body-sm texto-secundario">Analista Senior</p>
+        </div>
+        <div class="w-10 h-10 redondeado-completo bg-primario-contenedor flex items-center justify-center overflow-hidden">
+          <img alt="Perfil" class="ancho-completo h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXtmNQ6-fTZLMDnOarr05vesp1qBPpGIRxJOUJ-ncwisn4VHM0hBvWwnaghh1_NI2d0zS84FpneHXNaPNcGwqEOyipjBiMEVOQIx31bAg52VUv40EwvyAWQe9JpQ3pdglTi3EsiXx9EmYspXpBN9eUdqtkCKmxrvJPK4hb43mfyFjTzBy-jti3USKR0SrOsUn_WKvbNFyqOJfnnKFtLtIKlh3LhU6dTY2HiE-EBSKP5-ttyJeFkpdycsjNXG51KYdUfVMm9sz8_rA">
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="contenido-principal-escritorio relleno-superior flex min-h-screen">
+    <aside class="filtros-laterales">
+      <div class="flex items-center justify-between mb-6">
+        <h3 class="texto-label-md texto-primario">FILTROS AVANZADOS</h3>
+        <button class="texto-primario texto-label-md hover-subrayado">Limpiar</button>
+      </div>
+      <div class="espaciado-y-8">
+        <div>
+          <label class="block texto-label-md texto-secundario mb-3">Categoría</label>
+          <div class="espaciado-y-2">
+            <label class="flex items-center gap-3 cursor-pointer grupo">
+              <input checked class="redondeado borde-variante texto-primario focus:ring-primario h-4 w-4" type="checkbox">
+              <span class="texto-body-md grupo-hover-texto-primario transition-colors">Tecnología</span>
+            </label>
+            <label class="flex items-center gap-3 cursor-pointer grupo">
+              <input class="redondeado borde-variante texto-primario focus:ring-primario h-4 w-4" type="checkbox">
+              <span class="texto-body-md grupo-hover-texto-primario transition-colors">Logística</span>
+            </label>
+            <label class="flex items-center gap-3 cursor-pointer grupo">
+              <input class="redondeado borde-variante texto-primario focus:ring-primario h-4 w-4" type="checkbox">
+              <span class="texto-body-md grupo-hover-texto-primario transition-colors">Retail</span>
+            </label>
+          </div>
+        </div>
+        <div>
+          <label class="block texto-label-md texto-secundario mb-3">Valoración Mínima</label>
+          <div class="flex items-center gap-1">
+            <span class="material-symbols-outlined icono-lleno texto-amber-400">star</span>
+            <span class="material-symbols-outlined icono-lleno texto-amber-400">star</span>
+            <span class="material-symbols-outlined icono-lleno texto-amber-400">star</span>
+            <span class="material-symbols-outlined borde-variante">star</span>
+            <span class="material-symbols-outlined borde-variante">star</span>
+          </div>
+        </div>
+        <div>
+          <label class="block texto-label-md texto-secundario mb-3">Radio de Búsqueda (km)</label>
+          <input class="ancho-completo accent-primario h-1 bg-superficie-mas-alta redondeado-completo appearance-none" type="range">
+          <div class="flex justify-between mt-2 texto-label-sm texto-variante">
+            <span>0 km</span>
+            <span>50 km</span>
+          </div>
+        </div>
+        <div>
+          <label class="block texto-label-md texto-secundario mb-3">Ubicación</label>
+          <div class="relative">
+            <input class="ancho-completo pl-10 pr-4 py-2 bg-superficie-baja border-none redondeado-lg texto-body-sm focus:ring-2 focus:ring-primario transition" placeholder="Ciudad o CP..." type="text">
+            <span class="material-symbols-outlined absolute left-3 centro-vertical-absoluto texto-secundario">location_on</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <section class="flex-1 px-margen-escritorio py-8">
+      <div class="flex justify-between items-center mb-10">
+        <div>
+          <h2 class="texto-headline-md texto-primario">124 Resultados en Madrid</h2>
+          <p class="texto-body-md texto-secundario">Mostrando prospectos de alta relevancia para el sector IT</p>
+        </div>
+        <div class="flex gap-4">
+          <div class="flex bg-superficie-mas-alta redondeado-lg p-1">
+            <button class="p-2 bg-blanco redondeado shadow-sm texto-primario">
+              <span class="material-symbols-outlined">grid_view</span>
+            </button>
+            <button class="p-2 texto-secundario hover-texto-primario transition-colors">
+              <span class="material-symbols-outlined">list</span>
+            </button>
+          </div>
+          <div class="relative flex items-center bg-blanco redondeado-lg tarjeta-sombra hover-sombra-lg transition">
+            <select class="apariencia-ninguna border-none bg-transparent py-2 selector-relevantes texto-label-md texto-primario cursor-pointer contorno-ninguno focus:ring-2 focus:ring-primario redondeado-lg">
+              <option>Más Relevantes</option>
+              <option>Mayor Valoración</option>
+              <option>Más Recientes</option>
+            </select>
+            <span class="material-symbols-outlined absolute right-2 eventos-nulos texto-secundario centro-vertical-absoluto">expand_more</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 columnas-grid-xl columnas-grid-2xl gap-gutter">
+        <div class="bg-blanco p-6 redondeado-xl tarjeta-sombra hover-sombra-lg transition grupo flex flex-col justify-between border border-transparent hover-borde-variante">
+          <div>
+            <div class="flex justify-between items-start mb-4">
+              <div class="w-14 h-14 bg-secundario-contenedor redondeado-lg flex items-center justify-center texto-primario-contenedor">
+                <span class="material-symbols-outlined escala-125">hub</span>
+              </div>
+              <div class="flex gap-2">
+                <button class="p-2 texto-variante hover-texto-error transition-colors">
+                  <span class="material-symbols-outlined">favorite</span>
+                </button>
+                <button class="p-2 texto-variante hover-texto-primario transition-colors">
+                  <span class="material-symbols-outlined">share</span>
+                </button>
+              </div>
+            </div>
+            <h4 class="texto-headline-md texto-primario mb-1">TechNode Solutions</h4>
+            <div class="flex items-center gap-2 mb-4">
+              <span class="px-3 py-1 bg-secundario-fijo texto-secundario-fijo redondeado-completo texto-label-sm">Tecnología</span>
+              <div class="flex items-center gap-1">
+                <span class="material-symbols-outlined icono-lleno texto-amber-400">star</span>
+                <span class="texto-label-md texto-primario">4.8</span>
+              </div>
+            </div>
+            <div class="espaciado-y-3 mb-6">
+              <div class="flex items-start gap-3 texto-secundario">
+                <span class="material-symbols-outlined">location_on</span>
+                <span class="texto-body-sm">Paseo de la Castellana, 256, 28046 Madrid</span>
+              </div>
+              <div class="flex items-start gap-3 texto-secundario">
+                <span class="material-symbols-outlined">group</span>
+                <span class="texto-body-sm">50 - 200 empleados</span>
+              </div>
+            </div>
+          </div>
+          <div class="flex gap-3">
+            <button class="flex-1 py-3 border borde-variante redondeado-lg texto-label-md texto-primario hover-bg-superficie-variante transition-colors">Ver Detalles</button>
+            <button class="px-4 py-3 bg-primario-contenedor texto-blanco redondeado-lg hover-bg-primario hover-texto-blanco transition-all">
+              <span class="material-symbols-outlined">file_download</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="bg-blanco p-6 redondeado-xl tarjeta-sombra hover-sombra-lg transition grupo flex flex-col justify-between border border-transparent hover-borde-variante">
+          <div>
+            <div class="flex justify-between items-start mb-4">
+              <div class="w-14 h-14 bg-terciario-fijo redondeado-lg flex items-center justify-center texto-terciario-contenedor">
+                <span class="material-symbols-outlined escala-125">precision_manufacturing</span>
+              </div>
+              <div class="flex gap-2">
+                <button class="p-2 texto-error transition-colors">
+                  <span class="material-symbols-outlined icono-lleno">favorite</span>
+                </button>
+                <button class="p-2 texto-variante hover-texto-primario transition-colors">
+                  <span class="material-symbols-outlined">share</span>
+                </button>
+              </div>
+            </div>
+            <h4 class="texto-headline-md texto-primario mb-1">LogistiCorp Global</h4>
+            <div class="flex items-center gap-2 mb-4">
+              <span class="px-3 py-1 bg-superficie-variante texto-variante redondeado-completo texto-label-sm">Logística</span>
+              <div class="flex items-center gap-1">
+                <span class="material-symbols-outlined icono-lleno texto-amber-400">star</span>
+                <span class="texto-label-md texto-primario">4.2</span>
+              </div>
+            </div>
+            <div class="espaciado-y-3 mb-6">
+              <div class="flex items-start gap-3 texto-secundario">
+                <span class="material-symbols-outlined">location_on</span>
+                <span class="texto-body-sm">Polígono Ind. Coslada, Calle B, 12, 28823</span>
+              </div>
+              <div class="flex items-start gap-3 texto-secundario">
+                <span class="material-symbols-outlined">trending_up</span>
+                <span class="texto-body-sm">Crecimiento: +12% anual</span>
+              </div>
+            </div>
+          </div>
+          <div class="flex gap-3">
+            <button class="flex-1 py-3 border borde-variante redondeado-lg texto-label-md texto-primario hover-bg-superficie-variante transition-colors">Ver Detalles</button>
+            <button class="px-4 py-3 bg-primario-contenedor texto-blanco redondeado-lg hover-bg-primario hover-texto-blanco transition-all">
+              <span class="material-symbols-outlined">file_download</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="bg-blanco p-6 redondeado-xl tarjeta-sombra hover-sombra-lg transition grupo flex flex-col justify-between border border-transparent hover-borde-variante">
+          <div>
+            <div class="flex justify-between items-start mb-4">
+              <div class="w-14 h-14 bg-on-tertiary-fixed-variant/10 redondeado-lg flex items-center justify-center texto-variante">
+                <span class="material-symbols-outlined escala-125">account_balance</span>
+              </div>
+              <div class="flex gap-2">
+                <button class="p-2 texto-variante hover-texto-error transition-colors">
+                  <span class="material-symbols-outlined">favorite</span>
+                </button>
+                <button class="p-2 texto-variante hover-texto-primario transition-colors">
+                  <span class="material-symbols-outlined">share</span>
+                </button>
+              </div>
+            </div>
+            <h4 class="texto-headline-md texto-primario mb-1">EuroFin Advisors</h4>
+            <div class="flex items-center gap-2 mb-4">
+              <span class="px-3 py-1 bg-secundario-fijo texto-secundario-fijo redondeado-completo texto-label-sm">Finanzas</span>
+              <div class="flex items-center gap-1">
+                <span class="material-symbols-outlined icono-lleno texto-amber-400">star</span>
+                <span class="texto-label-md texto-primario">4.9</span>
+              </div>
+            </div>
+            <div class="espaciado-y-3 mb-6">
+              <div class="flex items-start gap-3 texto-secundario">
+                <span class="material-symbols-outlined">location_on</span>
+                <span class="texto-body-sm">Calle de Serrano, 45, 28001 Madrid</span>
+              </div>
+              <div class="flex items-start gap-3 texto-secundario">
+                <span class="material-symbols-outlined">verified</span>
+                <span class="texto-body-sm">Sede Central - Verificado</span>
+              </div>
+            </div>
+          </div>
+          <div class="flex gap-3">
+            <button class="flex-1 py-3 border borde-variante redondeado-lg texto-label-md texto-primario hover-bg-superficie-variante transition-colors">Ver Detalles</button>
+            <button class="px-4 py-3 bg-primario-contenedor texto-blanco redondeado-lg hover-bg-primario hover-texto-blanco transition-all">
+              <span class="material-symbols-outlined">file_download</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="bg-blanco p-6 redondeado-xl tarjeta-sombra hover-sombra-lg transition grupo flex flex-col justify-between border border-transparent hover-borde-variante">
+          <div>
+            <div class="flex justify-between items-start mb-4">
+              <div class="w-14 h-14 bg-secundario-contenedor redondeado-lg flex items-center justify-center texto-primario-contenedor">
+                <span class="material-symbols-outlined escala-125">cloud_done</span>
+              </div>
+              <div class="flex gap-2">
+                <button class="p-2 texto-variante hover-texto-error transition-colors">
+                  <span class="material-symbols-outlined">favorite</span>
+                </button>
+                <button class="p-2 texto-variante hover-texto-primario transition-colors">
+                  <span class="material-symbols-outlined">share</span>
+                </button>
+              </div>
+            </div>
+            <h4 class="texto-headline-md texto-primario mb-1">CloudSphere Data</h4>
+            <div class="flex items-center gap-2 mb-4">
+              <span class="px-3 py-1 bg-secundario-fijo texto-secundario-fijo redondeado-completo texto-label-sm">SaaS</span>
+              <div class="flex items-center gap-1">
+                <span class="material-symbols-outlined icono-lleno texto-amber-400">star</span>
+                <span class="texto-label-md texto-primario">4.5</span>
+              </div>
+            </div>
+            <div class="espaciado-y-3 mb-6">
+              <div class="flex items-start gap-3 texto-secundario">
+                <span class="material-symbols-outlined">location_on</span>
+                <span class="texto-body-sm">Av. Europa, 12, Alcobendas, 28108</span>
+              </div>
+              <div class="flex items-start gap-3 texto-secundario">
+                <span class="material-symbols-outlined">payments</span>
+                <span class="texto-body-sm">Facturación: 5M - 10M €</span>
+              </div>
+            </div>
+          </div>
+          <div class="flex gap-3">
+            <button class="flex-1 py-3 border borde-variante redondeado-lg texto-label-md texto-primario hover-bg-superficie-variante transition-colors">Ver Detalles</button>
+            <button class="px-4 py-3 bg-primario-contenedor texto-blanco redondeado-lg hover-bg-primario hover-texto-blanco transition-all">
+              <span class="material-symbols-outlined">file_download</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="bg-blanco p-6 redondeado-xl tarjeta-sombra hover-sombra-lg transition grupo flex flex-col justify-between border border-transparent hover-borde-variante">
+          <div>
+            <div class="flex justify-between items-start mb-4">
+              <div class="w-14 h-14 bg-error-contenedor redondeado-lg flex items-center justify-center texto-error">
+                <span class="material-symbols-outlined escala-125">shopping_basket</span>
+              </div>
+              <div class="flex gap-2">
+                <button class="p-2 texto-variante hover-texto-error transition-colors">
+                  <span class="material-symbols-outlined">favorite</span>
+                </button>
+                <button class="p-2 texto-variante hover-texto-primario transition-colors">
+                  <span class="material-symbols-outlined">share</span>
+                </button>
+              </div>
+            </div>
+            <h4 class="texto-headline-md texto-primario mb-1">MarketFlow Retail</h4>
+            <div class="flex items-center gap-2 mb-4">
+              <span class="px-3 py-1 bg-superficie-variante texto-variante redondeado-completo texto-label-sm">Retail</span>
+              <div class="flex items-center gap-1">
+                <span class="material-symbols-outlined icono-lleno texto-amber-400">star</span>
+                <span class="texto-label-md texto-primario">3.9</span>
+              </div>
+            </div>
+            <div class="espaciado-y-3 mb-6">
+              <div class="flex items-start gap-3 texto-secundario">
+                <span class="material-symbols-outlined">location_on</span>
+                <span class="texto-body-sm">Gran Vía, 32, 28013 Madrid</span>
+              </div>
+              <div class="flex items-start gap-3 texto-secundario">
+                <span class="material-symbols-outlined">store</span>
+                <span class="texto-body-sm">8 puntos de venta en región</span>
+              </div>
+            </div>
+          </div>
+          <div class="flex gap-3">
+            <button class="flex-1 py-3 border borde-variante redondeado-lg texto-label-md texto-primario hover-bg-superficie-variante transition-colors">Ver Detalles</button>
+            <button class="px-4 py-3 bg-primario-contenedor texto-blanco redondeado-lg hover-bg-primario hover-texto-blanco transition-all">
+              <span class="material-symbols-outlined">file_download</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="bg-blanco p-6 redondeado-xl tarjeta-sombra hover-sombra-lg transition grupo flex flex-col justify-between border border-transparent hover-borde-variante relative overflow-hidden">
+          <div class="absolute top-0 right-0 bg-primario texto-blanco px-4 py-1 rounded-bl-lg texto-label-sm">NUEVO</div>
+          <div>
+            <div class="flex justify-between items-start mb-4">
+              <div class="w-14 h-14 bg-on-primary-container/20 redondeado-lg flex items-center justify-center texto-primario">
+                <span class="material-symbols-outlined escala-125">energy_savings_leaf</span>
+              </div>
+              <div class="flex gap-2">
+                <button class="p-2 texto-variante hover-texto-error transition-colors">
+                  <span class="material-symbols-outlined">favorite</span>
+                </button>
+                <button class="p-2 texto-variante hover-texto-primario transition-colors">
+                  <span class="material-symbols-outlined">share</span>
+                </button>
+              </div>
+            </div>
+            <h4 class="texto-headline-md texto-primario mb-1">EcoSystem Renewables</h4>
+            <div class="flex items-center gap-2 mb-4">
+              <span class="px-3 py-1 bg-secundario-fijo texto-secundario-fijo redondeado-completo texto-label-sm">Energía</span>
+              <div class="flex items-center gap-1">
+                <span class="material-symbols-outlined icono-lleno texto-amber-400">star</span>
+                <span class="texto-label-md texto-primario">4.7</span>
+              </div>
+            </div>
+            <div class="espaciado-y-3 mb-6">
+              <div class="flex items-start gap-3 texto-secundario">
+                <span class="material-symbols-outlined">location_on</span>
+                <span class="texto-body-sm">Calle de Alcalá, 120, 28009 Madrid</span>
+              </div>
+              <div class="flex items-start gap-3 texto-secundario">
+                <span class="material-symbols-outlined">eco</span>
+                <span class="texto-body-sm">Sostenibilidad Grado A+</span>
+              </div>
+            </div>
+          </div>
+          <div class="flex gap-3">
+            <button class="flex-1 py-3 border borde-variante redondeado-lg texto-label-md texto-primario hover-bg-superficie-variante transition-colors">Ver Detalles</button>
+            <button class="px-4 py-3 bg-primario-contenedor texto-blanco redondeado-lg hover-bg-primario hover-texto-blanco transition-all">
+              <span class="material-symbols-outlined">file_download</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-12 flex items-center justify-between py-6 border-t borde-variante">
+        <span class="texto-body-sm texto-secundario">Mostrando 1-6 de 124 resultados</span>
+        <div class="flex gap-2">
+          <button class="w-10 h-10 flex items-center justify-center redondeado-lg bg-blanco border borde-variante texto-secundario hover-bg-superficie-variante transition-colors">
+            <span class="material-symbols-outlined">chevron_left</span>
+          </button>
+          <button class="w-10 h-10 flex items-center justify-center redondeado-lg bg-primario texto-blanco texto-label-md">1</button>
+          <button class="w-10 h-10 flex items-center justify-center redondeado-lg bg-blanco border borde-variante texto-secundario hover-bg-superficie-variante transition-colors texto-label-md">2</button>
+          <button class="w-10 h-10 flex items-center justify-center redondeado-lg bg-blanco border borde-variante texto-secundario hover-bg-superficie-variante transition-colors texto-label-md">3</button>
+          <span class="w-10 h-10 flex items-center justify-center texto-secundario">...</span>
+          <button class="w-10 h-10 flex items-center justify-center redondeado-lg bg-blanco border borde-variante texto-secundario hover-bg-superficie-variante transition-colors">
+            <span class="material-symbols-outlined">chevron_right</span>
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+</body>
+</html>
