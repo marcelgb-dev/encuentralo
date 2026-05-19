@@ -41,3 +41,5 @@ target/
 /dataSources/
 /dataSources.local.xml
 .idea/
+/docker/mysql/data/
+/target/
