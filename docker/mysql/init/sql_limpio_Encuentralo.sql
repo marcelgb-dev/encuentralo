@@ -7,7 +7,8 @@ CREATE TABLE Usuario(
     email VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
     nombre VARCHAR(255) NOT NULL,
-    apellidos VARCHAR(255) NULL
+    apellidos VARCHAR(255) NULL,
+    rol VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE Categoria(
