@@ -1,5 +1,6 @@
 package app.senia.encuentralo.service;
 
+import app.senia.encuentralo.model.Categoria;
 import org.springframework.stereotype.Service;
 import app.senia.encuentralo.model.Resultado;
 
@@ -31,5 +32,43 @@ public class ResultadosService {
             listaResultados.sort(Comparator.comparing(Resultado::getNombre).reversed());
 
         return listaResultados;
+    }
+
+    public List<Resultado> ordenarPorValoracion (List<Resultado> listaResultados, boolean inverso) {
+
+        if (!inverso)
+            listaResultados.sort(Comparator.comparing(Resultado::getValoracion).reversed());
+        else
+            listaResultados.sort(Comparator.comparing(Resultado::getValoracion));
+
+        return listaResultados;
+    }
+
+    // Métodos de filtrado (filtering)
+
+    public List<Resultado> filtrarPorValoracion (List<Resultado> listaResultados, double minimo) {
+        List<Resultado> listaFiltrada = new ArrayList<>();
+
+        for (Resultado r : listaResultados) {
+            if (r.getValoracion() >= minimo)
+                listaFiltrada.add(r);
+        }
+        return listaFiltrada;
+    }
+
+    public List<Resultado> filtrarPorCategoria (List<Resultado> listaResultados, String nombreCategoria) {
+        List<Resultado> listaFiltrada = new ArrayList<>();
+
+        for (Resultado r : listaResultados) {
+            List<Categoria> categorias = r.getCategorias();
+
+            for (Categoria c : categorias) {
+                if (nombreCategoria.equals(c.getNombre())) {
+                    listaFiltrada.add(r);
+                    break;
+                }
+            }
+        }
+        return listaFiltrada;
     }
 }
