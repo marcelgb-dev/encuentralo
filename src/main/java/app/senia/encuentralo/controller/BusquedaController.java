@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -33,11 +34,11 @@ public class BusquedaController {
     }
 
     // ENDPOINT DE ACCIÓN: Ejecuta la nueva búsqueda y redirige
-    @PostMapping("/busqueda/new")
-    public String makeSearch(@ModelAttribute("busqueda") SolicitudBusqueda busqueda) {
+    @PostMapping("/buscar/nueva")
+    public String makeSearch(@ModelAttribute("busqueda") SolicitudBusqueda busqueda, RedirectAttributes redirectAttributes) {
 
         // Ejecutamos la llamada a la API externa
-        List<Resultado> resultadosApi = ys.llamarApi(
+        List<Resultado> resultados = ys.llamarApi(
                 busqueda.getTemino(),
                 busqueda.getLatitud(),
                 busqueda.getLongitud(),
@@ -45,12 +46,18 @@ public class BusquedaController {
                 busqueda.getLimite()
         ).getResultados();
 
+        // Inyectamos la lista completa como un Flash Attribute
+        // Vivirá en la sesión solo durante la redirección
+        redirectAttributes.addFlashAttribute("resultados", resultados);
+
+        return "redirect:/resultados";
+
         // Guardamos la Búsqueda y sus Resultados asociados en la Base de Datos.
         // Este método en tu Service debería devolver la entidad Busqueda ya persistida con su ID autogenerado.
         //Busqueda busquedaGuardada = busquedaService.guardarBusquedaConResultados(busqueda, resultadosApi);
 
         // Redirección limpia (PRG) pasándole el ID de la búsqueda por la URL
-        return "redirect:/resultados/" + busquedaGuardada.getId();
+        //return "redirect:/resultados/" + busquedaGuardada.getId();
     }
 
 

@@ -18,6 +18,7 @@ public class Resultado {
     private Integer idBusqueda;
 
     private List<Categoria> categorias;
+    private String ciudad;
 
     // Constructor
     public Resultado(String nombre, String telefono, double distancia, String direccion, double valoracion, String url, boolean esFavorito, Integer idUsuario, Integer idBusqueda) {
@@ -111,6 +112,7 @@ public class Resultado {
         this.url = url;
     }
 
+    // Getters y Setters
     public boolean isEsFavorito() {
         return esFavorito;
     }
@@ -143,7 +145,13 @@ public class Resultado {
         this.categorias = categorias;
     }
 
-    // Getters y Setters
+    public String getCiudad() {
+        return ciudad;
+    }
+
+    public void setCiudad(String ciudad) {
+        this.ciudad = ciudad;
+    }
 
 
 }

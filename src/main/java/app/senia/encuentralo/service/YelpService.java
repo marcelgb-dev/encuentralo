@@ -1,5 +1,6 @@
 package app.senia.encuentralo.service;
 
+import app.senia.encuentralo.service.ResultadosService;
 import app.senia.encuentralo.dto.yelp.BusinessDTO;
 import app.senia.encuentralo.dto.yelp.YelpResponse;
 import app.senia.encuentralo.model.Busqueda;
@@ -24,11 +25,13 @@ public class YelpService implements ProviderService {
     private String yelpLocale;
     private final RestClient restClient;
     private final ObjectMapper objectMapper;
+    private final ResultadosService resultadosService;
 
     // Constructor
-    public YelpService(RestClient yelpRestClient, ObjectMapper objectMapper) {
+    public YelpService(RestClient yelpRestClient, ObjectMapper objectMapper, ResultadosService resultadosService) {
         this.restClient = yelpRestClient;
         this.objectMapper = objectMapper;
+        this.resultadosService = resultadosService;
     }
 
     public Busqueda llamarApi(String termino, double latitud, double longitud, int radio, int limite) {
@@ -70,17 +73,18 @@ public class YelpService implements ProviderService {
 
         for (BusinessDTO dto : listaDtos) {
             String nombre = dto.name();
-            double rating = dto.rating();
+            double valoracion = dto.rating();
             String url = dto.url();
             String telefono = dto.displayPhone();
             double longitud = dto.coordinates().longitude();
             double latitud = dto.coordinates().latitude();
             double distancia = dto.distance();
             String direccion = String.join(", ", dto.location().displayAddress());
+            String ciudad = dto.location().city();
             List<Categoria> categorias = Categoria.toCategorias(dto.getCategoryTitles());
 
-            Resultado resultado = new Resultado(nombre, rating, url, telefono, longitud, latitud, direccion, categorias, distancia);
-
+            Resultado resultado = new Resultado(nombre, telefono, distancia, direccion, valoracion, url, false, 0, 0);
+            resultado.setCiudad(ciudad);
             listaResultados.add(resultado);
         }
 
@@ -104,13 +108,22 @@ public class YelpService implements ProviderService {
             );
 
             // Convertimos los datos de la YelpResponse al objeto Busqueda, añadiendo también los metadatos
-            Busqueda busqueda = new Busqueda( "TEST", 0, 0, LocalDateTime.now());
+            Busqueda busqueda = new Busqueda( "TEST", LocalDateTime.now(), 0, "");
             busqueda.setResultados(parsearDtos(response));
+
+            // Usamos obtenerCiudad para obtener la ciudad del resultado más cercano
+            busqueda.setCiudad(obtenerCiudad(busqueda));
+
 
             return busqueda;
         } catch (IOException e) {
             throw new RuntimeException("No se pudo leer el archivo JSON", e);
         }
+    }
+
+    // Ordena los resultados de busqueda por distancia
+    private String obtenerCiudad(Busqueda busqueda) {
+        return resultadosService.ordenarPorDistancia(busqueda.getResultados(), false).getFirst().getCiudad();
     }
 
 }
