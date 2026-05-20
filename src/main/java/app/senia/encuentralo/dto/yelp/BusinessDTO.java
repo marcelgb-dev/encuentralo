@@ -14,6 +14,7 @@ public record BusinessDTO(
         String displayPhone,
         LocationDTO location,
         CoordinatesDTO coordinates,
+        double distance,
         List<CategoryDTO> categories
 ) {
         public List<String> getCategoryTitles() {

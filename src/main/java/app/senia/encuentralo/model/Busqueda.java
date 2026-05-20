@@ -16,7 +16,6 @@ public class Busqueda {
 
     // Constructor
     public Busqueda(String termino, double latitud, double longitud, LocalDateTime fecha) {
-        this.id = id;
         this.termino = termino;
         this.latitud = latitud;
         this.longitud = longitud;
@@ -63,6 +62,7 @@ public class Busqueda {
     public void setFecha(LocalDateTime fecha) {
         this.fecha = fecha;
     }
+
     public List<Resultado> getResultados() {
         return resultados;
     }

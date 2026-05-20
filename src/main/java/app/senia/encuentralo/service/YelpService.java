@@ -5,6 +5,7 @@ import app.senia.encuentralo.dto.yelp.YelpResponse;
 import app.senia.encuentralo.model.Busqueda;
 import app.senia.encuentralo.model.Categoria;
 import app.senia.encuentralo.model.Resultado;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
@@ -19,6 +20,8 @@ import java.util.List;
 @Service
 public class YelpService implements ProviderService {
 
+    @Value("${yelp.locale")
+    private String yelpLocale;
     private final RestClient restClient;
     private final ObjectMapper objectMapper;
 
@@ -41,6 +44,8 @@ public class YelpService implements ProviderService {
 //                        .queryParam("longitude", longitud) // Longitud del usuario
 //                        .queryParam("radius", radio) // Radio de búsqueda (en metros)
 //                        .queryParam("limit", limite) // Número máximo de resultados a pedir
+//                        .queryParam("locale", yelpLocale) // Código de país / idioma locale
+
 //                        .build())
 //                .retrieve()
 //                .body(YelpResponse.class);
@@ -70,10 +75,11 @@ public class YelpService implements ProviderService {
             String telefono = dto.displayPhone();
             double longitud = dto.coordinates().longitude();
             double latitud = dto.coordinates().latitude();
+            double distancia = dto.distance();
             String direccion = String.join(", ", dto.location().displayAddress());
             List<Categoria> categorias = Categoria.toCategorias(dto.getCategoryTitles());
 
-            Resultado resultado = new Resultado(nombre, rating, url, telefono, longitud, latitud, direccion, categorias);
+            Resultado resultado = new Resultado(nombre, rating, url, telefono, longitud, latitud, direccion, categorias, distancia);
 
             listaResultados.add(resultado);
         }

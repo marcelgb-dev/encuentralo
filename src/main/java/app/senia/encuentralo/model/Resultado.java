@@ -17,8 +17,11 @@ public class Resultado {
     private double longitud;
     private double latitud;
 
+    private double distancia; // Distancia en metros al origen de la búsqueda
+
     // Constructor
-    public Resultado(String nombre, double valoracion, String url, String telefono, double longitud, double latitud, String direccion, List<Categoria> categorias) {
+    public Resultado(String nombre, double valoracion, String url, String telefono, double longitud, double latitud, String direccion, List<Categoria> categorias, double distancia) {
+        this.distancia = distancia;
         this.id = id;
         this.nombre = nombre;
         this.valoracion = valoracion;
@@ -44,6 +47,7 @@ public class Resultado {
                 "\nUrl: " + url +
                 "\nTeléfono: " + telefono +
                 "\nCoordenadas: " + longitud + " long ," + latitud + " lat" +
+                "\nDistancia: " + String.format("%.2f", distancia) +
                 "\nDireccion: " + direccion +
                 "\nCategorias: " + String.join(", ", categoriasString);
     }
@@ -119,5 +123,13 @@ public class Resultado {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public double getDistancia() {
+        return distancia;
+    }
+
+    public void setDistancia(double distancia) {
+        this.distancia = distancia;
     }
 }
