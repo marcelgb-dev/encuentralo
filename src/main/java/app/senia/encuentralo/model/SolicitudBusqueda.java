@@ -2,6 +2,7 @@ package app.senia.encuentralo.model;
 
 public class SolicitudBusqueda {
 
+    // Atributos
     private String temino; // Término de búsqueda
     private double latitud; // Latitud del usuario
     private double longitud; // Longitud del usuario

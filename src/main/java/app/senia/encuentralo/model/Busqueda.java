@@ -5,13 +5,14 @@ import java.util.List;
 
 public class Busqueda {
 
-    // Atributos
+    // Atributos de la base de datos
     private Integer id;
     private String termino;
     private LocalDateTime fecha;
     private Integer idUsuario;
     private String ciudad;
 
+    // Atributos propios del objeto Java
     private List<Resultado> resultados;
 
     // Constructor

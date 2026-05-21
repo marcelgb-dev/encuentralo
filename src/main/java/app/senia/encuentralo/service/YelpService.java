@@ -109,16 +109,21 @@ public class YelpService implements ProviderService {
                     YelpResponse.class
             );
 
-            // Convertimos los datos de la YelpResponse al objeto Busqueda, añadiendo también los metadatos
+            // Parseamos los resultados de response a una lista
+            List<Resultado> resultados = parsearDtos(response);
+
+            // 1. Creamos un objeto Busqueda, añadiendo también los metadatos
             Busqueda busqueda = new Busqueda( "TEST", LocalDateTime.now(), 0);
-            // Usamos obtenerCiudad para obtener la ciudad del resultado más cercano
+            // 2. Añadimos la lista de resultados a la búsqueda
+            busqueda.setResultados(resultados);
+            // 3. Usamos obtenerCiudad para obtener la ciudad del resultado más cercano
             busqueda.setCiudad(obtenerCiudad(busqueda));
-            // Añadimos la lista de resultados a la búsqueda
-            busqueda.setResultados(parsearDtos(response));
 
+            // TO DO - Añadir lógica para guardar la Búsqueda y los Resultados
+            // busqueda = busquedaService.guardarBusqueda()
+            resultadosService.guardarResultados(busqueda.getId(), busqueda.getIdUsuario(), resultados);
 
-
-
+            // Devolvemos la Busqueda + la lista de resultados contenida dentro
             return busqueda;
         } catch (IOException e) {
             throw new RuntimeException("No se pudo leer el archivo JSON", e);

@@ -2,13 +2,12 @@ package app.senia.encuentralo.model;
 
 public class Usuario {
 
-    // Atributos
+    // Atributos de la base de datos
     private Integer id;
     private String email;
     private String password;
     private String nombre;
     private String apellidos;
-
     private String rol;
 
     // Constructor

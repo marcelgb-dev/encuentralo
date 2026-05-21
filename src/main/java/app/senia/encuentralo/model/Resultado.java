@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Resultado {
 
-    // Atributos
+    // Atributos de la base de datos
     private Integer id;
     private String nombre;
     private String telefono;
