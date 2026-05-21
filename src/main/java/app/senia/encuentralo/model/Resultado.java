@@ -5,29 +5,36 @@ import java.util.List;
 
 public class Resultado {
 
-    // Atributos
-    private int id;
+    // Atributos de la base de datos
+    private Integer id;
     private String nombre;
-    private String url;
     private String telefono;
+    private int distancia; // Distancia en metros al origen de la búsqueda
     private String direccion;
     private double valoracion;
-    private List<Categoria> categorias;
+    private int numValoraciones;
+    private String url;
+    private boolean esFavorito;
+    private Integer idUsuario;
+    private Integer idBusqueda;
 
-    private double longitud;
-    private double latitud;
+    // Atributos de Java
+    private List<Categoria> categorias;
+    private List<Etiqueta> etiquetas;
+    private String ciudad;
 
     // Constructor
-    public Resultado(String nombre, double valoracion, String url, String telefono, double longitud, double latitud, String direccion, List<Categoria> categorias) {
-        this.id = id;
+    public Resultado(String nombre, String telefono, int distancia, String direccion, double valoracion, int numValoraciones, String url, boolean esFavorito, Integer idUsuario, Integer idBusqueda) {
         this.nombre = nombre;
-        this.valoracion = valoracion;
-        this.url = url;
         this.telefono = telefono;
-        this.longitud = longitud;
-        this.latitud = latitud;
+        this.distancia = distancia;
         this.direccion = direccion;
-        this.categorias = categorias;
+        this.valoracion = valoracion;
+        this.numValoraciones = numValoraciones;
+        this.url = url;
+        this.esFavorito = esFavorito;
+        this.idUsuario = idUsuario;
+        this.idBusqueda = idBusqueda;
     }
 
     @Override
@@ -43,18 +50,50 @@ public class Resultado {
                 "\nRating: " + valoracion +
                 "\nUrl: " + url +
                 "\nTeléfono: " + telefono +
-                "\nCoordenadas: " + longitud + " long ," + latitud + " lat" +
+                "\nDistancia: " + String.format("%.2f", distancia) +
                 "\nDireccion: " + direccion +
                 "\nCategorias: " + String.join(", ", categoriasString);
     }
 
     // Getters y Setters
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     public String getNombre() {
         return nombre;
     }
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public int getDistancia() {
+        return distancia;
+    }
+
+    public void setDistancia(int distancia) {
+        this.distancia = distancia;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
 
     public double getValoracion() {
@@ -73,36 +112,29 @@ public class Resultado {
         this.url = url;
     }
 
-    public String getTelefono() {
-        return telefono;
+    // Getters y Setters
+    public boolean isEsFavorito() {
+        return esFavorito;
     }
 
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
+    public void setEsFavorito(boolean esFavorito) {
+        this.esFavorito = esFavorito;
     }
 
-    public double getLongitud() {
-        return longitud;
+    public Integer getIdUsuario() {
+        return idUsuario;
     }
 
-    public void setLongitud(double longitud) {
-        this.longitud = longitud;
+    public void setIdUsuario(Integer idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
-    public double getLatitud() {
-        return latitud;
+    public Integer getIdBusqueda() {
+        return idBusqueda;
     }
 
-    public void setLatitud(double latitud) {
-        this.latitud = latitud;
-    }
-
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
+    public void setIdBusqueda(Integer idBusqueda) {
+        this.idBusqueda = idBusqueda;
     }
 
     public List<Categoria> getCategorias() {
@@ -113,11 +145,27 @@ public class Resultado {
         this.categorias = categorias;
     }
 
-    public int getId() {
-        return id;
+    public String getCiudad() {
+        return ciudad;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setCiudad(String ciudad) {
+        this.ciudad = ciudad;
+    }
+
+    public int getNumValoraciones() {
+        return numValoraciones;
+    }
+
+    public void setNumValoraciones(int numValoraciones) {
+        this.numValoraciones = numValoraciones;
+    }
+
+    public List<Etiqueta> getEtiquetas() {
+        return etiquetas;
+    }
+
+    public void setEtiquetas(List<Etiqueta> etiquetas) {
+        this.etiquetas = etiquetas;
     }
 }

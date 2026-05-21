@@ -5,30 +5,30 @@ import java.util.List;
 
 public class Busqueda {
 
-    // Atributos
-    private int id;
+    // Atributos de la base de datos
+    private Integer id;
     private String termino;
-    private double latitud;
-    private double longitud;
     private LocalDateTime fecha;
+    private Integer idUsuario;
+    private String ciudad;
 
+    // Atributos propios del objeto Java
     private List<Resultado> resultados;
 
     // Constructor
-    public Busqueda(String termino, double latitud, double longitud, LocalDateTime fecha) {
-        this.id = id;
+    public Busqueda(String termino, LocalDateTime fecha, Integer idUsuario) {
         this.termino = termino;
-        this.latitud = latitud;
-        this.longitud = longitud;
         this.fecha = fecha;
+        this.idUsuario = idUsuario;
     }
 
+
     // Getters y Setters
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -40,22 +40,6 @@ public class Busqueda {
         this.termino = termino;
     }
 
-    public double getLatitud() {
-        return latitud;
-    }
-
-    public void setLatitud(double latitud) {
-        this.latitud = latitud;
-    }
-
-    public double getLongitud() {
-        return longitud;
-    }
-
-    public void setLongitud(double longitud) {
-        this.longitud = longitud;
-    }
-
     public LocalDateTime getFecha() {
         return fecha;
     }
@@ -63,6 +47,23 @@ public class Busqueda {
     public void setFecha(LocalDateTime fecha) {
         this.fecha = fecha;
     }
+
+    public Integer getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(Integer idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+    public String getCiudad() {
+        return ciudad;
+    }
+
+    public void setCiudad(String ciudad) {
+        this.ciudad = ciudad;
+    }
+
     public List<Resultado> getResultados() {
         return resultados;
     }
@@ -70,5 +71,4 @@ public class Busqueda {
     public void setResultados(List<Resultado> resultados) {
         this.resultados = resultados;
     }
-
 }

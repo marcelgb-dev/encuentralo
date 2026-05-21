@@ -2,7 +2,7 @@ package app.senia.encuentralo.model;
 
 public class Etiqueta {
 
-    // Atributos
+    // Atributos de la base de datos
     private int id;
     private String nombre;
     private int idUsuario;

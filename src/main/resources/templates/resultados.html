@@ -20,7 +20,7 @@
 <body>
 
 <div class="container">
-    <h1>Resultados de Búsqueda</h1>
+    <h1>Resultados de Búsqueda para: <span th:text="${busqueda.termino} + ' en ' + ${busqueda.ciudad}">Término en Ciudad</span></h1>
 
     <table>
         <thead>
@@ -37,10 +37,10 @@
         <tr th:each="res : ${resultados}">
             <td>
                 <span th:text="${res.nombre}" style="font-weight: bold;">Nombre</span>
-                <span class="coords" th:text="'Lat: ' + ${res.latitud} + ' | Lon: ' + ${res.longitud}">Coords</span>
+                <span class="coords" th:text="${res.distancia} + ' metros'">Distancia</span>
             </td>
             <td>
-                <span class="valoracion" th:text="${res.valoracion}">0.0</span>
+                <span class="valoracion" th:text="${res.valoracion} + '⭐'">0.0</span><span class="coords" th:text="'(' + ${res.numValoraciones} + ' reviews)'"></span>
             </td>
             <td>
                 <span th:each="cat : ${res.categorias}" class="tag" th:text="${cat.nombre}">Categoría</span>

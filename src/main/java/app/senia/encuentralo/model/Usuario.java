@@ -2,15 +2,18 @@ package app.senia.encuentralo.model;
 
 public class Usuario {
 
-    // Atributos
-    private int id;
+    // Atributos de la base de datos
+    private Integer id;
+    private String email;
     private String password;
     private String nombre;
     private String apellidos;
+    private String rol;
 
     // Constructor
-    public Usuario(String password, String nombre, String apellidos) {
-        this.id = id;
+    public Usuario(String email, String password, String nombre, String apellidos, String rol) {
+        this.email = email;
+        this.rol = rol;
         this.password = password;
         this.nombre = nombre;
         this.apellidos = apellidos;
@@ -47,5 +50,21 @@ public class Usuario {
 
     public void setApellidos(String apellidos) {
         this.apellidos = apellidos;
+    }
+
+    public String getRol() {
+        return rol;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

@@ -8,5 +8,6 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public record LocationDTO(
         @JsonProperty("display_address")
-        List<String> displayAddress
+        List<String> displayAddress,
+        String city
 ) {}

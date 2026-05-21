@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Categoria {
 
-    // Atributos
+    // Atributos de la base de datos
     private int id;
     private String nombre;
 
