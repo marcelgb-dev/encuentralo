@@ -1,6 +1,7 @@
 package app.senia.encuentralo.service;
 
 import app.senia.encuentralo.model.Categoria;
+import app.senia.encuentralo.repository.ResultadosRepository;
 import org.springframework.stereotype.Service;
 import app.senia.encuentralo.model.Resultado;
 
@@ -12,8 +13,36 @@ import java.util.List;
 @Service
 public class ResultadosService {
 
+    // Atributos / dependencias
+    private final ResultadosRepository resultadosRepo;
 
-    // Métodos de ordenación (Sorting)
+    // Constructor
+    public ResultadosService(ResultadosRepository resultadosRepo) {
+        this.resultadosRepo = resultadosRepo;
+    }
+
+    // Comunicación con el repositorio
+
+    public List<Resultado> obtenerResultadosBusqueda (Integer busquedaId) {
+        // Lógica para devolver una lista de Resultados en base a la ID de su Búsqueda (historial)
+        return null;
+    }
+
+    public List<Resultado> obtenerResultadosFavoritos (Integer usuarioId) {
+        // Lógica para devolver una lista con todos los resultados guardados como favoritos de un usuario
+        return null;
+    }
+
+    public void guardarResultados(Integer idBusqueda, Integer idUsuario, List<Resultado> resultados) {
+        // Lógica de guardado
+    }
+
+    public void guardarFavorito(Integer resultadoId, boolean esFavorito) {
+        // Lógica de marcar resultado como favorito (true / false)
+    }
+
+
+    // Métodos de ordenación (Sorting). inverso = true para orden inverso
 
     public List<Resultado> ordenarPorDistancia (List<Resultado> listaResultados, boolean inverso) {
 
@@ -47,6 +76,7 @@ public class ResultadosService {
 
     // Métodos de filtrado (filtering)
 
+    // Valoración >= parámetro
     public List<Resultado> filtrarPorValoracion (List<Resultado> listaResultados, double minimo) {
         List<Resultado> listaFiltrada = new ArrayList<>();
 
@@ -88,6 +118,7 @@ public class ResultadosService {
         return listaFiltrada;
     }
 
+    // Solo favoritos
     public List<Resultado> filtrarSoloFavoritos (List<Resultado> listaResultados) {
         List<Resultado> listaFiltrada = new ArrayList<>();
 
