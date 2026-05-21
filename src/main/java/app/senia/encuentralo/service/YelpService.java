@@ -110,7 +110,7 @@ public class YelpService implements ProviderService {
             );
 
             // Convertimos los datos de la YelpResponse al objeto Busqueda, añadiendo también los metadatos
-            Busqueda busqueda = new Busqueda( "TEST", LocalDateTime.now(), 0, "");
+            Busqueda busqueda = new Busqueda( "TEST", LocalDateTime.now(), 0);
             // Usamos obtenerCiudad para obtener la ciudad del resultado más cercano
             busqueda.setCiudad(obtenerCiudad(busqueda));
             // Añadimos la lista de resultados a la búsqueda
