@@ -37,6 +37,7 @@ CREATE TABLE Resultados(
     distancia FLOAT NOT NULL,
     direccion VARCHAR(255) NOT NULL,
     valoracion FLOAT NOT NULL,
+    num_reviews INT UNSIGNED NOT NULL,
     url VARCHAR(255) NOT NULL,
     esFavorito BOOLEAN NOT NULL,
     id_usuario INT UNSIGNED NOT NULL,
