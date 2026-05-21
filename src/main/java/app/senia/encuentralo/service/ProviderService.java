@@ -5,6 +5,6 @@ import app.senia.encuentralo.model.Busqueda;
 // Interfaz que sirve como plantilla para los serivces de las diferentes APIs
 public interface ProviderService {
 
-    Busqueda llamarApi(String termino, double latitud, double longitud, int radio, int limite);
+    Busqueda llamarApi(Integer idUsuario, String termino, double latitud, double longitud, int radio, int limite);
 
 }

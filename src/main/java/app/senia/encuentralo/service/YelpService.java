@@ -19,7 +19,7 @@ import java.util.List;
 @Service
 public class YelpService implements ProviderService {
 
-    @Value("${yelp.locale")
+    @Value("${yelp.locale}")
     private String yelpLocale;
     private final RestClient restClient;
     private final ObjectMapper objectMapper;
@@ -32,7 +32,7 @@ public class YelpService implements ProviderService {
         this.resultadoService = resultadoService;
     }
 
-    public Busqueda llamarApi(String termino, double latitud, double longitud, int radio, int limite) {
+    public Busqueda llamarApi(Integer idUsuario, String termino, double latitud, double longitud, int radio, int limite) {
 
         // MOCKING (LLAMADA FALSA)
         return llamarApiMock();
@@ -46,21 +46,26 @@ public class YelpService implements ProviderService {
 //                        .queryParam("radius", radio) // Radio de búsqueda (en metros)
 //                        .queryParam("limit", limite) // Número máximo de resultados a pedir
 //                        .queryParam("locale", yelpLocale) // Código de país / idioma locale
-
 //                        .build())
 //                .retrieve()
 //                .body(YelpResponse.class);
 //
 //        // Gracias a Jackson, 'response' ya contiene toda la jerarquía de records mapeada
 //        if (response != null && response.businesses() != null) {
-//            Busqueda busqueda = new Busqueda(0, termino, latitud, longitud, LocalDateTime.now());
-//            busqueda.setResultados(parsearDtos(response));
+//            Busqueda busqueda = new Busqueda(termino, LocalDateTime.now(), idUsuario);
+//            List<Resultado> resultados = parsearDtos(response);
+//            busqueda.setResultados(resultados);
+//            busqueda.setCiudad(obtenerCiudad(busqueda));
+//
+//            // TO DO - Añadir lógica para guardar la Búsqueda y los Resultados
+//            // busqueda = busquedaService.guardarBusqueda()
+//            resultadoService.guardarResultados(busqueda.getId(), busqueda.getIdUsuario(), resultados);
 //
 //            return busqueda;
 //        }
 //
 //        System.out.println("ERROR: Respuesta de Yelp vacía");
-//        return List.of();
+//        return null;
     }
 
     // Convierte datos del DTO YelpResponse a una Lista<Resultado>

@@ -18,6 +18,7 @@ import java.util.List;
 @Controller
 public class BusquedaController {
 
+    // Dependencias
     private final YelpService ys;
     private final ResultadoService rs;
 
@@ -36,10 +37,11 @@ public class BusquedaController {
 
     // ENDPOINT DE ACCIÓN: Ejecuta la nueva búsqueda y redirige
     @PostMapping("/buscar/nueva")
-    public String makeSearch(@ModelAttribute("busqueda") SolicitudBusqueda input, RedirectAttributes redirectAttributes) {
+    public String nuevaBusqueda(@ModelAttribute("busqueda") SolicitudBusqueda input, RedirectAttributes redirectAttributes) {
 
         // Ejecutamos la llamada a la API externa, que nos devuelve la búsqueda (NO TIENE ID)
         Busqueda busqueda = ys.llamarApi(
+                0,
                 input.getTemino(),
                 input.getLatitud(),
                 input.getLongitud(),
@@ -50,7 +52,7 @@ public class BusquedaController {
         // Obtenemos la lista de resultados de la búsqueda
         List<Resultado> resultados = busqueda.getResultados();
 
-        // Inyectamos la lista completa como un Flash Attribute
+        // TEMPORAL - Inyectamos la lista completa como un Flash Attribute
         // Vivirá en la sesión solo durante la redirección
         redirectAttributes.addFlashAttribute("resultados", resultados);
         redirectAttributes.addFlashAttribute("busqueda", busqueda);
