@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import app.senia.encuentralo.model.Resultado;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -56,6 +57,7 @@ public class ResultadosService {
         return listaFiltrada;
     }
 
+    // Una sola categoría
     public List<Resultado> filtrarPorCategoria (List<Resultado> listaResultados, String nombreCategoria) {
         List<Resultado> listaFiltrada = new ArrayList<>();
 
@@ -68,6 +70,30 @@ public class ResultadosService {
                     break;
                 }
             }
+        }
+        return listaFiltrada;
+    }
+
+    // Una lista de categorías
+    public List<Resultado> filtrarPorCategoria (List<Resultado> listaResultados, List<String> nombresCategoria) {
+
+        List<Resultado> listaFiltrada = new ArrayList<>();
+
+        for (Resultado r : listaResultados) {
+            // Entra en la condición si r.getCategorias() y nombresCategoria tienen algún elemento en común
+            if (!Collections.disjoint(r.getCategorias(), nombresCategoria))
+                listaFiltrada.add(r);
+        }
+
+        return listaFiltrada;
+    }
+
+    public List<Resultado> filtrarSoloFavoritos (List<Resultado> listaResultados) {
+        List<Resultado> listaFiltrada = new ArrayList<>();
+
+        for (Resultado r : listaResultados) {
+            if (r.isEsFavorito())
+                listaFiltrada.add(r);
         }
         return listaFiltrada;
     }
