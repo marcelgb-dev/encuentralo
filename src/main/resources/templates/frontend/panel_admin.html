@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
-<title>Encuentralo | Administración</title>
+<title>Encuéntralo | Administración</title>
 <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
 <style>
@@ -379,7 +379,7 @@
 <div class="vista-escritorio">
   <aside class="barra-lateral">
     <div class="mb-10 px-2">
-      <h1 class="texto-headline-md font-extrabold texto-primario">Encuentralo</h1>
+      <h1 class="texto-headline-md font-extrabold texto-primario">Encuéntralo</h1>
       <p class="texto-body-sm texto-secundario">Business Edition</p>
     </div>
     <nav class="flex-1 espacio-y-1">
@@ -395,23 +395,16 @@
         <span class="material-symbols-outlined">star</span>
         Favoritos
       </a>
-      <a class="flex items-center gap-3 px-4 py-3 redondeado-lg texto-secundario hover:bg-superficie-variante transition texto-label-md" href="#">
-        <span class="material-symbols-outlined">ios_share</span>
-        Exportación
-      </a>
-      <a class="flex items-center gap-3 px-4 py-3 redondeado-lg texto-primario border-r-4 borde-primario bg-secundario-contenedor-30 transition-transform translate-x-1 texto-label-md" href="#">
-        <span class="material-symbols-outlined">settings</span>
-        Administración
-      </a>
+
     </nav>
     <div class="mt-auto espacio-y-1">
       <button class="w-full mb-6 bg-primario-contenedor texto-blanco py-3 px-4 redondeado-lg texto-label-md flex items-center justify-center gap-2 hover:opacity-90 transition">
         <span class="material-symbols-outlined">add</span>
-        Nueva Prospección
+        Nueva Búsqueda
       </button>
       <a class="flex items-center gap-3 px-4 py-3 redondeado-lg texto-secundario hover:bg-superficie-variante transition texto-label-md" href="#">
-        <span class="material-symbols-outlined">help</span>
-        Ayuda
+        <span class="material-symbols-outlined">lock</span>
+        Cambiar contraseña
       </a>
       <a class="flex items-center gap-3 px-4 py-3 redondeado-lg texto-error hover:bg-error-contenedor/20 transition texto-label-md" href="#">
         <span class="material-symbols-outlined">logout</span>
@@ -426,56 +419,13 @@
         <h2 class="texto-headline-md font-bold texto-primario">Panel de Administración</h2>
       </div>
       <div class="flex items-center gap-6">
-        <button class="texto-variante hover:bg-superficie-alta p-2 redondeado-completo transition-colors">
-          <span class="material-symbols-outlined">notifications</span>
-        </button>
         <div class="flex items-center gap-3 cursor-pointer hover:bg-superficie-alta p-1 px-2 redondeado-lg transition-colors">
-          <div class="text-right">
-            <p class="texto-label-md texto-primario">Admin Principal</p>
-            <p class="texto-label-sm texto-secundario">Pro Plan</p>
-          </div>
-          <img alt="Avatar de perfil" class="w-10 h-10 redondeado-completo object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAoNOE03PQgSOdEipl8bPw8jybAdEAbMU-GEFHVdnF5bl5DQ7WZ5ZBV9YSatecRGHut_PBWlSS79H0yuBrrivF4BklA7hwKD9BnnO4ORR2qRjjy_rn08IkTBEoG8YdwaJi8rxvnmHvWzcUOlRjLQbDgPFe215fZxl3Vm9vmG5UYQxWFkNosajfu1YdLE_MC3WkQhd2o7vp7mRXwezpdZDHAHdnx3Z-IXTEGwRdrtoaXw8aGXa3EnGUl8vV6ZWUYCaLG5MoZXJcKUIXt">
+          <p class="texto-label-md texto-primario flex items-center gap-2">Admin Principal <span class="material-symbols-outlined" style="font-size: 20px;">account_circle</span></p>
         </div>
       </div>
     </header>
 
     <section class="seccion-contenido">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter mb-12">
-        <div class="tarjeta-corporativa p-6 flex items-center gap-6">
-          <div class="w-14 h-14 redondeado-xl bg-primario-fijo flex items-center justify-center texto-primario">
-            <span class="material-symbols-outlined">group</span>
-          </div>
-          <div>
-            <p class="texto-label-sm texto-secundario mb-1">Usuarios Totales</p>
-            <p class="texto-headline-lg texto-primario">1,284</p>
-            <p class="texto-xs texto-verde-600 font-medium flex items-center mt-1">
-              <span class="material-symbols-outlined texto-xs mr-1">trending_up</span>
-              +12% este mes
-            </p>
-          </div>
-        </div>
-        <div class="tarjeta-corporativa p-6 flex items-center gap-6">
-          <div class="w-14 h-14 redondeado-xl bg-terciario-fijo flex items-center justify-center texto-primario">
-            <span class="material-symbols-outlined">bolt</span>
-          </div>
-          <div>
-            <p class="texto-label-sm texto-secundario mb-1">Usuarios Activos (24h)</p>
-            <p class="texto-headline-lg texto-primario">856</p>
-            <p class="texto-xs texto-variante font-medium flex items-center mt-1">66.7% del total</p>
-          </div>
-        </div>
-        <div class="tarjeta-corporativa p-6 flex flex-col justify-center">
-          <div class="flex justify-between items-center mb-4">
-            <p class="texto-label-sm texto-secundario">Uso de Cuota API</p>
-            <span class="texto-label-md texto-primario">78%</span>
-          </div>
-          <div class="w-full bg-superficie-mas-alta redondeado-completo h-2">
-            <div class="bg-primario h-2 redondeado-completo" style="width: 78%"></div>
-          </div>
-          <p class="texto-xs texto-secundario mt-3">390,000 / 500,000 peticiones consumidas</p>
-        </div>
-      </div>
-
       <div class="flex justify-between items-end mb-6">
         <div>
           <h3 class="texto-headline-md texto-primario mb-1">Gestión de Usuarios</h3>
@@ -614,54 +564,6 @@
           </div>
         </div>
       </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-gutter mt-12">
-        <div class="tarjeta-corporativa p-8">
-          <div class="flex justify-between items-start mb-6">
-            <h4 class="texto-label-md texto-primario uppercase">Estado de los Servicios</h4>
-            <span class="flex items-center gap-1 texto-xs texto-verde-600 font-bold">
-              <span class="w-2 h-2 redondeado-completo bg-verde-500"></span>
-              OPERATIVO
-            </span>
-          </div>
-          <div class="espacio-y-6">
-            <div class="flex justify-between items-center">
-              <div class="flex items-center gap-3">
-                <span class="material-symbols-outlined texto-secundario">database</span>
-                <span class="texto-body-md texto-primario">Base de Datos Central</span>
-              </div>
-              <span class="texto-xs font-medium texto-variante">42ms latencia</span>
-            </div>
-            <div class="flex justify-between items-center">
-              <div class="flex items-center gap-3">
-                <span class="material-symbols-outlined texto-secundario">map</span>
-                <span class="texto-body-md texto-primario">Motor de Geocodificación</span>
-              </div>
-              <span class="texto-xs font-medium texto-variante">Online</span>
-            </div>
-            <div class="flex justify-between items-center">
-              <div class="flex items-center gap-3">
-                <span class="material-symbols-outlined texto-secundario">cloud_sync</span>
-                <span class="texto-body-md texto-primario">Sincronización CRM</span>
-              </div>
-              <span class="texto-xs font-medium texto-variante">Sincronizado hace 2m</span>
-            </div>
-          </div>
-        </div>
-        <div class="tarjeta-corporativa p-8 bg-primario-contenedor texto-blanco relative overflow-hidden">
-          <div class="absolute inset-0 opacidad-5 pointer-events-none">
-            <div class="grid grid-cols-12 h-full w-full">
-              <div class="border-r borde-blanco-20"></div><div class="border-r borde-blanco-20"></div><div class="border-r borde-blanco-20"></div><div class="border-r borde-blanco-20"></div><div class="border-r borde-blanco-20"></div><div class="border-r borde-blanco-20"></div><div class="border-r borde-blanco-20"></div><div class="border-r borde-blanco-20"></div><div class="border-r borde-blanco-20"></div><div class="border-r borde-blanco-20"></div><div class="border-r borde-blanco-20"></div><div class="border-r borde-blanco-20"></div>
-            </div>
-          </div>
-          <div class="relative z-10">
-            <h4 class="texto-label-md texto-primario-fijo uppercase mb-4">Soporte Business Edition</h4>
-            <p class="texto-headline-md font-bold mb-4">¿Necesitas ampliar tus límites?</p>
-            <p class="texto-body-sm texto-primario-fijo-80 mb-8 max-w-sm">Contacta con tu gestor de cuenta para personalizar las cuotas de API o añadir nuevos asientos de administrador.</p>
-            <button class="bg-blanco texto-primario texto-label-md px-6 py-3 redondeado-lg hover:bg-primario-fijo transition-colors">Hablar con Soporte</button>
-          </div>
-        </div>
-      </div>
     </section>
   </main>
 </div>
@@ -671,7 +573,7 @@
     <div class="flex justify-between items-center ancho-completo px-margen-movil md:px-margen-escritorio py-2 max-w-contenedor mx-auto h-16">
       <div class="flex items-center gap-3 cursor-pointer active:scale-95 transition">
         <span class="material-symbols-outlined texto-primario">explore</span>
-        <span class="texto-headline-md font-bold texto-primario">Encuentralo</span>
+        <span class="texto-headline-md font-bold texto-primario">Encuéntralo</span>
       </div>
       <nav class="hidden md:flex items-center gap-8 h-full">
         <a class="texto-secundario hover:bg-superficie-alta transition-colors px-2 py-1 redondeado" href="#">Búsqueda</a>
@@ -689,44 +591,15 @@
 
   <main class="max-w-contenedor mx-auto px-margen-movil md:px-margen-escritorio py-8 mb-20 md:mb-8">
     <section class="mb-10">
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
         <div>
           <h1 class="texto-headline-lg-movil md:text-headline-lg texto-primario">Panel de Administración</h1>
-          <p class="texto-body-md texto-variante">Gestión de usuarios y métricas de rendimiento del sistema.</p>
+          <p class="texto-body-md texto-variante">Administra los accesos y roles de tu organización</p>
         </div>
         <button class="flex items-center justify-center gap-2 bg-primario texto-blanco px-6 py-3 redondeado-xl sombra-suave hover:bg-primario-contenedor transition active:scale-95 cursor-pointer">
           <span class="material-symbols-outlined">person_add</span>
           <span class="texto-label-md">Añadir Usuario</span>
         </button>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
-        <div class="bg-superficie-mas-baja p-6 redondeado-xl sombra-suave flex items-center gap-4">
-          <div class="w-12 h-12 redondeado-completo bg-secundario-contenedor flex items-center justify-center texto-secundario">
-            <span class="material-symbols-outlined">group</span>
-          </div>
-          <div>
-            <p class="texto-label-sm texto-variante">Total Usuarios</p>
-            <h3 class="texto-headline-md texto-primario">1,284</h3>
-          </div>
-        </div>
-        <div class="bg-superficie-mas-baja p-6 redondeado-xl sombra-suave flex items-center gap-4">
-          <div class="w-12 h-12 redondeado-completo bg-primario-fijo flex items-center justify-center texto-primario">
-            <span class="material-symbols-outlined">bolt</span>
-          </div>
-          <div>
-            <p class="texto-label-sm texto-variante">Usuarios Activos</p>
-            <h3 class="texto-headline-md texto-primario">892</h3>
-          </div>
-        </div>
-        <div class="bg-superficie-mas-baja p-6 redondeado-xl sombra-suave flex items-center gap-4">
-          <div class="w-12 h-12 redondeado-completo bg-terciario-fijo flex items-center justify-center texto-primario">
-            <span class="material-symbols-outlined">api</span>
-          </div>
-          <div>
-            <p class="texto-label-sm texto-variante">Uso de API</p>
-            <h3 class="texto-headline-md texto-primario">85%</h3>
-          </div>
-        </div>
       </div>
     </section>
 

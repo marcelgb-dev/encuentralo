@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
-<title>Historial de Búsquedas | Encuentralo</title>
+<title>Historial de Búsquedas | Encuéntralo</title>
 <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
 <style>
@@ -407,7 +407,7 @@
     <div class="flex justify-between items-center ancho-completo px-margen-movil py-2 max-w-contenedor mx-auto">
       <div class="flex items-center gap-3 cursor-pointer active:scale-95 transition">
         <span class="material-symbols-outlined texto-primario texto-headline-md">explore</span>
-        <span class="texto-headline-md font-bold texto-primario">Encuentralo</span>
+        <span class="texto-headline-md font-bold texto-primario">Encuéntralo</span>
       </div>
       <nav class="hidden md:flex items-center gap-8">
         <a class="texto-secundario hover:bg-superficie-alta transition-colors px-3 py-2 redondeado-lg texto-body-md" href="#">Búsqueda</a>
@@ -581,13 +581,10 @@
 <div class="vista-escritorio">
   <aside class="barra-lateral">
     <div class="mb-10 px-2">
-      <h1 class="texto-headline-md font-extrabold texto-primario">Encuentralo</h1>
+      <h1 class="texto-headline-md font-extrabold texto-primario">Encuéntralo</h1>
       <p class="texto-body-sm texto-secundario">Business Edition</p>
     </div>
-    <button class="mb-8 flex items-center justify-center gap-2 bg-primario texto-blanco py-3 px-4 redondeado-xl texto-label-md hover:opacity-90 transition">
-      <span class="material-symbols-outlined">add</span>
-      Nueva Prospección
-    </button>
+
     <nav class="flex-1 space-y-1">
       <a class="flex items-center gap-3 px-4 py-3 redondeado-lg texto-secundario texto-label-md hover:bg-superficie-variante transition" href="#">
         <span class="material-symbols-outlined">search</span>
@@ -601,19 +598,12 @@
         <span class="material-symbols-outlined">star</span>
         Favoritos
       </a>
-      <a class="flex items-center gap-3 px-4 py-3 redondeado-lg texto-secundario texto-label-md hover:bg-superficie-variante transition" href="#">
-        <span class="material-symbols-outlined">ios_share</span>
-        Exportación
-      </a>
-      <a class="flex items-center gap-3 px-4 py-3 redondeado-lg texto-secundario texto-label-md hover:bg-superficie-variante transition" href="#">
-        <span class="material-symbols-outlined">settings</span>
-        Administración
-      </a>
+
     </nav>
     <div class="pt-6 mt-6 border-t borde-variante space-y-1">
       <a class="flex items-center gap-3 px-4 py-3 redondeado-lg texto-secundario texto-label-md hover:bg-superficie-variante transition" href="#">
-        <span class="material-symbols-outlined">help</span>
-        Ayuda
+        <span class="material-symbols-outlined">lock</span>
+        Cambiar contraseña
       </a>
       <a class="flex items-center gap-3 px-4 py-3 redondeado-lg texto-secundario texto-label-md hover:bg-superficie-variante transition" href="#">
         <span class="material-symbols-outlined">logout</span>
@@ -628,72 +618,19 @@
         <h2 class="texto-headline-md font-bold texto-primario">Historial de Búsquedas</h2>
       </div>
       <div class="flex items-center gap-6">
-        <button class="texto-variante hover:bg-superficie-alta p-2 redondeado-completo transition">
-          <span class="material-symbols-outlined">notifications</span>
-        </button>
         <div class="flex items-center gap-3 pl-4 border-l borde-variante">
-          <div class="text-right">
-            <p class="texto-label-md texto-primario">Carlos Méndez</p>
-            <p class="texto-body-sm texto-secundario">Admin</p>
-          </div>
-          <span class="material-symbols-outlined texto-primario">account_circle</span>
+          <p class="texto-label-md texto-primario flex items-center gap-2">Carlos Méndez <span class="material-symbols-outlined" style="font-size: 20px;">account_circle</span></p>
         </div>
       </div>
     </header>
 
     <div class="px-margen-escritorio py-8 ancho-max-1400">
-      <div class="grid grid-cols-12 gap-gutter mb-10">
-        <div class="col-span-8 bg-superficie-mas-baja p-6 redondeado-xl tarjeta-sombra">
-          <div class="flex items-center gap-4 mb-6">
-            <div class="relative flex-1">
-              <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 texto-secundario">search</span>
-              <input class="ancho-completo pl-12 pr-4 py-3 bg-superficie-baja border-none redondeado-lg focus:ring-2 focus:ring-primario transition texto-body-md" placeholder="Buscar por término o fuente..." type="text">
-            </div>
-            <button class="bg-primario texto-blanco px-6 py-3 redondeado-lg texto-label-md flex items-center gap-2">
-              Filtrar
-              <span class="material-symbols-outlined">filter_list</span>
-            </button>
-          </div>
-          <div class="flex gap-3 overflow-x-auto pb-2">
-            <span class="px-4 py-1.5 redondeado-completo bg-secundario-contenedor texto-secundario-contenedor texto-label-md flex items-center gap-2 espacio-sin-salto">
-              Últimos 30 días <span class="material-symbols-outlined">close</span>
-            </span>
-            <span class="px-4 py-1.5 redondeado-completo bg-secundario-contenedor texto-secundario-contenedor texto-label-md flex items-center gap-2 espacio-sin-salto">
-              Estado: Completado <span class="material-symbols-outlined">close</span>
-            </span>
-            <span class="px-4 py-1.5 redondeado-completo bg-superficie-alta texto-secundario texto-label-md flex items-center gap-2 espacio-sin-salto">
-              Fuente: Google Maps <span class="material-symbols-outlined">close</span>
-            </span>
-          </div>
-        </div>
-        <div class="col-span-4 bg-primario-contenedor p-6 redondeado-xl tarjeta-sombra relative overflow-hidden grupo">
-          <div class="relative z-10 h-full flex flex-col justify-between">
-            <div>
-              <p class="texto-on-primario-contenedor texto-label-md opacidad-80 mb-1">Total de registros</p>
-              <h3 class="texto-blanco texto-headline-xl">1,284</h3>
-            </div>
-            <div class="flex items-center gap-2 texto-on-primario-contenedor texto-body-sm">
-              <span class="material-symbols-outlined texto-verde">trending_up</span>
-              +12% respecto al mes anterior
-            </div>
-          </div>
-          <div class="absolute -right-4 -bottom-4 opacidad-10 escala-150 grupo-hover:escala-110 transition">
-            <span class="material-symbols-outlined texto-blanco">analytics</span>
-          </div>
-        </div>
-      </div>
+
 
       <div class="bg-superficie-mas-baja redondeado-xl tarjeta-sombra overflow-hidden">
         <div class="px-8 py-6 border-b borde-variante flex justify-between items-center">
           <h3 class="texto-headline-md texto-primario">Registros de Actividad</h3>
-          <div class="flex items-center gap-2">
-            <button class="p-2 hover:bg-superficie-alta redondeado-lg transition texto-secundario">
-              <span class="material-symbols-outlined">download</span>
-            </button>
-            <button class="p-2 hover:bg-superficie-alta redondeado-lg transition texto-secundario">
-              <span class="material-symbols-outlined">more_vert</span>
-            </button>
-          </div>
+
         </div>
         <div class="overflow-x-auto">
           <table class="ancho-completo text-left">
@@ -703,8 +640,6 @@
                 <th class="px-8 py-4 texto-label-md texto-secundario uppercase tracking-wider">Término de Búsqueda</th>
                 <th class="px-8 py-4 texto-label-md texto-secundario uppercase tracking-wider">Fuente</th>
                 <th class="px-8 py-4 texto-label-md texto-secundario uppercase tracking-wider text-center">Resultados</th>
-                <th class="px-8 py-4 texto-label-md texto-secundario uppercase tracking-wider">Estado</th>
-                <th class="px-8 py-4 texto-label-md texto-secundario uppercase tracking-wider text-right">Acciones</th>
               </tr>
             </thead>
             <tbody class="divide-y borde-variante">
@@ -725,15 +660,6 @@
                 <td class="px-8 py-5 text-center">
                   <div class="texto-headline-md texto-primario">142</div>
                 </td>
-                <td class="px-8 py-5">
-                  <span class="flex-en-linea items-center justify-center text-center px-3 py-1 redondeado-completo bg-verde-claro texto-verde texto-label-md ancho-ajustado">Completado</span>
-                </td>
-                <td class="px-8 py-5 text-right">
-                  <button class="flex-en-linea items-center gap-2 bg-superficie-alta px-4 py-2 redondeado-lg texto-primario texto-label-md hover:bg-primario hover:texto-blanco transition">
-                    <span class="material-symbols-outlined">replay</span>
-                    Repetir
-                  </button>
-                </td>
               </tr>
               <tr class="hover:bg-superficie-baja transition">
                 <td class="px-8 py-5">
@@ -751,15 +677,6 @@
                 </td>
                 <td class="px-8 py-5 text-center">
                   <div class="texto-headline-md texto-primario">85</div>
-                </td>
-                <td class="px-8 py-5">
-                  <span class="flex-en-linea items-center justify-center text-center px-3 py-1 redondeado-completo bg-verde-claro texto-verde texto-label-md ancho-ajustado">Completado</span>
-                </td>
-                <td class="px-8 py-5 text-right">
-                  <button class="flex-en-linea items-center gap-2 bg-superficie-alta px-4 py-2 redondeado-lg texto-primario texto-label-md hover:bg-primario hover:texto-blanco transition">
-                    <span class="material-symbols-outlined">replay</span>
-                    Repetir
-                  </button>
                 </td>
               </tr>
               <tr class="hover:bg-superficie-baja transition">
@@ -779,16 +696,6 @@
                 <td class="px-8 py-5 text-center">
                   <div class="texto-headline-md texto-secundario">--</div>
                 </td>
-                <td class="px-8 py-5">
-                  <span class="flex items-center gap-2 texto-primario texto-label-md">
-                    <span class="w-2 h-2 redondeado-completo bg-primario animacion-pulso"></span> Procesando
-                  </span>
-                </td>
-                <td class="px-8 py-5 text-right">
-                  <button class="p-2 texto-secundario hover:texto-error transition">
-                    <span class="material-symbols-outlined">block</span>
-                  </button>
-                </td>
               </tr>
               <tr class="hover:bg-superficie-baja transition">
                 <td class="px-8 py-5">
@@ -806,15 +713,6 @@
                 </td>
                 <td class="px-8 py-5 text-center">
                   <div class="texto-headline-md texto-primario">0</div>
-                </td>
-                <td class="px-8 py-5">
-                  <span class="flex-en-linea items-center justify-center text-center px-3 py-1 redondeado-completo bg-error-contenedor texto-error texto-label-md ancho-ajustado">Error de conexión</span>
-                </td>
-                <td class="px-8 py-5 text-right">
-                  <button class="flex-en-linea items-center gap-2 bg-superficie-alta px-4 py-2 redondeado-lg texto-primario texto-label-md hover:bg-primario hover:texto-blanco transition">
-                    <span class="material-symbols-outlined">replay</span>
-                    Reintentar
-                  </button>
                 </td>
               </tr>
             </tbody>
@@ -838,28 +736,7 @@
         </div>
       </div>
 
-      <div class="mt-12 grid grid-cols-3 gap-gutter">
-        <div class="bg-blanco p-8 redondeado-xl tarjeta-sombra flex flex-col items-center text-center border borde-variante">
-          <div class="w-12 h-12 bg-secundario-contenedor redondeado-completo flex items-center justify-center mb-4">
-            <span class="material-symbols-outlined texto-primario">auto_awesome</span>
-          </div>
-          <h4 class="texto-headline-md texto-primario mb-2">Análisis de Tendencias</h4>
-          <p class="texto-body-sm texto-secundario mb-6">Visualiza qué términos están obteniendo mejores resultados en tu sector este mes.</p>
-          <button class="texto-primario texto-label-md flex items-center gap-1 hover:gap-2 transition">
-            Ver informe completo <span class="material-symbols-outlined">arrow_forward</span>
-          </button>
-        </div>
-        <div class="col-span-2 relative h-56 redondeado-xl overflow-hidden tarjeta-sombra">
-          <img alt="Panel de análisis" class="absolute inset-0 ancho-completo h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCqFCy31oXzhsDTgCasfaOjYy8WnsXceG8lmLn-3JlUhWvhJ8Xip_vjpI99apr-oVyTmj80l4RRiHrud0cMjqHxEJ3uk1yk64e3CDcntK94I2ev1TSNPqqWFVMfbm0Rr5y1NXDYPhFaC91NVfoEeGVEg6v8Oj7TepauDAt3OOKXpI-O73YptWmwSCYToktd5xOqW1NVLjV-G30UDBrz1uR42R26grQoCw8i9O3aUb5pMQYr42WP6aprRCII3igdJvxGiwqdKsXzJf4">
-          <div class="absolute inset-0 bg-gradiente flex flex-col justify-center px-12 texto-blanco">
-            <span class="texto-label-md texto-inverse-primario mb-2 uppercase tracking-widest">Novedad</span>
-            <h3 class="texto-headline-lg mb-4 max-w-md">Exportación programada ahora disponible para cuentas Business.</h3>
-            <button class="bg-blanco texto-primario px-8 py-3 redondeado-lg texto-label-md ancho-ajustado hover:bg-superficie-alta transition">
-              Configurar ahora
-            </button>
-          </div>
-        </div>
-      </div>
+
     </div>
   </main>
 </div>

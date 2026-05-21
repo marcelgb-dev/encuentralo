@@ -3,10 +3,42 @@
 <head>
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
-<title>Lugares Guardados | Encuentralo</title>
+<title>Lugares Guardados | Encuéntralo</title>
 <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
 <style>
+  :root {
+    --color-fondo: #f7f9fb;
+    --color-primario: #091426;
+    --color-primario-contenedor: #1e293b;
+    --color-texto-base: #191c1e;
+    --color-texto-variante: #45474c;
+    --color-texto-secundario: #505f76;
+    --color-blanco: #ffffff;
+    --color-error: #ba1a1a;
+    --color-estrella: #fbbf24;
+    --color-superficie-baja: #f2f4f6;
+    --color-superficie-alta: #e6e8ea;
+    --color-superficie-mas-alta: #e0e3e5;
+    --color-borde-variante: #c5c6cd;
+    --color-borde-superficie: #eceef0;
+    
+    --color-categoria-secundario-bg: #d0e1fb;
+    --color-categoria-terciario-bg: #20283c;
+    
+    --fuente-principal: 'Hanken Grotesk', sans-serif;
+    
+    --sombra-suave: 0px 4px 20px rgba(30, 41, 59, 0.05);
+    --sombra-inferior: 0 -4px 20px rgba(30, 41, 59, 0.05);
+    --sombra-grande: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    
+    --redondeado-sm: 0.25rem;
+    --redondeado-md: 0.5rem;
+    --redondeado-lg: 0.75rem;
+    --redondeado-xl: 1rem;
+    --redondeado-completo: 9999px;
+  }
+
   *, ::before, ::after {
     box-sizing: border-box;
     border-width: 0;
@@ -388,6 +420,510 @@
     margin-left: auto;
     margin-right: auto;
   }
+
+  /* NUEVOS ESTILOS PARA ORDENACIÓN Y FILTRADO AVANZADO */
+  
+  /* Contenedores de ordenación */
+  .contenedor-ordenar-cabecera {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .boton-invertir-orden {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    height: 38px;
+    width: 38px;
+    background-color: #ffffff;
+    border: 1px solid #c5c6cd;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s;
+  }
+  .boton-invertir-orden:hover {
+    background-color: #f2f4f6;
+  }
+  .boton-invertir-orden.activo {
+    background-color: #1e293b;
+    color: #ffffff;
+    border-color: #1e293b;
+  }
+
+  /* Selector múltiple personalizado */
+  .selector-multiple-contenedor {
+    position: relative;
+    width: 100%;
+  }
+  .selector-multiple-cabecera {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background-color: #ffffff;
+    border: 1px solid #c5c6cd;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    text-align: left;
+    font-size: 14px;
+    font-weight: 500;
+    transition: border-color 0.2s;
+  }
+  .selector-multiple-cabecera:hover {
+    border-color: #091426;
+  }
+  .selector-multiple-opciones {
+    display: none;
+    position: absolute;
+    top: 105%;
+    left: 0;
+    right: 0;
+    background-color: #ffffff;
+    border: 1px solid #c5c6cd;
+    border-radius: 0.5rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    z-index: 150;
+    max-height: 200px;
+    overflow-y: auto;
+    padding: 0.5rem;
+  }
+  .selector-multiple-opciones.activo {
+    display: block;
+  }
+  .selector-multiple-opcion {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    cursor: pointer;
+    border-radius: 0.25rem;
+    font-size: 14px;
+    transition: background-color 0.2s;
+  }
+  .selector-multiple-opcion:hover {
+    background-color: #f2f4f6;
+  }
+  .selector-multiple-opcion input {
+    cursor: pointer;
+    accent-color: #091426;
+    width: 16px;
+    height: 16px;
+  }
+
+  /* Modal de gestión de etiquetas */
+  .modal-personalizado-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(9, 20, 38, 0.4);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+  }
+  .modal-personalizado-contenido {
+    background: #ffffff;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  .modal-personalizado-cabecera {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #eceef0;
+    padding-bottom: 0.5rem;
+  }
+  .modal-personalizado-cabecera h4 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #091426;
+  }
+  .modal-personalizado-cerrar {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #505f76;
+    line-height: 1;
+  }
+  .modal-personalizado-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    max-height: 150px;
+    overflow-y: auto;
+    padding-right: 0.25rem;
+  }
+  .modal-personalizado-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 14px;
+    padding: 0.25rem 0;
+  }
+  .modal-personalizado-item input {
+    accent-color: #091426;
+    width: 16px;
+    height: 16px;
+  }
+  .modal-personalizado-nuevo {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+  .modal-input {
+    flex: 1;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #c5c6cd;
+    border-radius: 0.5rem;
+    font-size: 14px;
+    outline: none;
+  }
+  .modal-input:focus {
+    border-color: #091426;
+  }
+
+  /* Etiquetas personalizadas en tarjetas */
+  .contenedor-etiquetas-tarjeta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+  .etiqueta-personalizada {
+    background-color: #f2f4f6;
+    color: #505f76;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 0.15rem 0.5rem;
+    border-radius: 9999px;
+    border: 1px solid #c5c6cd;
+  }
+
+  /* Filtros laterales */
+  .filtros-laterales-contenedor {
+    width: 18rem;
+    background-color: #ffffff;
+    padding: 2rem;
+    border-right: 1px solid #c5c6cd;
+    position: sticky;
+    top: 4rem;
+    height: calc(100vh - 4rem);
+    overflow-y: auto;
+    flex-shrink: 0;
+  }
+  .filtros-cabecera {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+  }
+  .filtros-cabecera h3 {
+    font-size: 14px;
+    font-weight: 600;
+    color: #091426;
+  }
+  .filtros-cabecera button {
+    font-size: 14px;
+    color: #091426;
+    font-weight: 600;
+  }
+  .filtros-cabecera button:hover {
+    text-decoration: underline;
+  }
+  .filtro-seccion {
+    margin-bottom: 2rem;
+  }
+  .filtro-seccion:last-child {
+    margin-bottom: 0;
+  }
+  .filtro-seccion-label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #505f76;
+    margin-bottom: 0.75rem;
+  }
+  
+  .filtro-estrellas-grupo {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+  .filtro-estrellas-grupo span {
+    color: #fbbf24;
+    cursor: pointer;
+    transition: transform 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .filtro-estrellas-grupo span:hover {
+    transform: scale(1.2);
+  }
+  .filtro-estrellas-grupo span.vacia {
+    color: #c5c6cd;
+  }
+
+  .filtros-avanzados-movil {
+    background-color: #ffffff;
+    border-radius: 0.5rem;
+    box-shadow: 0px 4px 20px rgba(30, 41, 59, 0.05);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid #eceef0;
+    display: none;
+  }
+  .filtros-avanzados-movil.activo {
+    display: block;
+  }
+
+  .barra-filtros-rapidos-movil {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+  }
+  .barra-filtros-rapidos-movil::-webkit-scrollbar {
+    display: none;
+  }
+  .filtro-rapido-boton {
+    border-radius: 9999px;
+    white-space: nowrap;
+  }
+
+  .boton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .boton:active {
+    transform: scale(0.95);
+  }
+  .boton-primario {
+    background-color: #091426;
+    color: #ffffff;
+  }
+  .boton-primario:hover {
+    opacity: 0.9;
+  }
+  .boton-azul {
+    background-color: #2563eb;
+    color: #ffffff;
+    border: none;
+  }
+  .boton-azul:hover {
+    background-color: #1d4ed8;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
+  }
+  .boton-secundario {
+    background-color: #f2f4f6;
+    color: #45474c;
+    border: 1px solid #c5c6cd;
+  }
+  .boton-secundario:hover {
+    background-color: #e6e8ea;
+    color: #091426;
+  }
+  .boton-borde {
+    border: 1px solid #c5c6cd;
+    color: #505f76;
+    background-color: transparent;
+  }
+  .boton-borde:hover {
+    background-color: #f2f4f6;
+  }
+  .ancho-completo {
+    width: 100%;
+  }
+  
+  .selector-filtros-contenedor {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background-color: #f2f4f6;
+    border-radius: 0.5rem;
+    border: 1px solid #c5c6cd;
+    width: 100%;
+    transition: border-color 150ms, box-shadow 150ms;
+  }
+  .selector-filtros-contenedor:hover {
+    border-color: #091426;
+  }
+  .selector-filtros {
+    appearance: none;
+    -webkit-appearance: none;
+    border: none;
+    background-color: transparent;
+    padding: 0.5rem 2.5rem 0.5rem 0.75rem;
+    font-size: 14px;
+    font-weight: 500;
+    color: #191c1e;
+    cursor: pointer;
+    outline: none;
+    width: 100%;
+    border-radius: 0.5rem;
+  }
+  .selector-filtros-icono {
+    position: absolute;
+    right: 0.75rem;
+    pointer-events: none;
+    color: #505f76;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .tarjeta-valoracion {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    margin-bottom: 0.75rem;
+  }
+  .tarjeta-valoracion-puntos {
+    font-size: 12px;
+    font-weight: 700;
+    color: #45474c;
+  }
+  .tarjeta-valoracion-estrellas {
+    display: flex;
+    color: #fbbf24;
+  }
+  .tarjeta-valoracion-cantidad {
+    font-size: 12px;
+    color: #45474c;
+    margin-left: 0.25rem;
+  }
+
+  /* Componente Común: Grilla de Resultados */
+  .grilla-resultados {
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap: 24px;
+    width: 100%;
+  }
+
+  @media (min-width: 1024px) {
+    .grilla-resultados {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .grilla-resultados {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 1536px) {
+    .grilla-resultados {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  /* Componente Común: Tarjeta de Establecimiento */
+  .tarjeta-prospecto {
+    background-color: var(--color-blanco);
+    border-radius: var(--redondeado-lg);
+    box-shadow: var(--sombra-suave);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: box-shadow 150ms, transform 150ms;
+    position: relative;
+    border: 1px solid #e6e8ea;
+  }
+  .tarjeta-prospecto:hover {
+    box-shadow: var(--sombra-grande);
+    transform: translateY(-2px);
+  }
+  .tarjeta-badge-nuevo {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: var(--color-primario);
+    color: var(--color-blanco);
+    padding: 0.25rem 1rem;
+    border-bottom-left-radius: var(--redondeado-md);
+    font-size: 12px;
+    font-weight: 600;
+    z-index: 10;
+  }
+  .tarjeta-cabecera {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    margin-bottom: 1rem;
+  }
+  
+  /* Badges de Categorías semánticos */
+  .etiqueta-categoria {
+    padding: 0.25rem 0.75rem;
+    font-size: 12px;
+    font-weight: 500;
+    border-radius: var(--redondeado-completo);
+    display: inline-block;
+  }
+  .etiqueta-categoria.logistico {
+    background-color: #d0e1fb;
+    color: #091426;
+  }
+  .etiqueta-categoria.oficinas {
+    background-color: #dbeafe;
+    color: #1e40af;
+  }
+  .etiqueta-categoria.retail {
+    background-color: #d1fae5;
+    color: #065f46;
+  }
+
+  .tarjeta-contacto-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .tarjeta-contacto-item {
+    display: flex;
+    align-items: start;
+    gap: 0.5rem;
+    color: var(--color-texto-secundario);
+  }
+  .tarjeta-contacto-item span {
+    color: var(--color-texto-variante);
+  }
+  .tarjeta-contacto-item p {
+    font-size: 14px;
+    color: var(--color-texto-variante);
+    line-height: 1.25;
+  }
+  
+  .tarjeta-acciones {
+    margin-top: auto;
+    display: flex;
+    gap: 0.75rem;
+  }
+  .tarjeta-acciones button:first-child {
+    flex: 1;
+  }
 </style>
 </head>
 <body>
@@ -397,7 +933,7 @@
     <div class="flex justify-between items-center ancho-completo px-margen-movil py-2 max-w-contenedor mx-auto">
       <div class="flex items-center gap-3">
         <span class="material-symbols-outlined texto-primario">explore</span>
-        <h1 class="texto-headline-md font-bold texto-primario">Encuentralo</h1>
+        <h1 class="texto-headline-md font-bold texto-primario">Encuéntralo</h1>
       </div>
       <div class="flex items-center gap-6">
         <nav class="hidden md:flex gap-8">
@@ -420,190 +956,81 @@
         <p class="texto-body-md texto-secundario mt-2">Gestiona tus prospectos territoriales y puntos de interés estratégicos.</p>
       </div>
       <div class="flex gap-2">
-        <button class="bg-primario texto-blanco px-6 py-2 redondeado-xl flex items-center gap-2 texto-label-md hover:opacity-90 transition cursor-pointer shadow-sm">
+        <button class="bg-primario texto-blanco px-6 py-2 redondeado-xl flex items-center gap-2 texto-label-md hover:opacity-90 transition cursor-pointer shadow-sm" id="boton-filtros-movil">
           <span class="material-symbols-outlined">filter_list</span>
           Filtrar
         </button>
-        <button class="border borde-variante texto-secundario px-6 py-2 redondeado-xl flex items-center gap-2 texto-label-md hover:bg-superficie transition cursor-pointer">
+        <button class="border borde-variante texto-secundario px-6 py-2 redondeado-xl flex items-center gap-2 texto-label-md hover:bg-superficie transition cursor-pointer" onclick="exportarResultadosCSV()">
           <span class="material-symbols-outlined">download</span>
           Exportar
         </button>
       </div>
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
-      <aside class="hidden lg:block lg:col-span-3 space-y-4">
-        <div class="bg-superficie-mas-baja redondeado-xl p-4 sombra-suave">
-          <h3 class="texto-label-md texto-primario mb-4 px-2">CATEGORÍAS</h3>
-          <ul class="space-y-1">
-            <li class="flex items-center justify-between p-2 bg-secundario-contenedor texto-primario redondeado-lg texto-label-sm cursor-pointer">
-              <span class="flex items-center gap-2"><span class="material-symbols-outlined">all_inclusive</span> Todos</span>
-              <span class="bg-superficie-mas-baja px-2 py-0.5 redondeado-completo">24</span>
-            </li>
-            <li class="flex items-center justify-between p-2 hover:bg-superficie texto-secundario redondeado-lg texto-label-sm cursor-pointer transition-colors">
-              <span class="flex items-center gap-2"><span class="material-symbols-outlined">factory</span> Industrial</span>
-              <span>12</span>
-            </li>
-            <li class="flex items-center justify-between p-2 hover:bg-superficie texto-secundario redondeado-lg texto-label-sm cursor-pointer transition-colors">
-              <span class="flex items-center gap-2"><span class="material-symbols-outlined">storefront</span> Retail</span>
-              <span>8</span>
-            </li>
-            <li class="flex items-center justify-between p-2 hover:bg-superficie texto-secundario redondeado-lg texto-label-sm cursor-pointer transition-colors">
-              <span class="flex items-center gap-2"><span class="material-symbols-outlined">apartment</span> Oficinas</span>
-              <span>4</span>
-            </li>
-          </ul>
+    <!-- Contenedor de Filtros Avanzados para Móvil -->
+    <div class="filtros-avanzados-movil" id="contenedor-filtros-movil">
+      <div class="filtro-seccion">
+        <label class="filtro-seccion-label">Ordenar por</label>
+        <div class="flex alinear-centro" style="gap: 0.5rem;">
+          <div class="selector-filtros-contenedor flex-1" style="margin-bottom: 0;">
+            <select class="selector-filtros" id="selector-ordenar-por-movil" onchange="actualizarOrdenacionDesdeSelector(this.value)">
+              <option value="" disabled selected>Ordenar por...</option>
+              <option value="valoracion">Valoración</option>
+              <option value="superficie">Superficie</option>
+              <option value="alfabeticamente">Alfabéticamente</option>
+            </select>
+            <span class="material-symbols-outlined selector-filtros-icono">expand_more</span>
+          </div>
+          <button class="boton-invertir-orden" id="boton-revertir-orden-movil" onclick="revertirOrden()" title="Invertir orden">
+            <span class="material-symbols-outlined">swap_vert</span>
+          </button>
         </div>
-        <div class="bg-primario-contenedor texto-blanco redondeado-xl p-6 shadow-lg">
-          <p class="texto-headline-md texto-blanco mb-2">Análisis Pro</p>
-          <p class="texto-on-primario-contenedor texto-body-sm opacidad-80 mb-4">Desbloquea mapas de calor y reportes de tráfico para tus favoritos.</p>
-          <button class="ancho-completo bg-superficie-mas-baja texto-primario py-2 redondeado-lg texto-label-md">Actualizar Plan</button>
-        </div>
-      </aside>
-
-      <section class="lg:col-span-9 space-y-4">
-        <div class="bg-superficie-mas-baja redondeado-xl p-4 md:p-6 sombra-suave border-l-4 border-primario hover:shadow-md transition">
-          <div class="flex flex-col md:flex-row gap-6">
-            <div class="w-full md:w-48 h-32 redondeado-lg overflow-hidden flex-shrink-0">
-              <img alt="Parque Logístico" class="ancho-completo h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDa81K1b9lPI4CwKKIMoC_lf48dnE0aanb1Gvdl8CGReAy2nbHSqGE7hkiYZIs-t6SQ0XCOMPThk509KTeMv7pyicp2TtpIT6MOo_7h_4TxrPR-fRwtPh4gQa965mV-41HMKUI2dcWcWfSc-eMS1PtB2Mf4Jb_LWKu-vE4IcIJfesa7zGlQgdg3Xz76ZkkazzZv4SmfRoEu79E8FA232L4VqXAZbLMbE9cnPBAp_b-yJgrSZMAbh37ixPWXLQkPqI65OJP-XaWXuN0">
-            </div>
-            <div class="flex-grow flex flex-col justify-between">
-              <div class="flex justify-between items-start">
-                <div>
-                  <div class="flex items-center gap-2 mb-1">
-                    <span class="bg-secundario-contenedor texto-primario text-[10px] px-2 py-0.5 redondeado-completo texto-label-md uppercase tracking-wider">Industrial</span>
-                    <span class="texto-body-sm texto-secundario">ID: EXT-4492</span>
-                  </div>
-                  <h3 class="texto-headline-md texto-primario">Parque Logístico Norte - Fase II</h3>
-                  <p class="texto-body-sm texto-secundario flex items-center gap-1 mt-1">
-                    <span class="material-symbols-outlined">location_on</span>
-                    Polígono Ind. San Fernando, Madrid
-                  </p>
-                </div>
-                <div class="flex gap-2">
-                  <button class="p-2 texto-error hover:bg-error-contenedor redondeado-completo transition" title="Eliminar de favoritos">
-                    <span class="material-symbols-outlined icono-lleno">star</span>
-                  </button>
-                  <button class="p-2 texto-secundario hover:bg-superficie redondeado-completo transition">
-                    <span class="material-symbols-outlined">more_vert</span>
-                  </button>
-                </div>
-              </div>
-              <div class="mt-4 flex flex-wrap items-center gap-4 border-t border-superficie pt-4">
-                <div class="flex items-center gap-2">
-                  <span class="material-symbols-outlined texto-secundario">straighten</span>
-                  <span class="texto-label-sm">12,500 m²</span>
-                </div>
-                <div class="flex items-center gap-2 border-l border-superficie pl-4">
-                  <span class="material-symbols-outlined texto-secundario">payments</span>
-                  <span class="texto-label-sm">€4.5M - Est.</span>
-                </div>
-                <div class="flex items-center gap-2 border-l border-superficie pl-4">
-                  <span class="material-symbols-outlined texto-secundario">event</span>
-                  <span class="texto-label-sm">Agregado: 12 Oct</span>
-                </div>
-                <button class="ml-auto flex items-center gap-1 texto-primario hover:underline texto-label-sm">
-                  <span class="material-symbols-outlined">note_add</span>
-                  Añadir Nota
-                </button>
-              </div>
-            </div>
+      </div>
+      <div class="filtro-seccion">
+        <label class="filtro-seccion-label">Categoría</label>
+        <div class="selector-multiple-contenedor" id="desplegable-categorias-movil">
+          <button class="selector-multiple-cabecera" onclick="toggleSelectorMultiple('desplegable-categorias-movil', event)">
+            <span class="selector-multiple-texto-seleccionado" id="texto-categorias-movil">Todas las categorías</span>
+            <span class="material-symbols-outlined">expand_more</span>
+          </button>
+          <div class="selector-multiple-opciones" id="opciones-categorias-movil">
+            <!-- Checkboxes de categorías -->
           </div>
         </div>
-
-        <div class="bg-superficie-mas-baja redondeado-xl p-4 md:p-6 sombra-suave border-l-4 border-primario-fijo-dim hover:shadow-md transition">
-          <div class="flex flex-col md:flex-row gap-6">
-            <div class="w-full md:w-48 h-32 redondeado-lg overflow-hidden flex-shrink-0">
-              <img alt="Torre Oficinas" class="ancho-completo h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDelXplYd-nOhSuFZOXMp10I2ggwFQ3qSYnLnrfkeqO6Az9bQNrnLN6f_2sEswRtiWAtRZzcEbdRAFmEhBkWbaXekrA_hEQiQg1HpwTtzMoBL6OlQA9KvoPdXtP5LhfKbkZb8NeG8F7rWd0MaGNsUa4TVP07B-kyuTPObMwUAMSh07HIKLDgW9syK7-FifNF0-hRLxJ2AxQJ4g_yldRvdw69lbqeN8HRUm3Z5AlZ_IVmVEy0AnKLYThPG6eLnqJbUnYe6lpp9OdX_E">
-            </div>
-            <div class="flex-grow flex flex-col justify-between">
-              <div class="flex justify-between items-start">
-                <div>
-                  <div class="flex items-center gap-2 mb-1">
-                    <span class="bg-secundario-contenedor texto-primario text-[10px] px-2 py-0.5 redondeado-completo texto-label-md uppercase tracking-wider">Oficinas</span>
-                    <span class="texto-body-sm texto-secundario">ID: EXT-9921</span>
-                  </div>
-                  <h3 class="texto-headline-md texto-primario">Torre Empresarial Castellana</h3>
-                  <p class="texto-body-sm texto-secundario flex items-center gap-1 mt-1">
-                    <span class="material-symbols-outlined">location_on</span>
-                    Paseo de la Castellana, Madrid
-                  </p>
-                </div>
-                <div class="flex gap-2">
-                  <button class="p-2 texto-error hover:bg-error-contenedor redondeado-completo transition">
-                    <span class="material-symbols-outlined icono-lleno">star</span>
-                  </button>
-                  <button class="p-2 texto-secundario hover:bg-superficie redondeado-completo transition">
-                    <span class="material-symbols-outlined">more_vert</span>
-                  </button>
-                </div>
-              </div>
-              <div class="mt-4 p-3 bg-superficie-baja redondeado-lg">
-                <p class="texto-body-sm italic">"Nota: Revisar disponibilidad de parking para clientes VIP. Interés alto para expansión Q4."</p>
-              </div>
-              <div class="mt-4 flex flex-wrap items-center gap-4 border-t border-superficie pt-4">
-                <div class="flex items-center gap-2">
-                  <span class="material-symbols-outlined texto-secundario">groups</span>
-                  <span class="texto-label-sm">Cap. 450</span>
-                </div>
-                <div class="flex items-center gap-2 border-l border-superficie pl-4">
-                  <span class="material-symbols-outlined texto-secundario">trending_up</span>
-                  <span class="texto-label-sm">Plusvalía +12%</span>
-                </div>
-                <button class="ml-auto flex items-center gap-1 texto-primario hover:underline texto-label-sm">
-                  <span class="material-symbols-outlined">edit</span>
-                  Editar Nota
-                </button>
-              </div>
-            </div>
+      </div>
+      <div class="filtro-seccion">
+        <label class="filtro-seccion-label">Etiquetas Personalizadas</label>
+        <div class="selector-multiple-contenedor" id="desplegable-etiquetas-movil">
+          <button class="selector-multiple-cabecera" onclick="toggleSelectorMultiple('desplegable-etiquetas-movil', event)">
+            <span class="selector-multiple-texto-seleccionado" id="texto-etiquetas-movil">Seleccionar etiquetas...</span>
+            <span class="material-symbols-outlined">expand_more</span>
+          </button>
+          <div class="selector-multiple-opciones" id="opciones-etiquetas-movil">
+            <!-- Checkboxes de etiquetas -->
           </div>
         </div>
-
-        <div class="bg-superficie-mas-baja redondeado-xl p-4 md:p-6 sombra-suave border-l-4 border-terciario hover:shadow-md transition">
-          <div class="flex flex-col md:flex-row gap-6">
-            <div class="w-full md:w-48 h-32 redondeado-lg overflow-hidden flex-shrink-0">
-              <img alt="Local Retail" class="ancho-completo h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCuNCf0bRxQc3MeKnrlI0_6ORpQSqZqzU7s9OuFwae2IkFwZg1SI1-uh0MjyNIiR7G04DLCt2d3dqlt86DQamsCaPg2dUbmcc1BlDGVrDsKy1E_cvoQCuBU53HxeHlSucOD9RmZ5GFi5wK57Y6gTIvm_vZLNvvMS9kqf9q8T6JmTOXfkw6Jy9YVxNkjB8-qMIzFL8gWCy13Rib6PeGRtwM_nL-sSMDK8Putxe3iEDlmW5hm7C43JbvH65NBIcrmDJHfn6KYJrJrZ4c">
-            </div>
-            <div class="flex-grow flex flex-col justify-between">
-              <div class="flex justify-between items-start">
-                <div>
-                  <div class="flex items-center gap-2 mb-1">
-                    <span class="bg-secundario-contenedor texto-primario text-[10px] px-2 py-0.5 redondeado-completo texto-label-md uppercase tracking-wider">Retail</span>
-                    <span class="texto-body-sm texto-secundario">ID: EXT-2105</span>
-                  </div>
-                  <h3 class="texto-headline-md texto-primario">Local Premium Barrio Salamanca</h3>
-                  <p class="texto-body-sm texto-secundario flex items-center gap-1 mt-1">
-                    <span class="material-symbols-outlined">location_on</span>
-                    Calle Serrano, Madrid
-                  </p>
-                </div>
-                <div class="flex gap-2">
-                  <button class="p-2 texto-error hover:bg-error-contenedor redondeado-completo transition">
-                    <span class="material-symbols-outlined icono-lleno">star</span>
-                  </button>
-                  <button class="p-2 texto-secundario hover:bg-superficie redondeado-completo transition">
-                    <span class="material-symbols-outlined">more_vert</span>
-                  </button>
-                </div>
-              </div>
-              <div class="mt-4 flex flex-wrap items-center gap-4 border-t border-superficie pt-4">
-                <div class="flex items-center gap-2">
-                  <span class="material-symbols-outlined texto-secundario">footprint</span>
-                  <span class="texto-label-sm">Tráfico: Muy Alto</span>
-                </div>
-                <div class="flex items-center gap-2 border-l border-superficie pl-4">
-                  <span class="material-symbols-outlined texto-secundario">shopping_bag</span>
-                  <span class="texto-label-sm">Escaparate: 15m</span>
-                </div>
-                <button class="ml-auto flex items-center gap-1 texto-primario hover:underline texto-label-sm">
-                  <span class="material-symbols-outlined">note_add</span>
-                  Añadir Nota
-                </button>
-              </div>
-            </div>
-          </div>
+      </div>
+      <div class="filtro-seccion">
+        <label class="filtro-seccion-label">Valoración Mínima</label>
+        <div class="filtro-estrellas-grupo" id="grupo-estrellas-movil">
+          <span class="material-symbols-outlined vacia">star</span>
+          <span class="material-symbols-outlined vacia">star</span>
+          <span class="material-symbols-outlined vacia">star</span>
+          <span class="material-symbols-outlined vacia">star</span>
+          <span class="material-symbols-outlined vacia">star</span>
         </div>
-      </section>
+      </div>
+      <div class="filtro-seccion" style="margin-bottom: 0;">
+        <button class="boton boton-primario ancho-completo" onclick="cerrarFiltrosMovil()">
+          <span class="material-symbols-outlined">filter_alt</span>
+          Aplicar filtros
+        </button>
+      </div>
+    </div>
+
+    <!-- Contenedor dinámico de tarjetas móviles -->
+    <div class="grilla-resultados" id="grilla-resultados-movil">
+      <!-- Se carga dinámicamente -->
     </div>
   </main>
 
@@ -630,7 +1057,7 @@
 <div class="vista-escritorio">
   <aside class="barra-lateral">
     <div class="mb-10 px-4">
-      <h1 class="texto-headline-md font-extrabold texto-primario">Encuentralo</h1>
+      <h1 class="texto-headline-md font-extrabold texto-primario">Encuéntralo</h1>
       <p class="texto-label-md texto-secundario">Business Edition</p>
     </div>
     <nav class="flex-1 space-y-2">
@@ -646,24 +1073,13 @@
         <span class="material-symbols-outlined icono-lleno">star</span>
         Favoritos
       </a>
-      <a class="flex items-center gap-3 px-4 py-3 redondeado-lg texto-secundario hover:bg-superficie-variante transition texto-label-md" href="#">
-        <span class="material-symbols-outlined">ios_share</span>
-        Exportación
-      </a>
-      <a class="flex items-center gap-3 px-4 py-3 redondeado-lg texto-secundario hover:bg-superficie-variante transition texto-label-md" href="#">
-        <span class="material-symbols-outlined">settings</span>
-        Administración
-      </a>
     </nav>
     <div class="mt-auto space-y-4 px-4 pt-6 border-t borde-variante">
-      <button class="ancho-completo flex items-center justify-center gap-2 bg-primario texto-blanco py-3 px-4 redondeado-lg texto-label-md hover:opacity-90 transition">
-        <span class="material-symbols-outlined">add</span>
-        Nueva Prospección
-      </button>
+      
       <div class="space-y-1">
         <a class="flex items-center gap-3 py-2 texto-secundario texto-label-md hover:texto-primario" href="#">
-          <span class="material-symbols-outlined">help</span>
-          Ayuda
+          <span class="material-symbols-outlined">lock</span>
+          Cambiar contraseña
         </a>
         <a class="flex items-center gap-3 py-2 texto-secundario texto-label-md hover:texto-error" href="#">
           <span class="material-symbols-outlined">logout</span>
@@ -679,196 +1095,750 @@
         <span class="texto-headline-md font-bold texto-primario">Favoritos</span>
       </div>
       <div class="flex items-center gap-6">
-        <button class="relative p-2 redondeado-completo hover:bg-superficie-alta transition-colors">
-          <span class="material-symbols-outlined texto-primario">notifications</span>
-          <span class="absolute top-2 right-2 w-2 h-2 bg-error redondeado-completo"></span>
-        </button>
         <div class="flex items-center gap-3">
-          <div class="text-right">
-            <p class="texto-label-md">Admin User</p>
-            <p class="texto-body-sm texto-secundario">Premium Account</p>
-          </div>
-          <img alt="Perfil" class="w-10 h-10 redondeado-completo object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCizqC5w5WzRd7_wNdEukDrzVFbLVrHJHIiQ-qeZZRCqL6RGaJhDBl69ouALr5U4qHKZWMb6IFQWiik-xY3tsAbTI_0Eel-uYWaBzx6g09fcVFMIp15K4b4sc4YPNvbxqW0HqbAKc6GdhrQ9kmCiaoUNgxdVN_lLIeN6cLa4z6oB08Fnp5lPkLFldVrBxHlgARie9dH_GMBGNACh66vbHdC6_Y39joZeVxA8cm7lPQloRjacqbgEkx7lvuIV9VQEvB9UCxv7V0Gipkk">
+          <p class="texto-label-md flex items-center gap-2">Admin User <span class="material-symbols-outlined" style="font-size: 20px;">account_circle</span></p>
         </div>
       </div>
     </header>
 
-    <section class="px-margen-escritorio py-8 max-w-1440">
-      <div class="flex flex-col md:flex-row md:items-center justify-between mb-10 gap-4">
-        <div>
-          <h2 class="texto-headline-lg texto-primario mb-1">Lugares Guardados</h2>
-          <p class="texto-body-md texto-secundario">Gestiona y analiza tus prospectos inmobiliarios prioritarios.</p>
+    <div class="flex" style="width: 100%;">
+      <!-- Barra Lateral de Filtros -->
+      <aside class="filtros-laterales-contenedor" id="filtros-laterales-escritorio">
+        <div class="filtros-cabecera">
+          <h3>FILTROS AVANZADOS</h3>
+          <button class="cursor-pointer" onclick="limpiarFiltros()" style="font-size: 14px; color: #091426; font-weight: 600;">Limpiar</button>
         </div>
-        <div class="flex items-center gap-3">
-          <div class="flex items-center bg-superficie-mas-baja redondeado-lg border borde-variante px-3 py-2 shadow-sm">
-            <span class="material-symbols-outlined texto-secundario mr-2">filter_list</span>
-            <select class="bg-transparent border-none focus:ring-0 texto-label-md appearance-none pr-8">
-              <option>Todos los sectores</option>
-              <option>Logístico</option>
-              <option>Oficinas</option>
-              <option>Retail</option>
-            </select>
+        
+        <div class="filtro-seccion">
+          <label class="filtro-seccion-label">Categoría</label>
+          <div class="selector-multiple-contenedor" id="desplegable-categorias-escritorio">
+            <button class="selector-multiple-cabecera" onclick="toggleSelectorMultiple('desplegable-categorias-escritorio', event)">
+              <span class="selector-multiple-texto-seleccionado" id="texto-categorias-escritorio">Todas las categorías</span>
+              <span class="material-symbols-outlined">expand_more</span>
+            </button>
+            <div class="selector-multiple-opciones" id="opciones-categorias-escritorio">
+              <!-- Checkboxes de categorías -->
+            </div>
           </div>
-          <button class="flex items-center gap-2 px-4 py-2 redondeado-lg border borde-variante texto-secundario texto-label-md hover:bg-superficie-alta transition-colors">
-            <span class="material-symbols-outlined">download</span>
-            Exportar CSV
+        </div>
+        
+        <div class="filtro-seccion">
+          <label class="filtro-seccion-label">Etiquetas Personalizadas</label>
+          <div class="selector-multiple-contenedor" id="desplegable-etiquetas-escritorio">
+            <button class="selector-multiple-cabecera" onclick="toggleSelectorMultiple('desplegable-etiquetas-escritorio', event)">
+              <span class="selector-multiple-texto-seleccionado" id="texto-etiquetas-escritorio">Seleccionar etiquetas...</span>
+              <span class="material-symbols-outlined">expand_more</span>
+            </button>
+            <div class="selector-multiple-opciones" id="opciones-etiquetas-escritorio">
+              <!-- Checkboxes de etiquetas -->
+            </div>
+          </div>
+        </div>
+        
+        <div class="filtro-seccion">
+          <label class="filtro-seccion-label">Valoración Mínima</label>
+          <div class="filtro-estrellas-grupo" id="grupo-estrellas-escritorio">
+            <span class="material-symbols-outlined vacia">star</span>
+            <span class="material-symbols-outlined vacia">star</span>
+            <span class="material-symbols-outlined vacia">star</span>
+            <span class="material-symbols-outlined vacia">star</span>
+            <span class="material-symbols-outlined vacia">star</span>
+          </div>
+        </div>
+        
+        <div class="filtro-seccion" style="margin-bottom: 0;">
+          <button class="boton boton-primario ancho-completo" onclick="filtrarYRenderizar()">
+            <span class="material-symbols-outlined">filter_alt</span>
+            Aplicar filtros
           </button>
         </div>
-      </div>
+      </aside>
 
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
-        <article class="lg:col-span-8 bg-superficie-mas-baja redondeado-xl overflow-hidden tarjeta-sombra group transition hover:translate-y-[-4px]">
-          <div class="flex flex-col md:flex-row h-full">
-            <div class="md:w-1/2 relative h-64 md:h-auto">
-              <img alt="Parque Logístico Norte" class="ancho-completo h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBUDjaQ7BphQpOFkly7aEWBRL0QJ7J0-UXvjEuPB8HmkG_SZtQdyx16q0JJ9_VQRlOR4P4WA3JWEmpOi1KWg7P7lrrbD5ODMRUqe53idtNdazSzB0tGLmYjzX-z9VWJ1U1Jyf-p4bjdYb7H50br9SRHMpnn4LTHr1r-HQI5HEZx7s-IW1aso8Tkb21rDVvsvNYI0r27Yew0DZcNniNf6gJPZHn0Ovkn7OdTMld1812I6nYEKnXj514l89Wtca2IdTFPwF7P0ou9sYEc">
-              <div class="absolute top-4 left-4 fondo-oscuro-80 filtro-desenfoque texto-blanco px-3 py-1 redondeado-completo texto-label-sm">ID: LOG-2024-08</div>
-            </div>
-            <div class="md:w-1/2 p-6 flex flex-col justify-between">
-              <div>
-                <div class="flex justify-between items-start mb-2">
-                  <span class="inline-block px-3 py-1 redondeado-completo bg-secundario-contenedor texto-primario texto-label-sm">Logístico</span>
-                  <span class="material-symbols-outlined texto-primario cursor-pointer icono-lleno">star</span>
-                </div>
-                <h3 class="texto-headline-md texto-primario mb-2">Parque Logístico Norte</h3>
-                <div class="flex items-center gap-2 texto-secundario texto-body-sm mb-4">
-                  <span class="material-symbols-outlined">location_on</span>
-                  San Sebastián de los Reyes, Madrid
-                </div>
-                <div class="grid grid-cols-2 gap-4 mb-6">
-                  <div>
-                    <p class="texto-secundario texto-label-sm uppercase tracking-wider mb-1">Superficie</p>
-                    <p class="texto-primario texto-headline-md">12,500 m²</p>
-                  </div>
-                  <div>
-                    <p class="texto-secundario texto-label-sm uppercase tracking-wider mb-1">Valor Est.</p>
-                    <p class="texto-primario texto-headline-md">€14.2M</p>
-                  </div>
-                </div>
-                <div class="bg-superficie-baja p-3 redondeado-lg border-l-4 border-primario">
-                  <p class="texto-body-sm italic texto-secundario">"Ubicación estratégica con acceso directo a la A-1. Alta demanda para última milla."</p>
-                </div>
+      <!-- Sección de Resultados -->
+      <section class="px-margen-escritorio py-8 max-w-1440 flex-grow" style="width: calc(100% - 18rem);">
+        <div class="flex flex-col md:flex-row md:items-center justify-between mb-10 gap-4">
+          <div>
+            <h2 class="texto-headline-lg texto-primario mb-1">Lugares Guardados</h2>
+            <p class="texto-body-md texto-secundario">Gestiona y analiza tus prospectos inmobiliarios prioritarios.</p>
+          </div>
+          <div class="flex items-center gap-3">
+            <div class="contenedor-ordenar-cabecera">
+              <div class="selector-filtros-contenedor" style="width: 180px; margin-bottom: 0;">
+                <select class="selector-filtros" id="selector-ordenar-por-escritorio" onchange="actualizarOrdenacionDesdeSelector(this.value)">
+                  <option value="" disabled selected>Ordenar por...</option>
+                  <option value="valoracion">Valoración</option>
+                  <option value="superficie">Superficie</option>
+                  <option value="alfabeticamente">Alfabéticamente</option>
+                </select>
+                <span class="material-symbols-outlined selector-filtros-icono">expand_more</span>
               </div>
-              <div class="mt-6 flex gap-2">
-                <button class="flex-1 bg-primario texto-blanco py-2 redondeado-lg texto-label-md hover:opacity-90 transition">Ver Detalles</button>
-                <button class="p-2 redondeado-lg border borde-variante hover:bg-superficie-alta transition-colors">
-                  <span class="material-symbols-outlined">share</span>
-                </button>
-              </div>
+              <button class="boton-invertir-orden" id="boton-revertir-orden-escritorio" onclick="revertirOrden()" title="Invertir orden">
+                <span class="material-symbols-outlined">swap_vert</span>
+              </button>
+              <button class="boton boton-azul" onclick="exportarResultadosCSV()" style="height: 38px; white-space: nowrap; flex-shrink: 0; padding: 0 1.25rem;">
+                <span class="material-symbols-outlined">download</span>
+                Exportar resultados
+              </button>
             </div>
           </div>
-        </article>
+        </div>
 
-        <article class="lg:col-span-4 bg-superficie-mas-baja redondeado-xl overflow-hidden tarjeta-sombra group transition hover:translate-y-[-4px]">
-          <div class="h-48 relative">
-            <img alt="Torre Empresarial Castellana" class="ancho-completo h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDunflm_wIn8gBS-gLOtuM-glKO3C-pPmE3TdEGX8x5OCwnNQxAtA2kciAFOP2Rp61KSifEaH-07YNvVLPgR7kG-8AvQUXx6QuLWLG3vCaMZpd9J5DBCJGBqXfQsb8e0g47jiMZTwQWZdmGtTExzXyt_KWsPM_-56Reb4SFKxlCFRvhCWx4VwpyvCeksrubx_XT-B5gOGfdfoPK1YE9xlVXF9mWbWyin75MIJzPOW3Fsv9l13H7gcWnVK0CPozZ-l90gS3jqy9NXuqa">
-            <div class="absolute top-4 left-4 fondo-oscuro-80 filtro-desenfoque texto-blanco px-3 py-1 redondeado-completo texto-label-sm">ID: OFI-9921</div>
-          </div>
-          <div class="p-6">
-            <div class="flex justify-between items-start mb-4">
-              <span class="inline-block px-3 py-1 redondeado-completo bg-azul-claro texto-blue-800 texto-label-sm">Oficinas</span>
-              <span class="material-symbols-outlined texto-primario icono-lleno">star</span>
-            </div>
-            <h3 class="texto-headline-md texto-primario mb-1">Torre Empresarial Castellana</h3>
-            <div class="flex items-center gap-1 texto-secundario texto-body-sm mb-4">
-              <span class="material-symbols-outlined">location_on</span>
-              Paseo de la Castellana, Madrid
-            </div>
-            <div class="space-y-2 mb-6">
-              <div class="flex justify-between texto-body-sm">
-                <span class="texto-secundario">Capacidad:</span>
-                <span class="texto-primario font-semibold">850 personas</span>
-              </div>
-              <div class="flex justify-between texto-body-sm">
-                <span class="texto-secundario">Renta Anual:</span>
-                <span class="texto-primario font-semibold">€480,000</span>
-              </div>
-            </div>
-            <button class="ancho-completo border border-primario texto-primario py-2 redondeado-lg texto-label-md hover:bg-primario hover:texto-blanco transition">Ver Prospecto</button>
-          </div>
-        </article>
-
-        <article class="lg:col-span-4 bg-superficie-mas-baja redondeado-xl overflow-hidden tarjeta-sombra group transition hover:translate-y-[-4px]">
-          <div class="h-48 relative">
-            <img alt="Local Premium Barrio Salamanca" class="ancho-completo h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBx5JUs5QT_20C9iqVTqGsoO4pnoqYCNMuwOEPts67HIJkYUEiJzXMTEgsP5leOupZGoV6Y2oy65TSX8NoTjZ_W1GGKF0NZNbESl379zAmJv-mRDBT9Z90iOS43XmXkLQJ8FPMWIyyUBnVxHo5sfBD9O833MEkNkc-UVI5DDoZjN6Y7OwnWC64FNnXo_70wwqeIeAK9LavccKjw3BAwU8ktvlPcfdp4r3HCx_sus5IJDhdzep-BMNESTveq46LLvoaZyS3dMNGUB0Z3">
-            <div class="absolute top-4 left-4 fondo-oscuro-80 filtro-desenfoque texto-blanco px-3 py-1 redondeado-completo texto-label-sm">ID: RET-5540</div>
-          </div>
-          <div class="p-6">
-            <div class="flex justify-between items-start mb-4">
-              <span class="inline-block px-3 py-1 redondeado-completo bg-esmeralda-claro texto-emerald-800 texto-label-sm">Retail</span>
-              <span class="material-symbols-outlined texto-primario icono-lleno">star</span>
-            </div>
-            <h3 class="texto-headline-md texto-primario mb-1">Local Premium Barrio Salamanca</h3>
-            <div class="flex items-center gap-1 texto-secundario texto-body-sm mb-4">
-              <span class="material-symbols-outlined">location_on</span>
-              Calle Serrano, Madrid
-            </div>
-            <div class="space-y-2 mb-6">
-              <div class="flex justify-between texto-body-sm">
-                <span class="texto-secundario">Área:</span>
-                <span class="texto-primario font-semibold">215 m²</span>
-              </div>
-              <div class="flex justify-between texto-body-sm">
-                <span class="texto-secundario">Valoración:</span>
-                <span class="texto-primario font-semibold">€3.5M</span>
-              </div>
-            </div>
-            <button class="ancho-completo border border-primario texto-primario py-2 redondeado-lg texto-label-md hover:bg-primario hover:texto-blanco transition">Ver Prospecto</button>
-          </div>
-        </article>
-
-        <aside class="lg:col-span-8 bg-superficie p-6 redondeado-xl border borde-variante">
-          <h4 class="texto-headline-md texto-primario mb-6">Resumen de Cartera Favorita</h4>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div class="bg-superficie-mas-baja p-4 redondeado-lg shadow-sm">
-              <p class="texto-secundario texto-label-sm uppercase mb-1">Total Prospectos</p>
-              <p class="texto-primario font-bold text-4xl">12</p>
-              <div class="mt-2 texto-emerald-600 flex items-center texto-body-sm">
-                <span class="material-symbols-outlined mr-1">trending_up</span>
-                +3 este mes
-              </div>
-            </div>
-            <div class="bg-superficie-mas-baja p-4 redondeado-lg shadow-sm">
-              <p class="texto-secundario texto-label-sm uppercase mb-1">Valoración Total</p>
-              <p class="texto-primario font-bold text-4xl">€28.4M</p>
-              <p class="mt-2 texto-secundario texto-body-sm">Basado en m² promedio</p>
-            </div>
-            <div class="bg-superficie-mas-baja p-4 redondeado-lg shadow-sm">
-              <p class="texto-secundario texto-label-sm uppercase mb-1">Eficiencia de Área</p>
-              <p class="texto-primario font-bold text-4xl">94%</p>
-              <div class="mt-2 texto-variante flex items-center texto-body-sm">
-                <span class="material-symbols-outlined mr-1">check_circle</span>
-                Datos actualizados
-              </div>
-            </div>
-          </div>
-          <div class="mt-8 overflow-x-auto">
-            <table class="ancho-completo text-left">
-              <thead>
-                <tr class="border-b borde-variante">
-                  <th class="pb-3 texto-label-md texto-secundario uppercase tracking-wider">Última Nota de Análisis</th>
-                  <th class="pb-3 texto-label-md texto-secundario uppercase tracking-wider">Fecha</th>
-                  <th class="pb-3 texto-label-md texto-secundario uppercase tracking-wider">Status</th>
-                </tr>
-              </thead>
-              <tbody class="divide-y borde-variante">
-                <tr class="hover:bg-superficie-alta transition-colors">
-                  <td class="py-4 texto-body-md">Revisión de normativa urbanística completada para el sector norte.</td>
-                  <td class="py-4 texto-body-sm texto-secundario">12 Oct, 2023</td>
-                  <td class="py-4"><span class="px-2 py-1 bg-azul-claro texto-blue-800 redondeado texto-label-sm">En Revisión</span></td>
-                </tr>
-                <tr class="hover:bg-superficie-alta transition-colors">
-                  <td class="py-4 texto-body-md">Validación de accesibilidad transporte público para oficinas.</td>
-                  <td class="py-4 texto-body-sm texto-secundario">08 Oct, 2023</td>
-                  <td class="py-4"><span class="px-2 py-1 bg-esmeralda-claro texto-emerald-800 redondeado texto-label-sm">Verificado</span></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </aside>
-      </div>
-    </section>
+        <div class="grilla-resultados" id="grilla-resultados-escritorio">
+          <!-- Se carga dinámicamente -->
+        </div>
+      </section>
+    </div>
   </main>
 </div>
+
+<!-- Modal flotante de gestión de etiquetas -->
+<div class="modal-personalizado-overlay" id="modal-gestion-etiquetas" style="display: none;">
+  <div class="modal-personalizado-contenido">
+    <div class="modal-personalizado-cabecera">
+      <h4 id="modal-titulo">Gestionar Etiquetas</h4>
+      <button class="modal-personalizado-cerrar" onclick="cerrarModalEtiquetas()">&times;</button>
+    </div>
+    <p class="texto-cuerpo-pequeno texto-secundario margen-abajo-sm" style="font-weight: 600;">
+      Prospecto: <span id="nombre-prospecto-modal" style="color: #091426;"></span>
+    </p>
+    
+    <div class="modal-personalizado-lista" id="lista-etiquetas-modal">
+      <!-- Se carga dinámicamente -->
+    </div>
+    
+    <div class="modal-personalizado-nuevo">
+      <input type="text" class="modal-input" id="input-nueva-etiqueta" placeholder="Nueva etiqueta..." maxlength="20">
+      <button class="boton boton-primario" onclick="crearNuevaEtiqueta()" style="padding: 0.5rem 1rem;">Crear</button>
+    </div>
+    
+    <div class="flex justificar-fin margen-arriba-md" style="gap: 0.5rem; justify-content: flex-end; margin-top: 1.5rem;">
+      <button class="boton boton-secundario" onclick="cerrarModalEtiquetas()">Cancelar</button>
+      <button class="boton boton-primario" onclick="guardarEtiquetas()">Guardar</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Dataset de prospectos favoritos unificado
+  const prospectosDataset = [
+    {
+      id: 1,
+      identificador: "LOG-2024-08",
+      nombre: "Parque Logístico Norte",
+      categoria: "Logístico",
+      class: "logistico",
+      valoracion: 4.9,
+      reseñas: 142,
+      direccion: "San Sebastián de los Reyes, Madrid",
+      distancia: 18.5,
+      telefono: "+34 918 765 432",
+      superficie: 12500,
+      valorEst: 14200000,
+      agregado: "12 Oct",
+      cita: "Ubicación estratégica con acceso directo a la A-1. Alta demanda para última milla.",
+      imagen: "https://lh3.googleusercontent.com/aida-public/AB6AXuBUDjaQ7BphQpOFkly7aEWBRL0QJ7J0-UXvjEuPB8HmkG_SZtQdyx16q0JJ9_VQRlOR4P4WA3JWEmpOi1KWg7P7lrrbD5ODMRUqe53idtNdazSzB0tGLmYjzX-z9VWJ1U1Jyf-p4bjdYb7H50br9SRHMpnn4LTHr1r-HQI5HEZx7s-IW1aso8Tkb21rDVvsvNYI0r27Yew0DZcNniNf6gJPZHn0Ovkn7OdTMld1812I6nYEKnXj514l89Wtca2IdTFPwF7P0ou9sYEc",
+      tags: [],
+      metrica1Label: "Superficie",
+      metrica1Valor: "12,500 m²",
+      metrica2Label: "Valor Est.",
+      metrica2Valor: "€14.2M"
+    },
+    {
+      id: 2,
+      identificador: "OFI-9921",
+      nombre: "Torre Empresarial Castellana",
+      categoria: "Oficinas",
+      class: "oficinas",
+      valoracion: 4.7,
+      reseñas: 98,
+      direccion: "Paseo de la Castellana, Madrid",
+      distancia: 1.2,
+      telefono: "+34 915 554 433",
+      superficie: 2400,
+      valorEst: 8500000,
+      imagen: "https://lh3.googleusercontent.com/aida-public/AB6AXuDunflm_wIn8gBS-gLOtuM-glKO3C-pPmE3TdEGX8x5OCwnNQxAtA2kciAFOP2Rp61KSifEaH-07YNvVLPgR7kG-8AvQUXx6QuLWLG3vCaMZpd9J5DBCJGBqXfQsb8e0g47jiMZTwQWZdmGtTExzXyt_KWsPM_-56Reb4SFKxlCFRvhCWx4VwpyvCeksrubx_XT-B5gOGfdfoPK1YE9xlVXF9mWbWyin75MIJzPOW3Fsv9l13H7gcWnVK0CPozZ-l90gS3jqy9NXuqa",
+      tags: [],
+      metrica1Label: "Capacidad",
+      metrica1Valor: "850 personas",
+      metrica2Label: "Renta Anual",
+      metrica2Valor: "€480,000"
+    },
+    {
+      id: 3,
+      identificador: "RET-5540",
+      nombre: "Local Premium Barrio Salamanca",
+      categoria: "Retail",
+      class: "retail",
+      valoracion: 4.5,
+      reseñas: 64,
+      direccion: "Calle Serrano, Madrid",
+      distancia: 0.5,
+      telefono: "+34 913 221 100",
+      superficie: 215,
+      valorEst: 3500000,
+      imagen: "https://lh3.googleusercontent.com/aida-public/AB6AXuBx5JUs5QT_20C9iqVTqGsoO4pnoqYCNMuwOEPts67HIJkYUEiJzXMTEgsP5leOupZGoV6Y2oy65TSX8NoTjZ_W1GGKF0NZNbESl379zAmJv-mRDBT9Z90iOS43XmXkLQJ8FPMWIyyUBnVxHo5sfBD9O833MEkNkc-UVI5DDoZjN6Y7OwnWC64FNnXo_70wwqeIeAK9LavccKjw3BAwU8ktvlPcfdp4r3HCx_sus5IJDhdzep-BMNESTveq46LLvoaZyS3dMNGUB0Z3",
+      tags: [],
+      metrica1Label: "Área",
+      metrica1Valor: "215 m²",
+      metrica2Label: "Valoración",
+      metrica2Valor: "€3.5M"
+    }
+  ];
+
+  // Estado de la aplicación
+  let valoracionMinima = 0;
+  let criterioOrdenacion = "";
+  let ordenInvertido = false;
+  let prospectoActualId = null;
+  const todasEtiquetas = new Set();
+  let prospectosActivos = [];
+
+  const categoriasLista = [
+    { valor: 'logistico', nombre: 'Logístico' },
+    { valor: 'oficinas', nombre: 'Oficinas' },
+    { valor: 'retail', nombre: 'Retail' }
+  ];
+
+  // 1. Inicializar selectores de categorías al montar
+  function inicializarCategoriasDesplegable() {
+    const contenedores = [
+      document.getElementById('opciones-categorias-escritorio'),
+      document.getElementById('opciones-categorias-movil')
+    ];
+    
+    contenedores.forEach((opciones, i) => {
+      if (!opciones) return;
+      opciones.innerHTML = '';
+      const vista = i === 0 ? 'escritorio' : 'movil';
+      
+      categoriasLista.forEach(cat => {
+        const opcionDiv = document.createElement('div');
+        opcionDiv.className = 'selector-multiple-opcion';
+        opcionDiv.innerHTML = `
+          <label class="flex items-center cursor-pointer" style="gap: 0.5rem; width: 100%;">
+            <input type="checkbox" value="${cat.valor}" onchange="actualizarFiltrosCategoria(event, '${vista}')">
+            <span>${cat.nombre}</span>
+          </label>
+        `;
+        opciones.appendChild(opcionDiv);
+      });
+    });
+  }
+
+  // Sincronizar y aplicar filtros de categorías
+  function actualizarFiltrosCategoria(event, origen) {
+    const checkboxClickado = event.target;
+    const valor = checkboxClickado.value;
+    const estaChequeado = checkboxClickado.checked;
+    
+    const destinoSelector = origen === 'movil' ? '#opciones-categorias-escritorio input' : '#opciones-categorias-movil input';
+    const checkboxDestino = document.querySelector(`${destinoSelector}[value="${valor}"]`);
+    if (checkboxDestino) {
+      checkboxDestino.checked = estaChequeado;
+    }
+    
+    const seleccionados = Array.from(document.querySelectorAll('#opciones-categorias-escritorio input:checked')).map(cb => cb.value);
+    
+    const textoCategoriasEscritorio = document.getElementById('texto-categorias-escritorio');
+    const textoCategoriasMovil = document.getElementById('texto-categorias-movil');
+    
+    let texto = 'Todas las categorías';
+    if (seleccionados.length === 1) {
+      const checkboxEscogido = document.querySelector(`#opciones-categorias-escritorio input[value="${seleccionados[0]}"]`);
+      if (checkboxEscogido) {
+        texto = checkboxEscogido.nextElementSibling.textContent;
+      }
+    } else if (seleccionados.length > 1) {
+      texto = `${seleccionados.length} seleccionadas`;
+    }
+    
+    if (textoCategoriasEscritorio) textoCategoriasEscritorio.textContent = texto;
+    if (textoCategoriasMovil) textoCategoriasMovil.textContent = texto;
+    
+    filtrarYRenderizar();
+  }
+
+  // 2. Gestionar la visualización y sincronización de etiquetas en filtros
+  function actualizarDesplegablesEtiquetas() {
+    const contenedores = [
+      { opciones: document.getElementById('opciones-etiquetas-escritorio'), vista: 'escritorio' },
+      { opciones: document.getElementById('opciones-etiquetas-movil'), vista: 'movil' }
+    ];
+    
+    const seleccionadosAnteriormente = Array.from(document.querySelectorAll('#opciones-etiquetas-escritorio input:checked')).map(cb => cb.value);
+    
+    contenedores.forEach(({ opciones, vista }) => {
+      if (!opciones) return;
+      opciones.innerHTML = '';
+      
+      if (todasEtiquetas.size === 0) {
+        opciones.innerHTML = '<p class="texto-body-sm texto-secundario italic" style="padding: 0.5rem;">Crea etiquetas desde una tarjeta...</p>';
+      } else {
+        todasEtiquetas.forEach(tag => {
+          const estaChequeado = seleccionadosAnteriormente.includes(tag);
+          const opcionDiv = document.createElement('div');
+          opcionDiv.className = 'selector-multiple-opcion';
+          opcionDiv.innerHTML = `
+            <label class="flex items-center cursor-pointer" style="gap: 0.5rem; width: 100%;">
+              <input type="checkbox" value="${tag}" ${estaChequeado ? 'checked' : ''} onchange="actualizarFiltrosEtiquetas(event, '${vista}')">
+              <span>${tag}</span>
+            </label>
+          `;
+          opciones.appendChild(opcionDiv);
+        });
+      }
+    });
+    
+    actualizarTextoFiltrosEtiquetas();
+  }
+
+  function actualizarFiltrosEtiquetas(event, origen) {
+    const checkboxClickado = event.target;
+    const valor = checkboxClickado.value;
+    const estaChequeado = checkboxClickado.checked;
+    
+    const destinoSelector = origen === 'movil' ? '#opciones-etiquetas-escritorio input' : '#opciones-etiquetas-movil input';
+    const checkboxDestino = document.querySelector(`${destinoSelector}[value="${valor}"]`);
+    if (checkboxDestino) {
+      checkboxDestino.checked = estaChequeado;
+    }
+    
+    actualizarTextoFiltrosEtiquetas();
+    filtrarYRenderizar();
+  }
+
+  function actualizarTextoFiltrosEtiquetas() {
+    const seleccionados = Array.from(document.querySelectorAll('#opciones-etiquetas-escritorio input:checked')).map(cb => cb.value);
+    
+    const textoEtiquetasEscritorio = document.getElementById('texto-etiquetas-escritorio');
+    const textoEtiquetasMovil = document.getElementById('texto-etiquetas-movil');
+    
+    let texto = 'Seleccionar etiquetas...';
+    if (seleccionados.length === 1) {
+      texto = seleccionados[0];
+    } else if (seleccionados.length > 1) {
+      texto = `${seleccionados.length} seleccionadas`;
+    }
+    
+    if (textoEtiquetasEscritorio) textoEtiquetasEscritorio.textContent = texto;
+    if (textoEtiquetasMovil) textoEtiquetasMovil.textContent = texto;
+  }
+
+  // 3. Inicializar interactividad y filtrado de estrellas
+  function inicializarEstrellas() {
+    const grupos = [
+      { container: document.querySelectorAll('#grupo-estrellas-escritorio span'), vista: 'escritorio' },
+      { container: document.querySelectorAll('#grupo-estrellas-movil span'), vista: 'movil' }
+    ];
+    
+    grupos.forEach(({ container, vista }) => {
+      container.forEach((estrella, indice) => {
+        estrella.style.cursor = 'pointer';
+        estrella.onclick = () => {
+          const nuevaValoracion = indice + 1;
+          if (valoracionMinima === nuevaValoracion) {
+            valoracionMinima = 0;
+          } else {
+            valoracionMinima = nuevaValoracion;
+          }
+          
+          actualizarVistasEstrellas();
+          filtrarYRenderizar();
+        };
+      });
+    });
+  }
+
+  function actualizarVistasEstrellas() {
+    const grupos = [
+      document.querySelectorAll('#grupo-estrellas-escritorio span'),
+      document.querySelectorAll('#grupo-estrellas-movil span')
+    ];
+    
+    grupos.forEach(container => {
+      container.forEach((estrella, indice) => {
+        if (indice < valoracionMinima) {
+          estrella.classList.remove('vacia');
+          estrella.classList.add('icono-lleno');
+        } else {
+          estrella.classList.add('vacia');
+          estrella.classList.remove('icono-lleno');
+        }
+      });
+    });
+  }
+
+  // 4. Lógica de Ordenación
+  function actualizarOrdenacionDesdeSelector(valor) {
+    criterioOrdenacion = valor;
+    const selectorEscritorio = document.getElementById('selector-ordenar-por-escritorio');
+    const selectorMovil = document.getElementById('selector-ordenar-por-movil');
+    if (selectorEscritorio) selectorEscritorio.value = valor;
+    if (selectorMovil) selectorMovil.value = valor;
+    filtrarYRenderizar();
+  }
+
+  function revertirOrden() {
+    ordenInvertido = !ordenInvertido;
+    
+    const botonEscritorio = document.getElementById('boton-revertir-orden-escritorio');
+    const botonMovil = document.getElementById('boton-revertir-orden-movil');
+    
+    if (botonEscritorio) {
+      if (ordenInvertido) botonEscritorio.classList.add('activo');
+      else botonEscritorio.classList.remove('activo');
+    }
+    if (botonMovil) {
+      if (ordenInvertido) botonMovil.classList.add('activo');
+      else botonMovil.classList.remove('activo');
+    }
+    
+    filtrarYRenderizar();
+  }
+
+  // 5. Lógica de modal de etiquetas
+  function abrirModalEtiquetas(idProspeccion) {
+    prospectoActualId = idProspeccion;
+    const prospecto = prospectosDataset.find(p => p.id === idProspeccion);
+    if (!prospecto) return;
+    
+    const nombreProspectoModal = document.getElementById('nombre-prospecto-modal');
+    if (nombreProspectoModal) nombreProspectoModal.textContent = prospecto.nombre;
+    
+    const listaEtiquetasModal = document.getElementById('lista-etiquetas-modal');
+    if (listaEtiquetasModal) {
+      listaEtiquetasModal.innerHTML = '';
+      
+      if (todasEtiquetas.size === 0) {
+        listaEtiquetasModal.innerHTML = '<p class="texto-body-sm texto-secundario italic" style="padding: 0.5rem 0;">No hay etiquetas creadas. Crea una abajo.</p>';
+      } else {
+        todasEtiquetas.forEach(tag => {
+          const tieneTag = prospecto.tags.includes(tag);
+          const itemDiv = document.createElement('div');
+          itemDiv.className = 'modal-personalizado-item';
+          itemDiv.innerHTML = `
+            <label class="flex items-center cursor-pointer" style="gap: 0.5rem; width: 100%;">
+              <input type="checkbox" value="${tag}" ${tieneTag ? 'checked' : ''}>
+              <span>${tag}</span>
+            </label>
+          `;
+          listaEtiquetasModal.appendChild(itemDiv);
+        });
+      }
+    }
+    
+    const modal = document.getElementById('modal-gestion-etiquetas');
+    if (modal) modal.style.display = 'flex';
+  }
+
+  function cerrarModalEtiquetas() {
+    const modal = document.getElementById('modal-gestion-etiquetas');
+    if (modal) modal.style.display = 'none';
+    const inputNueva = document.getElementById('input-nueva-etiqueta');
+    if (inputNueva) inputNueva.value = '';
+    prospectoActualId = null;
+  }
+
+  function crearNuevaEtiqueta() {
+    const inputNueva = document.getElementById('input-nueva-etiqueta');
+    if (!inputNueva) return;
+    const tagLimpio = inputNueva.value.trim();
+    if (!tagLimpio) return;
+    
+    todasEtiquetas.add(tagLimpio);
+    
+    const prospecto = prospectosDataset.find(p => p.id === prospectoActualId);
+    if (prospecto && !prospecto.tags.includes(tagLimpio)) {
+      prospecto.tags.push(tagLimpio);
+    }
+    
+    inputNueva.value = '';
+    
+    actualizarDesplegablesEtiquetas();
+    abrirModalEtiquetas(prospectoActualId);
+  }
+
+  function guardarEtiquetas() {
+    const prospecto = prospectosDataset.find(p => p.id === prospectoActualId);
+    if (!prospecto) return;
+    
+    const checkboxes = document.querySelectorAll('#lista-etiquetas-modal input[type="checkbox"]');
+    const nuevasEtiquetasProspecto = [];
+    checkboxes.forEach(cb => {
+      if (cb.checked) {
+        nuevasEtiquetasProspecto.push(cb.value);
+      }
+    });
+    
+    prospecto.tags = nuevasEtiquetasProspecto;
+    
+    cerrarModalEtiquetas();
+    actualizarDesplegablesEtiquetas();
+    filtrarYRenderizar();
+  }
+
+  // 6. Visualización de estrellas
+  function renderizarEstrellasValoracion(puntos) {
+    let html = '';
+    const enteros = Math.floor(puntos);
+    const tieneMedio = (puntos - enteros) >= 0.3 && (puntos - enteros) <= 0.7;
+    const tieneCasiEntero = (puntos - enteros) > 0.7;
+    
+    for (let i = 1; i <= 5; i++) {
+      if (i <= enteros || (i === enteros + 1 && tieneCasiEntero)) {
+        html += '<span class="material-symbols-outlined icono-lleno">star</span>';
+      } else if (i === enteros + 1 && tieneMedio) {
+        html += '<span class="material-symbols-outlined icono-lleno">star_half</span>';
+      } else {
+        html += '<span class="material-symbols-outlined">star</span>';
+      }
+    }
+    return html;
+  }
+
+  function obtenerColorCategoria(categoriaClass) {
+    if (categoriaClass === 'logistico') return '#091426';
+    if (categoriaClass === 'oficinas') return '#2563eb';
+    if (categoriaClass === 'retail') return '#059669';
+    return '#505f76';
+  }
+
+  function obtenerClaseBadge(categoriaClass) {
+    if (categoriaClass === 'logistico') return 'bg-secundario-contenedor texto-primario';
+    if (categoriaClass === 'oficinas') return 'bg-azul-claro texto-blue-800';
+    if (categoriaClass === 'retail') return 'bg-esmeralda-claro texto-emerald-800';
+    return 'bg-superficie-alta texto-secundario';
+  }
+
+  // 7. Filtrar y Renderizar
+  function filtrarYRenderizar() {
+    const categoriasFiltro = Array.from(document.querySelectorAll('#opciones-categorias-escritorio input:checked')).map(cb => cb.value);
+    const etiquetasFiltro = Array.from(document.querySelectorAll('#opciones-etiquetas-escritorio input:checked')).map(cb => cb.value);
+    
+    let prospectosFiltrados = prospectosDataset.filter(prospecto => {
+      if (categoriasFiltro.length > 0 && !categoriasFiltro.includes(prospecto.class)) {
+        return false;
+      }
+      
+      if (etiquetasFiltro.length > 0) {
+        const tieneEtiqueta = prospecto.tags.some(tag => etiquetasFiltro.includes(tag));
+        if (!tieneEtiqueta) return false;
+      }
+      
+      if (prospecto.valoracion < valoracionMinima) {
+        return false;
+      }
+      
+      return true;
+    });
+    
+    if (criterioOrdenacion) {
+      prospectosFiltrados.sort((a, b) => {
+        let comparacion = 0;
+        
+        if (criterioOrdenacion === 'valoracion') {
+          comparacion = b.valoracion - a.valoracion;
+        } else if (criterioOrdenacion === 'superficie') {
+          comparacion = b.superficie - a.superficie;
+        } else if (criterioOrdenacion === 'alfabeticamente') {
+          comparacion = a.nombre.localeCompare(b.nombre);
+        }
+        
+        return ordenInvertido ? -comparacion : comparacion;
+      });
+    }
+    
+    prospectosActivos = prospectosFiltrados;
+    renderizarProspectos(prospectosFiltrados);
+  }
+
+  function renderizarProspectos(prospectos) {
+    const grillaEscritorio = document.getElementById('grilla-resultados-escritorio');
+    const grillaMovil = document.getElementById('grilla-resultados-movil');
+    
+    let html = '';
+    
+    if (prospectos.length === 0) {
+      html = `
+        <div style="grid-column: 1 / -1; text-align: center; padding: 3rem; background: var(--color-blanco); border-radius: var(--redondeado-lg); border: 1px dashed var(--color-borde-variante); width: 100%;">
+          <span class="material-symbols-outlined" style="font-size: 48px; color: var(--color-texto-secundario);">search_off</span>
+          <p class="texto-cuerpo-medio margen-arriba-sm" style="font-weight: 600; color: var(--color-primario);">No se encontraron prospectos</p>
+          <p class="texto-cuerpo-pequeno texto-secundario margen-arriba-xs">Intenta cambiar los criterios de búsqueda o limpiar los filtros.</p>
+        </div>
+      `;
+    } else {
+      prospectos.forEach(prospecto => {
+        let tagsHtml = '';
+        if (prospecto.tags && prospecto.tags.length > 0) {
+          tagsHtml = `
+            <div class="contenedor-etiquetas-tarjeta">
+              ${prospecto.tags.map(t => `<span class="etiqueta-personalizada">${t}</span>`).join('')}
+            </div>
+          `;
+        }
+        
+        html += `
+          <article class="tarjeta-prospecto">
+            <div>
+              <div class="tarjeta-cabecera">
+                <span class="etiqueta-categoria ${prospecto.class}">${prospecto.categoria}</span>
+              </div>
+              <h3 class="titulo-tarjeta margen-abajo-sm">${prospecto.nombre}</h3>
+              <div class="tarjeta-valoracion">
+                <span class="tarjeta-valoracion-puntos">${prospecto.valoracion.toFixed(1)}</span>
+                <span class="tarjeta-valoracion-cantidad">(${prospecto.reseñas} reseñas)</span>
+              </div>
+              
+              ${tagsHtml}
+
+              <div class="tarjeta-contacto-lista">
+                <div class="tarjeta-contacto-item">
+                  <span class="material-symbols-outlined">location_on</span>
+                  <p>${prospecto.direccion}</p>
+                </div>
+                <div class="tarjeta-contacto-item">
+                  <span class="material-symbols-outlined">distance</span>
+                  <p>${prospecto.distancia} km</p>
+                </div>
+                <div class="tarjeta-contacto-item">
+                  <span class="material-symbols-outlined">call</span>
+                  <p>${prospecto.telefono}</p>
+                </div>
+              </div>
+            </div>
+            <div class="tarjeta-acciones">
+              <button class="boton boton-primario">Ver Detalles</button>
+              <button class="boton boton-borde" onclick="abrirModalEtiquetas(${prospecto.id})" title="Gestionar etiquetas">
+                <span class="material-symbols-outlined">bookmark_add</span>
+              </button>
+            </div>
+          </article>
+        `;
+      });
+    }
+    
+    if (grillaEscritorio) grillaEscritorio.innerHTML = html;
+    if (grillaMovil) grillaMovil.innerHTML = html;
+  }
+
+  // 8. Limpiar filtros
+  function limpiarFiltros() {
+    document.querySelectorAll('#opciones-categorias-escritorio input, #opciones-categorias-movil input').forEach(cb => cb.checked = false);
+    const textoCategoriasEscritorio = document.getElementById('texto-categorias-escritorio');
+    const textoCategoriasMovil = document.getElementById('texto-categorias-movil');
+    if (textoCategoriasEscritorio) textoCategoriasEscritorio.textContent = 'Todas las categorías';
+    if (textoCategoriasMovil) textoCategoriasMovil.textContent = 'Todas las categorías';
+
+    document.querySelectorAll('#opciones-etiquetas-escritorio input, #opciones-etiquetas-movil input').forEach(cb => cb.checked = false);
+    const textoEtiquetasEscritorio = document.getElementById('texto-etiquetas-escritorio');
+    const textoEtiquetasMovil = document.getElementById('texto-etiquetas-movil');
+    if (textoEtiquetasEscritorio) textoEtiquetasEscritorio.textContent = 'Seleccionar etiquetas...';
+    if (textoEtiquetasMovil) textoEtiquetasMovil.textContent = 'Seleccionar etiquetas...';
+
+    valoracionMinima = 0;
+    actualizarVistasEstrellas();
+
+    criterioOrdenacion = '';
+    ordenInvertido = false;
+    const selectorEscritorio = document.getElementById('selector-ordenar-por-escritorio');
+    const selectorMovil = document.getElementById('selector-ordenar-por-movil');
+    if (selectorEscritorio) selectorEscritorio.value = '';
+    if (selectorMovil) selectorMovil.value = '';
+
+    const botonEscritorio = document.getElementById('boton-revertir-orden-escritorio');
+    const botonMovil = document.getElementById('boton-revertir-orden-movil');
+    if (botonEscritorio) botonEscritorio.classList.remove('activo');
+    if (botonMovil) botonMovil.classList.remove('activo');
+
+    filtrarYRenderizar();
+  }
+
+  function cerrarFiltrosMovil() {
+    const contenedorFiltrosMovil = document.getElementById('contenedor-filtros-movil');
+    if (contenedorFiltrosMovil) {
+      contenedorFiltrosMovil.classList.remove('activo');
+    }
+  }
+
+  // 9. Exportar a CSV con delimitador ; y UTF-8 BOM
+  function exportarResultadosCSV() {
+    if (!prospectosActivos || prospectosActivos.length === 0) {
+      alert("No hay prospectos activos para exportar.");
+      return;
+    }
+    
+    const cabecera = ["Nombre", "ID", "Categoría", "Dirección", "Superficie", "Valor Est.", "Valoración", "Reseñas", "Etiquetas"];
+    const filas = prospectosActivos.map(prospecto => [
+      `"${prospecto.nombre.replace(/"/g, '""')}"`,
+      `"${prospecto.identificador.replace(/"/g, '""')}"`,
+      `"${prospecto.categoria.replace(/"/g, '""')}"`,
+      `"${prospecto.direccion.replace(/"/g, '""')}"`,
+      prospecto.superficie,
+      prospecto.valorEst,
+      prospecto.valoracion,
+      prospecto.reseñas,
+      `"${(prospecto.tags || []).join('; ').replace(/"/g, '""')}"`
+    ]);
+    
+    const contenidoCSV = "\uFEFF" + [cabecera.join(";"), ...filas.map(f => f.join(";"))].join("\n");
+    
+    const blob = new Blob([contenidoCSV], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const enlace = document.createElement("a");
+    enlace.setAttribute("href", url);
+    enlace.setAttribute("download", `favoritos_prospectos_${new Date().toISOString().slice(0, 10)}.csv`);
+    enlace.style.visibility = "hidden";
+    document.body.appendChild(enlace);
+    enlace.click();
+    document.body.removeChild(enlace);
+  }
+
+  // 10. Despliegue de selectores múltiples
+  function toggleSelectorMultiple(contenedorId, event) {
+    event.stopPropagation();
+    
+    const contenedor = document.getElementById(contenedorId);
+    if (!contenedor) return;
+    
+    const opciones = contenedor.querySelector('.selector-multiple-opciones');
+    if (!opciones) return;
+    
+    document.querySelectorAll('.selector-multiple-opciones').forEach(opc => {
+      if (opc !== opciones) {
+        opc.classList.remove('activo');
+      }
+    });
+    
+    opciones.classList.toggle('activo');
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    inicializarCategoriasDesplegable();
+    actualizarDesplegablesEtiquetas();
+    inicializarEstrellas();
+    
+    const botonFiltrosMovil = document.getElementById('boton-filtros-movil');
+    const contenedorFiltrosMovil = document.getElementById('contenedor-filtros-movil');
+
+    if (botonFiltrosMovil && contenedorFiltrosMovil) {
+      botonFiltrosMovil.addEventListener('click', () => {
+        contenedorFiltrosMovil.classList.toggle('activo');
+      });
+    }
+    
+    // Cierre al hacer clic fuera
+    document.addEventListener('click', (evento) => {
+      if (!evento.target.closest('.selector-multiple-contenedor')) {
+        document.querySelectorAll('.selector-multiple-opciones').forEach(opciones => {
+          opciones.classList.remove('activo');
+        });
+      }
+    });
+    
+    // Renderizado inicial
+    filtrarYRenderizar();
+  });
+</script>
 
 </body>
 </html>
