@@ -1,8 +1,10 @@
 package app.senia.encuentralo.controller;
 
+import app.senia.encuentralo.model.Categoria;
 import app.senia.encuentralo.model.Resultado;
 import app.senia.encuentralo.model.Busqueda;
 import app.senia.encuentralo.model.SolicitudBusqueda;
+import app.senia.encuentralo.service.ResultadosService;
 import app.senia.encuentralo.service.YelpService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,9 +22,11 @@ import java.util.List;
 public class BusquedaController {
 
     private final YelpService ys;
+    private final ResultadosService rs;
 
-    public BusquedaController(YelpService ys) {
+    public BusquedaController(YelpService ys, ResultadosService rs) {
         this.ys = ys;
+        this.rs = rs;
     }
 
     // Página temporal index.html que contiene un objeto vacío de SolicitudBusqueda para
@@ -35,20 +39,30 @@ public class BusquedaController {
 
     // ENDPOINT DE ACCIÓN: Ejecuta la nueva búsqueda y redirige
     @PostMapping("/buscar/nueva")
-    public String makeSearch(@ModelAttribute("busqueda") SolicitudBusqueda busqueda, RedirectAttributes redirectAttributes) {
+    public String makeSearch(@ModelAttribute("busqueda") SolicitudBusqueda input, RedirectAttributes redirectAttributes) {
 
         // Ejecutamos la llamada a la API externa
         List<Resultado> resultados = ys.llamarApi(
-                busqueda.getTemino(),
-                busqueda.getLatitud(),
-                busqueda.getLongitud(),
-                busqueda.getRadio(),
-                busqueda.getLimite()
+                input.getTemino(),
+                input.getLatitud(),
+                input.getLongitud(),
+                input.getRadio(),
+                input.getLimite()
         ).getResultados();
+
+        // Falseado para probar thymeleaf
+        Busqueda busqueda = new Busqueda("Pizza", LocalDateTime.now(), 0, ys.llamarApiMock().getCiudad());
 
         // Inyectamos la lista completa como un Flash Attribute
         // Vivirá en la sesión solo durante la redirección
         redirectAttributes.addFlashAttribute("resultados", resultados);
+        redirectAttributes.addFlashAttribute("busqueda", busqueda);
+
+        System.out.println("Categorías: ");
+        for (Resultado r : resultados) {
+            for (Categoria c : r.getCategorias())
+                System.out.println(c.getNombre());
+        }
 
         return "redirect:/resultados";
 

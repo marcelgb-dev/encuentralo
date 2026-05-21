@@ -9,6 +9,8 @@ import java.util.List;
 public record BusinessDTO(
         String name,
         double rating,
+        @JsonProperty("review_count")
+        int reviewCount,
         String url,
         @JsonProperty("display_phone")
         String displayPhone,

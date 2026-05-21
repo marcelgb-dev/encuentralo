@@ -74,17 +74,19 @@ public class YelpService implements ProviderService {
         for (BusinessDTO dto : listaDtos) {
             String nombre = dto.name();
             double valoracion = dto.rating();
+            int numValoraciones = dto.reviewCount();
             String url = dto.url();
             String telefono = dto.displayPhone();
             double longitud = dto.coordinates().longitude();
             double latitud = dto.coordinates().latitude();
-            double distancia = dto.distance();
+            int distancia = (int)dto.distance();
             String direccion = String.join(", ", dto.location().displayAddress());
             String ciudad = dto.location().city();
             List<Categoria> categorias = Categoria.toCategorias(dto.getCategoryTitles());
 
-            Resultado resultado = new Resultado(nombre, telefono, distancia, direccion, valoracion, url, false, 0, 0);
+            Resultado resultado = new Resultado(nombre, telefono, distancia, direccion, valoracion, numValoraciones, url, false, 0, 0);
             resultado.setCiudad(ciudad);
+            resultado.setCategorias(categorias);
             listaResultados.add(resultado);
         }
 
@@ -93,7 +95,7 @@ public class YelpService implements ProviderService {
     }
 
     // Método de pruebas que devuelve el objeto Busqueda correspondiente a los datos en resources/json/yelp_example.json
-    private Busqueda llamarApiMock() {
+    public Busqueda llamarApiMock() {
 
         System.out.println("WARNING: LLAMADA FALSA A LA API CON YelpService.llamarApiMock()");
 

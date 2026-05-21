@@ -9,9 +9,10 @@ public class Resultado {
     private Integer id;
     private String nombre;
     private String telefono;
-    private double distancia; // Distancia en metros al origen de la búsqueda
+    private int distancia; // Distancia en metros al origen de la búsqueda
     private String direccion;
     private double valoracion;
+    private int numValoraciones;
     private String url;
     private boolean esFavorito;
     private Integer idUsuario;
@@ -21,12 +22,13 @@ public class Resultado {
     private String ciudad;
 
     // Constructor
-    public Resultado(String nombre, String telefono, double distancia, String direccion, double valoracion, String url, boolean esFavorito, Integer idUsuario, Integer idBusqueda) {
+    public Resultado(String nombre, String telefono, int distancia, String direccion, double valoracion, int numValoraciones, String url, boolean esFavorito, Integer idUsuario, Integer idBusqueda) {
         this.nombre = nombre;
         this.telefono = telefono;
         this.distancia = distancia;
         this.direccion = direccion;
         this.valoracion = valoracion;
+        this.numValoraciones = numValoraciones;
         this.url = url;
         this.esFavorito = esFavorito;
         this.idUsuario = idUsuario;
@@ -80,11 +82,11 @@ public class Resultado {
         this.telefono = telefono;
     }
 
-    public double getDistancia() {
+    public int getDistancia() {
         return distancia;
     }
 
-    public void setDistancia(double distancia) {
+    public void setDistancia(int distancia) {
         this.distancia = distancia;
     }
 
@@ -153,5 +155,12 @@ public class Resultado {
         this.ciudad = ciudad;
     }
 
+    public int getNumValoraciones() {
+        return numValoraciones;
+    }
+
+    public void setNumValoraciones(int numValoraciones) {
+        this.numValoraciones = numValoraciones;
+    }
 
 }
