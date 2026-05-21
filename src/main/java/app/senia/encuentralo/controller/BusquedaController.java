@@ -41,28 +41,22 @@ public class BusquedaController {
     @PostMapping("/buscar/nueva")
     public String makeSearch(@ModelAttribute("busqueda") SolicitudBusqueda input, RedirectAttributes redirectAttributes) {
 
-        // Ejecutamos la llamada a la API externa
-        List<Resultado> resultados = ys.llamarApi(
+        // Ejecutamos la llamada a la API externa, que nos devuelve la búsqueda (NO TIENE ID)
+        Busqueda busqueda = ys.llamarApi(
                 input.getTemino(),
                 input.getLatitud(),
                 input.getLongitud(),
                 input.getRadio(),
                 input.getLimite()
-        ).getResultados();
+        );
 
-        // Falseado para probar thymeleaf
-        Busqueda busqueda = new Busqueda("Pizza", LocalDateTime.now(), 0, ys.llamarApiMock().getCiudad());
+        // Obtenemos la lista de resultados de la búsqueda
+        List<Resultado> resultados = busqueda.getResultados();
 
         // Inyectamos la lista completa como un Flash Attribute
         // Vivirá en la sesión solo durante la redirección
         redirectAttributes.addFlashAttribute("resultados", resultados);
         redirectAttributes.addFlashAttribute("busqueda", busqueda);
-
-        System.out.println("Categorías: ");
-        for (Resultado r : resultados) {
-            for (Categoria c : r.getCategorias())
-                System.out.println(c.getNombre());
-        }
 
         return "redirect:/resultados";
 
