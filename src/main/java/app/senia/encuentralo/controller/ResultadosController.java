@@ -1,14 +1,9 @@
 package app.senia.encuentralo.controller;
 
-import app.senia.encuentralo.model.Resultado;
-import app.senia.encuentralo.model.SolicitudBusqueda;
-import app.senia.encuentralo.service.ResultadosService;
 import app.senia.encuentralo.service.YelpService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 // Controlador que gestiona el mostrar los resultados
 @Controller

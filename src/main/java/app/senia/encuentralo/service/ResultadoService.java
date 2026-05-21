@@ -1,7 +1,7 @@
 package app.senia.encuentralo.service;
 
 import app.senia.encuentralo.model.Categoria;
-import app.senia.encuentralo.repository.ResultadosRepository;
+import app.senia.encuentralo.repository.ResultadoRepository;
 import org.springframework.stereotype.Service;
 import app.senia.encuentralo.model.Resultado;
 
@@ -11,13 +11,13 @@ import java.util.Comparator;
 import java.util.List;
 
 @Service
-public class ResultadosService {
+public class ResultadoService {
 
     // Atributos / dependencias
-    private final ResultadosRepository resultadosRepo;
+    private final ResultadoRepository resultadosRepo;
 
     // Constructor
-    public ResultadosService(ResultadosRepository resultadosRepo) {
+    public ResultadoService(ResultadoRepository resultadosRepo) {
         this.resultadosRepo = resultadosRepo;
     }
 

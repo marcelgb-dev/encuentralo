@@ -1,6 +1,5 @@
 package app.senia.encuentralo.service;
 
-import app.senia.encuentralo.service.ResultadosService;
 import app.senia.encuentralo.dto.yelp.BusinessDTO;
 import app.senia.encuentralo.dto.yelp.YelpResponse;
 import app.senia.encuentralo.model.Busqueda;
@@ -12,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 import tools.jackson.databind.ObjectMapper;
 
-import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -25,13 +23,13 @@ public class YelpService implements ProviderService {
     private String yelpLocale;
     private final RestClient restClient;
     private final ObjectMapper objectMapper;
-    private final ResultadosService resultadosService;
+    private final ResultadoService resultadoService;
 
     // Constructor
-    public YelpService(RestClient yelpRestClient, ObjectMapper objectMapper, ResultadosService resultadosService) {
+    public YelpService(RestClient yelpRestClient, ObjectMapper objectMapper, ResultadoService resultadoService) {
         this.restClient = yelpRestClient;
         this.objectMapper = objectMapper;
-        this.resultadosService = resultadosService;
+        this.resultadoService = resultadoService;
     }
 
     public Busqueda llamarApi(String termino, double latitud, double longitud, int radio, int limite) {
@@ -121,7 +119,7 @@ public class YelpService implements ProviderService {
 
             // TO DO - Añadir lógica para guardar la Búsqueda y los Resultados
             // busqueda = busquedaService.guardarBusqueda()
-            resultadosService.guardarResultados(busqueda.getId(), busqueda.getIdUsuario(), resultados);
+            resultadoService.guardarResultados(busqueda.getId(), busqueda.getIdUsuario(), resultados);
 
             // Devolvemos la Busqueda + la lista de resultados contenida dentro
             return busqueda;
@@ -132,7 +130,7 @@ public class YelpService implements ProviderService {
 
     // Ordena los resultados de busqueda por distancia
     private String obtenerCiudad(Busqueda busqueda) {
-        return resultadosService.ordenarPorDistancia(busqueda.getResultados(), false).getFirst().getCiudad();
+        return resultadoService.ordenarPorDistancia(busqueda.getResultados(), false).getFirst().getCiudad();
     }
 
 }

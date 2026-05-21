@@ -18,7 +18,9 @@ public class Resultado {
     private Integer idUsuario;
     private Integer idBusqueda;
 
+    // Atributos de Java
     private List<Categoria> categorias;
+    private List<Etiqueta> etiquetas;
     private String ciudad;
 
     // Constructor
@@ -34,10 +36,6 @@ public class Resultado {
         this.idUsuario = idUsuario;
         this.idBusqueda = idBusqueda;
     }
-
-
-    // Constructor
-
 
     @Override
     public String toString() {
@@ -163,4 +161,11 @@ public class Resultado {
         this.numValoraciones = numValoraciones;
     }
 
+    public List<Etiqueta> getEtiquetas() {
+        return etiquetas;
+    }
+
+    public void setEtiquetas(List<Etiqueta> etiquetas) {
+        this.etiquetas = etiquetas;
+    }
 }

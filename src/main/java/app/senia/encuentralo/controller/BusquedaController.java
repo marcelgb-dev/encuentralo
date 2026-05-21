@@ -1,20 +1,17 @@
 package app.senia.encuentralo.controller;
 
-import app.senia.encuentralo.model.Categoria;
 import app.senia.encuentralo.model.Resultado;
 import app.senia.encuentralo.model.Busqueda;
 import app.senia.encuentralo.model.SolicitudBusqueda;
-import app.senia.encuentralo.service.ResultadosService;
+import app.senia.encuentralo.service.ResultadoService;
 import app.senia.encuentralo.service.YelpService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 // Controlador que gestiona la página de búsqueda
@@ -22,9 +19,9 @@ import java.util.List;
 public class BusquedaController {
 
     private final YelpService ys;
-    private final ResultadosService rs;
+    private final ResultadoService rs;
 
-    public BusquedaController(YelpService ys, ResultadosService rs) {
+    public BusquedaController(YelpService ys, ResultadoService rs) {
         this.ys = ys;
         this.rs = rs;
     }
