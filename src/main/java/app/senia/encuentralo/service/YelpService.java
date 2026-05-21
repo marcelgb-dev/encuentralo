@@ -116,7 +116,7 @@ public class YelpService implements ProviderService {
             List<Resultado> resultados = parsearDtos(response);
 
             // 1. Creamos un objeto Busqueda, añadiendo también los metadatos
-            Busqueda busqueda = new Busqueda( "TEST", LocalDateTime.now(), 0);
+            Busqueda busqueda = new Busqueda( "Pizzeria", LocalDateTime.now(), 0);
             // 2. Añadimos la lista de resultados a la búsqueda
             busqueda.setResultados(resultados);
             // 3. Usamos obtenerCiudad para obtener la ciudad del resultado más cercano

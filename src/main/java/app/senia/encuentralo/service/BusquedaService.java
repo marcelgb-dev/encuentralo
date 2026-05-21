@@ -1,13 +1,22 @@
 package app.senia.encuentralo.service;
 
 import app.senia.encuentralo.model.Busqueda;
+import org.springframework.stereotype.Service;
 
+import java.util.List;
+
+@Service
 public class BusquedaService {
 
     // Conexión con el repositorio
 
     public Busqueda obtenerBusqueda(Integer busquedaId) {
         // Lógica para obtener una búsqueda por su id
+        return null;
+    }
+
+    public List<Busqueda> obtenerHistorial() {
+        // Lógica para obtener el historial de búsquedas
         return null;
     }
 
