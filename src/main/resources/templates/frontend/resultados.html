@@ -1212,7 +1212,7 @@
             </select>
             <span class="material-symbols-outlined selector-filtros-icono">expand_more</span>
           </div>
-          <button class="boton-invertir-orden" id="boton-revertir-orden-movil" onclick="revertirOrden()" title="Invertir orden">
+          <button class="boton-invertir-orden" id="boton-revertir-orden-movil" title="Invertir orden">
             <span class="material-symbols-outlined">swap_vert</span>
           </button>
         </div>
@@ -1220,19 +1220,24 @@
       <div class="filtro-seccion">
         <label class="filtro-seccion-label">Categoría</label>
         <div class="selector-multiple-contenedor" id="desplegable-categorias-movil">
-          <button class="selector-multiple-cabecera" onclick="toggleSelectorMultiple('desplegable-categorias-movil', event)">
+          <button class="selector-multiple-cabecera">
             <span class="selector-multiple-texto-seleccionado" id="texto-categorias-movil">Todas las categorías</span>
             <span class="material-symbols-outlined">expand_more</span>
           </button>
           <div class="selector-multiple-opciones" id="opciones-categorias-movil">
-            <!-- Checkboxes de categorías -->
+            <div class="selector-multiple-opcion"><label class="flex items-center" style="gap:0.5rem;width:100%"><input type="checkbox" value="tecnologia"><span>Tecnología</span></label></div>
+            <div class="selector-multiple-opcion"><label class="flex items-center" style="gap:0.5rem;width:100%"><input type="checkbox" value="logistica"><span>Logística</span></label></div>
+            <div class="selector-multiple-opcion"><label class="flex items-center" style="gap:0.5rem;width:100%"><input type="checkbox" value="finanzas"><span>Finanzas</span></label></div>
+            <div class="selector-multiple-opcion"><label class="flex items-center" style="gap:0.5rem;width:100%"><input type="checkbox" value="saas"><span>SaaS</span></label></div>
+            <div class="selector-multiple-opcion"><label class="flex items-center" style="gap:0.5rem;width:100%"><input type="checkbox" value="retail"><span>Retail</span></label></div>
+            <div class="selector-multiple-opcion"><label class="flex items-center" style="gap:0.5rem;width:100%"><input type="checkbox" value="energia"><span>Energía</span></label></div>
           </div>
         </div>
       </div>
       <div class="filtro-seccion">
         <label class="filtro-seccion-label">Favoritos</label>
         <label class="contenedor-interruptor-favorito">
-          <input type="checkbox" id="filtro-favorito-movil" onchange="filtrarYRenderizar()">
+          <input type="checkbox" id="filtro-favorito-movil">
           <span class="deslizador-interruptor"></span>
           <span class="texto-label-md select-none">Solo mostrar favoritos</span>
         </label>
@@ -1240,12 +1245,12 @@
       <div class="filtro-seccion">
         <label class="filtro-seccion-label">Etiquetas Personalizadas</label>
         <div class="selector-multiple-contenedor" id="desplegable-etiquetas-movil">
-          <button class="selector-multiple-cabecera" onclick="toggleSelectorMultiple('desplegable-etiquetas-movil', event)">
+          <button class="selector-multiple-cabecera">
             <span class="selector-multiple-texto-seleccionado" id="texto-etiquetas-movil">Seleccionar etiquetas...</span>
             <span class="material-symbols-outlined">expand_more</span>
           </button>
           <div class="selector-multiple-opciones" id="opciones-etiquetas-movil">
-            <!-- Checkboxes de etiquetas -->
+            <p class="texto-body-sm texto-secundario italic" style="padding: 0.5rem;">Crea etiquetas desde una tarjeta...</p>
           </div>
         </div>
       </div>
@@ -1260,13 +1265,13 @@
         </div>
       </div>
       <div class="filtro-seccion" style="margin-bottom: 0.75rem;">
-        <button class="boton boton-primario ancho-completo" onclick="cerrarFiltrosMovil()">
+        <button class="boton boton-primario ancho-completo">
           <span class="material-symbols-outlined">filter_alt</span>
           Aplicar filtros
         </button>
       </div>
       <div class="filtro-seccion" style="margin-bottom: 0;">
-        <button class="boton boton-azul ancho-completo" onclick="exportarResultadosCSV()">
+        <button class="boton boton-azul ancho-completo">
           <span class="material-symbols-outlined">download</span>
           Exportar resultados
         </button>
@@ -1274,7 +1279,48 @@
     </div>
 
     <div class="grilla-resultados" id="grilla-resultados-movil">
-      <!-- Se carga dinámicamente -->
+      <article class="tarjeta-prospecto">
+        <div><div class="tarjeta-cabecera"><span class="etiqueta-categoria tecnologia">Tecnología</span><button class="boton-estrella" title="Favorito"><span class="material-symbols-outlined">star</span></button></div>
+          <h3 class="titulo-tarjeta margen-abajo-sm">TechNode Solutions</h3>
+          <div class="tarjeta-valoracion"><span class="tarjeta-valoracion-puntos">4.8</span><div class="tarjeta-valoracion-estrellas"><span class="material-symbols-outlined icono-lleno">star</span><span class="material-symbols-outlined icono-lleno">star</span><span class="material-symbols-outlined icono-lleno">star</span><span class="material-symbols-outlined icono-lleno">star</span><span class="material-symbols-outlined icono-lleno">star_half</span></div><span class="tarjeta-valoracion-cantidad">(124 reseñas)</span></div>
+          <div class="tarjeta-contacto-lista"><div class="tarjeta-contacto-item"><span class="material-symbols-outlined">location_on</span><p>Paseo de la Castellana, 256, 28046 Madrid</p></div><div class="tarjeta-contacto-item"><span class="material-symbols-outlined">distance</span><p>0.8 km</p></div><div class="tarjeta-contacto-item"><span class="material-symbols-outlined">call</span><p>+34 915 678 901</p></div></div>
+        </div><div class="tarjeta-acciones"><button class="boton boton-primario">Ver Detalles</button></div>
+      </article>
+      <article class="tarjeta-prospecto">
+        <div><div class="tarjeta-cabecera"><span class="etiqueta-categoria logistica">Logística</span><button class="boton-estrella activo" title="Favorito"><span class="material-symbols-outlined icono-lleno">star</span></button></div>
+          <h3 class="titulo-tarjeta margen-abajo-sm">LogistiCorp Global</h3>
+          <div class="tarjeta-valoracion"><span class="tarjeta-valoracion-puntos">4.5</span><div class="tarjeta-valoracion-estrellas"><span class="material-symbols-outlined icono-lleno">star</span><span class="material-symbols-outlined icono-lleno">star</span><span class="material-symbols-outlined icono-lleno">star</span><span class="material-symbols-outlined icono-lleno">star</span><span class="material-symbols-outlined icono-lleno">star_half</span></div><span class="tarjeta-valoracion-cantidad">(89 reseñas)</span></div>
+          <div class="tarjeta-contacto-lista"><div class="tarjeta-contacto-item"><span class="material-symbols-outlined">location_on</span><p>Polígono Ind. Coslada, Calle B, 12, 28823 Madrid</p></div><div class="tarjeta-contacto-item"><span class="material-symbols-outlined">distance</span><p>12.4 km</p></div><div class="tarjeta-contacto-item"><span class="material-symbols-outlined">call</span><p>+34 918 234 567</p></div></div>
+        </div><div class="tarjeta-acciones"><button class="boton boton-primario">Ver Detalles</button></div>
+      </article>
+      <article class="tarjeta-prospecto">
+        <div><div class="tarjeta-cabecera"><span class="etiqueta-categoria finanzas">Finanzas</span><button class="boton-estrella" title="Favorito"><span class="material-symbols-outlined">star</span></button></div>
+          <h3 class="titulo-tarjeta margen-abajo-sm">EuroFin Advisors</h3>
+          <div class="tarjeta-valoracion"><span class="tarjeta-valoracion-puntos">4.9</span><div class="tarjeta-valoracion-estrellas"><span class="material-symbols-outlined icono-lleno">star</span><span class="material-symbols-outlined icono-lleno">star</span><span class="material-symbols-outlined icono-lleno">star</span><span class="material-symbols-outlined icono-lleno">star</span><span class="material-symbols-outlined icono-lleno">star</span></div><span class="tarjeta-valoracion-cantidad">(210 reseñas)</span></div>
+          <div class="tarjeta-contacto-lista"><div class="tarjeta-contacto-item"><span class="material-symbols-outlined">location_on</span><p>Calle de Serrano, 45, 28001 Madrid</p></div><div class="tarjeta-contacto-item"><span class="material-symbols-outlined">distance</span><p>1.5 km</p></div><div class="tarjeta-contacto-item"><span class="material-symbols-outlined">call</span><p>+34 913 456 789</p></div></div>
+        </div><div class="tarjeta-acciones"><button class="boton boton-primario">Ver Detalles</button></div>
+      </article>
+      <article class="tarjeta-prospecto">
+        <div><div class="tarjeta-cabecera"><span class="etiqueta-categoria saas">SaaS</span><button class="boton-estrella" title="Favorito"><span class="material-symbols-outlined">star</span></button></div>
+          <h3 class="titulo-tarjeta margen-abajo-sm">CloudSphere Data</h3>
+          <div class="tarjeta-valoracion"><span class="tarjeta-valoracion-puntos">4.6</span><div class="tarjeta-valoracion-estrellas"><span class="material-symbols-outlined icono-lleno">star</span><span class="material-symbols-outlined icono-lleno">star</span><span class="material-symbols-outlined icono-lleno">star</span><span class="material-symbols-outlined icono-lleno">star</span><span class="material-symbols-outlined icono-lleno">star_half</span></div><span class="tarjeta-valoracion-cantidad">(78 reseñas)</span></div>
+          <div class="tarjeta-contacto-lista"><div class="tarjeta-contacto-item"><span class="material-symbols-outlined">location_on</span><p>Calle de Orense, 34, 28020 Madrid</p></div><div class="tarjeta-contacto-item"><span class="material-symbols-outlined">distance</span><p>2.1 km</p></div><div class="tarjeta-contacto-item"><span class="material-symbols-outlined">call</span><p>+34 911 234 567</p></div></div>
+        </div><div class="tarjeta-acciones"><button class="boton boton-primario">Ver Detalles</button></div>
+      </article>
+      <article class="tarjeta-prospecto">
+        <div><div class="tarjeta-cabecera"><span class="etiqueta-categoria retail">Retail</span><button class="boton-estrella" title="Favorito"><span class="material-symbols-outlined">star</span></button></div>
+          <h3 class="titulo-tarjeta margen-abajo-sm">MarketFlow Retail</h3>
+          <div class="tarjeta-valoracion"><span class="tarjeta-valoracion-puntos">4.2</span><div class="tarjeta-valoracion-estrellas"><span class="material-symbols-outlined icono-lleno">star</span><span class="material-symbols-outlined icono-lleno">star</span><span class="material-symbols-outlined icono-lleno">star</span><span class="material-symbols-outlined icono-lleno">star</span><span class="material-symbols-outlined">star</span></div><span class="tarjeta-valoracion-cantidad">(56 reseñas)</span></div>
+          <div class="tarjeta-contacto-lista"><div class="tarjeta-contacto-item"><span class="material-symbols-outlined">location_on</span><p>Calle de Fuencarral, 92, 28004 Madrid</p></div><div class="tarjeta-contacto-item"><span class="material-symbols-outlined">distance</span><p>1.8 km</p></div><div class="tarjeta-contacto-item"><span class="material-symbols-outlined">call</span><p>+34 917 890 123</p></div></div>
+        </div><div class="tarjeta-acciones"><button class="boton boton-primario">Ver Detalles</button></div>
+      </article>
+      <article class="tarjeta-prospecto">
+        <div><div class="tarjeta-cabecera"><span class="etiqueta-categoria energia">Energía</span><button class="boton-estrella" title="Favorito"><span class="material-symbols-outlined">star</span></button></div>
+          <h3 class="titulo-tarjeta margen-abajo-sm">EcoSystem Renewables</h3>
+          <div class="tarjeta-valoracion"><span class="tarjeta-valoracion-puntos">4.7</span><div class="tarjeta-valoracion-estrellas"><span class="material-symbols-outlined icono-lleno">star</span><span class="material-symbols-outlined icono-lleno">star</span><span class="material-symbols-outlined icono-lleno">star</span><span class="material-symbols-outlined icono-lleno">star</span><span class="material-symbols-outlined icono-lleno">star_half</span></div><span class="tarjeta-valoracion-cantidad">(42 reseñas)</span></div>
+          <div class="tarjeta-contacto-lista"><div class="tarjeta-contacto-item"><span class="material-symbols-outlined">location_on</span><p>Calle de Alcalá, 120, 28009 Madrid</p></div><div class="tarjeta-contacto-item"><span class="material-symbols-outlined">distance</span><p>3.1 km</p></div><div class="tarjeta-contacto-item"><span class="material-symbols-outlined">call</span><p>+34 913 456 789</p></div></div>
+        </div><div class="tarjeta-acciones"><button class="boton boton-primario">Ver Detalles</button></div>
+      </article>
     </div>
 
     <div class="paginacion-contenedor">
@@ -1372,24 +1418,29 @@
     <aside class="filtros-laterales-contenedor">
       <div class="filtros-cabecera">
         <h3>FILTROS AVANZADOS</h3>
-        <button class="cursor-puntero" onclick="limpiarFiltros()">Limpiar</button>
+        <button class="cursor-puntero">Limpiar</button>
       </div>
       <div class="filtro-seccion">
         <label class="filtro-seccion-label">Categoría</label>
         <div class="selector-multiple-contenedor" id="desplegable-categorias-escritorio">
-          <button class="selector-multiple-cabecera" onclick="toggleSelectorMultiple('desplegable-categorias-escritorio', event)">
+          <button class="selector-multiple-cabecera">
             <span class="selector-multiple-texto-seleccionado" id="texto-categorias-escritorio">Todas las categorías</span>
             <span class="material-symbols-outlined">expand_more</span>
           </button>
           <div class="selector-multiple-opciones" id="opciones-categorias-escritorio">
-            <!-- Checkboxes de categorías -->
+            <div class="selector-multiple-opcion"><label class="flex items-center" style="gap:0.5rem;width:100%"><input type="checkbox" value="tecnologia"><span>Tecnología</span></label></div>
+            <div class="selector-multiple-opcion"><label class="flex items-center" style="gap:0.5rem;width:100%"><input type="checkbox" value="logistica"><span>Logística</span></label></div>
+            <div class="selector-multiple-opcion"><label class="flex items-center" style="gap:0.5rem;width:100%"><input type="checkbox" value="finanzas"><span>Finanzas</span></label></div>
+            <div class="selector-multiple-opcion"><label class="flex items-center" style="gap:0.5rem;width:100%"><input type="checkbox" value="saas"><span>SaaS</span></label></div>
+            <div class="selector-multiple-opcion"><label class="flex items-center" style="gap:0.5rem;width:100%"><input type="checkbox" value="retail"><span>Retail</span></label></div>
+            <div class="selector-multiple-opcion"><label class="flex items-center" style="gap:0.5rem;width:100%"><input type="checkbox" value="energia"><span>Energía</span></label></div>
           </div>
         </div>
       </div>
       <div class="filtro-seccion">
         <label class="filtro-seccion-label">Favoritos</label>
         <label class="contenedor-interruptor-favorito">
-          <input type="checkbox" id="filtro-favorito-escritorio" onchange="filtrarYRenderizar()">
+          <input type="checkbox" id="filtro-favorito-escritorio">
           <span class="deslizador-interruptor"></span>
           <span class="texto-label-md select-none">Solo mostrar favoritos</span>
         </label>
@@ -1397,12 +1448,12 @@
       <div class="filtro-seccion">
         <label class="filtro-seccion-label">Etiquetas Personalizadas</label>
         <div class="selector-multiple-contenedor" id="desplegable-etiquetas-escritorio">
-          <button class="selector-multiple-cabecera" onclick="toggleSelectorMultiple('desplegable-etiquetas-escritorio', event)">
+          <button class="selector-multiple-cabecera">
             <span class="selector-multiple-texto-seleccionado" id="texto-etiquetas-escritorio">Seleccionar etiquetas...</span>
             <span class="material-symbols-outlined">expand_more</span>
           </button>
           <div class="selector-multiple-opciones" id="opciones-etiquetas-escritorio">
-            <!-- Checkboxes de etiquetas -->
+            <p class="texto-body-sm texto-secundario italic" style="padding: 0.5rem;">Crea etiquetas desde una tarjeta...</p>
           </div>
         </div>
       </div>
@@ -1417,13 +1468,13 @@
         </div>
       </div>
       <div class="filtro-seccion" style="margin-bottom: 0.75rem;">
-        <button class="boton boton-primario ancho-completo" onclick="filtrarYRenderizar()">
+        <button class="boton boton-primario ancho-completo">
           <span class="material-symbols-outlined">filter_alt</span>
           Aplicar filtros
         </button>
       </div>
       <div class="filtro-seccion">
-        <button class="boton boton-azul ancho-completo" onclick="exportarResultadosCSV()">
+        <button class="boton boton-azul ancho-completo">
           <span class="material-symbols-outlined">download</span>
           Exportar resultados
         </button>
@@ -1446,14 +1497,55 @@
             </select>
             <span class="material-symbols-outlined selector-filtros-icono">expand_more</span>
           </div>
-          <button class="boton-invertir-orden" id="boton-revertir-orden-escritorio" onclick="revertirOrden()" title="Invertir orden">
+          <button class="boton-invertir-orden" id="boton-revertir-orden-escritorio" title="Invertir orden">
             <span class="material-symbols-outlined">swap_vert</span>
           </button>
         </div>
       </div>
 
       <div class="grilla-resultados" id="grilla-resultados-escritorio">
-        <!-- Se carga dinámicamente -->
+        <article class="tarjeta-prospecto">
+          <div><div class="tarjeta-cabecera"><span class="etiqueta-categoria tecnologia">Tecnología</span><button class="boton-estrella" title="Favorito"><span class="material-symbols-outlined">star</span></button></div>
+            <h3 class="titulo-tarjeta margen-abajo-sm">TechNode Solutions</h3>
+            <div class="tarjeta-valoracion"><span class="tarjeta-valoracion-puntos">4.8</span><div class="tarjeta-valoracion-estrellas"><span class="material-symbols-outlined icono-lleno">star</span><span class="material-symbols-outlined icono-lleno">star</span><span class="material-symbols-outlined icono-lleno">star</span><span class="material-symbols-outlined icono-lleno">star</span><span class="material-symbols-outlined icono-lleno">star_half</span></div><span class="tarjeta-valoracion-cantidad">(124 reseñas)</span></div>
+            <div class="tarjeta-contacto-lista"><div class="tarjeta-contacto-item"><span class="material-symbols-outlined">location_on</span><p>Paseo de la Castellana, 256, 28046 Madrid</p></div><div class="tarjeta-contacto-item"><span class="material-symbols-outlined">distance</span><p>0.8 km</p></div><div class="tarjeta-contacto-item"><span class="material-symbols-outlined">call</span><p>+34 915 678 901</p></div></div>
+          </div><div class="tarjeta-acciones"><button class="boton boton-primario">Ver Detalles</button></div>
+        </article>
+        <article class="tarjeta-prospecto">
+          <div><div class="tarjeta-cabecera"><span class="etiqueta-categoria logistica">Logística</span><button class="boton-estrella activo" title="Favorito"><span class="material-symbols-outlined icono-lleno">star</span></button></div>
+            <h3 class="titulo-tarjeta margen-abajo-sm">LogistiCorp Global</h3>
+            <div class="tarjeta-valoracion"><span class="tarjeta-valoracion-puntos">4.5</span><div class="tarjeta-valoracion-estrellas"><span class="material-symbols-outlined icono-lleno">star</span><span class="material-symbols-outlined icono-lleno">star</span><span class="material-symbols-outlined icono-lleno">star</span><span class="material-symbols-outlined icono-lleno">star</span><span class="material-symbols-outlined icono-lleno">star_half</span></div><span class="tarjeta-valoracion-cantidad">(89 reseñas)</span></div>
+            <div class="tarjeta-contacto-lista"><div class="tarjeta-contacto-item"><span class="material-symbols-outlined">location_on</span><p>Polígono Ind. Coslada, Calle B, 12, 28823 Madrid</p></div><div class="tarjeta-contacto-item"><span class="material-symbols-outlined">distance</span><p>12.4 km</p></div><div class="tarjeta-contacto-item"><span class="material-symbols-outlined">call</span><p>+34 918 234 567</p></div></div>
+          </div><div class="tarjeta-acciones"><button class="boton boton-primario">Ver Detalles</button></div>
+        </article>
+        <article class="tarjeta-prospecto">
+          <div><div class="tarjeta-cabecera"><span class="etiqueta-categoria finanzas">Finanzas</span><button class="boton-estrella" title="Favorito"><span class="material-symbols-outlined">star</span></button></div>
+            <h3 class="titulo-tarjeta margen-abajo-sm">EuroFin Advisors</h3>
+            <div class="tarjeta-valoracion"><span class="tarjeta-valoracion-puntos">4.9</span><div class="tarjeta-valoracion-estrellas"><span class="material-symbols-outlined icono-lleno">star</span><span class="material-symbols-outlined icono-lleno">star</span><span class="material-symbols-outlined icono-lleno">star</span><span class="material-symbols-outlined icono-lleno">star</span><span class="material-symbols-outlined icono-lleno">star</span></div><span class="tarjeta-valoracion-cantidad">(210 reseñas)</span></div>
+            <div class="tarjeta-contacto-lista"><div class="tarjeta-contacto-item"><span class="material-symbols-outlined">location_on</span><p>Calle de Serrano, 45, 28001 Madrid</p></div><div class="tarjeta-contacto-item"><span class="material-symbols-outlined">distance</span><p>1.5 km</p></div><div class="tarjeta-contacto-item"><span class="material-symbols-outlined">call</span><p>+34 913 456 789</p></div></div>
+          </div><div class="tarjeta-acciones"><button class="boton boton-primario">Ver Detalles</button></div>
+        </article>
+        <article class="tarjeta-prospecto">
+          <div><div class="tarjeta-cabecera"><span class="etiqueta-categoria saas">SaaS</span><button class="boton-estrella" title="Favorito"><span class="material-symbols-outlined">star</span></button></div>
+            <h3 class="titulo-tarjeta margen-abajo-sm">CloudSphere Data</h3>
+            <div class="tarjeta-valoracion"><span class="tarjeta-valoracion-puntos">4.6</span><div class="tarjeta-valoracion-estrellas"><span class="material-symbols-outlined icono-lleno">star</span><span class="material-symbols-outlined icono-lleno">star</span><span class="material-symbols-outlined icono-lleno">star</span><span class="material-symbols-outlined icono-lleno">star</span><span class="material-symbols-outlined icono-lleno">star_half</span></div><span class="tarjeta-valoracion-cantidad">(78 reseñas)</span></div>
+            <div class="tarjeta-contacto-lista"><div class="tarjeta-contacto-item"><span class="material-symbols-outlined">location_on</span><p>Calle de Orense, 34, 28020 Madrid</p></div><div class="tarjeta-contacto-item"><span class="material-symbols-outlined">distance</span><p>2.1 km</p></div><div class="tarjeta-contacto-item"><span class="material-symbols-outlined">call</span><p>+34 911 234 567</p></div></div>
+          </div><div class="tarjeta-acciones"><button class="boton boton-primario">Ver Detalles</button></div>
+        </article>
+        <article class="tarjeta-prospecto">
+          <div><div class="tarjeta-cabecera"><span class="etiqueta-categoria retail">Retail</span><button class="boton-estrella" title="Favorito"><span class="material-symbols-outlined">star</span></button></div>
+            <h3 class="titulo-tarjeta margen-abajo-sm">MarketFlow Retail</h3>
+            <div class="tarjeta-valoracion"><span class="tarjeta-valoracion-puntos">4.2</span><div class="tarjeta-valoracion-estrellas"><span class="material-symbols-outlined icono-lleno">star</span><span class="material-symbols-outlined icono-lleno">star</span><span class="material-symbols-outlined icono-lleno">star</span><span class="material-symbols-outlined icono-lleno">star</span><span class="material-symbols-outlined">star</span></div><span class="tarjeta-valoracion-cantidad">(56 reseñas)</span></div>
+            <div class="tarjeta-contacto-lista"><div class="tarjeta-contacto-item"><span class="material-symbols-outlined">location_on</span><p>Calle de Fuencarral, 92, 28004 Madrid</p></div><div class="tarjeta-contacto-item"><span class="material-symbols-outlined">distance</span><p>1.8 km</p></div><div class="tarjeta-contacto-item"><span class="material-symbols-outlined">call</span><p>+34 917 890 123</p></div></div>
+          </div><div class="tarjeta-acciones"><button class="boton boton-primario">Ver Detalles</button></div>
+        </article>
+        <article class="tarjeta-prospecto">
+          <div><div class="tarjeta-cabecera"><span class="etiqueta-categoria energia">Energía</span><button class="boton-estrella" title="Favorito"><span class="material-symbols-outlined">star</span></button></div>
+            <h3 class="titulo-tarjeta margen-abajo-sm">EcoSystem Renewables</h3>
+            <div class="tarjeta-valoracion"><span class="tarjeta-valoracion-puntos">4.7</span><div class="tarjeta-valoracion-estrellas"><span class="material-symbols-outlined icono-lleno">star</span><span class="material-symbols-outlined icono-lleno">star</span><span class="material-symbols-outlined icono-lleno">star</span><span class="material-symbols-outlined icono-lleno">star</span><span class="material-symbols-outlined icono-lleno">star_half</span></div><span class="tarjeta-valoracion-cantidad">(42 reseñas)</span></div>
+            <div class="tarjeta-contacto-lista"><div class="tarjeta-contacto-item"><span class="material-symbols-outlined">location_on</span><p>Calle de Alcalá, 120, 28009 Madrid</p></div><div class="tarjeta-contacto-item"><span class="material-symbols-outlined">distance</span><p>3.1 km</p></div><div class="tarjeta-contacto-item"><span class="material-symbols-outlined">call</span><p>+34 913 456 789</p></div></div>
+          </div><div class="tarjeta-acciones"><button class="boton boton-primario">Ver Detalles</button></div>
+        </article>
       </div>
 
       <div class="paginacion-contenedor">
@@ -1480,721 +1572,27 @@
   <div class="modal-personalizado-contenido">
     <div class="modal-personalizado-cabecera">
       <h4 id="modal-titulo">Gestionar Etiquetas</h4>
-      <button class="modal-personalizado-cerrar" onclick="cerrarModalEtiquetas()">&times;</button>
+      <button class="modal-personalizado-cerrar">&times;</button>
     </div>
     <p class="texto-cuerpo-pequeno texto-secundario margen-abajo-sm" style="font-weight: 600;">
       Prospecto: <span id="nombre-prospecto-modal" style="color: var(--color-primario);"></span>
     </p>
     
     <div class="modal-personalizado-lista" id="lista-etiquetas-modal">
-      <!-- Se carga dinámicamente -->
+      <p class="texto-body-sm texto-secundario italic" style="padding: 0.5rem 0;">No hay etiquetas creadas. Crea una abajo.</p>
     </div>
     
     <div class="modal-personalizado-nuevo">
       <input type="text" class="modal-input" id="input-nueva-etiqueta" placeholder="Nueva etiqueta..." maxlength="20">
-      <button class="boton boton-primario" onclick="crearNuevaEtiqueta()" style="padding: 0.5rem 1rem;">Crear</button>
+      <button class="boton boton-primario" style="padding: 0.5rem 1rem;">Crear</button>
     </div>
     
     <div class="flex justificar-fin margen-arriba-md" style="gap: 0.5rem; justify-content: flex-end; margin-top: 1.5rem;">
-      <button class="boton boton-secundario" onclick="cerrarModalEtiquetas()">Cancelar</button>
-      <button class="boton boton-primario" onclick="guardarEtiquetas()">Guardar</button>
+      <button class="boton boton-secundario">Cancelar</button>
+      <button class="boton boton-primario">Guardar</button>
     </div>
   </div>
 </div>
-
-<script>
-  // Dataset de prospectos originales
-  const prospectosDataset = [
-    {
-      id: 1,
-      nombre: "TechNode Solutions",
-      categoria: "Tecnología",
-      class: "tecnologia",
-      valoracion: 4.8,
-      reseñas: 124,
-      direccion: "Paseo de la Castellana, 256, 28046 Madrid",
-      distancia: 0.8,
-      telefono: "+34 915 678 901",
-      esFavorito: false,
-      nuevo: true,
-      tags: []
-    },
-    {
-      id: 2,
-      nombre: "LogistiCorp Global",
-      categoria: "Logística",
-      class: "logistica",
-      valoracion: 4.5,
-      reseñas: 89,
-      direccion: "Polígono Ind. Coslada, Calle B, 12, 28823 Madrid",
-      distancia: 12.4,
-      telefono: "+34 918 234 567",
-      esFavorito: true,
-      nuevo: false,
-      tags: []
-    },
-    {
-      id: 3,
-      nombre: "EuroFin Advisors",
-      categoria: "Finanzas",
-      class: "finanzas",
-      valoracion: 4.9,
-      reseñas: 210,
-      direccion: "Calle de Serrano, 45, 28001 Madrid",
-      distancia: 1.5,
-      telefono: "+34 913 456 789",
-      esFavorito: false,
-      nuevo: false,
-      tags: []
-    },
-    {
-      id: 4,
-      nombre: "CloudSphere Data",
-      categoria: "SaaS",
-      class: "saas",
-      valoracion: 4.6,
-      reseñas: 78,
-      direccion: "Calle de Orense, 34, 28020 Madrid",
-      distancia: 2.1,
-      telefono: "+34 911 234 567",
-      esFavorito: false,
-      nuevo: false,
-      tags: []
-    },
-    {
-      id: 5,
-      nombre: "MarketFlow Retail",
-      categoria: "Retail",
-      class: "retail",
-      valoracion: 4.2,
-      reseñas: 56,
-      direccion: "Calle de Fuencarral, 92, 28004 Madrid",
-      distancia: 1.8,
-      telefono: "+34 917 890 123",
-      esFavorito: false,
-      nuevo: false,
-      tags: []
-    },
-    {
-      id: 6,
-      nombre: "EcoSystem Renewables",
-      categoria: "Energía",
-      class: "energia",
-      valoracion: 4.7,
-      reseñas: 42,
-      direccion: "Calle de Alcalá, 120, 28009 Madrid",
-      distancia: 3.1,
-      telefono: "+34 913 456 789",
-      esFavorito: false,
-      nuevo: false,
-      tags: []
-    }
-  ];
-
-  // Estado de la aplicación
-  let valoracionMinima = 0;
-  let criterioOrdenacion = "";
-  let ordenInvertido = false;
-  let prospectoActualId = null;
-  const todasEtiquetas = new Set();
-  let prospectosActivos = [];
-
-  const categoriasLista = [
-    { valor: 'tecnologia', nombre: 'Tecnología' },
-    { valor: 'logistica', nombre: 'Logística' },
-    { valor: 'finanzas', nombre: 'Finanzas' },
-    { valor: 'saas', nombre: 'SaaS' },
-    { valor: 'retail', nombre: 'Retail' },
-    { valor: 'energia', nombre: 'Energía' }
-  ];
-
-  // 1. Inicializar selectores de categorías al montar
-  function inicializarCategoriasDesplegable() {
-    const contenedores = [
-      document.getElementById('opciones-categorias-escritorio'),
-      document.getElementById('opciones-categorias-movil')
-    ];
-    
-    contenedores.forEach((opciones, i) => {
-      if (!opciones) return;
-      opciones.innerHTML = '';
-      const vista = i === 0 ? 'escritorio' : 'movil';
-      
-      categoriasLista.forEach(cat => {
-        const opcionDiv = document.createElement('div');
-        opcionDiv.className = 'selector-multiple-opcion';
-        opcionDiv.innerHTML = `
-          <label class="flex alinear-centro cursor-puntero" style="gap: 0.5rem; width: 100%;">
-            <input type="checkbox" value="${cat.valor}" onchange="actualizarFiltrosCategoria(event, '${vista}')">
-            <span>${cat.nombre}</span>
-          </label>
-        `;
-        opciones.appendChild(opcionDiv);
-      });
-    });
-  }
-
-  // Sincronizar y aplicar filtros de categorías
-  function actualizarFiltrosCategoria(event, origen) {
-    const checkboxClickado = event.target;
-    const valor = checkboxClickado.value;
-    const estaChequeado = checkboxClickado.checked;
-    
-    const destinoSelector = origen === 'movil' ? '#opciones-categorias-escritorio input' : '#opciones-categorias-movil input';
-    const checkboxDestino = document.querySelector(`${destinoSelector}[value="${valor}"]`);
-    if (checkboxDestino) {
-      checkboxDestino.checked = estaChequeado;
-    }
-    
-    const seleccionados = Array.from(document.querySelectorAll('#opciones-categorias-escritorio input:checked')).map(cb => cb.value);
-    
-    const textoCategoriasEscritorio = document.getElementById('texto-categorias-escritorio');
-    const textoCategoriasMovil = document.getElementById('texto-categorias-movil');
-    
-    let texto = 'Todas las categorías';
-    if (seleccionados.length === 1) {
-      const checkboxEscogido = document.querySelector(`#opciones-categorias-escritorio input[value="${seleccionados[0]}"]`);
-      if (checkboxEscogido) {
-        texto = checkboxEscogido.nextElementSibling.textContent;
-      }
-    } else if (seleccionados.length > 1) {
-      texto = `${seleccionados.length} seleccionadas`;
-    }
-    
-    if (textoCategoriasEscritorio) textoCategoriasEscritorio.textContent = texto;
-    if (textoCategoriasMovil) textoCategoriasMovil.textContent = texto;
-    
-    filtrarYRenderizar();
-  }
-
-  // 2. Gestionar la visualización y sincronización de etiquetas en filtros
-  function actualizarDesplegablesEtiquetas() {
-    const contenedores = [
-      { opciones: document.getElementById('opciones-etiquetas-escritorio'), vista: 'escritorio' },
-      { opciones: document.getElementById('opciones-etiquetas-movil'), vista: 'movil' }
-    ];
-    
-    const seleccionadosAnteriormente = Array.from(document.querySelectorAll('#opciones-etiquetas-escritorio input:checked')).map(cb => cb.value);
-    
-    contenedores.forEach(({ opciones, vista }) => {
-      if (!opciones) return;
-      opciones.innerHTML = '';
-      
-      if (todasEtiquetas.size === 0) {
-        opciones.innerHTML = '<p class="texto-cuerpo-pequeno texto-secundario italic" style="padding: 0.5rem;">Crea etiquetas desde una tarjeta...</p>';
-      } else {
-        todasEtiquetas.forEach(tag => {
-          const estaChequeado = seleccionadosAnteriormente.includes(tag);
-          const opcionDiv = document.createElement('div');
-          opcionDiv.className = 'selector-multiple-opcion';
-          opcionDiv.innerHTML = `
-            <label class="flex alinear-centro cursor-puntero" style="gap: 0.5rem; width: 100%;">
-              <input type="checkbox" value="${tag}" ${estaChequeado ? 'checked' : ''} onchange="actualizarFiltrosEtiquetas(event, '${vista}')">
-              <span>${tag}</span>
-            </label>
-          `;
-          opciones.appendChild(opcionDiv);
-        });
-      }
-    });
-    
-    actualizarTextoFiltrosEtiquetas();
-  }
-
-  function actualizarFiltrosEtiquetas(event, origen) {
-    const checkboxClickado = event.target;
-    const valor = checkboxClickado.value;
-    const estaChequeado = checkboxClickado.checked;
-    
-    const destinoSelector = origen === 'movil' ? '#opciones-etiquetas-escritorio input' : '#opciones-etiquetas-movil input';
-    const checkboxDestino = document.querySelector(`${destinoSelector}[value="${valor}"]`);
-    if (checkboxDestino) {
-      checkboxDestino.checked = estaChequeado;
-    }
-    
-    actualizarTextoFiltrosEtiquetas();
-    filtrarYRenderizar();
-  }
-
-  function actualizarTextoFiltrosEtiquetas() {
-    const seleccionados = Array.from(document.querySelectorAll('#opciones-etiquetas-escritorio input:checked')).map(cb => cb.value);
-    
-    const textoEtiquetasEscritorio = document.getElementById('texto-etiquetas-escritorio');
-    const textoEtiquetasMovil = document.getElementById('texto-etiquetas-movil');
-    
-    let texto = 'Seleccionar etiquetas...';
-    if (seleccionados.length === 1) {
-      texto = seleccionados[0];
-    } else if (seleccionados.length > 1) {
-      texto = `${seleccionados.length} seleccionadas`;
-    }
-    
-    if (textoEtiquetasEscritorio) textoEtiquetasEscritorio.textContent = texto;
-    if (textoEtiquetasMovil) textoEtiquetasMovil.textContent = texto;
-  }
-
-  // 3. Inicializar interactividad y filtrado de estrellas
-  function inicializarEstrellas() {
-    const grupos = [
-      { container: document.querySelectorAll('#grupo-estrellas-escritorio span'), vista: 'escritorio' },
-      { container: document.querySelectorAll('#grupo-estrellas-movil span'), vista: 'movil' }
-    ];
-    
-    grupos.forEach(({ container, vista }) => {
-      container.forEach((estrella, indice) => {
-        estrella.style.cursor = 'pointer';
-        estrella.onclick = () => {
-          const nuevaValoracion = indice + 1;
-          if (valoracionMinima === nuevaValoracion) {
-            valoracionMinima = 0; // Deseleccionar
-          } else {
-            valoracionMinima = nuevaValoracion;
-          }
-          
-          actualizarVistasEstrellas();
-          filtrarYRenderizar();
-        };
-      });
-    });
-  }
-
-  function actualizarVistasEstrellas() {
-    const grupos = [
-      document.querySelectorAll('#grupo-estrellas-escritorio span'),
-      document.querySelectorAll('#grupo-estrellas-movil span')
-    ];
-    
-    grupos.forEach(container => {
-      container.forEach((estrella, indice) => {
-        if (indice < valoracionMinima) {
-          estrella.classList.remove('vacia');
-          estrella.classList.add('icono-lleno');
-        } else {
-          estrella.classList.add('vacia');
-          estrella.classList.remove('icono-lleno');
-        }
-      });
-    });
-  }
-
-  // 4. Lógica de Ordenación
-  function actualizarOrdenacionDesdeSelector(valor) {
-    criterioOrdenacion = valor;
-    const selectorEscritorio = document.getElementById('selector-ordenar-por-escritorio');
-    const selectorMovil = document.getElementById('selector-ordenar-por-movil');
-    if (selectorEscritorio) selectorEscritorio.value = valor;
-    if (selectorMovil) selectorMovil.value = valor;
-    filtrarYRenderizar();
-  }
-
-  function revertirOrden() {
-    ordenInvertido = !ordenInvertido;
-    
-    const botonEscritorio = document.getElementById('boton-revertir-orden-escritorio');
-    const botonMovil = document.getElementById('boton-revertir-orden-movil');
-    
-    if (botonEscritorio) {
-      if (ordenInvertido) botonEscritorio.classList.add('activo');
-      else botonEscritorio.classList.remove('activo');
-    }
-    if (botonMovil) {
-      if (ordenInvertido) botonMovil.classList.add('activo');
-      else botonMovil.classList.remove('activo');
-    }
-    
-    filtrarYRenderizar();
-  }
-
-  // 5. Interactividad de favoritos en tarjeta
-  function toggleFavoritoTarjeta(idProspeccion) {
-    const prospecto = prospectosDataset.find(p => p.id === idProspeccion);
-    if (prospecto) {
-      prospecto.esFavorito = !prospecto.esFavorito;
-      filtrarYRenderizar();
-    }
-  }
-
-  // 6. Lógica de modal de etiquetas
-  function abrirModalEtiquetas(idProspeccion) {
-    prospectoActualId = idProspeccion;
-    const prospecto = prospectosDataset.find(p => p.id === idProspeccion);
-    if (!prospecto) return;
-    
-    const tituloModal = document.getElementById('nombre-prospecto-modal');
-    if (tituloModal) tituloModal.textContent = prospecto.nombre;
-    
-    const listaEtiquetasModal = document.getElementById('lista-etiquetas-modal');
-    if (listaEtiquetasModal) {
-      listaEtiquetasModal.innerHTML = '';
-      
-      if (todasEtiquetas.size === 0) {
-        listaEtiquetasModal.innerHTML = '<p class="texto-cuerpo-pequeno texto-secundario italic" style="padding: 0.5rem 0;">No hay etiquetas creadas. Crea una abajo.</p>';
-      } else {
-        todasEtiquetas.forEach(tag => {
-          const tieneTag = prospecto.tags.includes(tag);
-          const itemDiv = document.createElement('div');
-          itemDiv.className = 'modal-personalizado-item';
-          itemDiv.innerHTML = `
-            <label class="flex alinear-centro cursor-puntero" style="gap: 0.5rem; width: 100%;">
-              <input type="checkbox" value="${tag}" ${tieneTag ? 'checked' : ''}>
-              <span>${tag}</span>
-            </label>
-          `;
-          listaEtiquetasModal.appendChild(itemDiv);
-        });
-      }
-    }
-    
-    const modal = document.getElementById('modal-gestion-etiquetas');
-    if (modal) modal.style.display = 'flex';
-  }
-
-  function cerrarModalEtiquetas() {
-    const modal = document.getElementById('modal-gestion-etiquetas');
-    if (modal) modal.style.display = 'none';
-    const inputNueva = document.getElementById('input-nueva-etiqueta');
-    if (inputNueva) inputNueva.value = '';
-    prospectoActualId = null;
-  }
-
-  function crearNuevaEtiqueta() {
-    const inputNueva = document.getElementById('input-nueva-etiqueta');
-    if (!inputNueva) return;
-    const tagLimpio = inputNueva.value.trim();
-    if (!tagLimpio) return;
-    
-    todasEtiquetas.add(tagLimpio);
-    
-    const prospecto = prospectosDataset.find(p => p.id === prospectoActualId);
-    if (prospecto && !prospecto.tags.includes(tagLimpio)) {
-      prospecto.tags.push(tagLimpio);
-    }
-    
-    inputNueva.value = '';
-    
-    actualizarDesplegablesEtiquetas();
-    abrirModalEtiquetas(prospectoActualId);
-  }
-
-  function guardarEtiquetas() {
-    const prospecto = prospectosDataset.find(p => p.id === prospectoActualId);
-    if (!prospecto) return;
-    
-    const checkboxes = document.querySelectorAll('#lista-etiquetas-modal input[type="checkbox"]');
-    const nuevasEtiquetasProspecto = [];
-    checkboxes.forEach(cb => {
-      if (cb.checked) {
-        nuevasEtiquetasProspecto.push(cb.value);
-      }
-    });
-    
-    prospecto.tags = nuevasEtiquetasProspecto;
-    
-    cerrarModalEtiquetas();
-    actualizarDesplegablesEtiquetas();
-    filtrarYRenderizar();
-  }
-
-  // 7. Visualización estética de estrellas de valoración en tarjeta
-  function renderizarEstrellasValoracion(puntos) {
-    let html = '';
-    const enteros = Math.floor(puntos);
-    const tieneMedio = (puntos - enteros) >= 0.3 && (puntos - enteros) <= 0.7;
-    const tieneCasiEntero = (puntos - enteros) > 0.7;
-    
-    for (let i = 1; i <= 5; i++) {
-      if (i <= enteros || (i === enteros + 1 && tieneCasiEntero)) {
-        html += '<span class="material-symbols-outlined icono-lleno">star</span>';
-      } else if (i === enteros + 1 && tieneMedio) {
-        html += '<span class="material-symbols-outlined icono-lleno">star_half</span>';
-      } else {
-        html += '<span class="material-symbols-outlined">star</span>';
-      }
-    }
-    return html;
-  }
-
-  // 8. Tareas de Filtrado y Renderizado
-  function filtrarYRenderizar() {
-    const categoriasFiltro = Array.from(document.querySelectorAll('#opciones-categorias-escritorio input:checked')).map(cb => cb.value);
-    const etiquetasFiltro = Array.from(document.querySelectorAll('#opciones-etiquetas-escritorio input:checked')).map(cb => cb.value);
-    const soloFavoritos = document.getElementById('filtro-favorito-escritorio')?.checked || false;
-    
-    let prospectosFiltrados = prospectosDataset.filter(prospecto => {
-      if (categoriasFiltro.length > 0 && !categoriasFiltro.includes(prospecto.class)) {
-        return false;
-      }
-      
-      if (etiquetasFiltro.length > 0) {
-        const tieneEtiqueta = prospecto.tags.some(tag => etiquetasFiltro.includes(tag));
-        if (!tieneEtiqueta) return false;
-      }
-      
-      if (soloFavoritos && !prospecto.esFavorito) {
-        return false;
-      }
-      
-      if (prospecto.valoracion < valoracionMinima) {
-        return false;
-      }
-      
-      return true;
-    });
-    
-    if (criterioOrdenacion) {
-      prospectosFiltrados.sort((a, b) => {
-        let comparacion = 0;
-        
-        if (criterioOrdenacion === 'valoracion') {
-          comparacion = b.valoracion - a.valoracion;
-        } else if (criterioOrdenacion === 'distancia') {
-          comparacion = a.distancia - b.distancia;
-        } else if (criterioOrdenacion === 'alfabeticamente') {
-          comparacion = a.nombre.localeCompare(b.nombre);
-        }
-        
-        return ordenInvertido ? -comparacion : comparacion;
-      });
-    }
-    
-    prospectosActivos = prospectosFiltrados;
-    renderizarProspectos(prospectosFiltrados);
-    actualizarContadores(prospectosFiltrados.length);
-  }
-
-  function renderizarProspectos(prospectos) {
-    const grillaEscritorio = document.getElementById('grilla-resultados-escritorio');
-    const grillaMovil = document.getElementById('grilla-resultados-movil');
-    
-    let html = '';
-    
-    if (prospectos.length === 0) {
-      html = `
-        <div style="grid-column: 1 / -1; text-align: center; padding: 3rem; background: var(--color-blanco); border-radius: var(--redondeado-lg); border: 1px dashed var(--color-borde-variante);">
-          <span class="material-symbols-outlined" style="font-size: 48px; color: var(--color-texto-secundario);">search_off</span>
-          <p class="texto-cuerpo-medio margen-arriba-sm" style="font-weight: 600; color: var(--color-primario);">No se encontraron prospectos</p>
-          <p class="texto-cuerpo-pequeno texto-secundario margen-arriba-xs">Intenta cambiar los criterios de búsqueda o limpiar los filtros.</p>
-        </div>
-      `;
-    } else {
-      prospectos.forEach(prospecto => {
-        const badgeNuevo = prospecto.nuevo ? '<div class="tarjeta-badge-nuevo">NUEVO</div>' : '';
-        const estrellaActiva = prospecto.esFavorito ? 'activo' : '';
-        const estrellaIconoLleno = prospecto.esFavorito ? 'icono-lleno' : '';
-        
-        let tagsHtml = '';
-        if (prospecto.tags && prospecto.tags.length > 0) {
-          tagsHtml = `
-            <div class="contenedor-etiquetas-tarjeta">
-              ${prospecto.tags.map(t => `<span class="etiqueta-personalizada">${t}</span>`).join('')}
-            </div>
-          `;
-        }
-        
-        html += `
-          <article class="tarjeta-prospecto">
-            ${badgeNuevo}
-            <div>
-              <div class="tarjeta-cabecera">
-                <span class="etiqueta-categoria ${prospecto.class}">${prospecto.categoria}</span>
-                <button class="boton-estrella ${estrellaActiva}" onclick="toggleFavoritoTarjeta(${prospecto.id})" title="Favorito">
-                  <span class="material-symbols-outlined ${estrellaIconoLleno}">star</span>
-                </button>
-              </div>
-              <h3 class="titulo-tarjeta margen-abajo-sm">${prospecto.nombre}</h3>
-              <div class="tarjeta-valoracion">
-                <span class="tarjeta-valoracion-puntos">${prospecto.valoracion.toFixed(1)}</span>
-                <div class="tarjeta-valoracion-estrellas">
-                  ${renderizarEstrellasValoracion(prospecto.valoracion)}
-                </div>
-                <span class="tarjeta-valoracion-cantidad">(${prospecto.reseñas} reseñas)</span>
-              </div>
-              
-              ${tagsHtml}
-
-              <div class="tarjeta-contacto-lista">
-                <div class="tarjeta-contacto-item">
-                  <span class="material-symbols-outlined">location_on</span>
-                  <p>${prospecto.direccion}</p>
-                </div>
-                <div class="tarjeta-contacto-item">
-                  <span class="material-symbols-outlined">distance</span>
-                  <p>${prospecto.distancia} km</p>
-                </div>
-                <div class="tarjeta-contacto-item">
-                  <span class="material-symbols-outlined">call</span>
-                  <p>${prospecto.telefono}</p>
-                </div>
-              </div>
-            </div>
-            <div class="tarjeta-acciones">
-              <button class="boton boton-primario">Ver Detalles</button>
-            </div>
-          </article>
-        `;
-      });
-    }
-    
-    if (grillaEscritorio) grillaEscritorio.innerHTML = html;
-    if (grillaMovil) grillaMovil.innerHTML = html;
-  }
-
-  function actualizarContadores(total) {
-    const desc = `${total} Resultados en Madrid`;
-    const cntEscritorio = document.getElementById('contador-resultados-escritorio');
-    const cntMovil = document.querySelector('.seccion-cabecera-movil h2.titulo-principal');
-    if (cntEscritorio) cntEscritorio.textContent = desc;
-    if (cntMovil) cntMovil.textContent = desc;
-  }
-
-  // 9. Limpieza global de filtros
-  function limpiarFiltros() {
-    document.querySelectorAll('#opciones-categorias-escritorio input, #opciones-categorias-movil input').forEach(cb => cb.checked = false);
-    const textoCategoriasEscritorio = document.getElementById('texto-categorias-escritorio');
-    const textoCategoriasMovil = document.getElementById('texto-categorias-movil');
-    if (textoCategoriasEscritorio) textoCategoriasEscritorio.textContent = 'Todas las categorías';
-    if (textoCategoriasMovil) textoCategoriasMovil.textContent = 'Todas las categorías';
-
-    document.querySelectorAll('#opciones-etiquetas-escritorio input, #opciones-etiquetas-movil input').forEach(cb => cb.checked = false);
-    const textoEtiquetasEscritorio = document.getElementById('texto-etiquetas-escritorio');
-    const textoEtiquetasMovil = document.getElementById('texto-etiquetas-movil');
-    if (textoEtiquetasEscritorio) textoEtiquetasEscritorio.textContent = 'Seleccionar etiquetas...';
-    if (textoEtiquetasMovil) textoEtiquetasMovil.textContent = 'Seleccionar etiquetas...';
-
-    const filtroFavoritoEscritorio = document.getElementById('filtro-favorito-escritorio');
-    const filtroFavoritoMovil = document.getElementById('filtro-favorito-movil');
-    if (filtroFavoritoEscritorio) filtroFavoritoEscritorio.checked = false;
-    if (filtroFavoritoMovil) filtroFavoritoMovil.checked = false;
-
-    valoracionMinima = 0;
-    actualizarVistasEstrellas();
-
-    criterioOrdenacion = '';
-    ordenInvertido = false;
-    const selectorEscritorio = document.getElementById('selector-ordenar-por-escritorio');
-    const selectorMovil = document.getElementById('selector-ordenar-por-movil');
-    if (selectorEscritorio) selectorEscritorio.value = '';
-    if (selectorMovil) selectorMovil.value = '';
-
-    const botonEscritorio = document.getElementById('boton-revertir-orden-escritorio');
-    const botonMovil = document.getElementById('boton-revertir-orden-movil');
-    if (botonEscritorio) botonEscritorio.classList.remove('activo');
-    if (botonMovil) botonMovil.classList.remove('activo');
-
-    filtrarYRenderizar();
-  }
-
-  function cerrarFiltrosMovil() {
-    const contenedorFiltrosMovil = document.getElementById('contenedor-filtros-movil');
-    if (contenedorFiltrosMovil) {
-      contenedorFiltrosMovil.classList.remove('activo');
-    }
-  }
-
-  // 11. Exportar negocios a un archivo CSV
-  function exportarResultadosCSV() {
-    if (!prospectosActivos || prospectosActivos.length === 0) {
-      alert("No hay prospectos activos para exportar.");
-      return;
-    }
-    
-    // Cabecera y mapeo de datos
-    const cabecera = ["Nombre", "Categoría", "Valoración", "Reseñas", "Dirección", "Distancia (km)", "Teléfono", "Favorito", "Etiquetas"];
-    const filas = prospectosActivos.map(prospecto => [
-      `"${prospecto.nombre.replace(/"/g, '""')}"`,
-      `"${prospecto.categoria.replace(/"/g, '""')}"`,
-      prospecto.valoracion,
-      prospecto.reseñas,
-      `"${prospecto.direccion.replace(/"/g, '""')}"`,
-      prospecto.distancia,
-      `"${prospecto.telefono.replace(/"/g, '""')}"`,
-      prospecto.esFavorito ? "Sí" : "No",
-      `"${(prospecto.tags || []).join('; ').replace(/"/g, '""')}"`
-    ]);
-    
-    // Contenido CSV con codificación UTF-8 BOM para soporte correcto de acentos en Microsoft Excel en español
-    const contenidoCSV = "\uFEFF" + [cabecera.join(";"), ...filas.map(f => f.join(";"))].join("\n");
-    
-    // Descarga del archivo
-    const blob = new Blob([contenidoCSV], { type: "text/csv;charset=utf-8;" });
-    const url = URL.createObjectURL(blob);
-    const enlace = document.createElement("a");
-    enlace.setAttribute("href", url);
-    enlace.setAttribute("download", `resultados_negocios_${new Date().toISOString().slice(0, 10)}.csv`);
-    enlace.style.visibility = "hidden";
-    document.body.appendChild(enlace);
-    enlace.click();
-    document.body.removeChild(enlace);
-  }
-
-  // 10. Despliegue de selectores múltiples
-  function toggleSelectorMultiple(contenedorId, event) {
-    event.stopPropagation();
-    
-    const contenedor = document.getElementById(contenedorId);
-    if (!contenedor) return;
-    
-    const opciones = contenedor.querySelector('.selector-multiple-opciones');
-    if (!opciones) return;
-    
-    document.querySelectorAll('.selector-multiple-opciones').forEach(opc => {
-      if (opc !== opciones) {
-        opc.classList.remove('activo');
-      }
-    });
-    
-    opciones.classList.toggle('activo');
-  }
-
-  document.addEventListener('DOMContentLoaded', () => {
-    inicializarCategoriasDesplegable();
-    actualizarDesplegablesEtiquetas();
-    inicializarEstrellas();
-    
-    const favEscritorio = document.getElementById('filtro-favorito-escritorio');
-    const favMovil = document.getElementById('filtro-favorito-movil');
-
-    if (favEscritorio && favMovil) {
-      favEscritorio.addEventListener('change', (e) => {
-        favMovil.checked = e.target.checked;
-        filtrarYRenderizar();
-      });
-      favMovil.addEventListener('change', (e) => {
-        favEscritorio.checked = e.target.checked;
-        filtrarYRenderizar();
-      });
-    }
-
-    const botonFiltrosMovil = document.getElementById('boton-filtros-movil');
-    const contenedorFiltrosMovil = document.getElementById('contenedor-filtros-movil');
-    const botonRatingMovil = document.getElementById('boton-rating-movil');
-
-    if (botonFiltrosMovil && contenedorFiltrosMovil) {
-      botonFiltrosMovil.addEventListener('click', () => {
-        contenedorFiltrosMovil.classList.toggle('activo');
-      });
-    }
-
-    if (botonRatingMovil && contenedorFiltrosMovil) {
-      botonRatingMovil.addEventListener('click', () => {
-        contenedorFiltrosMovil.classList.add('activo');
-        contenedorFiltrosMovil.scrollIntoView({ behavior: 'smooth' });
-      });
-    }
-    
-    // Cierre al hacer clic fuera
-    document.addEventListener('click', (evento) => {
-      if (!evento.target.closest('.selector-multiple-contenedor')) {
-        document.querySelectorAll('.selector-multiple-opciones').forEach(opciones => {
-          opciones.classList.remove('activo');
-        });
-      }
-    });
-    
-    // Renderizado inicial
-    filtrarYRenderizar();
-  });
-</script>
 
 </body>
 </html>
