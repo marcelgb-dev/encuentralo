@@ -15,11 +15,10 @@ public class Busqueda {
     private List<Resultado> resultados;
 
     // Constructor
-    public Busqueda(String termino, LocalDateTime fecha, Integer idUsuario, String ciudad) {
+    public Busqueda(String termino, LocalDateTime fecha, Integer idUsuario) {
         this.termino = termino;
         this.fecha = fecha;
         this.idUsuario = idUsuario;
-        this.ciudad = ciudad;
     }
 
 
