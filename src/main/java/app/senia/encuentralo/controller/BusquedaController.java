@@ -61,8 +61,8 @@ public class BusquedaController {
         redirectAttributes.addFlashAttribute("resultados", resultados);
         redirectAttributes.addFlashAttribute("busqueda", busqueda);
 
-        //return "redirect:/resultados";
-        return "redirect:/historial";
+        return "redirect:/resultados";
+        //return "redirect:/historial";
 
         // Guardamos la Búsqueda y sus Resultados asociados en la Base de Datos.
         // Este método en tu Service debería devolver la entidad Busqueda ya persistida con su ID autogenerado.
