@@ -438,102 +438,19 @@
       </button>
     </div>
 
+    <!-- CONTENEDOR PRINCIPAL DE RESULTADOS (MÓVIL) -->
     <div class="space-y-4">
-      <div class="texto-label-sm texto-outline uppercase tracking-wider mb-2">Hoy</div>
       <div class="bg-blanco p-6 redondeado-xl tarjeta-sombra border borde-superficie flex flex-col md:flex-row md:items-center justify-between gap-4 hover:shadow-md transition grupo">
         <div class="flex items-inicio gap-4">
-          <div class="w-12 h-12 redondeado-lg bg-primario-contenedor flex items-center justify-center">
-            <span class="material-symbols-outlined texto-blanco">public</span>
-          </div>
           <div>
-            <h3 class="texto-body-lg texto-primario mb-1 font-semibold">Empresas de logística en Madrid</h3>
-            <div class="flex flex-envolver items-center gap-3">
-              <span class="bg-secundario-fijo texto-secundario-fijo px-2 py-0.5 redondeado texto-label-sm">Google Maps</span>
-              <span class="texto-outline texto-body-sm flex items-center gap-1">
-                <span class="material-symbols-outlined">schedule</span>
-                10:45 AM
-              </span>
-            </div>
-          </div>
-        </div>
-        <div class="flex items-center gap-3 opacidad-0 grupo-hover:opacidad-100 transition">
-          <button class="flex items-center gap-2 px-4 py-2 bg-primario texto-blanco redondeado-lg texto-label-sm active:scale-95 transition">
-            <span class="material-symbols-outlined">refresh</span>
-            Repetir Búsqueda
-          </button>
-          <button class="p-2 texto-outline hover:texto-error hover:bg-error-contenedor redondeado-lg transition">
-            <span class="material-symbols-outlined">delete</span>
-          </button>
-        </div>
-      </div>
-
-      <div class="bg-blanco p-6 redondeado-xl tarjeta-sombra border borde-superficie flex flex-col md:flex-row md:items-center justify-between gap-4 hover:shadow-md transition grupo">
-        <div class="flex items-inicio gap-4">
-          <div class="w-12 h-12 redondeado-lg bg-secundario-contenedor flex items-center justify-center">
-            <span class="material-symbols-outlined texto-primario">apartment</span>
-          </div>
-          <div>
-            <h3 class="texto-body-lg texto-primario mb-1 font-semibold">Inmobiliarias con más de 50 reseñas</h3>
-            <div class="flex flex-envolver items-center gap-3">
-              <span class="bg-secundario-fijo texto-secundario-fijo px-2 py-0.5 redondeado texto-label-sm">TripAdvisor</span>
-              <span class="texto-outline texto-body-sm flex items-center gap-1">
-                <span class="material-symbols-outlined">schedule</span>
-                08:30 AM
-              </span>
-            </div>
-          </div>
-        </div>
-        <div class="flex items-center gap-3 opacidad-0 grupo-hover:opacidad-100 transition">
-          <button class="flex items-center gap-2 px-4 py-2 bg-primario texto-blanco redondeado-lg texto-label-sm active:scale-95 transition">
-            <span class="material-symbols-outlined">refresh</span>
-            Repetir Búsqueda
-          </button>
-          <button class="p-2 texto-outline hover:texto-error hover:bg-error-contenedor redondeado-lg transition">
-            <span class="material-symbols-outlined">delete</span>
-          </button>
-        </div>
-      </div>
-
-      <div class="texto-label-sm texto-outline uppercase tracking-wider mt-8 mb-2">Ayer</div>
-      <div class="bg-blanco p-6 redondeado-xl tarjeta-sombra border borde-superficie flex flex-col md:flex-row md:items-center justify-between gap-4 hover:shadow-md transition grupo">
-        <div class="flex items-inicio gap-4">
-          <div class="w-12 h-12 redondeado-lg bg-superficie-alta flex items-center justify-center">
-            <span class="material-symbols-outlined texto-secundario">storefront</span>
-          </div>
-          <div>
-            <h3 class="texto-body-lg texto-primario mb-1 font-semibold">Restaurantes italianos en Barcelona</h3>
-            <div class="flex flex-envolver items-center gap-3">
-              <span class="bg-secundario-fijo texto-secundario-fijo px-2 py-0.5 redondeado texto-label-sm">Foursquare</span>
-              <span class="texto-outline texto-body-sm flex items-center gap-1">
-                <span class="material-symbols-outlined">calendar_today</span>
-                23 Oct, 2023
-              </span>
-            </div>
-          </div>
-        </div>
-        <div class="flex items-center gap-3 opacidad-0 grupo-hover:opacidad-100 transition">
-          <button class="flex items-center gap-2 px-4 py-2 bg-primario texto-blanco redondeado-lg texto-label-sm active:scale-95 transition">
-            <span class="material-symbols-outlined">refresh</span>
-            Repetir Búsqueda
-          </button>
-          <button class="p-2 texto-outline hover:texto-error hover:bg-error-contenedor redondeado-lg transition">
-            <span class="material-symbols-outlined">delete</span>
-          </button>
-        </div>
-      </div>
-
-      <div class="bg-blanco p-6 redondeado-xl tarjeta-sombra border borde-superficie flex flex-col md:flex-row md:items-center justify-between gap-4 hover:shadow-md transition grupo">
-        <div class="flex items-inicio gap-4">
-          <div class="w-12 h-12 redondeado-lg bg-terciario-contenedor flex items-center justify-center">
-            <span class="material-symbols-outlined texto-blanco">medical_services</span>
-          </div>
-          <div>
-            <h3 class="texto-body-lg texto-primario mb-1 font-semibold">Clínicas dentales abiertas 24h</h3>
+            <h3 th:text="${bus.termino}" class="texto-body-lg texto-primario mb-1 font-semibold">Ejemplo de Término de Búsqueda</h3>
+            <h2 th:text="${bus.ciudad}" class="texto-body-sm texto-secundario mb-3">Ubicación de ejemplo</h2>
             <div class="flex flex-envolver items-center gap-3">
               <span class="bg-secundario-fijo texto-secundario-fijo px-2 py-0.5 redondeado texto-label-sm">Google Maps</span>
               <span class="texto-outline texto-body-sm flex items-center gap-1">
                 <span class="material-symbols-outlined">calendar_today</span>
-                23 Oct, 2023
+                <span th:text="${#temporals.format(bus.fecha, 'dd MMM yyyy')}">00 Mes 2000</span>
+                <span th:text="' - ' + ${#temporals.format(bus.fecha, 'hh:mm a')}" class="texto-body-sm texto-secundario">- 00:00 AM</span>
               </span>
             </div>
           </div>
