@@ -1182,8 +1182,12 @@
     <section class="seccion-cabecera-movil">
       <div class="flex flex-columna justificar-entre">
         <div>
-          <h2 class="titulo-principal">124 Resultados en Madrid</h2>
-          <p class="texto-cuerpo-pequeno margen-arriba-xs">Mostrando prospectos de alta relevancia para el sector IT</p>
+          <span th:text="${#lists.size(resultados)} + ' resultados en ' + ${busqueda.ciudad}">
+            100 Resultados en Madrid
+          </span>
+          <p class="texto-cuerpo-pequeno margen-arriba-xs">Mostrando mejores coincidencias para
+            <span th:text='|"${busqueda.termino}"|'>"negocios"</span>
+          </p>
         </div>
         <div class="barra-filtros-rapidos-movil">
           <button class="boton boton-secundario filtro-rapido-boton" id="boton-rating-movil">
@@ -1279,47 +1283,51 @@
     </div>
 
     <div class="grilla-resultados" id="grilla-resultados-movil">
-      <article class="tarjeta-prospecto">
-        <div><div class="tarjeta-cabecera"><span class="etiqueta-categoria tecnologia">Tecnología</span><button class="boton-estrella" title="Favorito"><span class="material-symbols-outlined">star</span></button></div>
-          <h3 class="titulo-tarjeta margen-abajo-sm">TechNode Solutions</h3>
-          <div class="tarjeta-valoracion"><span class="tarjeta-valoracion-puntos">4.8</span><div class="tarjeta-valoracion-estrellas"><span class="material-symbols-outlined icono-lleno">star</span><span class="material-symbols-outlined icono-lleno">star</span><span class="material-symbols-outlined icono-lleno">star</span><span class="material-symbols-outlined icono-lleno">star</span><span class="material-symbols-outlined icono-lleno">star_half</span></div><span class="tarjeta-valoracion-cantidad">(124 reseñas)</span></div>
-          <div class="tarjeta-contacto-lista"><div class="tarjeta-contacto-item"><span class="material-symbols-outlined">location_on</span><p>Paseo de la Castellana, 256, 28046 Madrid</p></div><div class="tarjeta-contacto-item"><span class="material-symbols-outlined">distance</span><p>0.8 km</p></div><div class="tarjeta-contacto-item"><span class="material-symbols-outlined">call</span><p>+34 915 678 901</p></div></div>
-        </div><div class="tarjeta-acciones"><button class="boton boton-primario">Ver Detalles</button></div>
-      </article>
-      <article class="tarjeta-prospecto">
-        <div><div class="tarjeta-cabecera"><span class="etiqueta-categoria logistica">Logística</span><button class="boton-estrella activo" title="Favorito"><span class="material-symbols-outlined icono-lleno">star</span></button></div>
-          <h3 class="titulo-tarjeta margen-abajo-sm">LogistiCorp Global</h3>
-          <div class="tarjeta-valoracion"><span class="tarjeta-valoracion-puntos">4.5</span><div class="tarjeta-valoracion-estrellas"><span class="material-symbols-outlined icono-lleno">star</span><span class="material-symbols-outlined icono-lleno">star</span><span class="material-symbols-outlined icono-lleno">star</span><span class="material-symbols-outlined icono-lleno">star</span><span class="material-symbols-outlined icono-lleno">star_half</span></div><span class="tarjeta-valoracion-cantidad">(89 reseñas)</span></div>
-          <div class="tarjeta-contacto-lista"><div class="tarjeta-contacto-item"><span class="material-symbols-outlined">location_on</span><p>Polígono Ind. Coslada, Calle B, 12, 28823 Madrid</p></div><div class="tarjeta-contacto-item"><span class="material-symbols-outlined">distance</span><p>12.4 km</p></div><div class="tarjeta-contacto-item"><span class="material-symbols-outlined">call</span><p>+34 918 234 567</p></div></div>
-        </div><div class="tarjeta-acciones"><button class="boton boton-primario">Ver Detalles</button></div>
-      </article>
-      <article class="tarjeta-prospecto">
-        <div><div class="tarjeta-cabecera"><span class="etiqueta-categoria finanzas">Finanzas</span><button class="boton-estrella" title="Favorito"><span class="material-symbols-outlined">star</span></button></div>
-          <h3 class="titulo-tarjeta margen-abajo-sm">EuroFin Advisors</h3>
-          <div class="tarjeta-valoracion"><span class="tarjeta-valoracion-puntos">4.9</span><div class="tarjeta-valoracion-estrellas"><span class="material-symbols-outlined icono-lleno">star</span><span class="material-symbols-outlined icono-lleno">star</span><span class="material-symbols-outlined icono-lleno">star</span><span class="material-symbols-outlined icono-lleno">star</span><span class="material-symbols-outlined icono-lleno">star</span></div><span class="tarjeta-valoracion-cantidad">(210 reseñas)</span></div>
-          <div class="tarjeta-contacto-lista"><div class="tarjeta-contacto-item"><span class="material-symbols-outlined">location_on</span><p>Calle de Serrano, 45, 28001 Madrid</p></div><div class="tarjeta-contacto-item"><span class="material-symbols-outlined">distance</span><p>1.5 km</p></div><div class="tarjeta-contacto-item"><span class="material-symbols-outlined">call</span><p>+34 913 456 789</p></div></div>
-        </div><div class="tarjeta-acciones"><button class="boton boton-primario">Ver Detalles</button></div>
-      </article>
-      <article class="tarjeta-prospecto">
-        <div><div class="tarjeta-cabecera"><span class="etiqueta-categoria saas">SaaS</span><button class="boton-estrella" title="Favorito"><span class="material-symbols-outlined">star</span></button></div>
-          <h3 class="titulo-tarjeta margen-abajo-sm">CloudSphere Data</h3>
-          <div class="tarjeta-valoracion"><span class="tarjeta-valoracion-puntos">4.6</span><div class="tarjeta-valoracion-estrellas"><span class="material-symbols-outlined icono-lleno">star</span><span class="material-symbols-outlined icono-lleno">star</span><span class="material-symbols-outlined icono-lleno">star</span><span class="material-symbols-outlined icono-lleno">star</span><span class="material-symbols-outlined icono-lleno">star_half</span></div><span class="tarjeta-valoracion-cantidad">(78 reseñas)</span></div>
-          <div class="tarjeta-contacto-lista"><div class="tarjeta-contacto-item"><span class="material-symbols-outlined">location_on</span><p>Calle de Orense, 34, 28020 Madrid</p></div><div class="tarjeta-contacto-item"><span class="material-symbols-outlined">distance</span><p>2.1 km</p></div><div class="tarjeta-contacto-item"><span class="material-symbols-outlined">call</span><p>+34 911 234 567</p></div></div>
-        </div><div class="tarjeta-acciones"><button class="boton boton-primario">Ver Detalles</button></div>
-      </article>
-      <article class="tarjeta-prospecto">
-        <div><div class="tarjeta-cabecera"><span class="etiqueta-categoria retail">Retail</span><button class="boton-estrella" title="Favorito"><span class="material-symbols-outlined">star</span></button></div>
-          <h3 class="titulo-tarjeta margen-abajo-sm">MarketFlow Retail</h3>
-          <div class="tarjeta-valoracion"><span class="tarjeta-valoracion-puntos">4.2</span><div class="tarjeta-valoracion-estrellas"><span class="material-symbols-outlined icono-lleno">star</span><span class="material-symbols-outlined icono-lleno">star</span><span class="material-symbols-outlined icono-lleno">star</span><span class="material-symbols-outlined icono-lleno">star</span><span class="material-symbols-outlined">star</span></div><span class="tarjeta-valoracion-cantidad">(56 reseñas)</span></div>
-          <div class="tarjeta-contacto-lista"><div class="tarjeta-contacto-item"><span class="material-symbols-outlined">location_on</span><p>Calle de Fuencarral, 92, 28004 Madrid</p></div><div class="tarjeta-contacto-item"><span class="material-symbols-outlined">distance</span><p>1.8 km</p></div><div class="tarjeta-contacto-item"><span class="material-symbols-outlined">call</span><p>+34 917 890 123</p></div></div>
-        </div><div class="tarjeta-acciones"><button class="boton boton-primario">Ver Detalles</button></div>
-      </article>
-      <article class="tarjeta-prospecto">
-        <div><div class="tarjeta-cabecera"><span class="etiqueta-categoria energia">Energía</span><button class="boton-estrella" title="Favorito"><span class="material-symbols-outlined">star</span></button></div>
-          <h3 class="titulo-tarjeta margen-abajo-sm">EcoSystem Renewables</h3>
-          <div class="tarjeta-valoracion"><span class="tarjeta-valoracion-puntos">4.7</span><div class="tarjeta-valoracion-estrellas"><span class="material-symbols-outlined icono-lleno">star</span><span class="material-symbols-outlined icono-lleno">star</span><span class="material-symbols-outlined icono-lleno">star</span><span class="material-symbols-outlined icono-lleno">star</span><span class="material-symbols-outlined icono-lleno">star_half</span></div><span class="tarjeta-valoracion-cantidad">(42 reseñas)</span></div>
-          <div class="tarjeta-contacto-lista"><div class="tarjeta-contacto-item"><span class="material-symbols-outlined">location_on</span><p>Calle de Alcalá, 120, 28009 Madrid</p></div><div class="tarjeta-contacto-item"><span class="material-symbols-outlined">distance</span><p>3.1 km</p></div><div class="tarjeta-contacto-item"><span class="material-symbols-outlined">call</span><p>+34 913 456 789</p></div></div>
-        </div><div class="tarjeta-acciones"><button class="boton boton-primario">Ver Detalles</button></div>
+      <article th:each="res : ${resultados}" class="tarjeta-prospecto">
+          <div>
+            <div class="tarjeta-cabecera">
+              <div style="display:flex; gap:0.2rem">
+                <span th:each="cat : ${res.categorias}" th:text="${cat.nombre}" class="etiqueta-categoria tecnologia">Categoria</span>
+              </div>
+              <button class="boton-estrella" title="Favorito">
+                <span class="material-symbols-outlined">star</span>
+              </button>
+            </div>
+            <h3 th:text="${res.nombre}" class="titulo-tarjeta margen-abajo-sm">Nombre negocio</h3>
+            <div class="tarjeta-valoracion">
+              <span th:text="${res.valoracion}" class="tarjeta-valoracion-puntos">5</span>
+              <div class="tarjeta-valoracion-estrellas" th:with="rating=${res.valoracion}">
+                <!-- Bucle fijo de 1 a 5 para las 5 estrellas posibles -->
+                <span th:each="i : ${#numbers.sequence(1, 5)}"
+                      class="material-symbols-outlined"
+                      th:classappend="${rating >= i} ? 'icono-lleno' : (${rating >= i - 0.5} ? 'icono-media' : 'icono-vacia')"
+                      th:text="${rating >= i} ? 'star' : (${rating >= i - 0.5} ? 'star_half' : 'grade')">
+                </span>
+              </div>
+              <span th:text="'(' + ${res.numValoraciones} + ' reseñas)'" class="tarjeta-valoracion-cantidad">(0 reseñas)</span>
+            </div>
+            <div class="tarjeta-contacto-lista">
+              <div class="tarjeta-contacto-item">
+                <span class="material-symbols-outlined">location_on</span>
+                <p th:text="${res.direccion}">Paseo de la Castellana, 256, 28046 Madrid</p>
+              </div>
+              <div class="tarjeta-contacto-item">
+                <span class="material-symbols-outlined">distance</span>
+                <span th:text="${res.distancia >= 1000}
+                    ? ${#numbers.formatDecimal(res.distancia / 1000.0, 1, 1)} + ' km'
+                    : ${#numbers.formatDecimal(res.distancia, 1, 0)} + ' m'">
+                    1.2 km
+                </span>
+              </div>
+              <div class="tarjeta-contacto-item">
+                <span class="material-symbols-outlined">call</span>
+                <p th:text="${res.telefono}">+34 915 678 901</p>
+              </div>
+            </div>
+          </div>
+          <div class="tarjeta-acciones">
+            <a th:href="${res.url}" target="_blank" class="boton boton-primario" style="width:100%">Abrir en Yelp</a>
+          </div>
       </article>
     </div>
 
@@ -1485,8 +1493,8 @@
       <div class="resultados-cabecera-linea">
         <div class="resultados-cabecera-texto">
           <h2 id="contador-resultados-escritorio">
-            <span th:text="${#lists.size(resultados)} + ' resultados en ' +
-                  ${busqueda.ciudad}">100 Resultados en Madrid
+            <span th:text="${#lists.size(resultados)} + ' resultados en ' + ${busqueda.ciudad}">
+              100 Resultados en Madrid
             </span>
           </h2>
           <p>Mostrando mejores coincidencias para
@@ -1553,9 +1561,7 @@
             </div>
           </div>
           <div class="tarjeta-acciones">
-            <a th:href="${res.url}" target="_blank">
-              <button class="boton boton-primario">Abrir en Yelp</button>
-            </a>
+            <a th:href="${res.url}" target="_blank" class="boton boton-primario" style="width:100%">Abrir en Yelp</a>
           </div>
         </article>
       </div>
