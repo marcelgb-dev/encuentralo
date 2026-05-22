@@ -1232,46 +1232,125 @@
           <p class="texto-label-sm texto-secundario uppercase tracking-wider">Nunca mejor dicho...</p>
 
           <p class="texto-body-sm texto-secundario max-w-lg mx-auto">Identifique oportunidades geográficas de alto valor
-            corporativo y localice prospectos Premium en tiempo real bajo exigentes criterios de precisión comercial.
+            corporativo y localice negocios en tiempo real bajo exigentes criterios de precisión comercial.
           </p>
         </div>
 
-        <div class="space-y-6">
-          <!-- TÉRMINO -->
-          <div class="space-y-2">
-            <label class="block texto-label-md texto-primario font-semibold">Palabra Clave / Categoría</label>
-            <div class="relative">
-              <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 texto-secundario"
-                style="font-size: 22px;">search</span>
-              <input id="termino-desktop"
-                class="ancho-completo pl-12 pr-12 py-4 bg-superficie-baja border border-borde-variante redondeado-xl focus:ring-2 focus:ring-primario focus:bg-blanco transition texto-body-md"
-                placeholder="Ej. Sedes Corporativas, Centros de Negocio Premium..." type="text">
+        <form id="formulario-busqueda" th:action="@{/buscar/nueva}" method="post" th:object="${busqueda}">
+          <div class="space-y-6">
+            <!-- TÉRMINO -->
+            <div class="space-y-2">
+              <label class="block texto-label-md texto-primario font-semibold">Palabra Clave / Categoría</label>
+              <div class="relative">
+                <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 texto-secundario"
+                  style="font-size: 22px;">search</span>
+                <input type="text" id="termino-desktop" th:field="*{temino}"
+                  class="ancho-completo pl-12 pr-12 py-4 bg-superficie-baja border border-borde-variante redondeado-xl focus:ring-2 focus:ring-primario focus:bg-blanco transition texto-body-md"
+                  placeholder="Ej. Sedes Corporativas, Centros de Negocio Premium...">
+              </div>
             </div>
-          </div>
 
-          <!-- RADIO (SLIDER) -->
-          <div class="space-y-2 pt-2">
-            <div class="flex justify-between items-center">
-              <label class="texto-label-md texto-primario font-semibold">Radio de Acción</label>
-              <span id="valor-radio-desktop" class="texto-label-md texto-primario font-bold">5.0 km</span>
+            <!-- RADIO (SLIDER) -->
+            <div class="space-y-2 pt-2">
+              <div class="flex justify-between items-center">
+                <label class="texto-label-md texto-primario font-semibold">Radio de búsqueda</label>
+                <div class="texto-label-md texto-primario font-semibold valor-deslizador">
+                  Distancia máxima: <span id="valor-deslizador-texto"></span>
+                </div>
+        
+              </div>
+              <input id="radio-deslizador"
+                th:field="${busqueda.radio ?: 5000}"
+                name="radio"
+                class="ancho-completo h-1.5 bg-superficie-mas-alta redondeado-lg appearance-none cursor-pointer accent-primario"
+                type="range" 
+                min="100" 
+                max="40000">
+              <div class="flex justify-between mt-2">
+                <span class="texto-label-sm texto-outline font-semibold">100 m</span>
+                <span class="texto-label-sm texto-outline font-semibold">40 km</span>
+              </div>
             </div>
-            <input id="radio-deslizador"
-              class="ancho-completo h-1.5 bg-superficie-mas-alta redondeado-lg appearance-none cursor-pointer accent-primario"
-              type="range" min="1" max="50" value="5">
-            <div class="flex justify-between mt-2">
-              <span class="texto-label-sm texto-outline font-semibold">1 km</span>
-              <span class="texto-label-sm texto-outline font-semibold">50 km</span>
-            </div>
-          </div>
+            <!-- SCRIPT PARA PINTAR EL VALOR DEL RADIO-->
+            <script>
+              // 1. Obtenemos las referencias a los elementos del DOM
+              const deslizador = document.getElementById('radio-deslizador');
+              const visorTexto = document.getElementById('valor-deslizador-texto');
 
-          <div class="pt-6 border-t borde-superficie">
-            <button
-              class="ancho-completo py-4 bg-primario texto-blanco redondeado-xl texto-label-md shadow-lg flex items-center justify-center gap-2 hover:opacity-90 transition font-bold active:scale-95">
-              <span class="material-symbols-outlined">rocket_launch</span>
-              Buscar
-            </button>
+              // 2. Función para actualizar el texto en el HTML
+              function actualizarVisor() {
+                  const metros = parseInt(deslizador.value);
+
+                  if (metros >= 1000) {
+                    // Convertimos a km y fijamos 1 decimal (ej: 1.5 km)
+                    const kilometros = (metros / 1000).toFixed(1);
+                    visorTexto.textContent = kilometros + " km";
+                  } else {
+                    // Si es menor de 1000, lo dejamos en metros sin decimales
+                    visorTexto.textContent = metros + " m";
+                  }
+                }
+
+              // 3. Escuchamos el evento 'input' para actualizar en tiempo real mientras se arrastra
+              deslizador.addEventListener('input', actualizarVisor);
+
+              // 4. Ejecutamos la función una vez al cargar la página para pintar el valor inicial
+              actualizarVisor();
+            </script>
+
+            <div class="pt-6 border-t borde-superficie">
+              <button type="submit"
+                class="ancho-completo py-4 bg-primario texto-blanco redondeado-xl texto-label-md shadow-lg flex items-center justify-center gap-2 hover:opacity-90 transition font-bold active:scale-95">
+                <span class="material-symbols-outlined">rocket_launch</span>
+                Buscar
+              </button>
+            </div>
+            <!-- CAMPOS OCULTOS (LATITUD, LONGITUD, LÍMITE)-->
+            <div>
+              <input hidden type="number" step="any" id="latitud" th:field="*{latitud}" required>
+              <input hidden type="number" step="any" id="longitud" th:field="*{longitud}" required> 
+              <input type="number" id="limite" th:field="*{limite}" placeholder="10"> 
+            </div>
+            <!--SCRIPT PARA OBTENER LA UBICACIÓN DEL USUARIO-->
+            <script>
+              document.getElementById('formulario-busqueda').addEventListener('submit', function(event) {
+                  const latInput = document.getElementById('latitud');
+                  const lonInput = document.getElementById('longitud');
+
+                  // Si ya tenemos coordenadas cargadas (por ejemplo, porque falló el envío previo pero el GPS ya leyó), enviamos del tirón
+                  if (latInput.value && lonInput.value) {
+                      return; 
+                  }
+
+                  // 1. Detenemos temporalmente el envío del formulario para que no viaje vacío
+                  event.preventDefault();
+                  
+                  const form = this;
+
+                  if (navigator.geolocation) {
+                      // Cambiar visualmente el texto del botón puede ser útil aquí para dar feedback de "Cargando GPS..."
+                      
+                      navigator.geolocation.getCurrentPosition(
+                          (position) => {
+                              // 2. Inyectamos los valores reales en los campos ocultos
+                              latInput.value = position.coords.latitude;
+                              lonInput.value = position.coords.longitude;
+                              
+                              // 3. Reanudamos el envío de forma manual ahora que los datos están listos
+                              form.submit();
+                          }, 
+                          (error) => {
+                              alert("Es obligatorio activar el GPS y dar permisos de ubicación para realizar la búsqueda.");
+                              console.error(error);
+                          }
+                      );
+                  } else {
+                      alert("Tu navegador no soporta geolocalización.");
+                  }
+              });
+            </script>
           </div>
-        </div>
+        </form>
     </main>
   </div>
 
