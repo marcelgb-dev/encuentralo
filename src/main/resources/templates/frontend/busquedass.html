@@ -1134,7 +1134,7 @@
             </div>
           </div>
 
-          <button onclick="ejecutarBusquedaMovil()"
+          <button
             class="ancho-completo py-5 bg-primario texto-blanco redondeado-xl texto-headline-md shadow-lg hover:bg-primario-contenedor transition active:scale-95 flex items-center justify-center gap-3 mt-4">
             <span>Iniciar Búsqueda</span>
             <span class="material-symbols-outlined">arrow_forward</span>
@@ -1265,7 +1265,7 @@
           </div>
 
           <div class="pt-6 border-t borde-superficie">
-            <button onclick="ejecutarBusquedaDesktop()"
+            <button
               class="ancho-completo py-4 bg-primario texto-blanco redondeado-xl texto-label-md shadow-lg flex items-center justify-center gap-2 hover:opacity-90 transition font-bold active:scale-95">
               <span class="material-symbols-outlined">rocket_launch</span>
               Buscar
@@ -1275,42 +1275,6 @@
     </main>
   </div>
 
-  <!-- JAVASCRIPT INTERACTIVO -->
-  <script>
-    // Control deslizante de Radio en Escritorio
-    const deslizadorRadio = document.getElementById('radio-deslizador');
-    const indicadorValor = document.getElementById('valor-radio-desktop');
-
-    if (deslizadorRadio && indicadorValor) {
-      deslizadorRadio.addEventListener('input', (e) => {
-        const valor = parseFloat(e.target.value).toFixed(1);
-        indicadorValor.textContent = `${valor} km`;
-      });
-    }
-
-    // Redirección de Búsqueda a resultados.html
-    function ejecutarBusquedaMovil() {
-      const termino = document.getElementById('termino-movil').value.trim();
-      const radio = document.getElementById('radio-movil').value.trim();
-
-      let url = 'resultados.html';
-      if (termino || radio) {
-        url += `?termino=${encodeURIComponent(termino)}&radio=${encodeURIComponent(radio)}`;
-      }
-      window.location.href = url;
-    }
-
-    function ejecutarBusquedaDesktop() {
-      const termino = document.getElementById('termino-desktop').value.trim();
-      const radio = deslizadorRadio ? deslizadorRadio.value : '5';
-
-      let url = 'resultados.html';
-      if (termino || radio) {
-        url += `?termino=${encodeURIComponent(termino)}&radio=${encodeURIComponent(radio)}`;
-      }
-      window.location.href = url;
-    }
-  </script>
 </body>
 
 </html>
