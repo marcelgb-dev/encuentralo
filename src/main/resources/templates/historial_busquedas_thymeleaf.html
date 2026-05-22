@@ -440,7 +440,7 @@
 
     <!-- CONTENEDOR PRINCIPAL DE RESULTADOS (MÓVIL) -->
     <div class="space-y-4">
-      <div class="bg-blanco p-6 redondeado-xl tarjeta-sombra border borde-superficie flex flex-col md:flex-row md:items-center justify-between gap-4 hover:shadow-md transition grupo">
+      <div th:each="bus : ${busquedas}" class="bg-blanco p-6 redondeado-xl tarjeta-sombra border borde-superficie flex flex-col md:flex-row md:items-center justify-between gap-4 hover:shadow-md transition grupo">
         <div class="flex items-inicio gap-4">
           <div>
             <h3 th:text="${bus.termino}" class="texto-body-lg texto-primario mb-1 font-semibold">Ejemplo de Término de Búsqueda</h3>
