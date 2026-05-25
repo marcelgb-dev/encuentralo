@@ -27,13 +27,16 @@ public class BusquedaController {
         this.bs = bs;
     }
 
-    // Página temporal index.html que contiene un objeto vacío de SolicitudBusqueda para
-    // ser rellenado en el formulario
+    // Redirect básico temporal
     @GetMapping("/")
+    public String indice() {
+        return "redirect:/buscar";
+    }
+
+    @GetMapping("/buscar")
     public String getIndex(Model model) {
         // Búsqueda de ejemplo
-        SolicitudBusqueda solicitud = new SolicitudBusqueda("Restaurante", 39.42166875024546, -0.41739016142493673, 10, 10000);
-
+        SolicitudBusqueda solicitud = new SolicitudBusqueda("Restaurante", 39.42166875024546, -0.41739016142493673, 10, 20000);
         model.addAttribute("busqueda", solicitud);
         return "busquedass";
     }

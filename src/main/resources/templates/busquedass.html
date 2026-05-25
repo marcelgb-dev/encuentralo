@@ -1181,7 +1181,7 @@
           Búsqueda
         </a>
         <a class="flex items-center gap-3 px-4 py-3 redondeado-lg texto-secundario hover:bg-superficie-variante transition texto-label-md"
-          href="frontend/historial_busquedas.html">
+          th:href="@{/historial}" href="historial_busquedas_thymeleaf.html">
           <span class="material-symbols-outlined">history</span>
           Historial
         </a>
@@ -1192,11 +1192,11 @@
         </a>
       </nav>
       <div class="mt-auto space-y-4 px-4 pt-6 border-t borde-variante">
-        <button onclick="window.location.reload()"
+        <a th:ref="@{/buscar}" href="busquedass.html"
           class="ancho-completo flex items-center justify-center gap-2 bg-primario texto-blanco py-3 px-4 redondeado-lg texto-label-md hover:opacity-90 transition">
           <span class="material-symbols-outlined">add</span>
           Nueva Búsqueda
-        </button>
+        </a>
         <div class="space-y-1">
           <a class="flex items-center gap-3 py-2 texto-secundario texto-label-md hover:texto-primario" href="#">
             <span class="material-symbols-outlined">lock</span>
