@@ -1,27 +1,49 @@
 package app.senia.encuentralo.model;
 
+import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
+@Entity
+@Table(name = "Busqueda") // Conecta con la tabla Busqueda
 public class Busqueda {
 
-    // Atributos de la base de datos
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // AUTO_INCREMENT
+    @Column(name = "id_busqueda") // Mapea con id_busqueda
     private Integer id;
+
+    @Column(name = "termino_busqueda", nullable = false) // Mapea con termino_busqueda
     private String termino;
+
+    @Column(name = "fecha_busqueda", nullable = false) // Mapea con fecha_busqueda
     private LocalDateTime fecha;
-    private Integer idUsuario;
+
+    @Column(name = "ciudad", nullable = false)
     private String ciudad;
 
-    // Atributos propios del objeto Java
+    // RELACIÓN 1: Una búsqueda pertenece a un único Usuario
+    @ManyToOne
+    @JoinColumn(name = "id_usuario", nullable = false) // Clave foránea en SQL
+    private Usuario usuario; // Objeto Usuario completo
+
+    // RELACIÓN 2: Una búsqueda mapea muchos Resultados en Java
+    // El 'mappedBy' apunta al atributo 'busqueda' que crearemos en la clase
+    // Resultado
+    @OneToMany(mappedBy = "busqueda", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Resultado> resultados;
 
-    // Constructor
-    public Busqueda(String termino, LocalDateTime fecha, Integer idUsuario) {
-        this.termino = termino;
-        this.fecha = fecha;
-        this.idUsuario = idUsuario;
+    // Constructor vacío obligatorio para JPA
+    public Busqueda() {
     }
 
+    // Constructor adaptado para usar los objetos reales
+    public Busqueda(String termino, LocalDateTime fecha, Usuario usuario, String ciudad) {
+        this.termino = termino;
+        this.fecha = fecha;
+        this.usuario = usuario;
+        this.ciudad = ciudad;
+    }
 
     // Getters y Setters
     public Integer getId() {
@@ -48,20 +70,20 @@ public class Busqueda {
         this.fecha = fecha;
     }
 
-    public Integer getIdUsuario() {
-        return idUsuario;
-    }
-
-    public void setIdUsuario(Integer idUsuario) {
-        this.idUsuario = idUsuario;
-    }
-
     public String getCiudad() {
         return ciudad;
     }
 
     public void setCiudad(String ciudad) {
         this.ciudad = ciudad;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     public List<Resultado> getResultados() {

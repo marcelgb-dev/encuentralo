@@ -1,4 +1,4 @@
-package app.senia.encuentralo.model;
+package app.senia.encuentralo.dto;
 
 public class SolicitudBusqueda {
 
@@ -9,7 +9,9 @@ public class SolicitudBusqueda {
     private int limite; // Número máximo de resultados
     private int radio; // Radio de búsqueda en torno al usuario (en metros)
 
-    public SolicitudBusqueda(){}
+    public SolicitudBusqueda() {
+    }
+
     public SolicitudBusqueda(String temino, double latitud, double longitud, int limite, int radio) {
         this.temino = temino;
         this.latitud = latitud;

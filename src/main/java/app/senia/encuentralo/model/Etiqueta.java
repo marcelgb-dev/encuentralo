@@ -1,25 +1,41 @@
 package app.senia.encuentralo.model;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "Etiqueta") // Se conecta con la tabla Etiqueta
 public class Etiqueta {
 
-    // Atributos de la base de datos
-    private int id;
-    private String nombre;
-    private int idUsuario;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // AUTO_INCREMENT
+    @Column(name = "id_etiqueta") // Mapea con id_etiqueta
+    private Integer id;
 
-    // Constructor
-    public Etiqueta(String nombre, int idUsuario) {
-        this.id = id;
+    @Column(name = "nombre", nullable = false)
+    private String nombre;
+
+    // LA MAGIA DE LA RELACIÓN:
+    // Muchas etiquetas pertenecen a un único Usuario
+    @ManyToOne
+    @JoinColumn(name = "id_usuario", nullable = false) // Esta es la Foreign Key de tu SQL
+    private Usuario usuario; // ¡Guardamos el objeto Usuario entero!
+
+    // Constructor vacío obligatorio para JPA
+    public Etiqueta() {
+    }
+
+    // Constructor adaptado (ahora recibe el objeto Usuario completo)
+    public Etiqueta(String nombre, Usuario usuario) {
         this.nombre = nombre;
-        this.idUsuario = idUsuario;
+        this.usuario = usuario;
     }
 
     // Getters y Setters
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -31,11 +47,11 @@ public class Etiqueta {
         this.nombre = nombre;
     }
 
-    public int getIdUsuario() {
-        return idUsuario;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setIdUsuario(int idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }
