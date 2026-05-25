@@ -1,10 +1,12 @@
 package app.senia.encuentralo.service;
 
 import app.senia.encuentralo.model.Usuario;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 import java.util.List;
 
+@Service
 public class UsuarioService {
 
     public boolean verificarUsuario(String email, String password) {
