@@ -31,7 +31,7 @@ public class UsuarioController {
     public String procesarRegistro(@ModelAttribute("usuario") Usuario usuario, Model model) {
         try {
             // Le pedimos al servicio que haga su magia (validar y guardar)
-            usuarioService.registrarUsuario(usuario);
+            usuarioService.nuevoUsuario(usuario);
 
             // Si todo va bien, lo redirigimos a la pantalla de login con un mensaje de
             // éxito

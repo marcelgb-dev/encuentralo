@@ -31,7 +31,10 @@ public class BusquedaController {
     // ser rellenado en el formulario
     @GetMapping("/")
     public String getIndex(Model model) {
-        model.addAttribute("busqueda", new SolicitudBusqueda());
+        // Búsqueda de ejemplo
+        SolicitudBusqueda solicitud = new SolicitudBusqueda("Restaurante", 39.42166875024546, -0.41739016142493673, 10, 10000);
+
+        model.addAttribute("busqueda", solicitud);
         return "index";
     }
 
@@ -41,7 +44,7 @@ public class BusquedaController {
 
         // Ejecutamos la llamada a la API externa, que nos devuelve la búsqueda (NO TIENE ID)
         Busqueda busqueda = ys.llamarApi(
-                0,
+                1,
                 input.getTemino(),
                 input.getLatitud(),
                 input.getLongitud(),

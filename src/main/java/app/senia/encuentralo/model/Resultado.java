@@ -85,7 +85,7 @@ public class Resultado {
     }
 
     // Constructor secundario vacío por si vuestro JSON de pruebas lo necesita
-    public Resultado(double valoracion, int numValoraciones, String url, String telefono, double longitud,
+    public Resultado(double valoracion, int numReviews, String url, String telefono, double longitud,
             double latitud, int distancia, String direccion, String ciudad) {
     }
 
@@ -100,6 +100,7 @@ public class Resultado {
         return "ID: " + id +
                 "\nNombre: " + nombre +
                 "\nRating: " + valoracion +
+                "\nNum reviews: " + numReviews +
                 "\nUrl: " + url +
                 "\nTeléfono: " + telefono +
                 "\nDistancia: " + String.format("%.2f", distancia) +

@@ -11,7 +11,7 @@ public record BusinessDTO(
                 double rating,
                 @JsonProperty("review_count") int reviewCount,
                 String url,
-                String displayPhone,
+                @JsonProperty("display_phone") String displayPhone,
                 LocationDTO location,
                 CoordinatesDTO coordinates,
                 double distance,

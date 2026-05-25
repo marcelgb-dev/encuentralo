@@ -5,6 +5,9 @@ import app.senia.encuentralo.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
 public class UsuarioService {
 
@@ -12,7 +15,7 @@ public class UsuarioService {
     private UsuarioRepository usuarioRepository;
 
     // 1. MÉTODO DE REGISTRO (El tuyo rematado)
-    public Usuario registrarUsuario(Usuario usuario) throws Exception {
+    public Usuario nuevoUsuario(Usuario usuario) throws Exception {
         // 1. Comprobamos si el email ya está pillado
         Usuario usuarioExistente = usuarioRepository.findByEmail(usuario.getEmail());
 
@@ -40,5 +43,17 @@ public class UsuarioService {
         }
 
         return usuario;
+    }
+
+    public void editarUsuario(Integer usuarioId, Usuario usuario) {
+
+    }
+
+    public List<Usuario> obtenerListaUsuarios() {
+        return null;
+    }
+
+    public Optional<Usuario> obtenerUsuario(Integer usuarioId) {
+        return Optional.empty();
     }
 }

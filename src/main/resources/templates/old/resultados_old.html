@@ -40,7 +40,7 @@
                 <span class="coords" th:text="${res.distancia} + ' metros'">Distancia</span>
             </td>
             <td>
-                <span class="valoracion" th:text="${res.valoracion} + '⭐'">0.0</span><span class="coords" th:text="'(' + ${res.numValoraciones} + ' reviews)'"></span>
+                <span class="valoracion" th:text="${res.valoracion} + '⭐'">0.0</span><span class="coords" th:text="'(' + ${res.numReviews} + ' reviews)'"></span>
             </td>
             <td>
                 <span th:each="cat : ${res.categorias}" class="tag" th:text="${cat.nombre}">Categoría</span>

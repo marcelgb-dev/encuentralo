@@ -7,6 +7,7 @@ import app.senia.encuentralo.model.Categoria;
 import app.senia.encuentralo.model.Resultado;
 import app.senia.encuentralo.model.Usuario; // Añadido
 import app.senia.encuentralo.repository.UsuarioRepository; // Añadido para recuperar el objeto real
+import ch.qos.logback.core.net.SyslogOutputStream;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
@@ -37,54 +38,53 @@ public class YelpService implements ProviderService {
         this.usuarioRepository = usuarioRepository;
     }
 
-    public Busqueda llamarApi(Integer idUsuario, String termino, double latitud, double longitud, int radio,
-            int limite) {
+    public Busqueda llamarApi(Integer idUsuario, String termino, double latitud, double longitud, int radio, int limite) {
 
         // MOCKING (LLAMADA FALSA) - Ahora le pasamos el idUsuario para vincularlo
         // correctamente
         return llamarApiMock(idUsuario);
 
-        /*
-         * // CÓDIGO REAL CORREGIDO (Descomentar cuando paséis a producción)
-         * YelpResponse response = restClient.get()
-         * .uri(uriBuilder -> uriBuilder
-         * .path("/businesses/search")
-         * .queryParam("term", termino)
-         * .queryParam("latitude", latitud)
-         * .queryParam("longitude", longitud)
-         * .queryParam("radius", radio)
-         * .queryParam("limit", limite)
-         * .queryParam("locale", yelpLocale)
-         * .build())
-         * .retrieve()
-         * .body(YelpResponse.class);
-         * 
-         * if (response != null && response.businesses() != null) {
-         * // 1. Buscamos el objeto Usuario real usando el ID
-         * Usuario usuario = usuarioRepository.findById(idUsuario)
-         * .orElseThrow(() -> new RuntimeException("Usuario no encontrado con ID: " +
-         * idUsuario));
-         * 
-         * // 2. Inicializamos la búsqueda con el objeto usuario completo y ciudad vacía
-         * temporal
-         * Busqueda busqueda = new Busqueda(termino, LocalDateTime.now(), usuario, "");
-         * 
-         * // 3. Parseamos pasando el usuario y la búsqueda para que los resultados se
-         * aten correctamente
-         * List<Resultado> resultados = parsearDtos(response, usuario, busqueda);
-         * busqueda.setResultados(resultados);
-         * busqueda.setCiudad(obtenerCiudad(busqueda));
-         * 
-         * // 4. Guardamos usando los getters de ID correspondientes
-         * resultadoService.guardarResultados(busqueda.getId(), usuario.getId(),
-         * resultados);
-         * 
-         * return busqueda;
-         * }
-         * 
-         * System.out.println("ERROR: Respuesta de Yelp vacía");
-         * return null;
-         */
+            /*
+          // CÓDIGO REAL CORREGIDO (Descomentar cuando paséis a producción)
+          YelpResponse response = restClient.get()
+          .uri(uriBuilder -> uriBuilder
+          .path("/businesses/search")
+          .queryParam("term", termino)
+          .queryParam("latitude", latitud)
+          .queryParam("longitude", longitud)
+          .queryParam("radius", radio)
+          .queryParam("limit", limite)
+          .queryParam("locale", yelpLocale)
+          .build())
+          .retrieve()
+          .body(YelpResponse.class);
+
+          if (response != null && response.businesses() != null) {
+          // 1. Buscamos el objeto Usuario real usando el ID
+          Usuario usuario = usuarioRepository.findById(idUsuario)
+          .orElseThrow(() -> new RuntimeException("Usuario no encontrado con ID: " +
+          idUsuario));
+
+          // 2. Inicializamos la búsqueda con el objeto usuario completo y ciudad vacía
+          // temporal
+          Busqueda busqueda = new Busqueda(termino, LocalDateTime.now(), usuario, "");
+
+          // 3. Parseamos pasando el usuario y la búsqueda para que los resultados se
+          // aten correctamente
+          List<Resultado> resultados = parsearDtos(response, usuario, busqueda);
+          busqueda.setResultados(resultados);
+          busqueda.setCiudad(obtenerCiudad(busqueda));
+
+          // 4. Guardamos usando los getters de ID correspondientes
+          resultadoService.guardarResultados(busqueda.getId(), usuario.getId(),
+          resultados);
+
+          return busqueda;
+          }
+
+          System.out.println("ERROR: Respuesta de Yelp vacía");
+          return null;
+*/
     }
 
     // Convierte datos del DTO YelpResponse a una Lista<Resultado>
@@ -98,7 +98,7 @@ public class YelpService implements ProviderService {
         for (BusinessDTO dto : listaDtos) {
             String nombre = dto.name();
             double valoracion = dto.rating();
-            int numValoraciones = dto.reviewCount();
+            int numReviews = dto.reviewCount();
             String url = dto.url();
             String telefono = dto.displayPhone();
             int distancia = (int) dto.distance();
@@ -107,11 +107,14 @@ public class YelpService implements ProviderService {
             List<Categoria> categorias = Categoria.toCategorias(dto.getCategoryTitles());
 
             // CORREGIDO: Pasamos los objetos completos en lugar de "0, 0"
-            Resultado resultado = new Resultado(nombre, telefono, distancia, direccion, valoracion, numValoraciones,
+            Resultado resultado = new Resultado(nombre, telefono, distancia, direccion, valoracion, numReviews,
                     url, false, usuario, busqueda);
             resultado.setCiudad(ciudad);
             resultado.setCategorias(categorias);
             listaResultados.add(resultado);
+
+            // TESTING - Imprimir todos los resultados por pantalla
+            System.out.println(resultado);
         }
 
         return listaResultados;

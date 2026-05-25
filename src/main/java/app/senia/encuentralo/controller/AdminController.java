@@ -59,8 +59,14 @@ public class AdminController {
     public String guardarUsuario(@ModelAttribute("user") Usuario usuario) {
 
         // Si el objeto usuario tiene ID = 0, no existe en la BD así que lo creamos como nuevo
-        if (usuario.getId() == 0)
-            us.nuevoUsuario(usuario);
+        if (usuario.getId() == 0) {
+            try {
+                us.nuevoUsuario(usuario);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
         // Si el usuario ya existía al llamar a esta función, editamos sus datos
         else
             us.editarUsuario(usuario.getId(), usuario);
