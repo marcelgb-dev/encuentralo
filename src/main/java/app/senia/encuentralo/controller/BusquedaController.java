@@ -2,7 +2,7 @@ package app.senia.encuentralo.controller;
 
 import app.senia.encuentralo.model.Resultado;
 import app.senia.encuentralo.model.Busqueda;
-import app.senia.encuentralo.model.SolicitudBusqueda;
+import app.senia.encuentralo.dto.SolicitudBusqueda;
 import app.senia.encuentralo.service.ResultadoService;
 import app.senia.encuentralo.service.YelpService;
 import org.springframework.stereotype.Controller;
