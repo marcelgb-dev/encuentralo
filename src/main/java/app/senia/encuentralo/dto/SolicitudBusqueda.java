@@ -3,7 +3,7 @@ package app.senia.encuentralo.dto;
 public class SolicitudBusqueda {
 
     // Atributos
-    private String temino; // Término de búsqueda
+    private String termino; // Término de búsqueda
     private double latitud; // Latitud del usuario
     private double longitud; // Longitud del usuario
     private int limite; // Número máximo de resultados
@@ -12,20 +12,20 @@ public class SolicitudBusqueda {
     public SolicitudBusqueda() {
     }
 
-    public SolicitudBusqueda(String temino, double latitud, double longitud, int limite, int radio) {
-        this.temino = temino;
+    public SolicitudBusqueda(String termino, double latitud, double longitud, int limite, int radio) {
+        this.termino = termino;
         this.latitud = latitud;
         this.longitud = longitud;
         this.limite = limite;
         this.radio = radio;
     }
 
-    public String getTemino() {
-        return temino;
+    public String getTermino() {
+        return termino;
     }
 
-    public void setTemino(String temino) {
-        this.temino = temino;
+    public void setTermino(String termino) {
+        this.termino = termino;
     }
 
     public double getLatitud() {

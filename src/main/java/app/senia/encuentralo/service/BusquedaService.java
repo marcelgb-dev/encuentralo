@@ -30,7 +30,12 @@ public class BusquedaService {
         // Lógica para obtener el historial de búsquedas
         Usuario usuario = usuarioRepo.findById(usuarioId).orElseThrow();
 
-        return busquedaRepo.findByUsuarioOrderByFechaDesc(usuario);
+        List<Busqueda> busquedas = busquedaRepo.findByUsuarioOrderByFechaDesc(usuario);
+        for (Busqueda b : busquedas) {
+            System.out.println("ID: " + b.getId());
+        }
+
+        return busquedas;
     }
 
     // Guarda una Busqueda en la base de datos y la devuelve con los campos autogenerados (el ID)

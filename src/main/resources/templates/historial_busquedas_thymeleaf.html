@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -557,7 +557,9 @@
               </tr>
             </thead>
             <tbody class="divide-y borde-variante">
-              <tr th:each="bus : ${busquedas}" class="hover:bg-superficie-baja transition">
+              <tr th:each="bus : ${busquedas}"
+                  th:onclick="|window.location.href='@{/resultados/{id}(id=${bus.id})}'|"
+                  class="hover:bg-superficie-baja transition">
                 <td class="px-8 py-5">
                   <div th:text="${#temporals.format(bus.fecha, 'dd MMM yyyy')}" class="texto-body-md texto-primario">22 May 2024</div>
                   <div th:text="${#temporals.format(bus.fecha, 'hh:mm a')}"  class="texto-body-sm texto-secundario">11:02 AM</div>

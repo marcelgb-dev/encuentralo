@@ -1081,11 +1081,11 @@
           <a class="texto-primario font-bold border-b-2 border-primario py-1 texto-label-md"
             href="busquedass.html">Búsqueda</a>
           <a class="texto-secundario hover:bg-superficie-alta transition-colors px-2 py-1 redondeado texto-label-md"
-            href="historial_busquedas.html">Historial</a>
+            href="frontend/historial_busquedas.html">Historial</a>
           <a class="texto-secundario hover:bg-superficie-alta transition-colors px-2 py-1 redondeado texto-label-md"
-            href="favoritos.html">Favoritos</a>
+            href="frontend/favoritos.html">Favoritos</a>
           <a class="texto-secundario hover:bg-superficie-alta transition-colors px-2 py-1 redondeado texto-label-md"
-            href="panel_admin.html">Panel</a>
+            href="frontend/panel_admin.html">Panel</a>
         </nav>
         <div class="cursor-pointer active:scale-95 transition">
           <div
@@ -1150,17 +1150,17 @@
         <span class="texto-label-sm">Búsqueda</span>
       </a>
       <a class="flex flex-col items-center justify-center texto-variante px-3 py-1.5 hover:bg-superficie-variante transition"
-        href="historial_busquedas.html">
+        href="frontend/historial_busquedas.html">
         <span class="material-symbols-outlined">history</span>
         <span class="texto-label-sm">Historial</span>
       </a>
       <a class="flex flex-col items-center justify-center texto-variante px-3 py-1.5 hover:bg-superficie-variante transition"
-        href="favoritos.html">
+        href="frontend/favoritos.html">
         <span class="material-symbols-outlined">star</span>
         <span class="texto-label-sm">Favoritos</span>
       </a>
       <a class="flex flex-col items-center justify-center texto-variante px-3 py-1.5 hover:bg-superficie-variante transition"
-        href="panel_admin.html">
+        href="frontend/panel_admin.html">
         <span class="material-symbols-outlined">dashboard</span>
         <span class="texto-label-sm">Panel</span>
       </a>
@@ -1181,12 +1181,12 @@
           Búsqueda
         </a>
         <a class="flex items-center gap-3 px-4 py-3 redondeado-lg texto-secundario hover:bg-superficie-variante transition texto-label-md"
-          href="historial_busquedas.html">
+          href="frontend/historial_busquedas.html">
           <span class="material-symbols-outlined">history</span>
           Historial
         </a>
         <a class="flex items-center gap-3 px-4 py-3 redondeado-lg texto-secundario hover:bg-superficie-variante transition texto-label-md"
-          href="favoritos.html">
+          href="frontend/favoritos.html">
           <span class="material-symbols-outlined">star</span>
           Favoritos
         </a>
@@ -1202,7 +1202,7 @@
             <span class="material-symbols-outlined">lock</span>
             Cambiar contraseña
           </a>
-          <a class="flex items-center gap-3 py-2 texto-secundario texto-label-md hover:texto-error" href="login.html">
+          <a class="flex items-center gap-3 py-2 texto-secundario texto-label-md hover:texto-error" href="frontend/login.html">
             <span class="material-symbols-outlined">logout</span>
             Cerrar Sesión
           </a>
@@ -1244,7 +1244,7 @@
               <div class="relative">
                 <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 texto-secundario"
                   style="font-size: 22px;">search</span>
-                <input type="text" id="termino-desktop" th:field="*{temino}"
+                <input type="text" id="termino-desktop" th:field="*{termino}"
                   class="ancho-completo pl-12 pr-12 py-4 bg-superficie-baja border border-borde-variante redondeado-xl focus:ring-2 focus:ring-primario focus:bg-blanco transition texto-body-md"
                   placeholder="Ej. Sedes Corporativas, Centros de Negocio Premium...">
               </div>
@@ -1260,8 +1260,7 @@
         
               </div>
               <input id="radio-deslizador"
-                th:field="${busqueda.radio ?: 5000}"
-                name="radio"
+                th:field="*{radio}"
                 class="ancho-completo h-1.5 bg-superficie-mas-alta redondeado-lg appearance-none cursor-pointer accent-primario"
                 type="range" 
                 min="100" 
@@ -1297,7 +1296,12 @@
               // 4. Ejecutamos la función una vez al cargar la página para pintar el valor inicial
               actualizarVisor();
             </script>
-
+            <!-- CAMPOS OCULTOS (LATITUD, LONGITUD, LÍMITE)-->
+            <div>
+              <input type="hidden" step="any" id="latitud" th:field="*{latitud}" required>
+              <input type="hidden" step="any" id="longitud" th:field="*{longitud}" required>
+              <input type="hidden" id="limite" th:field="*{limite}" placeholder="10">
+            </div>
             <div class="pt-6 border-t borde-superficie">
               <button type="submit"
                 class="ancho-completo py-4 bg-primario texto-blanco redondeado-xl texto-label-md shadow-lg flex items-center justify-center gap-2 hover:opacity-90 transition font-bold active:scale-95">
@@ -1305,12 +1309,7 @@
                 Buscar
               </button>
             </div>
-            <!-- CAMPOS OCULTOS (LATITUD, LONGITUD, LÍMITE)-->
-            <div>
-              <input hidden type="number" step="any" id="latitud" th:field="*{latitud}" required>
-              <input hidden type="number" step="any" id="longitud" th:field="*{longitud}" required> 
-              <input type="number" id="limite" th:field="*{limite}" placeholder="10"> 
-            </div>
+
             <!--SCRIPT PARA OBTENER LA UBICACIÓN DEL USUARIO-->
             <script>
               document.getElementById('formulario-busqueda').addEventListener('submit', function(event) {

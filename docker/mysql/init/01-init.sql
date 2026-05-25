@@ -45,8 +45,6 @@ CREATE TABLE resultados(
     id_busqueda INT UNSIGNED NOT NULL
 );
 
-ALTER TABLE resultados ADD UNIQUE resultados_url_unique(url);
-
 CREATE TABLE resultados_categoria(
     id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     id_resultado INT UNSIGNED NOT NULL,

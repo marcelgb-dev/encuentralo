@@ -1,6 +1,5 @@
 package app.senia.encuentralo.controller;
 
-import app.senia.encuentralo.model.Resultado;
 import app.senia.encuentralo.model.Busqueda;
 import app.senia.encuentralo.dto.SolicitudBusqueda;
 import app.senia.encuentralo.service.BusquedaService;
@@ -36,7 +35,7 @@ public class BusquedaController {
         SolicitudBusqueda solicitud = new SolicitudBusqueda("Restaurante", 39.42166875024546, -0.41739016142493673, 10, 10000);
 
         model.addAttribute("busqueda", solicitud);
-        return "index";
+        return "busquedass";
     }
 
     // ENDPOINT DE ACCIÓN: Ejecuta la nueva búsqueda y redirige
@@ -46,7 +45,7 @@ public class BusquedaController {
         // Ejecutamos la llamada a la API externa, que nos devuelve la búsqueda (NO TIENE ID)
         Busqueda busqueda = ys.llamarApi(
                 1,
-                input.getTemino(),
+                input.getTermino(),
                 input.getLatitud(),
                 input.getLongitud(),
                 input.getRadio(),

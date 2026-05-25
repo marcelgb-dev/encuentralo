@@ -31,7 +31,8 @@ public class Resultado {
     @Column(name = "num_reviews", nullable = false) // En tu SQL se llama num_reviews
     private Integer numReviews;
 
-    @Column(name = "url", nullable = false, unique = true) // UNIQUE en tu SQL
+    // NOTA MARCEL: Esto antes era UNIQUE, pero de momento vamos a guardar negocios duplicados asi que lo quito
+    @Column(name = "url", nullable = false)
     private String url;
 
     @Column(name = "esFavorito", nullable = false) // BOOLEAN en SQL
