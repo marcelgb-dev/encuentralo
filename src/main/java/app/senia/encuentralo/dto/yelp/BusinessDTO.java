@@ -7,22 +7,18 @@ import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public record BusinessDTO(
-        String name,
-        double rating,
-        @JsonProperty("review_count")
-        int reviewCount,
-        String url,
-        @JsonProperty("display_phone")
-        String displayPhone,
-        LocationDTO location,
-        CoordinatesDTO coordinates,
-        double distance,
-        List<CategoryDTO> categories
-) {
+                String name,
+                double rating,
+                @JsonProperty("review_count") int reviewCount,
+                String url,
+                String displayPhone,
+                LocationDTO location,
+                CoordinatesDTO coordinates,
+                double distance,
+                List<CategoryDTO> categories) {
         public List<String> getCategoryTitles() {
                 return categories.stream()
-                        .map(CategoryDTO::title)
-                        .toList();
+                                .map(CategoryDTO::title)
+                                .toList();
         }
 }
-
