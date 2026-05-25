@@ -47,10 +47,11 @@ public class Resultado {
     private Busqueda busqueda; // Objeto Busqueda entero
 
     // RELACIÓN N:M CON CATEGORÍAS
-    @ManyToMany
-    @JoinTable(name = "Resultados_Categoria", // Tu tabla intermedia en SQL
-            joinColumns = @JoinColumn(name = "id_resultado"), // FK de esta clase
-            inverseJoinColumns = @JoinColumn(name = "id_categoria") // FK de la otra clase
+    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    @JoinTable(
+            name = "Resultados_Categoria",
+            joinColumns = @JoinColumn(name = "id_resultado"),
+            inverseJoinColumns = @JoinColumn(name = "id_categoria")
     )
     private List<Categoria> categorias;
 

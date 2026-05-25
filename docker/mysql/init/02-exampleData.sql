@@ -24,7 +24,7 @@ INSERT INTO busqueda (termino_busqueda, fecha_busqueda, id_usuario, ciudad) VALU
                                                                                 ('Crossfit', '2026-05-25 12:00:00', 2, 'Madrid');
 
 -- 5. Resultados obtenidos
-INSERT INTO resultados (nombre, telefono, distancia, direccion, valoracion, num_reviews, url, esFavorito, id_usuario, id_busqueda) VALUES
+INSERT INTO resultados (nombre, telefono, distancia, direccion, valoracion, num_reviews, url, es_favorito, id_usuario, id_busqueda) VALUES
                                                                                                                                        ('Pizzería Napolitana', '932112233', 0.5, 'Carrer de Mallorca, 123', 4.8, 150, 'https://napolitana.es', true, 1, 1),
                                                                                                                                        ('Gimnasio Iron', '914445566', 1.2, 'Calle de Atocha, 45', 4.2, 85, 'https://irongym.com', false, 2, 2),
                                                                                                                                        ('Sushi Express', '933009988', 2.1, 'Via Laietana, 5', 3.9, 210, 'https://sushiexpress.es', false, 1, 1);

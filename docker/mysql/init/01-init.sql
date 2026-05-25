@@ -40,7 +40,7 @@ CREATE TABLE resultados(
     valoracion FLOAT NOT NULL,
     num_reviews INT UNSIGNED NOT NULL,
     url VARCHAR(255) NOT NULL,
-    esFavorito BOOLEAN NOT NULL,
+    es_favorito BOOLEAN NOT NULL,
     id_usuario INT UNSIGNED NOT NULL,
     id_busqueda INT UNSIGNED NOT NULL
 );

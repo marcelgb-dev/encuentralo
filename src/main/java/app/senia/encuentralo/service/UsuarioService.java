@@ -14,7 +14,7 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-    // 1. MÉTODO DE REGISTRO (El tuyo rematado)
+    // 1. METODO DE REGISTRO (El tuyo rematado)
     public Usuario nuevoUsuario(Usuario usuario) throws Exception {
         // 1. Comprobamos si el email ya está pillado
         Usuario usuarioExistente = usuarioRepository.findByEmail(usuario.getEmail());
