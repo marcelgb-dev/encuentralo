@@ -1,37 +1,44 @@
 package app.senia.encuentralo.service;
 
 import app.senia.encuentralo.model.Usuario;
+import app.senia.encuentralo.repository.UsuarioRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
-import java.util.List;
 
 @Service
 public class UsuarioService {
 
-    public boolean verificarUsuario(String email, String password) {
-        // Lógica para verificar si los datos introducidos corresponden a un usuario
-        // (tener en cuenta encriptación de contraseña)
-        return false;
+    @Autowired
+    private UsuarioRepository usuarioRepository;
+
+    // 1. MÉTODO DE REGISTRO (El tuyo rematado)
+    public Usuario registrarUsuario(Usuario usuario) throws Exception {
+        // 1. Comprobamos si el email ya está pillado
+        Usuario usuarioExistente = usuarioRepository.findByEmail(usuario.getEmail());
+
+        if (usuarioExistente != null) {
+            throw new Exception("El email ya está registrado en la plataforma.");
+        }
+
+        // 2. Si no existe, le asignamos el rol básico
+        usuario.setRol("USER");
+
+        // 3. ¡EL CIERRE QUE FALTABA! Lo guardamos en la despensa y lo devolvemos
+        return usuarioRepository.save(usuario);
     }
 
-    public Optional<Usuario> obtenerUsuario(Integer usuarioId) {
-        // Lógica para obtener un Optional con el usuario seleccionado
+    // 2. MÉTODO DE LOGIN (El que añade la nueva funcionalidad)
+    public Usuario login(String email, String password) throws Exception {
+        Usuario usuario = usuarioRepository.findByEmail(email);
 
-        return Optional.empty();
-    }
+        if (usuario == null) {
+            throw new Exception("Credenciales incorrectas.");
+        }
 
-    public List<Usuario> obtenerListaUsuarios() {
-        // Lógica para obtener una lista de todos los usuarios
-        return null;
-    }
+        if (!usuario.getPassword().equals(password)) {
+            throw new Exception("Credenciales incorrectas.");
+        }
 
-    public void nuevoUsuario(Usuario usuario) {
-        // Lógica para encriptar contraseña
-        // Lógica para guardar un nuevo usuario en la BD
-    }
-
-    public void editarUsuario(Integer usuarioId, Usuario usuarioEditado) {
-        // Lógica para guardar los datos de usuarioEditado en el usuario de la BD indicado por el ID
+        return usuario;
     }
 }

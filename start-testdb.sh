@@ -7,7 +7,7 @@ DB_PASSWORD="1234"
 DATA_FOLDER="$(pwd)/docker/mysql/data"
 # Ruta a los scripts SQL (01-schema y 02-data)
 INIT_FOLDER="$(pwd)/docker/mysql/init"
-DB_NAME="ENCUENTRALO_DB"
+DB_NAME="Encuentralo"
 NETWORK_NAME="encuentralo-test-network"
 
 echo "🚀 Iniciando entorno de base de datos para Encuentralo..."
