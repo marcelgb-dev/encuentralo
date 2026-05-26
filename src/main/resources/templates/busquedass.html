@@ -1311,41 +1311,50 @@
             </div>
 
             <!--SCRIPT PARA OBTENER LA UBICACIÓN DEL USUARIO-->
-            <script>
+            <script th:inline="javascript">
+              /* Obtener la variable desde el modelo de Spring */
+              const isTesting = [[${testMode}]];
+
               document.getElementById('formulario-busqueda').addEventListener('submit', function(event) {
-                  const latInput = document.getElementById('latitud');
-                  const lonInput = document.getElementById('longitud');
+                // Si estamos en modo testing, no hacemos nada y dejamos que el formulario se envíe
+                if (isTesting) {
+                  console.log("Modo testing activo: omitiendo GPS.");
+                  return true;
+                }
 
-                  // Si ya tenemos coordenadas cargadas (por ejemplo, porque falló el envío previo pero el GPS ya leyó), enviamos del tirón
-                  if (latInput.value && lonInput.value) {
-                      return; 
-                  }
+                const form = this;
+                const latInput = document.getElementById('latitud');
+                const lonInput = document.getElementById('longitud');
+                const btnEnvio = form.querySelector('button[type="submit"]');
 
-                  // 1. Detenemos temporalmente el envío del formulario para que no viaje vacío
-                  event.preventDefault();
-                  
-                  const form = this;
+                // Si ya hay coordenadas (y no estamos en testing), evitamos repetir el proceso
+                if (latInput.value && latInput.value !== "0.0" && latInput.value !== "0") {
+                  return true;
+                }
 
-                  if (navigator.geolocation) {
-                      // Cambiar visualmente el texto del botón puede ser útil aquí para dar feedback de "Cargando GPS..."
-                      
-                      navigator.geolocation.getCurrentPosition(
+                event.preventDefault();
+
+                if (navigator.geolocation) {
+                  btnEnvio.disabled = true;
+                  const textoOriginal = btnEnvio.innerHTML;
+                  btnEnvio.innerHTML = '<span class="material-symbols-outlined">sync</span> Localizando...';
+
+                  navigator.geolocation.getCurrentPosition(
                           (position) => {
-                              // 2. Inyectamos los valores reales en los campos ocultos
-                              latInput.value = position.coords.latitude;
-                              lonInput.value = position.coords.longitude;
-                              
-                              // 3. Reanudamos el envío de forma manual ahora que los datos están listos
-                              form.submit();
-                          }, 
+                            latInput.value = position.coords.latitude;
+                            lonInput.value = position.coords.longitude;
+                            form.submit();
+                          },
                           (error) => {
-                              alert("Es obligatorio activar el GPS y dar permisos de ubicación para realizar la búsqueda.");
-                              console.error(error);
-                          }
-                      );
-                  } else {
-                      alert("Tu navegador no soporta geolocalización.");
-                  }
+                            btnEnvio.disabled = false;
+                            btnEnvio.innerHTML = textoOriginal;
+                            alert("Error de ubicación. Por favor, activa el GPS.");
+                          },
+                          { enableHighAccuracy: true, timeout: 5000 }
+                  );
+                } else {
+                  alert("Tu navegador no soporta geolocalización.");
+                }
               });
             </script>
           </div>
