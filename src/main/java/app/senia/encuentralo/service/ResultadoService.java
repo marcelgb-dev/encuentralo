@@ -28,9 +28,9 @@ public class ResultadoService {
         return null;
     }
 
-    public List<Resultado> obtenerResultadosFavoritos (Integer usuarioId) {
+    public List<Resultado> obtenerResultadosFavoritos (Integer idUsuario) {
         // Lógica para devolver una lista con todos los resultados guardados como favoritos de un usuario
-        return null;
+        return resultadosRepo.findByUsuarioIdAndEsFavoritoTrue(idUsuario);
     }
 
     public void guardarResultados(Integer idBusqueda, Integer idUsuario, List<Resultado> resultados) {
