@@ -1,8 +1,10 @@
 package app.senia.encuentralo.controller;
 
 import app.senia.encuentralo.model.Busqueda;
+import app.senia.encuentralo.model.Categoria;
 import app.senia.encuentralo.model.Resultado;
 import app.senia.encuentralo.service.BusquedaService;
+import app.senia.encuentralo.service.CategoriaService;
 import app.senia.encuentralo.service.ResultadoService;
 import app.senia.encuentralo.service.YelpService;
 import org.springframework.stereotype.Controller;
@@ -18,11 +20,13 @@ public class ResultadosController {
     private final YelpService ys;
     private final BusquedaService bs;
     private final ResultadoService rs;
+    private final CategoriaService cs;
 
-    public ResultadosController(YelpService ys, BusquedaService bs, ResultadoService rs) {
+    public ResultadosController(YelpService ys, BusquedaService bs, ResultadoService rs, CategoriaService cs) {
         this.ys = ys;
         this.bs = bs;
         this.rs = rs;
+        this.cs = cs;
     }
 
     // Recibe una SolicitudBusqueda, llama a la API mediante YelpService y
@@ -36,8 +40,14 @@ public class ResultadosController {
             Model model) {
 
         Busqueda busqueda = bs.obtenerBusqueda(busquedaId);
+        List<Resultado> resultados = busqueda.getResultados();
+
+        List<Categoria> categorias = cs.obtenerCategorias(resultados);
+
+
         model.addAttribute("busqueda", busqueda);
-        model.addAttribute("resultados", busqueda.getResultados());
+        model.addAttribute("resultados", resultados);
+        model.addAttribute("categorias", categorias);
 
         // Ordenación
         switch (orden) {
@@ -89,5 +99,14 @@ public class ResultadosController {
 
         // Devolvemos el nombre del html resultados.html
         return "favoritos";
+    }
+
+    @PostMapping("/favoritos/toggle/{resultadoId}")
+    public String marcarFavorito(@PathVariable ("resultadoId") Integer resultadoId,
+                                 @RequestHeader(value = "referer", required = false, defaultValue = "/") String referer) {
+
+        rs.guardarFavorito(resultadoId);
+
+        return "redirect:" + referer;
     }
 }

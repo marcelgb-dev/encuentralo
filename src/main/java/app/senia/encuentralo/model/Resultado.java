@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import app.senia.encuentralo.repository.CategoriaRepository;
+
 @Entity
 @Table(name = "Resultados") // Se conecta con tu tabla Resultados
 public class Resultado {

@@ -3,9 +3,11 @@ package app.senia.encuentralo.service;
 import app.senia.encuentralo.model.Usuario;
 import app.senia.encuentralo.repository.BusquedaRepository;
 import app.senia.encuentralo.model.Busqueda;
+import app.senia.encuentralo.model.Categoria;
 import app.senia.encuentralo.repository.UsuarioRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -13,10 +15,13 @@ public class BusquedaService {
 
     private final BusquedaRepository busquedaRepo;
     private final UsuarioRepository usuarioRepo;
+    private final CategoriaService categoriaService;
 
-    public BusquedaService(BusquedaRepository busquedaRepo, UsuarioRepository usuarioRepo) {
+
+    public BusquedaService(BusquedaRepository busquedaRepo, UsuarioRepository usuarioRepo, CategoriaService categoriaService) {
         this.busquedaRepo = busquedaRepo;
         this.usuarioRepo = usuarioRepo;
+        this.categoriaService = categoriaService;
     }
 
     // Conexión con el repositorio
@@ -42,6 +47,7 @@ public class BusquedaService {
     public Busqueda guardarBusqueda(Busqueda busqueda) {
         // Lógica para guardar una nueva Búsqueda y devolverla
 
+        busqueda = categoriaService.limpiarCategoriasBusqueda(busqueda);
         return busquedaRepo.save(busqueda);
     }
 }

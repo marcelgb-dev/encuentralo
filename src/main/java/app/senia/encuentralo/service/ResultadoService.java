@@ -1,7 +1,10 @@
 package app.senia.encuentralo.service;
 
 import app.senia.encuentralo.model.Categoria;
+import app.senia.encuentralo.repository.CategoriaRepository;
 import app.senia.encuentralo.repository.ResultadoRepository;
+import jakarta.persistence.EntityNotFoundException;
+
 import org.springframework.stereotype.Service;
 import app.senia.encuentralo.model.Resultado;
 
@@ -14,11 +17,11 @@ import java.util.List;
 public class ResultadoService {
 
     // Atributos / dependencias
-    private final ResultadoRepository resultadosRepo;
+    private final ResultadoRepository resultadoRepo;
 
     // Constructor
     public ResultadoService(ResultadoRepository resultadosRepo) {
-        this.resultadosRepo = resultadosRepo;
+        this.resultadoRepo = resultadosRepo;
     }
 
     // Comunicación con el repositorio
@@ -30,15 +33,23 @@ public class ResultadoService {
 
     public List<Resultado> obtenerResultadosFavoritos (Integer idUsuario) {
         // Lógica para devolver una lista con todos los resultados guardados como favoritos de un usuario
-        return resultadosRepo.findByUsuarioIdAndEsFavoritoTrue(idUsuario);
+        return resultadoRepo.findByUsuarioIdAndEsFavoritoTrue(idUsuario);
     }
 
     public void guardarResultados(Integer idBusqueda, Integer idUsuario, List<Resultado> resultados) {
         // Lógica de guardado
     }
 
-    public void guardarFavorito(Integer resultadoId, boolean esFavorito) {
-        // Lógica de marcar resultado como favorito (true / false)
+    public void guardarFavorito(Integer resultadoId) {
+        // Obtenemos el objeto resultado por la id
+        Resultado resultado = resultadoRepo.findById(resultadoId)
+            .orElseThrow(() -> new EntityNotFoundException("Resultado no encontrado"));
+
+        // Invertimos el booleano de esFavorito (si es false lo convertimos a true, si es true lo convertimos a false)
+        resultado.setEsFavorito(!resultado.isEsFavorito());
+        resultadoRepo.save(resultado);
+
+
     }
 
 
