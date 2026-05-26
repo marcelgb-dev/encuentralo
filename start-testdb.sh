@@ -32,13 +32,14 @@ mkdir -p "${INIT_FOLDER}"
 docker run -d \
   --name ${CONTAINER_NAME} \
   --network $NETWORK_NAME \
-  -p 3306:3306 \
+  -p 5555:3306 \
   -e TZ=Europe/Madrid \
   -e MYSQL_ROOT_PASSWORD=${DB_PASSWORD} \
   -e MYSQL_DATABASE=${DB_NAME} \
   -v "${DATA_FOLDER}":/var/lib/mysql \
   -v "${INIT_FOLDER}":/docker-entrypoint-initdb.d \
-  mysql:8.0-oracle \
+  --platform linux/amd64 \
+  mysql:8.0 \
   --character-set-server=utf8mb4 \
   --collation-server=utf8mb4_unicode_ci \
   --skip-character-set-client-handshake
