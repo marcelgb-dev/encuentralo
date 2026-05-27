@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
 
 // Controlador que gestiona el mostrar los resultados
@@ -63,25 +64,39 @@ public class ResultadosController {
         model.addAttribute("valoracionMinima", valoracionMinima);
 
 
+
+
+
         // Ordenación
         switch (orden) {
             case "distancia":
                 // Ordenar por distancia
+                rs.ordenarPorDistancia(resultados, inverso);
                 break;
             case "valoracion":
                 // Ordenar por valoración
+                rs.ordenarPorValoracion(resultados, inverso);
                 break;
-            case "nombre":
+            case "alfabeticamente":
                 // Ordenar por nombre
+                rs.ordenarPorNombre(resultados, inverso);
                 break;
             default:
                 // Ordenar por defecto
+                if (inverso)
+                    Collections.reverse(resultados);
                 break;
         }
+
+        model.addAttribute("resultados", resultados);
+        model.addAttribute("orden", orden);
+        model.addAttribute("inverso", inverso);
 
         model.addAttribute("busqueda", busqueda);
         model.addAttribute("resultados", resultados);
         model.addAttribute("categorias", categorias);
+
+
 
         // Devolvemos el nombre del html resultados.html
         return "resultados";
@@ -92,6 +107,7 @@ public class ResultadosController {
             @RequestParam(value = "categorias", required = false) List<String> filtroCategorias,
             @RequestParam(value = "etiqueta", required = false) String etiqueta,
             @RequestParam(value = "orden", required = false, defaultValue = "default") String orden,
+            @RequestParam(value = "inverso", required = false, defaultValue = "false") boolean inverso,
             @RequestParam(value = "valoracionMinima", required = false, defaultValue = "0") int valoracionMinima,            
             Model model) {
 
@@ -113,23 +129,26 @@ public class ResultadosController {
 
         model.addAttribute("valoracionMinima", valoracionMinima);
 
-
-
         // Ordenación
         switch (orden) {
-            case "distancia":
-                // Ordenar por distancia
-                break;
             case "valoracion":
                 // Ordenar por valoración
+                rs.ordenarPorValoracion(resultados, inverso);
                 break;
-            case "nombre":
+            case "alfabeticamente":
                 // Ordenar por nombre
+                rs.ordenarPorNombre(resultados, inverso);
                 break;
             default:
                 // Ordenar por defecto
+                if (inverso)
+                    Collections.reverse(resultados);
                 break;
         }
+
+        model.addAttribute("resultados", resultados);
+        model.addAttribute("orden", orden);
+        model.addAttribute("inverso", inverso);
 
         model.addAttribute("resultados", resultados);
         model.addAttribute("categorias", categorias);

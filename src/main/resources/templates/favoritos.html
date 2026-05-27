@@ -330,6 +330,9 @@
               });
           });
         </script>
+        <!-- Inputs invisibles para el sorting-->
+        <input type="hidden" name="orden" id="hidden-orden" th:value="${orden}">
+        <input type="hidden" name="inverso" id="hidden-inverso" th:value="${inverso}">
         <div class="filtro-seccion" style="margin-bottom: 0.75rem;">
           <button  type="submit" class="boton boton-primario ancho-completo">
             <span class="material-symbols-outlined">filter_alt</span>
@@ -358,18 +361,54 @@
         </div>
         <div class="contenedor-ordenar-cabecera">
           <div class="selector-filtros-contenedor" style="width: 180px; margin-bottom: 0;">
-            <select class="selector-filtros" id="selector-ordenar-por-escritorio" onchange="actualizarOrdenacionDesdeSelector(this.value)">
-              <option value="" disabled selected>Ordenar por...</option>
-              <option value="valoracion">Valoración</option>
-              <option value="distancia">Distancia</option>
-              <option value="alfabeticamente">Alfabéticamente</option>
+            <select class="selector-filtros" id="selector-ordenar-por-escritorio" 
+                    onchange="actualizarOrdenacion(this.value)">
+              <option value="" disabled th:selected="${orden == null}">Ordenar por...</option>
+              <option value="default" th:selected="${orden == 'default'}">Por defecto</option>              
+              <option value="valoracion" th:selected="${orden == 'valoracion'}">Valoración</option>
+              <option value="alfabeticamente" th:selected="${orden == 'alfabeticamente'}">Alfabéticamente</option>
             </select>
-            <span class="material-symbols-outlined selector-filtros-icono">expand_more</span>
           </div>
-          <button class="boton-invertir-orden" id="boton-revertir-orden-escritorio" title="Invertir orden">
-            <span class="material-symbols-outlined">swap_vert</span>
+          
+          <button type="button" class="boton-invertir-orden" id="boton-revertir-orden-escritorio" 
+                  onclick="toggleInverso()" title="Invertir orden">
+            <span class="material-symbols-outlined" 
+                  th:style="${inverso == 'true'} ? 'transform: rotate(180deg)' : ''">swap_vert</span>
           </button>
         </div>
+        <!--SCRIPT PARA EL SORTING-->
+        <script>
+          function actualizarOrdenacion(valor) {
+              const inputOrden = document.getElementById('hidden-orden');
+              const form = document.querySelector('aside form'); // Buscamos el form dentro del aside
+              if (inputOrden && form) {
+                  inputOrden.value = valor;
+                  form.submit();
+              }
+          }
+
+          function toggleInverso() {
+              const inputInverso = document.getElementById('hidden-inverso');
+              const form = document.querySelector('aside form');
+              if (inputInverso && form) {
+                  // Alternamos el valor
+                  inputInverso.value = (inputInverso.value === 'true') ? 'false' : 'true';
+                  form.submit();
+              }
+          }
+          document.addEventListener('click', (event) => {
+              // Buscamos todos los elementos <details> que estén abiertos
+              const desplegables = document.querySelectorAll('details[open]');
+              
+              desplegables.forEach(details => {
+                  // Si el clic NO ha sido dentro del <details> que está abierto...
+                  if (!details.contains(event.target)) {
+                      // ...lo cerramos quitando el atributo 'open'
+                      details.removeAttribute('open');
+                  }
+              });
+          });
+        </script>
       </div>
 
       <div class="grilla-resultados" id="grilla-resultados-escritorio">
