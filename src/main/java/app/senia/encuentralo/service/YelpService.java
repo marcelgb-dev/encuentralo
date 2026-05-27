@@ -29,6 +29,9 @@ public class YelpService implements ProviderService {
     private final ResultadoService resultadoService;
     private final UsuarioRepository usuarioRepository; // Inyectamos la despensa de usuarios
 
+    @Value("${mock.json}")
+    private boolean mocking = false;
+
     // Constructor actualizado con el nuevo repositorio requerido
     public YelpService(RestClient yelpRestClient, ObjectMapper objectMapper, ResultadoService resultadoService,
             UsuarioRepository usuarioRepository) {
@@ -42,9 +45,10 @@ public class YelpService implements ProviderService {
 
         // MOCKING (LLAMADA FALSA) - Ahora le pasamos el idUsuario para vincularlo
         // correctamente
-        return llamarApiMock(idUsuario);
+        if (mocking)
+            return llamarApiMock(idUsuario);
 
-            /*
+
           // CÓDIGO REAL CORREGIDO (Descomentar cuando paséis a producción)
           YelpResponse response = restClient.get()
           .uri(uriBuilder -> uriBuilder
@@ -84,7 +88,7 @@ public class YelpService implements ProviderService {
 
           System.out.println("ERROR: Respuesta de Yelp vacía");
           return null;
-*/
+
     }
 
     // Convierte datos del DTO YelpResponse a una Lista<Resultado>

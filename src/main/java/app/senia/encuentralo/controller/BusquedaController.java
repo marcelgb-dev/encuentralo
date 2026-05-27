@@ -5,6 +5,7 @@ import app.senia.encuentralo.dto.SolicitudBusqueda;
 import app.senia.encuentralo.service.BusquedaService;
 import app.senia.encuentralo.service.ResultadoService;
 import app.senia.encuentralo.service.YelpService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,8 @@ import java.util.List;
 @Controller
 public class BusquedaController {
 
+    @Value("${mock.json}")
+    private boolean mocking = false;
     // Dependencias
     private final YelpService ys;
     private final ResultadoService rs;
@@ -38,7 +41,7 @@ public class BusquedaController {
         // Búsqueda de ejemplo
         SolicitudBusqueda solicitud = new SolicitudBusqueda("Restaurante", 0, 0, 10, 20000);
         model.addAttribute("busqueda", solicitud);
-        model.addAttribute("testMode", true);
+        model.addAttribute("testMode", mocking);
         return "busquedas";
     }
 
