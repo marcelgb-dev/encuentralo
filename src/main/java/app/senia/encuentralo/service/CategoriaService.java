@@ -8,7 +8,9 @@ import app.senia.encuentralo.repository.CategoriaRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class CategoriaService {
@@ -42,38 +44,33 @@ public class CategoriaService {
     // Filtra las categorías para evitar duplicados en la base de datos
     public Busqueda limpiarCategoriasBusqueda(Busqueda busqueda) {
 
-        List<Categoria> categoriasTotales = new ArrayList<>();
+        // Mapa para cachear las categorías de esta búsqueda y no repetir consultas ni objetos
+        Map<String, Categoria> mapaCategorias = new HashMap<>();
 
+        // Recorremos la lista de resultados
         for (Resultado r : busqueda.getResultados()) {
-            List<Categoria> categorias = r.getCategorias();
-            List <Categoria> categoriasFiltradas = new ArrayList<>();
+            List<Categoria> categoriasOriginales = r.getCategorias();
+            List<Categoria> categoriasProcesadas = new ArrayList<>();
 
-            for (int i = 0; i < categorias.size(); i++) {
-                String nombre = categorias.get(i).getNombre();
+            // Recorremos la lista de categorías del resultado
+            for (Categoria cat : categoriasOriginales) {
+                String nombre = cat.getNombre();
 
-                Categoria categoria = categoriaRepo.findByNombre(nombre)
-                    .orElseGet(() -> {
-                        // Si NO existe, creamos una nueva instancia transitoria
-                        return new Categoria(nombre);
-                    });
+                // Miramos si ya hemos procesado esta categoría en este bucle, y usamos su referencia para añadirla al resultado
+                if (mapaCategorias.containsKey(nombre)) {
+                    categoriasProcesadas.add(mapaCategorias.get(nombre));
+                // Si no la hemos procesado, la buscamos en la BD o la creamos
+                } else {
+                    Categoria categoriaFinal = categoriaRepo.findByNombre(nombre)
+                            .orElseGet(() -> new Categoria(nombre));
 
-                for (Categoria c : categoriasTotales) {
-                    if (c.getNombre() == categoria.getNombre())
-                    {
-                        
-                    }
+                    // La añadimos tanto a la lista de categorías procesadas para el objeto como al mapa general
+                    mapaCategorias.put(nombre, categoriaFinal);
+                    categoriasProcesadas.add(categoriaFinal);
                 }
-
-                categoriasFiltradas.add(categoria);
-                categoriasTotales.add(categoria);
             }
-
-            r.setCategorias(categoriasFiltradas);
-        }
-
-        for (Resultado r : busqueda.getResultados()) {
-            for (Categoria c : r.getCategorias())
-                System.out.println()
+            // Actualizamos la lista del resultado con las instancias "limpias"
+            r.setCategorias(categoriasProcesadas);
         }
 
         return busqueda;
