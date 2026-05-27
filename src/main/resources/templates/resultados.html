@@ -1329,7 +1329,7 @@
                     1.2 km
                 </span>
               </div>
-              <div class="tarjeta-contacto-item">
+              <div th:unless="${#strings.isEmpty(res.telefono)}" class="tarjeta-contacto-item">
                 <span class="material-symbols-outlined">call</span>
                 <p th:text="${res.telefono}">+34 915 678 901</p>
               </div>
@@ -1567,7 +1567,7 @@
                     1.2 km
                 </span>
               </div>
-              <div class="tarjeta-contacto-item">
+              <div th:unless="${#strings.isEmpty(res.telefono)}" class="tarjeta-contacto-item">
                 <span class="material-symbols-outlined">call</span>
                 <p th:text="${res.telefono}">+34 915 678 901</p>
               </div>
