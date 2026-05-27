@@ -36,6 +36,16 @@ public class Categoria {
         return categorias;
     }
 
+    public static List<String> toStringList(List<Categoria> categorias) {
+        List<String> categoriaStrings = new ArrayList<>();
+
+        for (Categoria c : categorias) {
+            categoriaStrings.add(c.nombre);
+        }
+
+        return categoriaStrings;
+    }
+
     // Getters y Setters corregidos con Integer
     public Integer getId() {
         return id;

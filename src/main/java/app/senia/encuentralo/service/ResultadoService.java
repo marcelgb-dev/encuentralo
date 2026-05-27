@@ -26,11 +26,6 @@ public class ResultadoService {
 
     // Comunicación con el repositorio
 
-    public List<Resultado> obtenerResultadosBusqueda (Integer busquedaId) {
-        // Lógica para devolver una lista de Resultados en base a la ID de su Búsqueda (historial)
-        return null;
-    }
-
     public List<Resultado> obtenerResultadosFavoritos (Integer idUsuario) {
         // Lógica para devolver una lista con todos los resultados guardados como favoritos de un usuario
         return resultadoRepo.findByUsuarioIdAndEsFavoritoTrue(idUsuario);
@@ -122,7 +117,7 @@ public class ResultadoService {
 
         for (Resultado r : listaResultados) {
             // Entra en la condición si r.getCategorias() y nombresCategoria tienen algún elemento en común
-            if (!Collections.disjoint(r.getCategorias(), nombresCategoria))
+            if (!Collections.disjoint(Categoria.toStringList(r.getCategorias()), nombresCategoria))
                 listaFiltrada.add(r);
         }
 

@@ -39,7 +39,7 @@ public class BusquedaController {
     @GetMapping("/buscar")
     public String getIndex(Model model) {
         // Búsqueda de ejemplo
-        SolicitudBusqueda solicitud = new SolicitudBusqueda("Restaurante", 0, 0, 10, 20000);
+        SolicitudBusqueda solicitud = new SolicitudBusqueda("Restaurante", 0, 0, 50, 20000);
         model.addAttribute("busqueda", solicitud);
         model.addAttribute("testMode", mocking);
         return "busquedas";
@@ -60,6 +60,7 @@ public class BusquedaController {
         );
 
         System.out.println("Realizando búsqueda para coords: " + input.getLatitud() + "lat, " + input.getLongitud() + "long");
+        System.out.println("Máximo de resultados: " + input.getLimite());
 
         // Guardamos la Búsqueda y sus Resultados asociados en la Base de Datos.
         Busqueda busquedaGuardada = bs.guardarBusqueda(busqueda);

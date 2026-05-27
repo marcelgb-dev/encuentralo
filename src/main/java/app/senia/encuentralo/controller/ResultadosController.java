@@ -34,20 +34,34 @@ public class ResultadosController {
     @GetMapping("/resultados/{busquedaId}")
     public String mostrarResultados(
             @PathVariable Integer busquedaId,
-            @RequestParam(value = "categoria", required = false) String categoria,
+            @RequestParam(value = "categorias", required = false) List<String> filtroCategorias,
             @RequestParam(value = "etiqueta", required = false) String etiqueta,
             @RequestParam(value = "orden", required = false, defaultValue = "default") String orden,
+            @RequestParam(value = "inverso", required = false, defaultValue = "false") boolean inverso,
+            @RequestParam(value = "soloFavoritos", required = false, defaultValue = "false") boolean soloFavoritos,
+            @RequestParam(value = "valoracionMinima", required = false, defaultValue = "0") int valoracionMinima,
             Model model) {
 
         Busqueda busqueda = bs.obtenerBusqueda(busquedaId);
         List<Resultado> resultados = busqueda.getResultados();
-
         List<Categoria> categorias = cs.obtenerCategorias(resultados);
 
 
-        model.addAttribute("busqueda", busqueda);
-        model.addAttribute("resultados", resultados);
-        model.addAttribute("categorias", categorias);
+
+        // Filtros
+        if (filtroCategorias != null) {
+            resultados = rs.filtrarPorCategoria(resultados, filtroCategorias);
+            model.addAttribute("categoriasSeleccionadas", filtroCategorias);
+        }
+        if (soloFavoritos == true) {
+            resultados = rs.filtrarSoloFavoritos(resultados);
+        }
+        if (valoracionMinima > 0)
+            resultados = rs.filtrarPorValoracion(resultados, valoracionMinima);
+
+        model.addAttribute("soloFavoritos", soloFavoritos);
+        model.addAttribute("valoracionMinima", valoracionMinima);
+
 
         // Ordenación
         switch (orden) {
@@ -64,6 +78,10 @@ public class ResultadosController {
                 // Ordenar por defecto
                 break;
         }
+
+        model.addAttribute("busqueda", busqueda);
+        model.addAttribute("resultados", resultados);
+        model.addAttribute("categorias", categorias);
 
         // Devolvemos el nombre del html resultados.html
         return "resultados";
@@ -71,18 +89,26 @@ public class ResultadosController {
 
     @GetMapping("/favoritos")
     public String mostrarFavoritos(
-            @RequestParam(value = "categoria", required = false) String categoria,
+            @RequestParam(value = "categorias", required = false) List<String> filtroCategorias,
             @RequestParam(value = "etiqueta", required = false) String etiqueta,
             @RequestParam(value = "orden", required = false, defaultValue = "default") String orden,
             Model model) {
+
+
 
 
         List<Resultado> resultados = rs.obtenerResultadosFavoritos(1);
         List<Categoria> categorias = cs.obtenerCategorias(resultados);
 
 
-        model.addAttribute("resultados", resultados);
-        model.addAttribute("categorias", categorias);
+
+        // Filtros
+        if (filtroCategorias != null) {
+            resultados = rs.filtrarPorCategoria(resultados, filtroCategorias);
+            model.addAttribute("categoriasSeleccionadas", filtroCategorias);
+        }
+
+
 
         // Ordenación
         switch (orden) {
@@ -99,6 +125,9 @@ public class ResultadosController {
                 // Ordenar por defecto
                 break;
         }
+
+        model.addAttribute("resultados", resultados);
+        model.addAttribute("categorias", categorias);
 
         // Devolvemos el nombre del html resultados.html
         return "favoritos";
