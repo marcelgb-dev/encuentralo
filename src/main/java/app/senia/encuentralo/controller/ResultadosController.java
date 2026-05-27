@@ -76,10 +76,13 @@ public class ResultadosController {
             @RequestParam(value = "orden", required = false, defaultValue = "default") String orden,
             Model model) {
 
+
         List<Resultado> resultados = rs.obtenerResultadosFavoritos(1);
+        List<Categoria> categorias = cs.obtenerCategorias(resultados);
 
 
         model.addAttribute("resultados", resultados);
+        model.addAttribute("categorias", categorias);
 
         // Ordenación
         switch (orden) {

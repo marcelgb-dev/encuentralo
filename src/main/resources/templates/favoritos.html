@@ -252,20 +252,19 @@
       </div>
       <div class="filtro-seccion">
         <label class="filtro-seccion-label">Categoría</label>
-        <div class="selector-multiple-contenedor" id="desplegable-categorias-escritorio">
-          <button class="selector-multiple-cabecera">
+        <details class="selector-multiple-contenedor">
+          <summary class="selector-multiple-cabecera" style="list-style: none; cursor: pointer;">
             <span class="selector-multiple-texto-seleccionado" id="texto-categorias-escritorio">Todas las categorías</span>
             <span class="material-symbols-outlined">expand_more</span>
-          </button>
+          </summary>
           <div class="selector-multiple-opciones" id="opciones-categorias-escritorio">
-            <div class="selector-multiple-opcion"><label class="flex items-center" style="gap:0.5rem;width:100%"><input type="checkbox" value="tecnologia"><span>Tecnología</span></label></div>
-            <div class="selector-multiple-opcion"><label class="flex items-center" style="gap:0.5rem;width:100%"><input type="checkbox" value="logistica"><span>Logística</span></label></div>
-            <div class="selector-multiple-opcion"><label class="flex items-center" style="gap:0.5rem;width:100%"><input type="checkbox" value="finanzas"><span>Finanzas</span></label></div>
-            <div class="selector-multiple-opcion"><label class="flex items-center" style="gap:0.5rem;width:100%"><input type="checkbox" value="saas"><span>SaaS</span></label></div>
-            <div class="selector-multiple-opcion"><label class="flex items-center" style="gap:0.5rem;width:100%"><input type="checkbox" value="retail"><span>Retail</span></label></div>
-            <div class="selector-multiple-opcion"><label class="flex items-center" style="gap:0.5rem;width:100%"><input type="checkbox" value="energia"><span>Energía</span></label></div>
-          </div>
-        </div>
+            <div th:each="cat : ${categorias}" class="selector-multiple-opcion">
+              <label class="flex items-center" style="gap:0.5rem;width:100%">
+                <input type="checkbox" name="categoria" value="tecnologia">
+                <span th:text="${cat.nombre}">Tecnología</span>
+              </label>
+            </div>
+        </details>
       </div>
       <div class="filtro-seccion">
         <label class="filtro-seccion-label">Etiquetas Personalizadas</label>
