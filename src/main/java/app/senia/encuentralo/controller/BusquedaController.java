@@ -39,7 +39,7 @@ public class BusquedaController {
         SolicitudBusqueda solicitud = new SolicitudBusqueda("Restaurante", 0, 0, 10, 20000);
         model.addAttribute("busqueda", solicitud);
         model.addAttribute("testMode", true);
-        return "busquedass";
+        return "busquedas";
     }
 
     // ENDPOINT DE ACCIÓN: Ejecuta la nueva búsqueda y redirige
@@ -73,7 +73,7 @@ public class BusquedaController {
         List<Busqueda> historial = bs.obtenerHistorial(1);
         model.addAttribute("busquedas", historial);
 
-        return "historial_busquedas_thymeleaf";
+        return "historial";
     }
 
 

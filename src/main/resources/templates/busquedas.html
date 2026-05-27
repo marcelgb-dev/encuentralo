@@ -1079,9 +1079,9 @@
         </div>
         <nav class="hidden md:flex items-center gap-8">
           <a class="texto-primario font-bold border-b-2 border-primario py-1 texto-label-md"
-            th:href="@{/buscar}" href="busquedass.html">Búsqueda</a>
+            th:href="@{/buscar}" href="busquedas.html">Búsqueda</a>
           <a class="texto-secundario hover:bg-superficie-alta transition-colors px-2 py-1 redondeado texto-label-md"
-             th:href="@{/historial}"  href="historial_busquedas_thymeleaf.html">Historial</a>
+             th:href="@{/historial}"  href="historial.html">Historial</a>
           <a class="texto-secundario hover:bg-superficie-alta transition-colors px-2 py-1 redondeado texto-label-md"
              th:href="@{/favoritos}" href="favoritos.html">Favoritos</a>
         </nav>
@@ -1143,12 +1143,12 @@
     <footer
       class="fixed bottom-0 left-0 ancho-completo z-50 flex justify-around items-center px-4 py-2 bg-superficie-mas-baja sombra-inferior redondeado-t-xl md:hidden">
       <a class="flex flex-col items-center justify-center bg-primario-contenedor texto-blanco redondeado-xl px-3 py-1.5 escala-95 transition"
-         th:href="@{/buscar}" href="busquedass.html">
+         th:href="@{/buscar}" href="busquedas.html">
         <span class="material-symbols-outlined">search</span>
         <span class="texto-label-sm">Búsqueda</span>
       </a>
       <a class="flex flex-col items-center justify-center texto-variante px-3 py-1.5 hover:bg-superficie-variante transition"
-         th:href="@{/historial}" href="historial_busquedas_thymeleaf.html">
+         th:href="@{/historial}" href="historial.html">
         <span class="material-symbols-outlined">history</span>
         <span class="texto-label-sm">Historial</span>
       </a>
@@ -1169,11 +1169,11 @@
       </div>
       <nav class="flex-1 space-y-2">
         <a class="flex items-center gap-3 px-4 py-3 redondeado-lg texto-primario border-r-4 border-primario bg-secundario-contenedor transition texto-label-md"
-           th:href="@{/buscar}" href="busquedass.html">
+           th:href="@{/buscar}" href="busquedas.html">
           <span class="material-symbols-outlined">search</span>
           Búsqueda
         </a>
-        <a th:href="@{/historial}" href="historial_busquedas_thymeleaf.html" class="flex items-center gap-3 px-4 py-3 redondeado-lg texto-secundario hover:bg-superficie-variante transition texto-label-md"
+        <a th:href="@{/historial}" href="historial.html" class="flex items-center gap-3 px-4 py-3 redondeado-lg texto-secundario hover:bg-superficie-variante transition texto-label-md"
           do>
           <span class="material-symbols-outlined">history</span>
           Historial
@@ -1184,7 +1184,7 @@
         </a>
       </nav>
       <div class="mt-auto space-y-4 px-4 pt-6 border-t borde-variante">
-        <a th:ref="@{/buscar}" href="busquedass.html"
+        <a th:ref="@{/buscar}" href="busquedas.html"
           class="ancho-completo flex items-center justify-center gap-2 bg-primario texto-blanco py-3 px-4 redondeado-lg texto-label-md hover:opacity-90 transition">
           <span class="material-symbols-outlined">add</span>
           Nueva Búsqueda
