@@ -287,14 +287,49 @@
         </div>
         <div class="filtro-seccion">
           <label class="filtro-seccion-label">Valoración Mínima</label>
+          
+          <input type="hidden" name="valoracionMinima" id="valoracionMinima" th:value="${valoracionMinima}">
+
           <div class="filtro-estrellas-grupo" id="grupo-estrellas-escritorio">
-            <span class="material-symbols-outlined vacia">star</span>
-            <span class="material-symbols-outlined vacia">star</span>
-            <span class="material-symbols-outlined vacia">star</span>
-            <span class="material-symbols-outlined vacia">star</span>
-            <span class="material-symbols-outlined vacia">star</span>
+            <span class="material-symbols-outlined estrella-filtro cursor-pointer" data-valor="1">star</span>
+            <span class="material-symbols-outlined estrella-filtro cursor-pointer" data-valor="2">star</span>
+            <span class="material-symbols-outlined estrella-filtro cursor-pointer" data-valor="3">star</span>
+            <span class="material-symbols-outlined estrella-filtro cursor-pointer" data-valor="4">star</span>
+            <span class="material-symbols-outlined estrella-filtro cursor-pointer" data-valor="5">star</span>
           </div>
         </div>
+        <!--SCRIPT PARA LA GESTIÓN DE LAS ESTRELLAS DE VALORACIÓN MÍNIMA (FILTRO)-->
+        <script>
+          document.addEventListener('DOMContentLoaded', () => {
+              const estrellas = document.querySelectorAll('.estrella-filtro');
+              const inputValoracion = document.getElementById('valoracionMinima');
+
+              function actualizarEstrellas(valor) {
+                  estrellas.forEach(s => {
+                      const v = parseInt(s.getAttribute('data-valor'));
+                      if (v <= valor) {
+                          s.classList.remove('vacia'); // Clase para estrella vacía
+                          s.textContent = 'star';      // Icono relleno
+                          s.style.fontVariationSettings = "'FILL' 1"; // Si usas Material Symbols variable
+                      } else {
+                          s.classList.add('vacia');
+                          s.style.fontVariationSettings = "'FILL' 0";
+                      }
+                  });
+              }
+
+              // Inicializar por si ya viene un valor del controlador (persistencia)
+              actualizarEstrellas(parseInt(inputValoracion.value) || 0);
+
+              estrellas.forEach(estrella => {
+                  estrella.addEventListener('click', () => {
+                      const valor = estrella.getAttribute('data-valor');
+                      inputValoracion.value = valor;
+                      actualizarEstrellas(valor);
+                  });
+              });
+          });
+        </script>
         <div class="filtro-seccion" style="margin-bottom: 0.75rem;">
           <button  type="submit" class="boton boton-primario ancho-completo">
             <span class="material-symbols-outlined">filter_alt</span>

@@ -92,6 +92,7 @@ public class ResultadosController {
             @RequestParam(value = "categorias", required = false) List<String> filtroCategorias,
             @RequestParam(value = "etiqueta", required = false) String etiqueta,
             @RequestParam(value = "orden", required = false, defaultValue = "default") String orden,
+            @RequestParam(value = "valoracionMinima", required = false, defaultValue = "0") int valoracionMinima,            
             Model model) {
 
 
@@ -107,6 +108,10 @@ public class ResultadosController {
             resultados = rs.filtrarPorCategoria(resultados, filtroCategorias);
             model.addAttribute("categoriasSeleccionadas", filtroCategorias);
         }
+        if (valoracionMinima > 0)
+            resultados = rs.filtrarPorValoracion(resultados, valoracionMinima);
+
+        model.addAttribute("valoracionMinima", valoracionMinima);
 
 
 
