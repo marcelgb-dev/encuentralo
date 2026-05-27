@@ -1349,12 +1349,12 @@
   </main>
 
   <nav class="barra-navegacion-movil">
-    <a class="enlace-nav-movil activo" href="#">
-      <span th:href="@{/buscar}" href="busquedass.html" class="material-symbols-outlined">search</span>
+    <a class="enlace-nav-movil activo" th:href="@{/buscar}" href="busquedass.html">
+      <span class="material-symbols-outlined">search</span>
       <span>Búsqueda</span>
     </a>
-    <a class="enlace-nav-movil" href="#">
-      <span th:href="@{/historial}" href="historial_busquedas_thymeleaf.html" class="material-symbols-outlined">history</span>
+    <a class="enlace-nav-movil" th:href="@{/historial}" href="historial_busquedas_thymeleaf.html">
+      <span class="material-symbols-outlined">history</span>
       <span>Historial</span>
     </a>
     <a class="enlace-nav-movil" href="#">
@@ -1374,12 +1374,8 @@
       <h1>Encuéntralo</h1>
       <p>Business Edition</p>
     </div>
-    <a th:href="@{/buscar}" href="busquedass.html" class="boton boton-primario boton-nueva-prospeccion">
-      <span class="material-symbols-outlined">add</span>
-      Nueva Búsqueda
-    </a>
     <nav class="menu-navegacion-escritorio">
-      <a class="enlace-nav-escritorio" href="#">
+      <a class="enlace-nav-escritorio" th:href="@{/buscar}" href="busquedass.html">
         <span class="material-symbols-outlined">search</span>
         <span>Búsqueda</span>
       </a>

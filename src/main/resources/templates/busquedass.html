@@ -1079,13 +1079,11 @@
         </div>
         <nav class="hidden md:flex items-center gap-8">
           <a class="texto-primario font-bold border-b-2 border-primario py-1 texto-label-md"
-            href="busquedass.html">Búsqueda</a>
+            th:href="@{/buscar}" href="busquedass.html">Búsqueda</a>
           <a class="texto-secundario hover:bg-superficie-alta transition-colors px-2 py-1 redondeado texto-label-md"
-            href="frontend/historial_busquedas.html">Historial</a>
+             th:href="@{/historial}"  href="historial_busquedas_thymeleaf.html">Historial</a>
           <a class="texto-secundario hover:bg-superficie-alta transition-colors px-2 py-1 redondeado texto-label-md"
-            href="frontend/favoritos.html">Favoritos</a>
-          <a class="texto-secundario hover:bg-superficie-alta transition-colors px-2 py-1 redondeado texto-label-md"
-            href="frontend/panel_admin.html">Panel</a>
+             th:href="@{/favoritos}" href="favoritos.html">Favoritos</a>
         </nav>
         <div class="cursor-pointer active:scale-95 transition">
           <div
@@ -1145,24 +1143,19 @@
     <footer
       class="fixed bottom-0 left-0 ancho-completo z-50 flex justify-around items-center px-4 py-2 bg-superficie-mas-baja sombra-inferior redondeado-t-xl md:hidden">
       <a class="flex flex-col items-center justify-center bg-primario-contenedor texto-blanco redondeado-xl px-3 py-1.5 escala-95 transition"
-        href="busquedass.html">
+         th:href="@{/buscar}" href="busquedass.html">
         <span class="material-symbols-outlined">search</span>
         <span class="texto-label-sm">Búsqueda</span>
       </a>
       <a class="flex flex-col items-center justify-center texto-variante px-3 py-1.5 hover:bg-superficie-variante transition"
-        href="frontend/historial_busquedas.html">
+         th:href="@{/historial}" href="historial_busquedas_thymeleaf.html">
         <span class="material-symbols-outlined">history</span>
         <span class="texto-label-sm">Historial</span>
       </a>
       <a class="flex flex-col items-center justify-center texto-variante px-3 py-1.5 hover:bg-superficie-variante transition"
-        href="frontend/favoritos.html">
+         th:href="@{/favoritos}" href="favoritos.html">
         <span class="material-symbols-outlined">star</span>
         <span class="texto-label-sm">Favoritos</span>
-      </a>
-      <a class="flex flex-col items-center justify-center texto-variante px-3 py-1.5 hover:bg-superficie-variante transition"
-        href="frontend/panel_admin.html">
-        <span class="material-symbols-outlined">dashboard</span>
-        <span class="texto-label-sm">Panel</span>
       </a>
     </footer>
   </div>
@@ -1176,7 +1169,7 @@
       </div>
       <nav class="flex-1 space-y-2">
         <a class="flex items-center gap-3 px-4 py-3 redondeado-lg texto-primario border-r-4 border-primario bg-secundario-contenedor transition texto-label-md"
-          href="busquedass.html">
+           th:href="@{/buscar}" href="busquedass.html">
           <span class="material-symbols-outlined">search</span>
           Búsqueda
         </a>
