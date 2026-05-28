@@ -36,6 +36,11 @@ public class EtiquetaService {
     }
 
     public void borrarEtiqueta(Integer etiquetaId) {
+        List<Resultado> resultados = resultadoRepo.findByEtiquetasId(etiquetaId);
+        for (Resultado r : resultados) {
+            r.getEtiquetas().removeIf(e -> e.getId().equals(etiquetaId));
+            resultadoRepo.save(r);
+        }
         etiquetaRepo.deleteById(etiquetaId);
     }
 

@@ -10,4 +10,6 @@ public interface ResultadoRepository extends JpaRepository<Resultado, Integer> {
     // Método útil: sacar solo los resultados que el usuario ha marcado como
     // favoritos
     List<Resultado> findByUsuarioIdAndEsFavoritoTrue(Integer idUsuario);
+
+    List<Resultado> findByEtiquetasId(Integer etiquetaId);
 }

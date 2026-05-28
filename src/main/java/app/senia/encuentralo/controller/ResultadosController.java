@@ -3,6 +3,8 @@ package app.senia.encuentralo.controller;
 import app.senia.encuentralo.model.Busqueda;
 import app.senia.encuentralo.model.Categoria;
 import app.senia.encuentralo.model.Resultado;
+import app.senia.encuentralo.model.Usuario;
+import app.senia.encuentralo.repository.UsuarioRepository;
 import app.senia.encuentralo.service.BusquedaService;
 import app.senia.encuentralo.service.CategoriaService;
 import app.senia.encuentralo.service.EtiquetaService;
@@ -19,6 +21,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.nio.charset.StandardCharsets;
+import java.security.Principal;
 import java.util.Collections;
 import java.util.List;
 
@@ -32,14 +35,21 @@ public class ResultadosController {
     private final CategoriaService cs;
     private final ExportService exportService;
     private final EtiquetaService es;
+    private final UsuarioRepository usuarioRepo;
 
-    public ResultadosController(YelpService ys, BusquedaService bs, ResultadoService rs, CategoriaService cs, ExportService exportService, EtiquetaService es) {
+    public ResultadosController(YelpService ys, BusquedaService bs, ResultadoService rs, CategoriaService cs, ExportService exportService, EtiquetaService es, UsuarioRepository usuarioRepo) {
         this.ys = ys;
         this.bs = bs;
         this.rs = rs;
         this.cs = cs;
         this.exportService = exportService;
         this.es = es;
+        this.usuarioRepo = usuarioRepo;
+    }
+
+    private Integer obtenerUsuarioId(Principal principal) {
+        Usuario usuario = usuarioRepo.findByEmail(principal.getName());
+        return usuario != null ? usuario.getId() : 1;
     }
 
     // Recibe una SolicitudBusqueda, llama a la API mediante YelpService y
@@ -53,8 +63,10 @@ public class ResultadosController {
             @RequestParam(value = "inverso", required = false, defaultValue = "false") boolean inverso,
             @RequestParam(value = "soloFavoritos", required = false, defaultValue = "false") boolean soloFavoritos,
             @RequestParam(value = "valoracionMinima", required = false, defaultValue = "0") int valoracionMinima,
+            Principal principal,
             Model model) {
 
+        Integer usuarioId = obtenerUsuarioId(principal);
         Busqueda busqueda = bs.obtenerBusqueda(busquedaId);
         List<Resultado> resultados = busqueda.getResultados();
         List<Categoria> categorias = cs.obtenerCategorias(resultados);
@@ -108,7 +120,7 @@ public class ResultadosController {
         model.addAttribute("busqueda", busqueda);
         model.addAttribute("resultados", resultados);
         model.addAttribute("categorias", categorias);
-        model.addAttribute("etiquetas", es.obtenerEtiquetasUsuario(1));
+        model.addAttribute("etiquetas", es.obtenerEtiquetasUsuario(usuarioId));
 
 
         // Devolvemos el nombre del html resultados.html
@@ -170,13 +182,13 @@ public class ResultadosController {
             @RequestParam(value = "etiqueta", required = false) String etiqueta,
             @RequestParam(value = "orden", required = false, defaultValue = "default") String orden,
             @RequestParam(value = "inverso", required = false, defaultValue = "false") boolean inverso,
-            @RequestParam(value = "valoracionMinima", required = false, defaultValue = "0") int valoracionMinima,            
+            @RequestParam(value = "valoracionMinima", required = false, defaultValue = "0") int valoracionMinima,
+            Principal principal,
             Model model) {
 
+        Integer usuarioId = obtenerUsuarioId(principal);
 
-
-
-        List<Resultado> resultados = rs.obtenerResultadosFavoritos(1);
+        List<Resultado> resultados = rs.obtenerResultadosFavoritos(usuarioId);
         List<Categoria> categorias = cs.obtenerCategorias(resultados);
 
 
@@ -215,7 +227,7 @@ public class ResultadosController {
 
         model.addAttribute("resultados", resultados);
         model.addAttribute("categorias", categorias);
-        model.addAttribute("etiquetas", es.obtenerEtiquetasUsuario(1));
+        model.addAttribute("etiquetas", es.obtenerEtiquetasUsuario(usuarioId));
 
         // Devolvemos el nombre del html resultados.html
         return "favoritos";
@@ -227,9 +239,10 @@ public class ResultadosController {
             @RequestParam(value = "etiqueta", required = false) String etiqueta,
             @RequestParam(value = "orden", required = false, defaultValue = "default") String orden,
             @RequestParam(value = "inverso", required = false, defaultValue = "false") boolean inverso,
-            @RequestParam(value = "valoracionMinima", required = false, defaultValue = "0") int valoracionMinima) {
+            @RequestParam(value = "valoracionMinima", required = false, defaultValue = "0") int valoracionMinima,
+            Principal principal) {
 
-        List<Resultado> resultados = rs.obtenerResultadosFavoritos(1);
+        List<Resultado> resultados = rs.obtenerResultadosFavoritos(obtenerUsuarioId(principal));
 
         if (filtroCategorias != null) {
             resultados = rs.filtrarPorCategoria(resultados, filtroCategorias);
