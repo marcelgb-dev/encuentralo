@@ -1,293 +1,276 @@
 <!DOCTYPE html>
-<html lang="es">
-
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>Encuéntralo - Acceso</title>
-    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;display=swap"
-        rel="stylesheet">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" th:href="@{/css/style.css}" href="../../static/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
     <style>
-        /* --- Layout específico del login (no cubierto por style.css) --- */
-        .min-altura { min-height: 100vh; }
-        .flex-centrado { display: flex; align-items: center; justify-content: center; }
-        .borde-sutil { border-color: rgba(197, 198, 205, 0.2); }
-        .seleccion-resaltado *::selection,
-        .seleccion-resaltado::selection { background-color: #d0e1fb; color: #54647a; }
-        .relleno-6 { padding: 1.5rem; }
-
-        .vista-escritorio { display: none; }
-        .vista-movil { display: flex; flex-direction: column; }
-
-        @media (min-width: 768px) {
-            .vista-escritorio { display: block; }
-            .vista-movil { display: none; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Hanken Grotesk', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #091426;
+            padding: 1.5rem;
         }
 
-        /* Desktop: panel izquierdo oscuro */
-        .vista-escritorio .grid-dos-columnas { display: grid; grid-template-columns: 7fr 5fr; min-height: 720px; }
-        .vista-escritorio .fondo-panel-izq { background-color: #091426; }
-        .vista-escritorio .texto-gris-claro { color: #8590a6; }
-        .vista-escritorio .fondo-icono { background-color: #131b2e; }
-        .vista-escritorio .icono-claro { color: #bcc7de; }
-        .vista-escritorio .bg-primario { background-color: #1e293b; }
-        .vista-escritorio .texto-terciario { color: #ffffff; }
-        .vista-escritorio .bg-surface-container-lowest { background-color: #ffffff; }
-        .vista-escritorio .min-altura-720 { min-height: 720px; }
-        .vista-escritorio .color-primario { color: #091426; }
-        .vista-escritorio .color-secundario { color: #505f76; }
-        .vista-escritorio .color-outline { color: #75777d; }
-        .vista-escritorio .negrita { font-weight: 700; }
-        .vista-escritorio .relleno-16 { padding: 4rem; }
-        .vista-escritorio .altura-completa { height: 100%; }
-        .vista-escritorio .ancho-10 { width: 2.5rem; }
-        .vista-escritorio .alto-10 { height: 2.5rem; }
-        .vista-escritorio .texto-centrado { text-align: center; }
-
-        /* Desktop: gradiente radial */
-        .vista-escritorio .bg-radial { background-image: radial-gradient(circle at center, var(--tw-gradient-stops)); }
-        .vista-escritorio .from-secondary-40 { --tw-gradient-from: rgba(80, 95, 118, 0.4); --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(80, 95, 118, 0)); }
-        .vista-escritorio .via-primary { --tw-gradient-stops: var(--tw-gradient-from), #091426, var(--tw-gradient-to, rgba(9, 20, 38, 0)); }
-        .vista-escritorio .to-primary { --tw-gradient-to: #091426; }
-
-        /* Desktop: interacciones y foco */
-        .vista-escritorio .foco-borde:focus { border-color: #091426; }
-        .vista-escritorio .foco-fondo:focus { background-color: #ffffff; }
-        .vista-escritorio .foco-sin-anillo:focus { --tw-ring-offset-shadow: 0 0 #0000; --tw-ring-shadow: 0 0 #0000; box-shadow: 0 0 #0000; }
-        .vista-escritorio .placeholder-color::placeholder { color: #75777d; }
-        .vista-escritorio .grupo-foco:focus-within .texto-grupo-foco { color: #091426; }
-        .vista-escritorio .hover\:subrayado:hover { text-decoration: underline; }
-        .vista-escritorio .hover\:texto-oscuro:hover { color: #191c1e; }
-        .vista-escritorio .hover\:fondo-primario:hover { background-color: #091426; }
-        .vista-escritorio .active\:escala-98:active { transform: scale(0.98); }
-        .vista-escritorio .sombra-sm { box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05); }
-        .vista-escritorio .transicion { transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1); }
-        .vista-escritorio .transicion-colores { transition: color 150ms, background-color 150ms, border-color 150ms; }
-        .vista-escritorio .borde-outline { border-color: #c5c6cd; }
-        .vista-escritorio .ancho-5 { width: 1.25rem; }
-        .vista-escritorio .alto-5 { height: 1.25rem; }
-        .vista-escritorio .redondeado { border-radius: 0.25rem; }
-        .vista-escritorio .espacio-y-6 > :not([hidden]) ~ :not([hidden]) { margin-top: 1.5rem; }
-
-        /* Desktop: responsive lg */
-        @media (min-width: 1024px) {
-            .vista-escritorio .grid-12 { grid-template-columns: repeat(12, minmax(0, 1fr)); }
-            .vista-escritorio .col-span-7 { grid-column: span 7 / span 7; }
-            .vista-escritorio .col-span-5 { grid-column: span 5 / span 5; }
-            .vista-escritorio .texto-izquierda { text-align: left; }
-            .vista-escritorio .flex-lg { display: flex; }
-            .vista-escritorio .ocultar-lg { display: none; }
-            .vista-escritorio .padding-x-20 { padding-left: 5rem; padding-right: 5rem; }
+        .login-container {
+            width: 100%;
+            max-width: 1100px;
+            min-height: 640px;
+            display: grid;
+            grid-template-columns: 7fr 5fr;
+            background: #ffffff;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.3);
         }
 
-        /* Mobile: tarjeta y panel */
-        .vista-movil { background-color: #f7f9fb; color: #191c1e; min-height: 100vh; }
-        .vista-movil .contenido-principal { flex-grow: 1; display: flex; align-items: center; justify-content: center; padding: 16px; }
-        .vista-movil .tarjeta { width: 100%; max-width: 1100px; background-color: #ffffff; border-radius: 0.75rem; box-shadow: 0 4px 20px rgba(30, 41, 59, 0.05); overflow: hidden; display: flex; flex-direction: column; min-height: 600px; }
-        .vista-movil .panel-izquierdo { display: none; }
-        .vista-movil .panel-derecho { width: 100%; padding: 16px; display: flex; flex-direction: column; justify-content: center; }
-        .vista-movil .contenedor-formulario { max-width: 24rem; margin: 0 auto; width: 100%; }
-        .vista-movil .logo-movil { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 3rem; color: #091426; }
-        .vista-movil .logo-movil span:first-child { font-size: 24px; }
-        .vista-movil .color-primario { color: #091426; }
-        .vista-movil .color-secundario { color: #505f76; }
-        .vista-movil .color-variante { color: #45474c; }
-        .vista-movil .color-outline { color: #75777d; }
-        .vista-movil .fondo-superficie-baja { background-color: #f2f4f6; }
-        .vista-movil .foco-borde:focus { border-color: #091426; }
-        .vista-movil .foco-fondo:focus { background-color: #ffffff; }
-        .vista-movil .foco-sin-anillo:focus { outline: none; }
-        .vista-movil .hover\:sombra-hover:hover { box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05); }
-        .vista-movil .active\:escala-98:active { transform: scale(0.98); }
-        .vista-movil .transicion { transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1); }
-        .vista-movil .pie-pagina { padding: 2rem; text-align: center; }
-        .vista-movil .espacio-y-2 > :not([hidden]) ~ :not([hidden]) { margin-top: 0.5rem; }
-        .vista-movil .espacio-y-6 > :not([hidden]) ~ :not([hidden]) { margin-top: 1.5rem; }
-        .vista-movil .texto-headline-md { font-size: 24px; line-height: 32px; font-weight: 600; }
-        .vista-movil .texto-headline-lg { font-size: 32px; line-height: 40px; font-weight: 600; letter-spacing: -0.01em; }
-        .vista-movil .texto-body-md { font-size: 16px; line-height: 24px; font-weight: 400; }
-        .vista-movil .texto-body-sm { font-size: 14px; line-height: 20px; font-weight: 400; }
-        .vista-movil .texto-label-md { font-size: 14px; line-height: 16px; letter-spacing: 0.01em; font-weight: 600; }
-        .vista-movil .texto-label-sm { font-size: 12px; line-height: 16px; font-weight: 500; }
+        /* Panel izquierdo */
+        .panel-izq {
+            background: #091426;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 3.5rem;
+            overflow: hidden;
+        }
+        .panel-izq::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 30% 70%, rgba(80, 95, 118, 0.3) 0%, #091426 70%);
+            z-index: 1;
+        }
+        .panel-izq > * {
+            position: relative;
+            z-index: 2;
+        }
+        .panel-izq .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .panel-izq .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: #131b2e;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: #bcc7de;
+        }
+        .panel-izq .logo-text {
+            font-size: 22px;
+            font-weight: 700;
+            color: #ffffff;
+        }
+        .panel-izq .contenido-central {
+            max-width: 420px;
+        }
+        .panel-izq .contenido-central h1 {
+            font-size: 36px;
+            font-weight: 700;
+            color: #ffffff;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+        .panel-izq .contenido-central p {
+            font-size: 16px;
+            color: #8590a6;
+            line-height: 1.6;
+        }
+        .panel-izq .badges {
+            display: flex;
+            gap: 2rem;
+        }
+        .panel-izq .badges span {
+            font-size: 13px;
+            font-weight: 600;
+            color: #8590a6;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .panel-izq .badges span::before {
+            content: '✓';
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 18px;
+            height: 18px;
+            background: rgba(188, 199, 222, 0.15);
+            border-radius: 50%;
+            font-size: 11px;
+            color: #bcc7de;
+        }
+
+        /* Panel derecho */
+        .panel-der {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 3.5rem;
+        }
+        .panel-der .form-header {
+            margin-bottom: 2.5rem;
+        }
+        .panel-der .form-header h2 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #091426;
+            margin-bottom: 0.5rem;
+        }
+        .panel-der .form-header p {
+            font-size: 15px;
+            color: #505f76;
+        }
+        .mensaje-error {
+            background: #ffdad6;
+            color: #ba1a1a;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            font-size: 14px;
+        }
+        .mensaje-exito {
+            background: #dcfce7;
+            color: #16a34a;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            font-size: 14px;
+        }
+        .mensaje-info {
+            background: #f2f4f6;
+            color: #505f76;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            font-size: 14px;
+        }
+        .campo {
+            margin-bottom: 1.25rem;
+        }
+        .campo label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #45474c;
+            margin-bottom: 6px;
+        }
+        .campo input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid transparent;
+            border-radius: 10px;
+            font-size: 16px;
+            font-family: inherit;
+            color: #191c1e;
+            background: #f2f4f6;
+            transition: border-color 150ms, background 150ms;
+            outline: none;
+        }
+        .campo input:focus {
+            border-color: #091426;
+            background: #ffffff;
+        }
+        .campo input::placeholder {
+            color: #75777d;
+        }
+        .btn-login {
+            width: 100%;
+            padding: 15px;
+            background: #091426;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 150ms;
+            margin-top: 0.75rem;
+        }
+        .btn-login:hover {
+            background: #1e293b;
+        }
+        .btn-login:active {
+            transform: scale(0.98);
+        }
+
+        /* Responsive: móvil */
+        @media (max-width: 768px) {
+            body { padding: 1rem; }
+            .login-container {
+                grid-template-columns: 1fr;
+                min-height: auto;
+            }
+            .panel-izq { display: none; }
+            .panel-der { padding: 2.5rem 1.5rem; }
+        }
     </style>
 </head>
+<body>
 
-<body class="fondo-base texto-base min-altura flex-centrado relleno-6 seleccion-resaltado">
-
-    <div class="vista-escritorio">
-        <div
-            class="grid-dos-columnas contenedor-max ancho-completo min-altura-720 bg-surface-container-lowest redondeado-xl sombra-caja borde-sutil">
-            <div class="fondo-panel-izq relativo overflow-hidden flex-centrado">
-                <div class="absoluto inset-0 opacidad-40 bg-radial from-secondary-40 via-primary to-primary"></div>
-                <img alt="Encuéntralo"
-                    class="absoluto inset-0 ancho-completo altura-completa objeto-cubrir mezcla-superposicion opacidad-60"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDK_s0Dfnqz2KsClJONIcGLMqsb_kTNO9SyfM7TksOuDwczH2NhdPal0V78Clq9GYbfQ-pPa7OBtinjFN5eGFHdGiG3KkIHuP4-J-mK5FybxL_iduaZ7HU0mwjhbGXEnlFlWvyiDO_RSio6ZmR8QHBp2YOqetbgOkngGsyI2m6JDSq1sZ9BNtZes8T8lywRkxHShS2g5FOJk_ArpYJ4_aNSCIL36LIdfVFXwcnByUj8n7DwwLfsYvzYnCkft9PkFOoA4WwI2LTn-Y4">
-                <div class="relativo z-10 relleno-16 flex-col justify-between altura-completa">
-                    <div class="flex items-center gap-3">
-                        <div class="ancho-10 alto-10 fondo-icono redondeado-lg flex items-center justify-center">
-                            <span class="material-symbols-outlined icono-claro">language</span>
-                        </div>
-                        <span class="texto-headline-md negrita texto-blanco">Encuéntralo</span>
-                    </div>
-                    <div class="max-w-md">
-                        <h1 class="texto-headline-xl texto-blanco mb-4">Optimización de Prospección Comercial</h1>
-                        <p class="texto-body-lg texto-gris-claro">Analice mercados, identifique oportunidades y exporte
-                            datos críticos con la plataforma líder en inteligencia geográfica para empresas.</p>
-                    </div>
-                    <div class="flex texto-gris-claro texto-label-md" style="padding-top: 0.5rem; justify-content: space-between; width: 100%; max-width: 27.25rem;">
-                        <div class="flex items-center gap-2">
-                            <span class="material-symbols-outlined icono-claro">check_circle</span>
-                            Precisión Geográfica
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <span class="material-symbols-outlined icono-claro">check_circle</span>
-                            Special Feria Valencia Edition
-                        </div>
-                    </div>
-                </div>
+    <div class="login-container">
+        <!-- Panel izquierdo: branding -->
+        <div class="panel-izq">
+            <div class="logo">
+                <div class="logo-icon">E</div>
+                <span class="logo-text">Encuéntralo</span>
             </div>
-            <div class="flex flex-col justify-center items-center px-8 py-12">
-                <div class="max-w-sm ancho-completo">
-                    <div class="ocultar-lg mb-12 flex items-center justify-center gap-2">
-                        <span class="material-symbols-outlined color-primario texto-4xl">language</span>
-                        <span class="texto-headline-md negrita color-primario">Encuéntralo</span>
-                    </div>
-                    <div class="mb-10 texto-centrado texto-izquierda">
-                        <h2 class="texto-headline-lg texto-base mb-2">Bienvenido de nuevo</h2>
-                        <p class="texto-body-md color-secundario">Ingrese sus credenciales para acceder al sistema.</p>
-                    </div>
-                    <form class="espacio-y-6">
-                        <div>
-                            <label class="block texto-label-md texto-variante mb-2" for="email">Correo Electrónico
-                                Corporativo</label>
-                            <div class="relativo group">
-                                <span
-                                    class="material-symbols-outlined absolute left-4 centrar-y color-outline grupo-foco:color-primario transicion-colores">mail</span>
-                                <input
-                                    class="ancho-completo pl-12 pr-4 py-3.5 bg-superficie-baja border-transparente foco-borde foco-fondo foco-sin-anillo redondeado-lg texto-body-md texto-base transicion placeholder-color"
-                                    id="email" name="email" placeholder="ejemplo@feriavalencia.com" type="email">
-                            </div>
-                        </div>
-                        <div>
-                            <div class="mb-2">
-                                <label class="block texto-label-md texto-variante" for="password">Contraseña</label>
-                            </div>
-                            <div class="relativo group">
-                                <span
-                                    class="material-symbols-outlined absolute left-4 centrar-y color-outline grupo-foco:color-primario transicion-colores">lock</span>
-                                <input
-                                    class="ancho-completo pl-12 pr-12 py-3.5 bg-superficie-baja border-transparente foco-borde foco-fondo foco-sin-anillo redondeado-lg texto-body-md texto-base transicion placeholder-color"
-                                    id="password" name="password" placeholder="••••••••" type="password">
-                                <button
-                                    class="absolute right-4 centrar-y color-outline hover\:texto-oscuro transicion-colores"
-                                    type="button">
-                                    <span class="material-symbols-outlined">visibility</span>
-                                </button>
-                            </div>
-                        </div>
 
-                        <button
-                            class="ancho-completo bg-primario texto-terciario py-4 redondeado-lg texto-label-md flex items-center justify-center gap-2 hover\:fondo-primario transicion active\:escala-98 sombra-sm"
-                            type="submit">
-                            Iniciar Sesión
-                            <span class="material-symbols-outlined texto-20px">arrow_forward</span>
-                        </button>
-                    </form>
+            <div class="contenido-central">
+                <h1>Optimización de Prospección Comercial</h1>
+                <p>Analice mercados, identifique oportunidades y exporte datos críticos con la plataforma líder en inteligencia geográfica para empresas.</p>
+            </div>
 
+            <div class="badges">
+                <span>Precisión Geográfica</span>
+                <span>Special Feria Valencia Edition</span>
+            </div>
+        </div>
+
+        <!-- Panel derecho: formulario -->
+        <div class="panel-der">
+            <div class="form-header">
+                <h2>Bienvenido de nuevo</h2>
+                <p>Ingrese sus credenciales para acceder al sistema.</p>
+            </div>
+
+            <!-- Mensajes de estado -->
+            <div th:if="${param.error}" class="mensaje-error">
+                Email o contraseña incorrectos.
+            </div>
+            <div th:if="${param.exito}" class="mensaje-exito">
+                Registro exitoso. Ya puedes entrar.
+            </div>
+            <div th:if="${param.logout}" class="mensaje-info">
+                Has cerrado sesión correctamente.
+            </div>
+
+            <form th:action="@{/login}" method="post">
+                <div class="campo">
+                    <label for="email">Correo Electrónico</label>
+                    <input id="email" name="username" type="email" placeholder="ejemplo@empresa.com" required>
                 </div>
 
-            </div>
+                <div class="campo">
+                    <label for="password">Contraseña</label>
+                    <input id="password" name="password" type="password" placeholder="••••••••" required>
+                </div>
+
+                <button type="submit" class="btn-login">Iniciar Sesión</button>
+            </form>
         </div>
     </div>
 
-    <div class="vista-movil">
-        <main class="contenido-principal">
-            <div class="tarjeta">
-                <div class="panel-izquierdo">
-                    <div class="marca">
-                        <div class="flex items-center gap-3 texto-blanco">
-                            <span class="material-symbols-outlined texto-3xl">explore</span>
-                            <span class="texto-headline-md negrita tracking-wide">Encuéntralo</span>
-                        </div>
-                    </div>
-                    <div class="texto-bienvenida">
-                        <h1>Inteligencia de mercado con precisión geográfica.</h1>
-                        <p>Descubra oportunidades estratégicas mediante el análisis avanzado de datos espaciales y
-                            prospección comercial de alto nivel.</p>
-                    </div>
-                    <div class="decoracion-fondo">
-                        <img alt="Red global conectada"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwbVUAIDJFOByqqalOkAgkc380Erzrv-dwayFJ62JbCAntI2IxD4NadXzEMVMBWlBvePVvQ39JbXuq384MuEnrfnae0m_eZ0PIrdFSmqHM5eplX51LvhvHb8bofk6qJNkUqErkxE1lg8OpICPvWUGK9fjCS-cCVoNeB4SHGYVpZbPHNx7souE0El4H9Fq6wE5Mp2G_ks5K9mop5syOLAsYkQ1OluLZoiMuzh7ouAz4uxaZfKArNAiaxyp90fxgkU-2LbAWcAjukAc">
-                    </div>
-                </div>
-                <div class="panel-derecho">
-                    <div class="contenedor-formulario">
-                        <div class="logo-movil">
-                            <span class="material-symbols-outlined">explore</span>
-                            <span class="texto-headline-md negrita">Encuéntralo</span>
-                        </div>
-                        <div class="mb-10">
-                            <h2 class="texto-headline-lg color-primario mb-2">Bienvenido de nuevo</h2>
-                            <p class="texto-body-md color-secundario">Acceda a su panel de prospección corporativa.</p>
-                        </div>
-                        <form class="espacio-y-6">
-                            <div class="espacio-y-2">
-                                <label class="block texto-label-md color-variante" for="email-movil">Correo
-                                    Electrónico</label>
-                                <div class="relativo group">
-                                    <span
-                                        class="material-symbols-outlined absolute left-4 centrar-y color-outline">mail</span>
-                                    <input
-                                        class="ancho-completo pl-12 pr-4 py-3 fondo-superficie-baja border-transparente border-b-2 foco-borde foco-fondo foco-sin-anillo redondeado-t-lg transicion texto-body-md outline-none"
-                                        id="email-movil" name="email" placeholder="ejemplo@empresa.com" type="email">
-                                </div>
-                            </div>
-                            <div class="espacio-y-2">
-                                <div>
-                                    <label class="block texto-label-md color-variante"
-                                        for="password-movil">Contraseña</label>
-                                </div>
-                                <div class="relativo group">
-                                    <span
-                                        class="material-symbols-outlined absolute left-4 centrar-y color-outline">lock</span>
-                                    <input
-                                        class="ancho-completo pl-12 pr-4 py-3 fondo-superficie-baja border-transparente border-b-2 foco-borde foco-fondo foco-sin-anillo redondeado-t-lg transicion texto-body-md outline-none"
-                                        id="password-movil" name="password" placeholder="••••••••" type="password">
-                                    <button
-                                        class="absolute right-4 centrar-y color-outline cursor-pointer"
-                                        type="button">
-                                        <span class="material-symbols-outlined">visibility</span>
-                                    </button>
-                                </div>
-                            </div>
-
-                            <button
-                                class="ancho-completo bg-primario texto-blanco py-4 redondeado-xl texto-label-md hover\:sombra-hover active\:escala-98 transicion flex justify-center items-center gap-2 mt-4"
-                                type="submit">
-                                <span>Iniciar Sesión</span>
-                                <span class="material-symbols-outlined texto-sm">arrow_forward</span>
-                            </button>
-                        </form>
-                        <div class="mt-12 text-center">
-                            <p class="texto-body-sm color-variante">
-                                ¿No tiene una cuenta corporativa?
-                                <a class="color-primario negrita hover\:subrayado ml-1" href="#">Contacte con Ventas</a>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </main>
-        <footer class="pie-pagina">
-            <p class="texto-label-sm color-outline tracking-wide mayusculas">Encuéntralo © 2025 • Plataforma de
-                Inteligencia</p>
-        </footer>
-    </div>
-
 </body>
-
 </html>
