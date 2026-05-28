@@ -589,13 +589,13 @@ select {
 .boton-primario:hover { opacity: 0.9; }
 
 .boton-azul {
-  background-color: #2563eb;
+  background-color: #217346;
   color: var(--color-blanco);
   border: none;
 }
 .boton-azul:hover {
-  background-color: #1d4ed8;
-  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
+  background-color: #1a5c38;
+  box-shadow: 0 4px 12px rgba(33, 115, 70, 0.15);
 }
 
 .boton-secundario {
@@ -865,7 +865,7 @@ select {
   position: relative;
   display: flex;
   align-items: center;
-  background-color: var(--color-superficie-baja);
+  background-color: var(--color-blanco);
   border-radius: var(--redondeado-md);
   border: 1px solid var(--color-borde-variante);
   width: 100%;
@@ -1243,6 +1243,9 @@ details .selector-multiple-cabecera::-webkit-details-marker { display: none; }
   border-radius: var(--redondeado-completo);
   white-space: nowrap;
 }
+#boton-filtros-movil {
+  background-color: var(--color-blanco);
+}
 
 .barra-navegacion-movil {
   position: fixed;
@@ -1594,7 +1597,7 @@ details .selector-multiple-cabecera::-webkit-details-marker { display: none; }
 }
 
 /* Selector específico para evitar conflictos */
-input[id="radio-deslizador"] {
+input[id="radio-deslizador"], input[id="radio-deslizador-movil"] {
   -webkit-appearance: none;
   appearance: none;
   width: 100%;
@@ -1609,13 +1612,13 @@ input[id="radio-deslizador"] {
 }
 
 /* --- Estilos para Chrome, Safari y Edge --- */
-input[id="radio-deslizador"]::-webkit-slider-runnable-track {
+input[id="radio-deslizador"]::-webkit-slider-runnable-track, input[id="radio-deslizador-movil"]::-webkit-slider-runnable-track {
   width: 100%;
   height: 32px;
   background: transparent;
 }
 
-input[id="radio-deslizador"]::-webkit-slider-thumb {
+input[id="radio-deslizador"]::-webkit-slider-thumb, input[id="radio-deslizador-movil"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
   height: 22px;
@@ -1631,14 +1634,14 @@ input[id="radio-deslizador"]::-webkit-slider-thumb {
 }
 
 /* --- Estilos para Firefox --- */
-input[id="radio-deslizador"]::-moz-range-track {
+input[id="radio-deslizador"]::-moz-range-track, input[id="radio-deslizador-movil"]::-moz-range-track {
   width: 100%;
   height: 32px;
   background: var(--color-superficie-alta);
   border-radius: var(--redondeado-completo);
 }
 
-input[id="radio-deslizador"]::-moz-range-thumb {
+input[id="radio-deslizador"]::-moz-range-thumb, input[id="radio-deslizador-movil"]::-moz-range-thumb {
   height: 20px;
   width: 20px;
   background: var(--color-blanco);

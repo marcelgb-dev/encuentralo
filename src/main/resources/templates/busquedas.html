@@ -33,12 +33,8 @@
           <a class="texto-secundario hover:bg-superficie-alta transition-colors px-2 py-1 redondeado texto-label-md"
              th:href="@{/favoritos}" href="favoritos.html">Favoritos</a>
         </nav>
-        <div class="cursor-pointer active:scale-95 transition">
-          <div
-            class="w-10 h-10 redondeado-completo bg-primario-contenedor flex items-center justify-center overflow-hidden">
-            <img alt="Perfil" class="ancho-completo h-full object-cover"
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFOKNvMAocw1nugibhRkbm5vkLDeZajAmDLxFjFWEr0hj4Hbo16yfTG6Iw-MfEZiB_Nqmf41xmFJ2Me_ZmdXR1r4t6ToXwBkw1dG2oBoFAaSP5bL5DFqmghvm2fjCg1vHOpfg9ErsrLPiUETLyuAFsFXZfUAC3J3sLghEFz7yPuWZQ2mXFGw06kYGK27IEKu1SCoC8mxk2gLEu5MKkZTzPjU2cZmSACuLS2ruDTmOfaIhBPlc9VVpKQ1-vJ1LPsT09XptnWUAOeVc">
-          </div>
+        <div class="flex items-center gap-2 pl-3 border-l borde-variante cursor-pointer active:scale-95 transition">
+          <span class="material-symbols-outlined texto-primario" style="font-size: 24px;">account_circle</span>
         </div>
       </div>
     </header>
@@ -54,38 +50,102 @@
             y expanda su cartera de clientes Premium bajo exigentes estándares de precisión y fiabilidad.</p>
         </div>
 
-        <div
+        <form id="formulario-busqueda-movil" th:action="@{/buscar/nueva}" method="post" th:object="${busqueda}"
           class="bg-superficie-mas-baja redondeado-2xl shadow-lg border border-borde-superficie p-6 md:p-12 space-y-6">
           <div class="space-y-3">
             <label class="texto-label-md texto-variante px-1">Término de búsqueda o categoría</label>
             <div class="relative">
               <span class="material-symbols-outlined absolute left-4 centrar-y texto-secundario pointer-events-none"
                 style="font-size: 22px;">search</span>
-              <input id="termino-movil"
+              <input type="text" id="termino-movil" th:field="*{termino}"
                 class="ancho-completo pl-12 pr-12 py-4 bg-superficie-baja border border-borde-variante redondeado-xl focus:ring-2 focus:ring-primario focus:bg-blanco transition texto-body-md"
-                placeholder="Ej. Centros de Negocio Premium..." type="text"
+                placeholder="Ej. Centros de Negocio Premium..."
                 style="padding-left: 3rem;">
             </div>
           </div>
 
-          <div class="space-y-3">
-            <label class="texto-label-md texto-variante px-1">Radio (en kms)</label>
-            <div class="relative">
-              <span class="material-symbols-outlined absolute left-4 centrar-y texto-secundario pointer-events-none"
-                style="font-size: 22px;">map</span>
-              <input id="radio-movil"
-                class="ancho-completo pl-12 pr-12 py-4 bg-superficie-baja border border-borde-variante redondeado-xl focus:ring-2 focus:ring-primario focus:bg-blanco transition texto-body-md"
-                type="number" min="1" max="50" value="5" placeholder="Radio en kilómetros"
-                style="padding-left: 3rem;">
+          <div class="space-y-2 pt-2">
+            <div class="flex justify-between items-center">
+              <label class="texto-label-md texto-variante px-1">Radio de búsqueda</label>
+              <div class="texto-label-md texto-primario font-semibold valor-deslizador">
+                Distancia máxima: <span id="valor-deslizador-texto-movil"></span>
+              </div>
+            </div>
+            <input type="range" id="radio-deslizador-movil" th:field="*{radio}" min="100" max="40000" class="ancho-completo">
+            <div class="flex justify-between mt-2">
+              <span class="texto-label-sm texto-outline font-semibold">100 m</span>
+              <span class="texto-label-sm texto-outline font-semibold">40 km</span>
             </div>
           </div>
+          <script>
+            var deslizadorMovil = document.getElementById('radio-deslizador-movil');
+            var visorTextoMovil = document.getElementById('valor-deslizador-texto-movil');
+            if (deslizadorMovil && visorTextoMovil) {
+              function actualizarVisorMovil() {
+                var metros = parseInt(deslizadorMovil.value);
+                if (metros >= 1000) {
+                  visorTextoMovil.textContent = (metros / 1000).toFixed(1) + " km";
+                } else {
+                  visorTextoMovil.textContent = metros + " m";
+                }
+              }
+              deslizadorMovil.addEventListener('input', actualizarVisorMovil);
+              actualizarVisorMovil();
+            }
+          </script>
 
-          <button
-            class="ancho-completo py-5 bg-primario texto-blanco redondeado-xl texto-headline-md shadow-lg hover:bg-primario-contenedor transition active:scale-95 flex items-center justify-center gap-3 mt-4">
-            <span>Iniciar Búsqueda</span>
-            <span class="material-symbols-outlined">arrow_forward</span>
-          </button>
-        </div>
+          <div>
+            <input type="hidden" step="any" id="latitud-movil" th:field="*{latitud}" required>
+            <input type="hidden" step="any" id="longitud-movil" th:field="*{longitud}" required>
+            <input type="hidden" id="limite-movil" th:field="*{limite}" value="50">
+          </div>
+
+          <div class="pt-6 border-t borde-superficie">
+            <button type="submit"
+              class="ancho-completo py-4 bg-primario texto-blanco redondeado-xl texto-label-md shadow-lg flex items-center justify-center gap-2 hover:opacity-90 transition font-bold active:scale-95">
+              <span class="material-symbols-outlined">rocket_launch</span>
+              Buscar
+            </button>
+          </div>
+        </form>
+
+        <script th:inline="javascript">
+          var isTestingMovil = [[${testMode}]];
+          document.getElementById('formulario-busqueda-movil').addEventListener('submit', function(event) {
+            if (isTestingMovil) {
+              console.log("Modo testing activo: omitiendo GPS.");
+              return true;
+            }
+            var form = this;
+            var latInput = document.getElementById('latitud-movil');
+            var lonInput = document.getElementById('longitud-movil');
+            var btnEnvio = form.querySelector('button[type="submit"]');
+            if (latInput.value && latInput.value !== "0.0" && latInput.value !== "0") {
+              return true;
+            }
+            event.preventDefault();
+            if (navigator.geolocation) {
+              btnEnvio.disabled = true;
+              var textoOriginal = btnEnvio.innerHTML;
+              btnEnvio.innerHTML = '<span class="material-symbols-outlined">sync</span> Localizando...';
+              navigator.geolocation.getCurrentPosition(
+                function(position) {
+                  latInput.value = position.coords.latitude;
+                  lonInput.value = position.coords.longitude;
+                  form.submit();
+                },
+                function(error) {
+                  btnEnvio.disabled = false;
+                  btnEnvio.innerHTML = textoOriginal;
+                  alert("Error de ubicaci\u00f3n. Por favor, activa el GPS.");
+                },
+                { enableHighAccuracy: true, timeout: 5000 }
+              );
+            } else {
+              alert("Tu navegador no soporta geolocalizaci\u00f3n.");
+            }
+          });
+        </script>
       </div>
     </main>
 
@@ -101,10 +161,6 @@
       <a th:href="@{/favoritos}" href="favoritos.html" class="flex flex-col items-center justify-center px-3 py-1 transition texto-variante hover:bg-superficie-variante">
         <span class="material-symbols-outlined">star</span>
         <span class="texto-label-sm">Favoritos</span>
-      </a>
-      <a class="flex flex-col items-center justify-center texto-variante px-3 py-1 hover:bg-superficie-variante transition" href="#">
-        <span class="material-symbols-outlined">dashboard</span>
-        <span class="texto-label-sm">Panel</span>
       </a>
     </nav>
   </div>

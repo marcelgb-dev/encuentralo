@@ -17,8 +17,8 @@
         <span class="material-symbols-outlined">explore</span>
         <h1>Encuéntralo</h1>
       </div>
-      <div class="boton-icono-redondo">
-        <img alt="Perfil" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJiwLNp_Po-sa-VemeehvUFJRAXcZYfXrwt27N-T9_aSH2Y5YatsOvtl5arB6udJKQlcmNZRJPRZWUzif5l0_DeDXyKDIHi7YG6aR6XNdF7U0MJGosav2GoXnpiB9ircqj9Hg5by2BMQfpUAcizx--j8n-4UnGcxzF24I5j8EQUW5qnhDFqWc0FhWI7yRoYbyPpVvSx1aXqk12WwuK1Ia_nusMxghV4nVnkYRruy7fXYqvcKYrCGmO2SWsmP3cRokF8mJpJDnSf-Y">
+      <div class="flex items-center gap-2 pl-3 border-l borde-variante cursor-pointer active:scale-95 transition">
+        <span class="material-symbols-outlined texto-primario" style="font-size: 24px;">account_circle</span>
       </div>
     </div>
   </header>
@@ -34,98 +34,155 @@
             <span th:text="${#lists.size(resultados)} + ' resultados guardados'"></span>
           </p>
         </div>
-        <div class="barra-filtros-rapidos-movil">
-          <button class="boton boton-secundario filtro-rapido-boton" id="boton-rating-movil">
-            <span class="material-symbols-outlined">star</span>
-            Rating
-            <span class="material-symbols-outlined">expand_more</span>
-          </button>
-          <button class="boton boton-secundario filtro-rapido-boton" id="boton-filtros-movil">
-            <span class="material-symbols-outlined">filter_list</span>
-            Filtros
-          </button>
-        </div>
       </div>
     </section>
 
     <div class="filtros-avanzados-movil" id="contenedor-filtros-movil">
-      <div class="filtro-seccion">
-        <label class="filtro-seccion-label">Ordenar por</label>
-        <div class="flex items-center" style="gap: 0.5rem;">
-          <div class="selector-filtros-contenedor flex-1" style="margin-bottom: 0;">
-            <select class="selector-filtros" id="selector-ordenar-por-movil" onchange="actualizarOrdenacionDesdeSelector(this.value)">
-              <option value="" disabled selected>Ordenar por...</option>
-              <option value="valoracion">Valoración</option>
-              <option value="distancia">Distancia</option>
-              <option value="alfabeticamente">Alfabéticamente</option>
-            </select>
-            <span class="material-symbols-outlined selector-filtros-icono">expand_more</span>
-          </div>
-          <button class="boton-invertir-orden" id="boton-revertir-orden-movil" title="Invertir orden">
-            <span class="material-symbols-outlined">swap_vert</span>
-          </button>
-        </div>
+      <div class="filtros-cabecera">
+        <h3>FILTROS AVANZADOS</h3>
+        <a th:href="@{/favoritos}">
+          <button class="cursor-pointer">Limpiar</button>
+        </a>
       </div>
-      <div class="filtro-seccion">
-        <label class="filtro-seccion-label">Categoría</label>
-        <div class="selector-multiple-contenedor" id="desplegable-categorias-movil">
-          <button class="selector-multiple-cabecera">
-            <span class="selector-multiple-texto-seleccionado" id="texto-categorias-movil">Todas las categorías</span>
-            <span class="material-symbols-outlined">expand_more</span>
-          </button>
-          <div class="selector-multiple-opciones" id="opciones-categorias-movil">
-            <div class="selector-multiple-opcion"><label class="flex items-center" style="gap:0.5rem;width:100%"><input type="checkbox" value="tecnologia"><span>Tecnología</span></label></div>
-            <div class="selector-multiple-opcion"><label class="flex items-center" style="gap:0.5rem;width:100%"><input type="checkbox" value="logistica"><span>Logística</span></label></div>
-            <div class="selector-multiple-opcion"><label class="flex items-center" style="gap:0.5rem;width:100%"><input type="checkbox" value="finanzas"><span>Finanzas</span></label></div>
-            <div class="selector-multiple-opcion"><label class="flex items-center" style="gap:0.5rem;width:100%"><input type="checkbox" value="saas"><span>SaaS</span></label></div>
-            <div class="selector-multiple-opcion"><label class="flex items-center" style="gap:0.5rem;width:100%"><input type="checkbox" value="retail"><span>Retail</span></label></div>
-            <div class="selector-multiple-opcion"><label class="flex items-center" style="gap:0.5rem;width:100%"><input type="checkbox" value="energia"><span>Energía</span></label></div>
+      <form th:action="@{/favoritos}" method="get">
+        <div class="filtro-seccion" style="margin-top: 0;">
+          <label class="filtro-seccion-label">Categoría</label>
+          <div class="selector-multiple-contenedor" id="desplegable-categorias-movil">
+            <button type="button" class="selector-multiple-cabecera">
+              <span class="selector-multiple-texto-seleccionado" id="texto-categorias-movil">Todas las categorías</span>
+              <span class="material-symbols-outlined">expand_more</span>
+            </button>
+            <div class="selector-multiple-opciones" id="opciones-categorias-movil">
+              <div th:each="cat : ${categorias}" class="selector-multiple-opcion">
+                <label class="flex items-center" style="gap:0.5rem;width:100%">
+                  <input type="checkbox" name="categorias" th:value="${cat.nombre}" th:checked="${categoriasSeleccionadas != null and #lists.contains(categoriasSeleccionadas, cat.nombre)}">
+                  <span th:text="${cat.nombre}">Nombre Categoría</span>
+                </label>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="filtro-seccion">
-        <label class="filtro-seccion-label">Favoritos</label>
-        <label class="contenedor-interruptor-favorito">
-          <input type="checkbox" id="filtro-favorito-movil">
-          <span class="deslizador-interruptor"></span>
-          <span class="texto-label-md select-none">Solo mostrar favoritos</span>
-        </label>
-      </div>
-      <div class="filtro-seccion">
-        <label class="filtro-seccion-label">Etiquetas Personalizadas</label>
-        <div class="selector-multiple-contenedor" id="desplegable-etiquetas-movil">
-          <button class="selector-multiple-cabecera">
-            <span class="selector-multiple-texto-seleccionado" id="texto-etiquetas-movil">Seleccionar etiquetas...</span>
-            <span class="material-symbols-outlined">expand_more</span>
-          </button>
-          <div class="selector-multiple-opciones" id="opciones-etiquetas-movil">
-            <p class="texto-body-sm texto-secundario italic" style="padding: 0.5rem;">Crea etiquetas desde una tarjeta...</p>
+        <div class="filtro-seccion">
+          <label class="filtro-seccion-label">Etiquetas Personalizadas</label>
+          <div class="selector-multiple-contenedor" id="desplegable-etiquetas-movil">
+            <button type="button" class="selector-multiple-cabecera">
+              <span class="selector-multiple-texto-seleccionado" id="texto-etiquetas-movil">Seleccionar etiquetas...</span>
+              <span class="material-symbols-outlined">expand_more</span>
+            </button>
+            <div class="selector-multiple-opciones" id="opciones-etiquetas-movil">
+              <p class="texto-body-sm texto-secundario italic" style="padding: 0.5rem;">Crea etiquetas desde una tarjeta...</p>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="filtro-seccion">
-        <label class="filtro-seccion-label">Valoración Mínima</label>
-        <div class="filtro-estrellas-grupo" id="grupo-estrellas-movil">
-          <span class="material-symbols-outlined icono-lleno">star</span>
-          <span class="material-symbols-outlined icono-lleno">star</span>
-          <span class="material-symbols-outlined icono-lleno">star</span>
-          <span class="material-symbols-outlined vacia">star</span>
-          <span class="material-symbols-outlined vacia">star</span>
+        <div class="filtro-seccion">
+          <label class="filtro-seccion-label">Valoración Mínima</label>
+          <input type="hidden" name="valoracionMinima" id="valoracionMinima-movil" th:value="${valoracionMinima}">
+          <div class="filtro-estrellas-grupo" id="grupo-estrellas-movil">
+            <span class="material-symbols-outlined estrella-filtro-movil cursor-pointer" data-valor="1">star</span>
+            <span class="material-symbols-outlined estrella-filtro-movil cursor-pointer" data-valor="2">star</span>
+            <span class="material-symbols-outlined estrella-filtro-movil cursor-pointer" data-valor="3">star</span>
+            <span class="material-symbols-outlined estrella-filtro-movil cursor-pointer" data-valor="4">star</span>
+            <span class="material-symbols-outlined estrella-filtro-movil cursor-pointer" data-valor="5">star</span>
+          </div>
         </div>
-      </div>
-      <div class="filtro-seccion" style="margin-bottom: 0.75rem;">
-        <button class="boton boton-primario ancho-completo">
-          <span class="material-symbols-outlined">filter_alt</span>
-          Aplicar filtros
-        </button>
-      </div>
+        <input type="hidden" name="orden" id="hidden-orden-movil" th:value="${orden}">
+        <input type="hidden" name="inverso" id="hidden-inverso-movil" th:value="${inverso}">
+        <div class="filtro-seccion" style="margin-bottom: 0.75rem;">
+          <button type="submit" class="boton boton-primario ancho-completo">
+            <span class="material-symbols-outlined">filter_alt</span>
+            Aplicar filtros
+          </button>
+        </div>
+      </form>
       <div class="filtro-seccion" style="margin-bottom: 0;">
-        <button class="boton boton-azul ancho-completo">
-          <span class="material-symbols-outlined">download</span>
-          Exportar resultados
-        </button>
+        <form th:action="@{/favoritos/exportar/csv}" method="get">
+          <input type="hidden" name="orden" th:value="${orden}">
+          <input type="hidden" name="inverso" th:value="${inverso}">
+          <input type="hidden" name="valoracionMinima" th:value="${valoracionMinima}">
+          <input th:each="cat : ${categoriasSeleccionadas}" type="hidden" name="categorias" th:value="${cat}">
+          <input th:if="${etiqueta != null}" type="hidden" name="etiqueta" th:value="${etiqueta}">
+          <button type="submit" class="boton boton-azul ancho-completo">
+            <span class="material-symbols-outlined">download</span>
+            Exportar resultados
+          </button>
+        </form>
       </div>
     </div>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+          document.querySelectorAll('#contenedor-filtros-movil .selector-multiple-cabecera').forEach(btn => {
+              btn.addEventListener('click', () => {
+                  const opciones = btn.nextElementSibling;
+                  if (opciones && opciones.classList.contains('selector-multiple-opciones')) {
+                      opciones.classList.toggle('activo');
+                  }
+              });
+          });
+          const estrellas = document.querySelectorAll('#contenedor-filtros-movil .estrella-filtro-movil');
+          const inputValoracion = document.getElementById('valoracionMinima-movil');
+
+          function actualizarEstrellasMovil(valor) {
+              estrellas.forEach(s => {
+                  const v = parseInt(s.getAttribute('data-valor'));
+                  if (v <= valor) {
+                      s.classList.remove('vacia');
+                      s.textContent = 'star';
+                      s.style.fontVariationSettings = "'FILL' 1";
+                  } else {
+                      s.classList.add('vacia');
+                      s.style.fontVariationSettings = "'FILL' 0";
+                  }
+              });
+          }
+
+          actualizarEstrellasMovil(parseInt(inputValoracion.value) || 0);
+
+          estrellas.forEach(estrella => {
+              estrella.addEventListener('click', () => {
+                  const valor = estrella.getAttribute('data-valor');
+                  inputValoracion.value = valor;
+                  actualizarEstrellasMovil(valor);
+              });
+          });
+      });
+    </script>
+
+    <div class="contenedor-ordenar-movil" style="display:flex; align-items:center; gap:0.5rem; padding:0.75rem 1rem;">
+      <button class="boton boton-secundario filtro-rapido-boton" id="boton-filtros-movil" onclick="document.getElementById('contenedor-filtros-movil').classList.toggle('activo')">
+        <span class="material-symbols-outlined">filter_list</span>
+        Avanzado
+      </button>
+      <div class="selector-filtros-contenedor flex-1" style="margin-bottom: 0;">
+        <select class="selector-filtros" id="selector-ordenar-por-movil" onchange="actualizarOrdenacionMovil(this.value)">
+          <option value="" disabled th:selected="${orden == null}">Ordenar por...</option>
+          <option value="default" th:selected="${orden == 'default'}">Por defecto</option>
+          <option value="valoracion" th:selected="${orden == 'valoracion'}">Valoración</option>
+          <option value="alfabeticamente" th:selected="${orden == 'alfabeticamente'}">Alfabéticamente</option>
+        </select>
+      </div>
+      <button type="button" class="boton-invertir-orden" id="boton-revertir-orden-movil" onclick="toggleInversoMovil()" title="Invertir orden">
+        <span class="material-symbols-outlined" th:style="${inverso == 'true'} ? 'transform: rotate(180deg)' : ''">swap_vert</span>
+      </button>
+    </div>
+    <script>
+      function actualizarOrdenacionMovil(valor) {
+          var inputOrden = document.getElementById('hidden-orden-movil');
+          var form = document.querySelector('#contenedor-filtros-movil form');
+          if (inputOrden && form) {
+              inputOrden.value = valor;
+              form.submit();
+          }
+      }
+
+      function toggleInversoMovil() {
+          var inputInverso = document.getElementById('hidden-inverso-movil');
+          var form = document.querySelector('#contenedor-filtros-movil form');
+          if (inputInverso && form) {
+              inputInverso.value = (inputInverso.value === 'true') ? 'false' : 'true';
+              form.submit();
+          }
+      }
+    </script>
 
     <div class="grilla-resultados" id="grilla-resultados-movil">
       <article th:each="res : ${resultados}" class="tarjeta-prospecto">
@@ -134,9 +191,11 @@
               <div style="display:flex; gap:0.2rem">
                 <span th:each="cat : ${res.categorias}" th:text="${cat.nombre}" class="etiqueta-categoria tecnologia">Categoria</span>
               </div>
-              <button class="boton-estrella" title="Favorito">
-                <span class="material-symbols-outlined">star</span>
-              </button>
+              <form th:action="@{/favoritos/toggle/{id}(id=${res.id})}" method="POST" style="display:inline;">
+                <button type="submit" class="boton-estrella" title="Favorito">
+                  <span class="material-symbols-outlined" th:style="${res.esFavorito} ? 'font-variation-settings: \'FILL\' 1;' : ''">star</span>
+                </button>
+              </form>
             </div>
             <h3 th:text="${res.nombre}" class="texto-headline-md mb-2">Nombre negocio</h3>
             <div class="tarjeta-valoracion">
@@ -156,14 +215,7 @@
                 <span class="material-symbols-outlined">location_on</span>
                 <p th:text="${res.direccion}">Paseo de la Castellana, 256, 28046 Madrid</p>
               </div>
-              <div class="tarjeta-contacto-item">
-                <span class="material-symbols-outlined">distance</span>
-                <span th:text="${res.distancia >= 1000}
-                    ? ${#numbers.formatDecimal(res.distancia / 1000.0, 1, 1)} + ' km'
-                    : ${#numbers.formatDecimal(res.distancia, 1, 0)} + ' m'">
-                    1.2 km
-                </span>
-              </div>
+
               <div class="tarjeta-contacto-item">
                 <span class="material-symbols-outlined">call</span>
                 <p th:text="${res.telefono}">+34 915 678 901</p>
@@ -191,12 +243,8 @@
       <span class="material-symbols-outlined">star</span>
       <span class="texto-label-sm">Favoritos</span>
     </a>
-    <a class="flex flex-col items-center justify-center texto-variante px-3 py-1 hover:bg-superficie-variante transition" href="#">
-      <span class="material-symbols-outlined">dashboard</span>
-      <span class="texto-label-sm">Panel</span>
-    </a>
-  </nav>
-</div>
+    </nav>
+  </div>
 
 <div class="vista-escritorio">
   <aside class="barra-lateral">
@@ -339,12 +387,17 @@
             Aplicar filtros
           </button>
         </div>
-        <div class="filtro-seccion">
-          <button class="boton boton-azul ancho-completo">
-            <span class="material-symbols-outlined">download</span>
-            Exportar resultados
-          </button>
-        </div>
+      </form>
+      <form th:action="@{/favoritos/exportar/csv}" method="get" class="filtro-seccion" style="margin-top: 0.5rem;">
+        <input type="hidden" name="orden" th:value="${orden}">
+        <input type="hidden" name="inverso" th:value="${inverso}">
+        <input type="hidden" name="valoracionMinima" th:value="${valoracionMinima}">
+        <input th:each="cat : ${categoriasSeleccionadas}" type="hidden" name="categorias" th:value="${cat}">
+        <input th:if="${etiqueta != null}" type="hidden" name="etiqueta" th:value="${etiqueta}">
+        <button type="submit" class="boton boton-azul ancho-completo">
+          <span class="material-symbols-outlined">download</span>
+          Exportar resultados
+        </button>
       </form>
     </aside>
 
@@ -409,58 +462,7 @@
               });
           });
         </script>
-      </div>
-
-      <div class="grilla-resultados" id="grilla-resultados-escritorio">
-        <article th:each="res : ${resultados}" class="tarjeta-prospecto">
-          <div>
-            <div class="tarjeta-cabecera">
-              <div style="display:flex; gap:0.2rem">
-                <span th:each="cat : ${res.categorias}" th:text="${cat.nombre}" class="etiqueta-categoria tecnologia">Categoria</span>
-              </div>
-              <!-- Lógica de botón de Favoritos -->
-              <form th:action="@{/favoritos/toggle/{id}(id=${res.id})}" method="POST" style="display:inline;">
-                <button type="submit" class="boton-estrella" title="Favorito">
-                  <span class="material-symbols-outlined" 
-                        th:style="${res.esFavorito} ? 'font-variation-settings: \'FILL\' 1;' : ''">
-                    star
-                  </span>
-                </button>
-              </form>
-            </div>
-            <h3 th:text="${res.nombre}" class="texto-headline-md mb-2">Nombre negocio</h3>
-            <div class="tarjeta-valoracion">
-              <span th:text="${res.valoracion}" class="tarjeta-valoracion-puntos">5</span>
-              <div class="tarjeta-valoracion-estrellas" th:with="rating=${res.valoracion}">
-                <!-- Bucle fijo de 1 a 5 para las 5 estrellas posibles -->
-                <span th:each="i : ${#numbers.sequence(1, 5)}"
-                      class="material-symbols-outlined"
-                      th:classappend="${rating >= i} ? 'icono-lleno' : (${rating >= i - 0.5} ? 'icono-media' : 'icono-vacia')"
-                      th:text="${rating >= i} ? 'star' : (${rating >= i - 0.5} ? 'star_half' : 'grade')">
-                </span>
-              </div>
-              <span th:text="'(' + ${res.numReviews} + ' reseñas)'" class="tarjeta-valoracion-cantidad">(0 reseñas)</span>
-            </div>
-            <div class="tarjeta-contacto-lista">
-              <div class="tarjeta-contacto-item">
-                <span class="material-symbols-outlined">location_on</span>
-                <p th:text="${res.direccion}">Paseo de la Castellana, 256, 28046 Madrid</p>
-              </div>
-              <div class="tarjeta-contacto-item">
-                <span class="material-symbols-outlined">call</span>
-                <p th:text="${res.telefono}">+34 915 678 901</p>
-              </div>
-            </div>
-          </div>
-          <div class="tarjeta-acciones">
-            <a th:href="${res.url}" target="_blank" class="boton boton-primario" style="width:100%">Abrir en Yelp</a>
-          </div>
-        </article>
-      </div>
-    </section>
     </div>
-  </main>
-</div>
 
 <!-- Modal flotante de gestión de etiquetas -->
 <div class="modal-personalizado-overlay" id="modal-gestion-etiquetas" style="display: none;">

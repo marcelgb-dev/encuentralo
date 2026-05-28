@@ -23,8 +23,8 @@
         <a class="texto-secundario hover:bg-superficie-alta transition-colors px-3 py-2 redondeado-lg texto-body-md" href="#">Favoritos</a>
         <a class="texto-secundario hover:bg-superficie-alta transition-colors px-3 py-2 redondeado-lg texto-body-md" href="#">Panel</a>
       </nav>
-      <div class="w-10 h-10 redondeado-completo bg-secundario-contenedor flex items-center justify-center overflow-hidden cursor-pointer active:scale-95 transition">
-        <img alt="Perfil" class="ancho-completo h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuASQrHusKTXsnMY0BaH-YyQMS6sRX2exbAdgltdrDrO3x9fbFeyn9W7aDLz-mUTN0M8DM3hugq-6UD6N1n7Zbjikx74NERMICIBnaQbPfylSD6uDIxyaHvLZjUc9QidKx506HkniUDxchu5ixO02fjiNUgUnL7tOWrS3IY25xKITn2efmjVbd5RvS1opUNQ-16_AI8ZSoNRpep2baIvKTP_Z-hYO7P3eic3esBMNBFuRdFOigmkH2O-MRP9U5NPNlAONIh9dyBkxNo">
+      <div class="flex items-center gap-2 pl-3 border-l borde-variante cursor-pointer active:scale-95 transition">
+        <span class="material-symbols-outlined texto-primario" style="font-size: 24px;">account_circle</span>
       </div>
     </div>
   </header>
@@ -40,21 +40,21 @@
         <span class="material-symbols-outlined absolute left-4 centrar-y texto-outline" style="font-size: 22px;">search</span>
         <input class="ancho-completo pl-12 pr-4 py-3 bg-superficie-baja redondeado-xl border-none focus:ring-2 focus:ring-primario focus:bg-blanco transition texto-body-md" placeholder="Filtrar por término o fuente..." type="text">
       </div>
-      <button class="flex items-center justify-center gap-2 px-6 py-3 bg-primario texto-blanco redondeado-xl texto-label-md hover:shadow-lg transition">
-        <span class="material-symbols-outlined">filter_list</span>
-        Filtros avanzados
-      </button>
+
     </div>
 
     <!-- CONTENEDOR PRINCIPAL DE RESULTADOS (MÓVIL) -->
     <div class="space-y-4">
-      <div th:each="bus : ${busquedas}" class="bg-blanco p-6 redondeado-xl tarjeta-sombra border borde-superficie flex flex-col md:flex-row md:items-center justify-between gap-4 hover:shadow-md transition grupo">
-          <div class="flex items-start gap-4">
+      <div th:each="bus : ${busquedas}" th:onclick="|window.location.href='@{/resultados/{id}(id=${bus.id})}'|"
+           class="bg-blanco p-6 redondeado-xl tarjeta-sombra border borde-superficie flex flex-col md:flex-row md:items-center justify-between gap-4 hover:shadow-md transition cursor-pointer grupo">
+        <div class="flex items-start gap-4">
           <div>
             <h3 th:text="${bus.termino}" class="texto-body-lg texto-primario mb-1 font-semibold">Ejemplo de Término de Búsqueda</h3>
             <h2 th:text="${bus.ciudad}" class="texto-body-sm texto-secundario mb-3">Ubicación de ejemplo</h2>
             <div class="flex flex-wrap items-center gap-3">
-              <span class="bg-secundario-fijo texto-secundario-fijo px-2 py-0.5 redondeado texto-label-sm">Google Maps</span>
+              <span class="flex-en-linea items-center gap-1 px-3 py-1 redondeado-completo bg-secundario-contenedor texto-secundario-contenedor texto-label-sm">
+                <span class="material-symbols-outlined">public</span> Yelp
+              </span>
               <span class="texto-outline texto-body-sm flex items-center gap-1">
                 <span class="material-symbols-outlined">calendar_today</span>
                 <span th:text="${#temporals.format(bus.fecha, 'dd MMM yyyy')}">00 Mes 2000</span>
@@ -62,15 +62,6 @@
               </span>
             </div>
           </div>
-        </div>
-        <div class="flex items-center gap-3 opacidad-0 grupo-hover:opacidad-100 transition">
-          <button class="flex items-center gap-2 px-4 py-2 bg-primario texto-blanco redondeado-lg texto-label-sm active:scale-95 transition">
-            <span class="material-symbols-outlined">refresh</span>
-            Repetir Búsqueda
-          </button>
-          <button class="p-2 texto-outline hover:texto-error hover:bg-error-contenedor redondeado-lg transition">
-            <span class="material-symbols-outlined">delete</span>
-          </button>
         </div>
       </div>
     </div>
@@ -90,12 +81,8 @@
         <span class="material-symbols-outlined">star</span>
         <span class="texto-label-sm">Favoritos</span>
       </a>
-      <a class="flex flex-col items-center justify-center texto-variante px-3 py-1 hover:bg-superficie-variante transition" href="#">
-        <span class="material-symbols-outlined">dashboard</span>
-        <span class="texto-label-sm">Panel</span>
-      </a>
-  </nav>
-  <div class="pb-24 md:pb-12"></div>
+    </nav>
+    <div class="pb-24 md:pb-12"></div>
 </div>
 
 <div class="vista-escritorio">
