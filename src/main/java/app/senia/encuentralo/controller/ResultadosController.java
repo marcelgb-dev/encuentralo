@@ -5,6 +5,7 @@ import app.senia.encuentralo.model.Categoria;
 import app.senia.encuentralo.model.Resultado;
 import app.senia.encuentralo.service.BusquedaService;
 import app.senia.encuentralo.service.CategoriaService;
+import app.senia.encuentralo.service.EtiquetaService;
 import app.senia.encuentralo.service.ExportService;
 import app.senia.encuentralo.service.ResultadoService;
 import app.senia.encuentralo.service.YelpService;
@@ -30,13 +31,15 @@ public class ResultadosController {
     private final ResultadoService rs;
     private final CategoriaService cs;
     private final ExportService exportService;
+    private final EtiquetaService es;
 
-    public ResultadosController(YelpService ys, BusquedaService bs, ResultadoService rs, CategoriaService cs, ExportService exportService) {
+    public ResultadosController(YelpService ys, BusquedaService bs, ResultadoService rs, CategoriaService cs, ExportService exportService, EtiquetaService es) {
         this.ys = ys;
         this.bs = bs;
         this.rs = rs;
         this.cs = cs;
         this.exportService = exportService;
+        this.es = es;
     }
 
     // Recibe una SolicitudBusqueda, llama a la API mediante YelpService y
@@ -105,7 +108,7 @@ public class ResultadosController {
         model.addAttribute("busqueda", busqueda);
         model.addAttribute("resultados", resultados);
         model.addAttribute("categorias", categorias);
-
+        model.addAttribute("etiquetas", es.obtenerEtiquetasUsuario(1));
 
 
         // Devolvemos el nombre del html resultados.html
@@ -212,6 +215,7 @@ public class ResultadosController {
 
         model.addAttribute("resultados", resultados);
         model.addAttribute("categorias", categorias);
+        model.addAttribute("etiquetas", es.obtenerEtiquetasUsuario(1));
 
         // Devolvemos el nombre del html resultados.html
         return "favoritos";
