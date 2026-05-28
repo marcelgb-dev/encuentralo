@@ -2,8 +2,8 @@ USE Encuentralo;
 
 -- 1. Usuarios (Password es 'password123' en BCrypt)
 INSERT INTO usuario (email, password, nombre, apellidos, rol) VALUES
-                                                                  ('admin@encuentralo.com', '$2a$10$8.UnVuG9HHgffUDAlk8q6uy5akLPNndzqBzv6Dxv5.S1.p.f1A5m6', 'Marcel', 'Admin', 'ADMIN'),
-                                                                  ('user@test.com', '$2a$10$8.UnVuG9HHgffUDAlk8q6uy5akLPNndzqBzv6Dxv5.S1.p.f1A5m6', 'Juan', 'García', 'USER');
+                                                                  ('admin@encuentralo.com', '$2a$10$sORMAXdsb4qgjfjlmycp4ehzBycX4O8gDWC4tst6PohTV1WhDoG5y', 'Marcel', 'Admin', 'ADMIN'),
+                                                                  ('user@test.com', '$2a$10$sORMAXdsb4qgjfjlmycp4ehzBycX4O8gDWC4tst6PohTV1WhDoG5y', 'Juan', 'García', 'USER');
 
 -- 2. Categorías
 INSERT INTO categoria (nombre_categoria) VALUES
