@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="claro" lang="es">
+<html class="claro" lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -299,7 +299,6 @@
   .hover\:texto-error:hover { color: #ba1a1a; }
   .borde-variante-20 { border-color: rgba(197, 198, 205, 0.2); }
 
-  
   @media (min-width: 768px) {
     .md\:block { display: block; }
     .md\:flex { display: flex; }
@@ -330,6 +329,8 @@
   .vista-escritorio .contenido-principal {
     margin-left: 16rem;
     min-height: 100vh;
+    display: flex;
+    flex-direction: column;
   }
   .vista-escritorio .cabecera-superior {
     display: flex;
@@ -350,20 +351,22 @@
     max-width: 1440px;
     margin-left: auto;
     margin-right: auto;
+    flex: 1;
+    overflow-y: auto;
   }
   .vista-escritorio .tarjeta-corporativa {
     background-color: #ffffff;
     border-radius: 12px;
     box-shadow: 0px 4px 20px rgba(30, 41, 59, 0.05);
   }
-  
+
   .vista-movil {
     display: block;
   }
   .vista-escritorio {
     display: none;
   }
-  
+
   @media (min-width: 768px) {
     .vista-movil {
       display: none !important;
@@ -372,9 +375,127 @@
       display: block !important;
     }
   }
+
+  /* Modal confirmación eliminar */
+  .modal-overlay { position: fixed; inset: 0; background: rgba(9,20,38,0.5); z-index: 999; display: flex; align-items: center; justify-content: center; }
+  .modal-overlay.hidden { display: none !important; }
+  .modal-box { background: #fff; border-radius: 12px; padding: 2.5rem 2rem; max-width: 24rem; width: 90%; text-align: center; box-shadow: 0 8px 32px rgba(30,41,59,0.15); }
+  .modal-box h3 { font-size: 20px; font-weight: 700; color: #091426; margin-bottom: 0.75rem; }
+  .modal-box p { font-size: 15px; color: #505f76; margin-bottom: 1.5rem; line-height: 1.5; }
+  .modal-btns { display: flex; gap: 0.75rem; justify-content: center; }
+  .modal-btns button { flex: 1; padding: 12px; border-radius: 8px; font-size: 14px; font-weight: 700; cursor: pointer; border: none; }
+  .btn-si { background: #ba1a1a; color: #fff; }
+  .btn-si:hover { background: #9c1515; }
+  .btn-no { background: #f2f4f6; color: #091426; }
+  .btn-no:hover { background: #e0e3e5; }
+
+  /* Dropdown menú acciones */
+  .menu-wrapper { position: relative; display: inline-block; }
+  .menu-acciones { position: absolute; right: 0; top: 100%; background: #fff; border: 1px solid #eceef0; border-radius: 8px; box-shadow: 0 4px 16px rgba(30,41,59,0.12); z-index: 200; min-width: 140px; overflow: hidden; }
+  .menu-acciones a { display: flex; align-items: center; gap: 8px; padding: 10px 16px; font-size: 14px; color: #091426; text-decoration: none; }
+  .menu-acciones a:hover { background: #f2f4f6; }
+  .hidden { display: none !important; }
+
+  /* Avatar móvil con dropdown */
+  .avatar-movil {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #091426;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    user-select: none;
+    transition: transform 150ms;
+    position: relative;
+  }
+  .avatar-movil:active { transform: scale(0.92); }
+  .avatar-dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 8px 28px rgba(9,20,38,0.15);
+    min-width: 220px;
+    overflow: hidden;
+    z-index: 200;
+    border: 1px solid #eceef0;
+  }
+  .avatar-dropdown.hidden { display: none; }
+  .avatar-dropdown a,
+  .avatar-dropdown button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 14px 18px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #091426;
+    text-decoration: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    transition: background 100ms;
+  }
+  .avatar-dropdown a:hover,
+  .avatar-dropdown button:hover { background: #f2f4f6; }
+  .avatar-dropdown .material-symbols-outlined { font-size: 20px; color: #505f76; }
+  .avatar-dropdown .cerrar-sesion { color: #ba1a1a; }
+  .avatar-dropdown .cerrar-sesion .material-symbols-outlined { color: #ba1a1a; }
+
+  /* Notificación toast */
+  .toast {
+    position: fixed;
+    top: 2rem;
+    right: 2rem;
+    background: #091426;
+    color: #ffffff;
+    padding: 1rem 1.5rem;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    box-shadow: 0 4px 20px rgba(9,20,38,0.25);
+    z-index: 9999;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+    pointer-events: none;
+  }
+  .toast.visible { opacity: 1; }
+
+  /* Scrollbar personalizado */
+  .tabla-scroll::-webkit-scrollbar {
+    width: 8px;
+  }
+  .tabla-scroll::-webkit-scrollbar-track {
+    background: #f2f4f6;
+    border-radius: 4px;
+  }
+  .tabla-scroll::-webkit-scrollbar-thumb {
+    background: #c5c6cd;
+    border-radius: 4px;
+  }
+  .tabla-scroll::-webkit-scrollbar-thumb:hover {
+    background: #091426;
+  }
+  .tabla-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: #c5c6cd #f2f4f6;
+  }
 </style>
 </head>
 <body class="bg-fondo texto-base">
+
+<!-- Toast de eliminación -->
+<div id="toast-eliminado" class="toast" th:if="${eliminado}">
+  Usuario '<span th:text="${eliminado}">nombre</span>' eliminado con éxito.
+</div>
 
 <div class="vista-escritorio">
   <aside class="barra-lateral">
@@ -395,21 +516,18 @@
         <span class="material-symbols-outlined">star</span>
         Favoritos
       </a>
-
     </nav>
     <div class="mt-auto espacio-y-1">
-      <button class="w-full mb-6 bg-primario-contenedor texto-blanco py-3 px-4 redondeado-lg texto-label-md flex items-center justify-center gap-2 hover:opacity-90 transition">
-        <span class="material-symbols-outlined">add</span>
-        Nueva Búsqueda
-      </button>
-      <a class="flex items-center gap-3 px-4 py-3 redondeado-lg texto-secundario hover:bg-superficie-variante transition texto-label-md" href="#">
+      <a th:href="@{/cambiar_contrasena}" class="flex items-center gap-3 px-4 py-3 redondeado-lg texto-secundario hover:bg-superficie-variante transition texto-label-md">
         <span class="material-symbols-outlined">lock</span>
         Cambiar contraseña
       </a>
-      <a class="flex items-center gap-3 px-4 py-3 redondeado-lg texto-error hover:bg-error-contenedor/20 transition texto-label-md" href="#">
-        <span class="material-symbols-outlined">logout</span>
-        Cerrar Sesión
-      </a>
+      <form th:action="@{/logout}" method="post" style="margin:0;">
+        <button type="submit" class="w-full flex items-center gap-3 px-4 py-3 redondeado-lg texto-error hover:bg-error-contenedor/20 transition texto-label-md">
+          <span class="material-symbols-outlined">logout</span>
+          Cerrar Sesión
+        </button>
+      </form>
     </div>
   </aside>
 
@@ -420,7 +538,10 @@
       </div>
       <div class="flex items-center gap-6">
         <div class="flex items-center gap-3 cursor-pointer hover:bg-superficie-alta p-1 px-2 redondeado-lg transition-colors">
-          <p class="texto-label-md texto-primario flex items-center gap-2">Admin Principal <span class="material-symbols-outlined" style="font-size: 20px;">account_circle</span></p>
+          <p class="texto-label-md texto-primario flex items-center gap-2">
+            <span th:text="${nombreUsuario}">Usuario</span>
+            <span class="material-symbols-outlined" style="font-size: 20px;">account_circle</span>
+          </p>
         </div>
       </div>
     </header>
@@ -432,136 +553,65 @@
           <p class="texto-body-sm texto-secundario">Administra los accesos y roles de tu organización</p>
         </div>
         <div class="flex gap-4">
-          <div class="relative">
-            <span class="material-symbols-outlined absolute left-3 centrar-y texto-secundario">search</span>
-            <input class="pl-10 pr-4 py-2 bg-superficie-baja border-none redondeado-lg focus:ring-2 w-64 texto-body-sm" placeholder="Buscar usuario..." type="text">
-          </div>
-          <button class="bg-primario texto-blanco texto-label-md px-6 py-2 redondeado-lg flex items-center gap-2 hover:bg-primario-contenedor transition-colors sombra-suave">
+          <a th:href="@{/registrar_usuario}" class="bg-primario texto-blanco texto-label-md px-6 py-2 redondeado-lg flex items-center gap-2 hover:bg-primario-contenedor transition-colors sombra-suave" style="text-decoration:none;">
             <span class="material-symbols-outlined">person_add</span>
             Añadir Usuario
-          </button>
+          </a>
         </div>
       </div>
 
       <div class="tarjeta-corporativa overflow-hidden">
-        <table class="w-full text-left zebra">
-          <thead>
-            <tr class="bg-superficie-baja">
-              <th class="px-6 py-4 texto-label-md texto-secundario uppercase tracking-wider">Nombre</th>
-              <th class="px-6 py-4 texto-label-md texto-secundario uppercase tracking-wider">Email</th>
-              <th class="px-6 py-4 texto-label-md texto-secundario uppercase tracking-wider">Rol</th>
-              <th class="px-6 py-4 texto-label-md texto-secundario uppercase tracking-wider">Estado</th>
-              <th class="px-6 py-4 texto-label-md texto-secundario uppercase tracking-wider text-right">Acciones</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y borde-variante-20">
-            <tr>
-              <td class="px-6 py-4">
-                <div class="flex items-center gap-3">
-                  <div class="w-8 h-8 redondeado-completo bg-secundario-contenedor texto-sobre-secundario-contenedor flex items-center justify-center font-bold texto-xs">AV</div>
-                  <span class="texto-body-md font-medium texto-primario">Adrián Valenzuela</span>
-                </div>
-               </td>
-              <td class="px-6 py-4 texto-body-md texto-secundario">adrian.v@encuentralo.com</td>
-              <td class="px-6 py-4">
-                <span class="px-3 py-1 redondeado-completo bg-primario-fijo texto-primario texto-xs texto-label-md">Super Admin</span>
-               </td>
-              <td class="px-6 py-4">
-                <span class="flex items-center gap-1-5 texto-xs font-medium texto-verde-700">
-                  <span class="w-2 h-2 redondeado-completo bg-verde-500"></span>
-                  Activo
-                </span>
-               </td>
-              <td class="px-6 py-4 text-right">
-                <button class="texto-secundario hover:texto-primario transition-colors">
-                  <span class="material-symbols-outlined">more_vert</span>
-                </button>
-               </td>
-            </tr>
-            <tr>
-              <td class="px-6 py-4">
-                <div class="flex items-center gap-3">
-                  <div class="w-8 h-8 redondeado-completo bg-terciario-contenedor texto-sobre-terciario-contenedor-oscuro flex items-center justify-center font-bold texto-xs">EL</div>
-                  <span class="texto-body-md font-medium texto-primario">Elena López</span>
-                </div>
-               </td>
-              <td class="px-6 py-4 texto-body-md texto-secundario">e.lopez@corporate.net</td>
-              <td class="px-6 py-4">
-                <span class="px-3 py-1 redondeado-completo bg-secundario-fijo texto-sobre-secundario-fijo texto-xs texto-label-md">Analista</span>
-               </td>
-              <td class="px-6 py-4">
-                <span class="flex items-center gap-1-5 texto-xs font-medium texto-verde-700">
-                  <span class="w-2 h-2 redondeado-completo bg-verde-500"></span>
-                  Activo
-                </span>
-               </td>
-              <td class="px-6 py-4 text-right">
-                <button class="texto-secundario hover:texto-primario transition-colors">
-                  <span class="material-symbols-outlined">more_vert</span>
-                </button>
-               </td>
-            </tr>
-            <tr>
-              <td class="px-6 py-4">
-                <div class="flex items-center gap-3">
-                  <div class="w-8 h-8 redondeado-completo bg-variante-superficie texto-sobre-variante-superficie flex items-center justify-center font-bold texto-xs">MC</div>
-                  <span class="texto-body-md font-medium texto-primario">Marcos Castro</span>
-                </div>
-               </td>
-              <td class="px-6 py-4 texto-body-md texto-secundario">m.castro@prospecting.es</td>
-              <td class="px-6 py-4">
-                <span class="px-3 py-1 redondeado-completo bg-secundario-fijo texto-sobre-secundario-fijo texto-xs texto-label-md">Visualizador</span>
-               </td>
-              <td class="px-6 py-4">
-                <span class="flex items-center gap-1-5 texto-xs font-medium texto-contorno">
-                  <span class="w-2 h-2 redondeado-completo bg-contorno"></span>
-                  Inactivo
-                </span>
-               </td>
-              <td class="px-6 py-4 text-right">
-                <button class="texto-secundario hover:texto-primario transition-colors">
-                  <span class="material-symbols-outlined">more_vert</span>
-                </button>
-               </td>
-            </tr>
-            <tr>
-              <td class="px-6 py-4">
-                <div class="flex items-center gap-3">
-                  <div class="w-8 h-8 redondeado-completo bg-secundario-contenedor texto-sobre-secundario-contenedor flex items-center justify-center font-bold texto-xs">RS</div>
-                  <span class="texto-body-md font-medium texto-primario">Roberto Sanz</span>
-                </div>
-               </td>
-              <td class="px-6 py-4 texto-body-md texto-secundario">roberto.sanz@encuentralo.com</td>
-              <td class="px-6 py-4">
-                <span class="px-3 py-1 redondeado-completo bg-secundario-fijo texto-sobre-secundario-fijo texto-xs texto-label-md">Analista</span>
-               </td>
-              <td class="px-6 py-4">
-                <span class="flex items-center gap-1-5 texto-xs font-medium texto-verde-700">
-                  <span class="w-2 h-2 redondeado-completo bg-verde-500"></span>
-                  Activo
-                </span>
-               </td>
-              <td class="px-6 py-4 text-right">
-                <button class="texto-secundario hover:texto-primario transition-colors">
-                  <span class="material-symbols-outlined">more_vert</span>
-                </button>
-               </td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="tabla-scroll" style="max-height: calc(100vh - 280px); overflow-y: auto;">
+          <table class="w-full text-left zebra">
+            <thead style="position: sticky; top: 0; z-index: 10;">
+              <tr class="bg-superficie-baja">
+                <th class="px-6 py-4 texto-label-md texto-secundario uppercase tracking-wider">Nombre</th>
+                <th class="px-6 py-4 texto-label-md texto-secundario uppercase tracking-wider">Email</th>
+                <th class="px-6 py-4 texto-label-md texto-secundario uppercase tracking-wider">Rol</th>
+                <th class="px-6 py-4 texto-label-md texto-secundario uppercase tracking-wider text-right">Acciones</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y borde-variante-20">
+              <tr th:each="usuario : ${usuarios}">
+                <td class="px-6 py-4">
+                  <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 redondeado-completo bg-secundario-contenedor texto-sobre-secundario-contenedor flex items-center justify-center font-bold texto-xs">
+                      <span th:text="${#strings.substring(usuario.nombre, 0, 1).toUpperCase() + (usuario.apellidos != null and !usuario.apellidos.isBlank() ? #strings.substring(usuario.apellidos, 0, 1).toUpperCase() : '')}">XX</span>
+                    </div>
+                    <span class="texto-body-md font-medium texto-primario" th:text="${usuario.nombre + (usuario.apellidos != null and !usuario.apellidos.isBlank() ? ' ' + usuario.apellidos : '')}">Nombre Apellido</span>
+                  </div>
+                </td>
+                <td class="px-6 py-4 texto-body-md texto-secundario" th:text="${usuario.email}">email@ejemplo.com</td>
+                <td class="px-6 py-4">
+                  <span class="px-3 py-1 redondeado-completo texto-xs texto-label-md"
+                        th:classappend="${usuario.rol == 'ADMIN' ? 'bg-primario-fijo texto-primario' : 'bg-secundario-fijo texto-sobre-secundario-fijo'}"
+                        th:text="${usuario.rol}">Rol</span>
+                </td>
+                <td class="px-6 py-4 text-right">
+                  <div class="menu-wrapper">
+                    <button onclick="toggleMenu(this)" class="texto-secundario hover:texto-primario transition-colors p-1 redondeado-lg">
+                      <span class="material-symbols-outlined">more_vert</span>
+                    </button>
+                    <div class="menu-acciones hidden">
+                      <a th:href="@{/editar_usuario(id=${usuario.id})}">
+                        <span class="material-symbols-outlined" style="font-size:18px;">edit</span>
+                        Editar
+                      </a>
+                      <a href="#" th:attr="data-id=${usuario.id}" onclick="abrirModalEliminar(event, this.getAttribute('data-id'))" style="color:#ba1a1a;">
+                        <span class="material-symbols-outlined" style="font-size:18px;">delete</span>
+                        Eliminar
+                      </a>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
         <div class="px-6 py-4 bg-superficie-baja flex justify-between items-center">
-          <p class="texto-body-sm texto-secundario">Mostrando 4 de 1,284 usuarios</p>
-          <div class="flex gap-2">
-            <button class="p-2 redondeado-md hover:bg-superficie-variante texto-secundario disabled:opacity-30" disabled>
-              <span class="material-symbols-outlined">chevron_left</span>
-            </button>
-            <button class="w-8 h-8 redondeado-md bg-primario texto-blanco texto-xs font-bold">1</button>
-            <button class="w-8 h-8 redondeado-md hover:bg-superficie-variante texto-secundario texto-xs font-bold">2</button>
-            <button class="w-8 h-8 redondeado-md hover:bg-superficie-variante texto-secundario texto-xs font-bold">3</button>
-            <button class="p-2 redondeado-md hover:bg-superficie-variante texto-secundario">
-              <span class="material-symbols-outlined">chevron_right</span>
-            </button>
-          </div>
+          <p class="texto-body-sm texto-secundario">
+            Mostrando <span th:text="${#lists.size(usuarios)}">0</span> usuarios
+          </p>
         </div>
       </div>
     </section>
@@ -575,15 +625,25 @@
         <span class="material-symbols-outlined texto-primario">explore</span>
         <span class="texto-headline-md font-bold texto-primario">Encuéntralo</span>
       </div>
-      <nav class="hidden md:flex items-center gap-8 h-full">
-        <a class="texto-secundario hover:bg-superficie-alta transition-colors px-2 py-1 redondeado" href="#">Búsqueda</a>
-        <a class="texto-secundario hover:bg-superficie-alta transition-colors px-2 py-1 redondeado" href="#">Historial</a>
-        <a class="texto-secundario hover:bg-superficie-alta transition-colors px-2 py-1 redondeado" href="#">Favoritos</a>
-        <a class="texto-primario font-bold borde-b-2 borde-primario h-full flex items-center" href="#">Panel</a>
-      </nav>
-      <div class="flex items-center gap-4">
-        <div class="w-10 h-10 redondeado-completo overflow-hidden border borde-variante cursor-pointer active:scale-95 transition">
-          <img alt="Perfil de usuario" class="ancho-completo h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA5nmMMaB-F3XlstPRkR60i1-LAtfbYTgUWLHmrTgodGT6_ATKLj61_Jj4M7KWOK4b9ONyf9AsdTdkV3h68rSnEssWYzoYHalpwkG5_SWnB6YaS2XrwMqjFvnoadkulSR7EXh0UaWic4dtw7PhISrBycKICsgyAIzWwpylnzLEbUZZILBJz2K9zq6jOS1XFGozt4WvS3n_QDj9jSJ72kNqaYbc70llbx12ENx1RCyYuV_tgW1B8PoTq9-cRPgEMPKMy0yP_JIWF6-4">
+      <div style="position:relative;">
+        <div class="avatar-movil" onclick="toggleAvatarMenu()">
+          <span th:text="${inicialUsuario}">U</span>
+        </div>
+        <div id="avatar-dropdown" class="avatar-dropdown hidden">
+          <a th:href="@{/buscar}">
+            <span class="material-symbols-outlined">search</span>
+            Realizar Búsqueda
+          </a>
+          <a th:href="@{/cambiar_contrasena}">
+            <span class="material-symbols-outlined">lock</span>
+            Cambiar contraseña
+          </a>
+          <form th:action="@{/logout}" method="post" style="margin:0;">
+            <button type="submit" class="cerrar-sesion">
+              <span class="material-symbols-outlined">logout</span>
+              Cerrar sesión
+            </button>
+          </form>
         </div>
       </div>
     </div>
@@ -596,10 +656,10 @@
           <h1 class="texto-headline-lg-movil md:text-headline-lg texto-primario">Panel de Administración</h1>
           <p class="texto-body-md texto-variante">Administra los accesos y roles de tu organización</p>
         </div>
-        <button class="flex items-center justify-center gap-2 bg-primario texto-blanco px-6 py-3 redondeado-xl sombra-suave hover:bg-primario-contenedor transition active:scale-95 cursor-pointer">
+        <a th:href="@{/registrar_usuario}" class="flex items-center justify-center gap-2 bg-primario texto-blanco px-6 py-3 redondeado-xl sombra-suave hover:bg-primario-contenedor transition active:scale-95 cursor-pointer" style="text-decoration:none;">
           <span class="material-symbols-outlined">person_add</span>
           <span class="texto-label-md">Añadir Usuario</span>
-        </button>
+        </a>
       </div>
     </section>
 
@@ -607,123 +667,58 @@
       <div class="bg-superficie-mas-baja redondeado-xl sombra-suave overflow-hidden">
         <div class="px-6 py-4 border-b borde-superficie flex justify-between items-center bg-superficie-baja">
           <h2 class="texto-headline-md texto-primario">Directorio de Usuarios</h2>
-          <div class="relative hidden md:block">
-            <span class="material-symbols-outlined absolute left-3 centrar-y texto-variante texto-body-md">search</span>
-            <input class="pl-10 pr-4 py-2 bg-superficie redondeado-lg border-none focus:ring-2 texto-body-sm w-64" placeholder="Buscar usuario..." type="text">
-          </div>
         </div>
-        <div class="overflow-x-auto">
+        <div class="tabla-scroll overflow-x-auto" style="max-height: calc(100vh - 320px); overflow-y: auto;">
           <table class="ancho-completo text-left">
-            <thead>
+            <thead style="position: sticky; top: 0; z-index: 10;">
               <tr class="bg-superficie-baja texto-variante texto-label-md uppercase tracking-wider">
                 <th class="px-6 py-4 font-semibold">Nombre</th>
                 <th class="px-6 py-4 font-semibold">Email</th>
                 <th class="px-6 py-4 font-semibold">Rol</th>
                 <th class="px-6 py-4 font-semibold text-right">Acciones</th>
-               </tr>
+              </tr>
             </thead>
             <tbody class="divide-y borde-superficie">
-              <tr class="hover:bg-superficie-baja transition-colors">
+              <tr th:each="usuario : ${usuarios}" class="hover:bg-superficie-baja transition-colors">
                 <td class="px-6 py-4">
                   <div class="flex items-center gap-3">
-                    <div class="w-8 h-8 redondeado-completo bg-secundario-fijo flex items-center justify-center texto-label-md">AS</div>
-                    <span class="texto-body-md font-medium texto-primario">Alejandro Sánchez</span>
+                    <div class="w-8 h-8 redondeado-completo bg-secundario-fijo flex items-center justify-center texto-label-md">
+                      <span th:text="${#strings.substring(usuario.nombre, 0, 1).toUpperCase() + (usuario.apellidos != null and !usuario.apellidos.isBlank() ? #strings.substring(usuario.apellidos, 0, 1).toUpperCase() : '')}">XX</span>
+                    </div>
+                    <span class="texto-body-md font-medium texto-primario" th:text="${usuario.nombre + (usuario.apellidos != null and !usuario.apellidos.isBlank() ? ' ' + usuario.apellidos : '')}">Nombre Apellido</span>
                   </div>
-                 </td>
-                <td class="px-6 py-4 texto-body-md texto-variante">alejandro.s@geofinder.com</td>
+                </td>
+                <td class="px-6 py-4 texto-body-md texto-variante" th:text="${usuario.email}">email@ejemplo.com</td>
                 <td class="px-6 py-4">
-                  <span class="bg-primario-fijo texto-primario px-3 py-1 redondeado-completo texto-label-sm">Admin</span>
-                 </td>
+                  <span class="px-3 py-1 redondeado-completo texto-label-sm"
+                        th:classappend="${usuario.rol == 'ADMIN' ? 'bg-primario-fijo texto-primario' : 'bg-superficie-alta texto-variante'}"
+                        th:text="${usuario.rol}">Rol</span>
+                </td>
                 <td class="px-6 py-4 text-right">
-                  <div class="flex justify-end gap-2">
-                    <button class="p-2 hover:bg-superficie-alta redondeado-lg transition active:scale-90">
-                      <span class="material-symbols-outlined">edit</span>
+                  <div class="menu-wrapper">
+                    <button onclick="toggleMenu(this)" class="p-2 hover:bg-superficie-alta redondeado-lg transition active:scale-90 texto-secundario">
+                      <span class="material-symbols-outlined">more_vert</span>
                     </button>
-                    <button class="p-2 hover:bg-error-contenedor hover:texto-error redondeado-lg transition active:scale-90">
-                      <span class="material-symbols-outlined">delete</span>
-                    </button>
+                    <div class="menu-acciones hidden">
+                      <a th:href="@{/editar_usuario(id=${usuario.id})}">
+                        <span class="material-symbols-outlined" style="font-size:18px;">edit</span>
+                        Editar
+                      </a>
+                      <a href="#" th:attr="data-id=${usuario.id}" onclick="abrirModalEliminar(event, this.getAttribute('data-id'))" style="color:#ba1a1a;">
+                        <span class="material-symbols-outlined" style="font-size:18px;">delete</span>
+                        Eliminar
+                      </a>
+                    </div>
                   </div>
-                 </td>
-               </tr>
-              <tr class="hover:bg-superficie-baja transition-colors">
-                <td class="px-6 py-4">
-                  <div class="flex items-center gap-3">
-                    <div class="w-8 h-8 redondeado-completo bg-terciario-fijo flex items-center justify-center texto-label-md">ML</div>
-                    <span class="texto-body-md font-medium texto-primario">Marta López</span>
-                  </div>
-                 </td>
-                <td class="px-6 py-4 texto-body-md texto-variante">marta.l@enterprise.biz</td>
-                <td class="px-6 py-4">
-                  <span class="bg-superficie-alta texto-variante px-3 py-1 redondeado-completo texto-label-sm">Usuario</span>
-                 </td>
-                <td class="px-6 py-4 text-right">
-                  <div class="flex justify-end gap-2">
-                    <button class="p-2 hover:bg-superficie-alta redondeado-lg transition active:scale-90">
-                      <span class="material-symbols-outlined">edit</span>
-                    </button>
-                    <button class="p-2 hover:bg-error-contenedor hover:texto-error redondeado-lg transition active:scale-90">
-                      <span class="material-symbols-outlined">delete</span>
-                    </button>
-                  </div>
-                 </td>
-               </tr>
-              <tr class="hover:bg-superficie-baja transition-colors">
-                <td class="px-6 py-4">
-                  <div class="flex items-center gap-3">
-                    <div class="w-8 h-8 redondeado-completo bg-secundario-fijo-oscuro flex items-center justify-center texto-label-md">RG</div>
-                    <span class="texto-body-md font-medium texto-primario">Roberto Gómez</span>
-                  </div>
-                 </td>
-                <td class="px-6 py-4 texto-body-md texto-variante">r.gomez@prospects.io</td>
-                <td class="px-6 py-4">
-                  <span class="bg-superficie-alta texto-variante px-3 py-1 redondeado-completo texto-label-sm">Usuario</span>
-                 </td>
-                <td class="px-6 py-4 text-right">
-                  <div class="flex justify-end gap-2">
-                    <button class="p-2 hover:bg-superficie-alta redondeado-lg transition active:scale-90">
-                      <span class="material-symbols-outlined">edit</span>
-                    </button>
-                    <button class="p-2 hover:bg-error-contenedor hover:texto-error redondeado-lg transition active:scale-90">
-                      <span class="material-symbols-outlined">delete</span>
-                    </button>
-                  </div>
-                 </td>
-               </tr>
-              <tr class="hover:bg-superficie-baja transition-colors">
-                <td class="px-6 py-4">
-                  <div class="flex items-center gap-3">
-                    <div class="w-8 h-8 redondeado-completo bg-terciario-fijo-oscuro flex items-center justify-center texto-label-md">CD</div>
-                    <span class="texto-body-md font-medium texto-primario">Carla Díaz</span>
-                  </div>
-                 </td>
-                <td class="px-6 py-4 texto-body-md texto-variante">carla.diaz@agency.net</td>
-                <td class="px-6 py-4">
-                  <span class="bg-primario-fijo texto-primario px-3 py-1 redondeado-completo texto-label-sm">Admin</span>
-                 </td>
-                <td class="px-6 py-4 text-right">
-                  <div class="flex justify-end gap-2">
-                    <button class="p-2 hover:bg-superficie-alta redondeado-lg transition active:scale-90">
-                      <span class="material-symbols-outlined">edit</span>
-                    </button>
-                    <button class="p-2 hover:bg-error-contenedor hover:texto-error redondeado-lg transition active:scale-90">
-                      <span class="material-symbols-outlined">delete</span>
-                    </button>
-                  </div>
-                 </td>
-               </tr>
+                </td>
+              </tr>
             </tbody>
-           </table>
+          </table>
         </div>
         <div class="px-6 py-4 border-t borde-superficie flex items-center justify-between">
-          <p class="texto-body-sm texto-variante">Mostrando 1-4 de 1,284 usuarios</p>
-          <div class="flex gap-2">
-            <button class="p-2 border borde-variante redondeado-lg hover:bg-superficie transition-colors disabled:opacity-50" disabled>
-              <span class="material-symbols-outlined">chevron_left</span>
-            </button>
-            <button class="p-2 border borde-variante redondeado-lg hover:bg-superficie transition-colors">
-              <span class="material-symbols-outlined">chevron_right</span>
-            </button>
-          </div>
+          <p class="texto-body-sm texto-variante">
+            Mostrando <span th:text="${#lists.size(usuarios)}">0</span> usuarios
+          </p>
         </div>
       </div>
     </section>
@@ -739,17 +734,88 @@
         <span class="material-symbols-outlined">history</span>
         <span class="texto-label-sm">Historial</span>
       </div>
-      <div class="flex flex-col items-center justify-center texto-variante px-3 py-1 hover:bg-superficie-mas-alta cursor-pointer transition">
-        <span class="material-symbols-outlined">star</span>
-        <span class="texto-label-sm">Favoritos</span>
-      </div>
       <div class="flex flex-col items-center justify-center bg-primario-contenedor texto-blanco redondeado-xl px-3 py-1 active:scale-95 transition duracion-150">
         <span class="material-symbols-outlined">dashboard</span>
         <span class="texto-label-sm">Panel</span>
       </div>
+      <form th:action="@{/logout}" method="post" style="margin:0;">
+        <button type="submit" class="flex flex-col items-center justify-center texto-error px-3 py-1 hover:bg-superficie-mas-alta cursor-pointer transition">
+          <span class="material-symbols-outlined">logout</span>
+          <span class="texto-label-sm">Salir</span>
+        </button>
+      </form>
     </div>
   </footer>
 </div>
 
+<!-- Modal: Confirmación eliminar -->
+<div id="modal-eliminar" class="modal-overlay hidden">
+  <div class="modal-box">
+    <h3>¿Eliminar este usuario?</h3>
+    <p>Esta acción no se puede deshacer.</p>
+    <div class="modal-btns">
+      <button class="btn-no" onclick="cerrarModal()">No</button>
+      <button class="btn-si" onclick="confirmarEliminar()">Sí</button>
+    </div>
+  </div>
+</div>
+
+<!-- Form oculto para enviar el POST de eliminación -->
+<form id="form-eliminar" th:action="@{/eliminar_usuario}" method="post" style="display:none;">
+  <input type="hidden" id="input-eliminar-id" name="id" value="">
+</form>
+
+<script>
+  var idAEliminar = null;
+
+  function toggleMenu(btn) {
+    const menu = btn.nextElementSibling;
+    const isHidden = menu.classList.contains('hidden');
+    document.querySelectorAll('.menu-acciones').forEach(m => m.classList.add('hidden'));
+    if (isHidden) menu.classList.remove('hidden');
+  }
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.menu-wrapper')) {
+      document.querySelectorAll('.menu-acciones').forEach(m => m.classList.add('hidden'));
+    }
+  });
+
+  function abrirModalEliminar(e, id) {
+    e.preventDefault();
+    document.querySelectorAll('.menu-acciones').forEach(m => m.classList.add('hidden'));
+    idAEliminar = id;
+    document.getElementById('modal-eliminar').classList.remove('hidden');
+  }
+  function cerrarModal() {
+    document.getElementById('modal-eliminar').classList.add('hidden');
+    idAEliminar = null;
+  }
+  function confirmarEliminar() {
+    if (idAEliminar) {
+      document.getElementById('input-eliminar-id').value = idAEliminar;
+      document.getElementById('form-eliminar').submit();
+    }
+  }
+
+  // Avatar móvil dropdown
+  function toggleAvatarMenu() {
+    var menu = document.getElementById('avatar-dropdown');
+    menu.classList.toggle('hidden');
+  }
+  document.addEventListener('click', function(e) {
+    var avatar = document.querySelector('.avatar-movil');
+    var dropdown = document.getElementById('avatar-dropdown');
+    if (avatar && dropdown && !avatar.contains(e.target) && !dropdown.contains(e.target)) {
+      dropdown.classList.add('hidden');
+    }
+  });
+
+  // Toast fade in/out
+  var toast = document.getElementById('toast-eliminado');
+  if (toast) {
+    setTimeout(function() { toast.classList.add('visible'); }, 100);
+    setTimeout(function() { toast.classList.remove('visible'); }, 8000);
+  }
+</script>
 </body>
 </html>
