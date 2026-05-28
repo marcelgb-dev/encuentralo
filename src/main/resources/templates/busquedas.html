@@ -111,6 +111,30 @@
 
         <script th:inline="javascript">
           var isTestingMovil = [[${testMode}]];
+
+          (function() {
+            if (!('permissions' in navigator)) return;
+            navigator.permissions.query({name: 'geolocation'}).then(function(result) {
+              // Si ya tiene permiso, obtener posición al cargar
+              if (result.state === 'granted') {
+                navigator.geolocation.getCurrentPosition(function(pos) {
+                  document.getElementById('latitud-movil').value = pos.coords.latitude;
+                  document.getElementById('longitud-movil').value = pos.coords.longitude;
+                }, function() {}, { enableHighAccuracy: false, timeout: 10000 });
+                return;
+              }
+              // Escuchar cambio de permiso (usuario aceptó el diálogo)
+              result.onchange = function() {
+                if (this.state === 'granted') {
+                  navigator.geolocation.getCurrentPosition(function(pos) {
+                    document.getElementById('latitud-movil').value = pos.coords.latitude;
+                    document.getElementById('longitud-movil').value = pos.coords.longitude;
+                  }, function() {}, { enableHighAccuracy: false, timeout: 10000 });
+                }
+              };
+            });
+          })();
+
           document.getElementById('formulario-busqueda-movil').addEventListener('submit', function(event) {
             if (isTestingMovil) {
               console.log("Modo testing activo: omitiendo GPS.");
@@ -123,11 +147,15 @@
             if (latInput.value && latInput.value !== "0.0" && latInput.value !== "0") {
               return true;
             }
+            if (!navigator.geolocation) {
+              alert("Tu navegador no soporta geolocalizaci\u00f3n.");
+              return false;
+            }
             event.preventDefault();
-            if (navigator.geolocation) {
-              btnEnvio.disabled = true;
-              var textoOriginal = btnEnvio.innerHTML;
-              btnEnvio.innerHTML = '<span class="material-symbols-outlined">sync</span> Localizando...';
+            btnEnvio.disabled = true;
+            var textoOriginal = btnEnvio.innerHTML;
+            btnEnvio.innerHTML = '<span class="material-symbols-outlined">sync</span> Localizando...';
+            function intentar(altaPrecision) {
               navigator.geolocation.getCurrentPosition(
                 function(position) {
                   latInput.value = position.coords.latitude;
@@ -135,15 +163,27 @@
                   form.submit();
                 },
                 function(error) {
-                  btnEnvio.disabled = false;
-                  btnEnvio.innerHTML = textoOriginal;
-                  alert("Error de ubicaci\u00f3n. Por favor, activa el GPS.");
+                  if (error.code === 1) {
+                    btnEnvio.disabled = false;
+                    btnEnvio.innerHTML = textoOriginal;
+                    alert("Permiso de ubicaci\u00f3n denegado. Act\u00edvalo en la configuraci\u00f3n del navegador.");
+                  } else if (!altaPrecision && (error.code === 3 || error.code === 2)) {
+                    // WiFi/torre falló -> reintentar con GPS
+                    intentar(true);
+                  } else {
+                    btnEnvio.disabled = false;
+                    btnEnvio.innerHTML = textoOriginal;
+                    var mensaje = error.code === 3
+                      ? "La solicitud de ubicaci\u00f3n tard\u00f3 demasiado. Intenta de nuevo."
+                      : "No se pudo determinar tu ubicaci\u00f3n. Verifica tu conexi\u00f3n e intenta de nuevo.";
+                    alert(mensaje);
+                  }
                 },
-                { enableHighAccuracy: true, timeout: 5000 }
+                { enableHighAccuracy: altaPrecision, timeout: altaPrecision ? 15000 : 8000 }
               );
-            } else {
-              alert("Tu navegador no soporta geolocalizaci\u00f3n.");
             }
+            // Primero intentar sin alta precisión (WiFi, rápido)
+            intentar(false);
           });
         </script>
       </div>
@@ -306,11 +346,30 @@
 
             <!--SCRIPT PARA OBTENER LA UBICACIÓN DEL USUARIO-->
             <script th:inline="javascript">
-              /* Obtener la variable desde el modelo de Spring */
               const isTesting = [[${testMode}]];
 
+              (function() {
+                if (!('permissions' in navigator)) return;
+                navigator.permissions.query({name: 'geolocation'}).then(function(result) {
+                  if (result.state === 'granted') {
+                    navigator.geolocation.getCurrentPosition(function(pos) {
+                      document.getElementById('latitud').value = pos.coords.latitude;
+                      document.getElementById('longitud').value = pos.coords.longitude;
+                    }, function() {}, { enableHighAccuracy: false, timeout: 10000 });
+                    return;
+                  }
+                  result.onchange = function() {
+                    if (this.state === 'granted') {
+                      navigator.geolocation.getCurrentPosition(function(pos) {
+                        document.getElementById('latitud').value = pos.coords.latitude;
+                        document.getElementById('longitud').value = pos.coords.longitude;
+                      }, function() {}, { enableHighAccuracy: false, timeout: 10000 });
+                    }
+                  };
+                });
+              })();
+
               document.getElementById('formulario-busqueda').addEventListener('submit', function(event) {
-                // Si estamos en modo testing, no hacemos nada y dejamos que el formulario se envíe
                 if (isTesting) {
                   console.log("Modo testing activo: omitiendo GPS.");
                   return true;
@@ -321,34 +380,49 @@
                 const lonInput = document.getElementById('longitud');
                 const btnEnvio = form.querySelector('button[type="submit"]');
 
-                // Si ya hay coordenadas (y no estamos en testing), evitamos repetir el proceso
                 if (latInput.value && latInput.value !== "0.0" && latInput.value !== "0") {
                   return true;
                 }
 
+                if (!navigator.geolocation) {
+                  alert("Tu navegador no soporta geolocalización.");
+                  return false;
+                }
+
                 event.preventDefault();
 
-                if (navigator.geolocation) {
-                  btnEnvio.disabled = true;
-                  const textoOriginal = btnEnvio.innerHTML;
-                  btnEnvio.innerHTML = '<span class="material-symbols-outlined">sync</span> Localizando...';
+                btnEnvio.disabled = true;
+                const textoOriginal = btnEnvio.innerHTML;
+                btnEnvio.innerHTML = '<span class="material-symbols-outlined">sync</span> Localizando...';
 
+                function intentar(altaPrecision) {
                   navigator.geolocation.getCurrentPosition(
-                          (position) => {
-                            latInput.value = position.coords.latitude;
-                            lonInput.value = position.coords.longitude;
-                            form.submit();
-                          },
-                          (error) => {
-                            btnEnvio.disabled = false;
-                            btnEnvio.innerHTML = textoOriginal;
-                            alert("Error de ubicación. Por favor, activa el GPS.");
-                          },
-                          { enableHighAccuracy: true, timeout: 5000 }
+                    (position) => {
+                      latInput.value = position.coords.latitude;
+                      lonInput.value = position.coords.longitude;
+                      form.submit();
+                    },
+                    (error) => {
+                      if (error.code === 1) {
+                        btnEnvio.disabled = false;
+                        btnEnvio.innerHTML = textoOriginal;
+                        alert("Permiso de ubicación denegado. Actívalo en la configuración del navegador.");
+                      } else if (!altaPrecision && (error.code === 3 || error.code === 2)) {
+                        intentar(true);
+                      } else {
+                        btnEnvio.disabled = false;
+                        btnEnvio.innerHTML = textoOriginal;
+                        const mensaje = error.code === 3
+                          ? "La solicitud de ubicación tardó demasiado. Intenta de nuevo."
+                          : "No se pudo determinar tu ubicación. Verifica tu conexión e intenta de nuevo.";
+                        alert(mensaje);
+                      }
+                    },
+                    { enableHighAccuracy: altaPrecision, timeout: altaPrecision ? 15000 : 8000 }
                   );
-                } else {
-                  alert("Tu navegador no soporta geolocalización.");
                 }
+
+                intentar(false);
               });
             </script>
           </div>

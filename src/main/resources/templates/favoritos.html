@@ -464,6 +464,51 @@
         </script>
     </div>
 
+    <div class="grilla-resultados" id="grilla-resultados-escritorio">
+      <article th:each="res : ${resultados}" class="tarjeta-prospecto">
+          <div>
+            <div class="tarjeta-cabecera">
+              <div style="display:flex; gap:0.2rem">
+                <span th:each="cat : ${res.categorias}" th:text="${cat.nombre}" class="etiqueta-categoria tecnologia">Categoria</span>
+              </div>
+              <form th:action="@{/favoritos/toggle/{id}(id=${res.id})}" method="POST" style="display:inline;">
+                <button type="submit" class="boton-estrella" title="Favorito">
+                  <span class="material-symbols-outlined" th:style="${res.esFavorito} ? 'font-variation-settings: \'FILL\' 1;' : ''">star</span>
+                </button>
+              </form>
+            </div>
+            <h3 th:text="${res.nombre}" class="texto-headline-md mb-2">Nombre negocio</h3>
+            <div class="tarjeta-valoracion">
+              <span th:text="${res.valoracion}" class="tarjeta-valoracion-puntos">5</span>
+              <div class="tarjeta-valoracion-estrellas" th:with="rating=${res.valoracion}">
+                <span th:each="i : ${#numbers.sequence(1, 5)}"
+                      class="material-symbols-outlined"
+                      th:classappend="${rating >= i} ? 'icono-lleno' : (${rating >= i - 0.5} ? 'icono-media' : 'icono-vacia')"
+                      th:text="${rating >= i} ? 'star' : (${rating >= i - 0.5} ? 'star_half' : 'grade')">
+                </span>
+              </div>
+              <span th:text="'(' + ${res.numReviews} + ' reseñas)'" class="tarjeta-valoracion-cantidad">(0 reseñas)</span>
+            </div>
+            <div class="tarjeta-contacto-lista">
+              <div class="tarjeta-contacto-item">
+                <span class="material-symbols-outlined">location_on</span>
+                <p th:text="${res.direccion}">Paseo de la Castellana, 256, 28046 Madrid</p>
+              </div>
+
+              <div class="tarjeta-contacto-item">
+                <span class="material-symbols-outlined">call</span>
+                <p th:text="${res.telefono}">+34 915 678 901</p>
+              </div>
+            </div>
+          </div>
+          <div class="tarjeta-acciones">
+            <a th:href="${res.url}" target="_blank" class="boton boton-primario" style="width:100%">Abrir en Yelp</a>
+          </div>
+      </article>
+    </div>
+    </section>
+    </div>
+
 <!-- Modal flotante de gestión de etiquetas -->
 <div class="modal-personalizado-overlay" id="modal-gestion-etiquetas" style="display: none;">
   <div class="modal-personalizado-contenido">
