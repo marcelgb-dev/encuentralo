@@ -7,6 +7,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.security.Principal;
 
 @Controller
 public class UsuarioController {
@@ -36,6 +40,37 @@ public class UsuarioController {
         } catch (Exception e) {
             model.addAttribute("error", e.getMessage());
             return "registro";
+        }
+    }
+
+    @GetMapping("/cambiar_contrasena")
+    public String mostrarCambiarContrasena() {
+        return "password";
+    }
+
+    @PostMapping("/cambiar_contrasena")
+    public String procesarCambiarContrasena(
+            @RequestParam("contrasenaAntigua") String contrasenaAntigua,
+            @RequestParam("contrasenaNueva") String contrasenaNueva,
+            @RequestParam("contrasenaVerificar") String contrasenaVerificar,
+            Principal principal, Model model, RedirectAttributes redirectAttributes) {
+
+        if (!contrasenaNueva.equals(contrasenaVerificar)) {
+            model.addAttribute("error", "Las contraseñas nuevas no coinciden.");
+            return "password";
+        }
+        if (contrasenaNueva.isBlank()) {
+            model.addAttribute("error", "La nueva contraseña no puede estar vacía.");
+            return "password";
+        }
+
+        try {
+            usuarioService.cambiarContrasena(principal.getName(), contrasenaAntigua, contrasenaNueva);
+            redirectAttributes.addFlashAttribute("exito", "Contraseña cambiada con éxito.");
+            return "redirect:/cambiar_contrasena";
+        } catch (Exception e) {
+            model.addAttribute("error", e.getMessage());
+            return "password";
         }
     }
 }

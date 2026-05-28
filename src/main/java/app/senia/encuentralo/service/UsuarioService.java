@@ -94,4 +94,16 @@ public class UsuarioService {
     public void eliminarUsuario(Integer usuarioId) {
         usuarioRepository.deleteById(usuarioId);
     }
+
+    public void cambiarContrasena(String email, String contrasenaAntigua, String contrasenaNueva) throws Exception {
+        Usuario usuario = usuarioRepository.findByEmail(email);
+        if (usuario == null) {
+            throw new Exception("Usuario no encontrado.");
+        }
+        if (!passwordEncoder.matches(contrasenaAntigua, usuario.getPassword())) {
+            throw new Exception("La contraseña actual es incorrecta.");
+        }
+        usuario.setPassword(passwordEncoder.encode(contrasenaNueva));
+        usuarioRepository.save(usuario);
+    }
 }

@@ -7,6 +7,26 @@
 <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" th:href="@{/css/style.css}" href="../static/css/style.css">
+<style>
+  .avatar-movil {
+    width: 36px; height: 36px; border-radius: 50%; background: #091426;
+    color: #fff; display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 15px; cursor: pointer; user-select: none;
+  }
+  .avatar-dropdown {
+    position: absolute; right: 0; top: 44px; background: #fff;
+    border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+    min-width: 200px; z-index: 999; overflow: hidden;
+  }
+  .avatar-dropdown.hidden { display: none; }
+  .avatar-dropdown a, .avatar-dropdown .cerrar-sesion {
+    display: flex; align-items: center; gap: 10px; padding: 12px 16px;
+    font-size: 14px; color: #191c1e; text-decoration: none; cursor: pointer;
+    border: none; background: none; width: 100%; font-family: inherit;
+  }
+  .avatar-dropdown a:hover, .avatar-dropdown .cerrar-sesion:hover { background: #f1f3f5; }
+  .avatar-dropdown .material-symbols-outlined { font-size: 20px; color: #505f76; }
+</style>
 </head>
 <body>
 
@@ -17,8 +37,26 @@
         <span class="material-symbols-outlined">explore</span>
         <h1>Encuéntralo</h1>
       </div>
-      <div class="flex items-center gap-2 pl-3 border-l borde-variante cursor-pointer active:scale-95 transition">
-        <span class="material-symbols-outlined texto-primario" style="font-size: 24px;">account_circle</span>
+      <div style="position:relative;">
+        <div class="avatar-movil" onclick="toggleAvatarMenu()">
+          <span th:text="${inicialUsuario}">U</span>
+        </div>
+        <div id="avatar-dropdown" class="avatar-dropdown hidden">
+          <a th:href="@{/buscar}">
+            <span class="material-symbols-outlined">search</span>
+            Realizar Búsqueda
+          </a>
+          <a th:href="@{/cambiar_contrasena}">
+            <span class="material-symbols-outlined">lock</span>
+            Cambiar contraseña
+          </a>
+          <form th:action="@{/logout}" method="post" style="margin:0;">
+            <button type="submit" class="cerrar-sesion">
+              <span class="material-symbols-outlined">logout</span>
+              Cerrar sesión
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   </header>
@@ -288,14 +326,16 @@
       </a>
     </nav>
     <div class="pt-6 mt-6 border-t borde-variante space-y-1">
-      <a class="flex items-center gap-3 px-4 py-3 redondeado-lg texto-secundario texto-label-md hover:bg-superficie-variante transition" href="#">
+      <a th:href="@{/cambiar_contrasena}" class="flex items-center gap-3 px-4 py-3 redondeado-lg texto-secundario texto-label-md hover:bg-superficie-variante transition">
         <span class="material-symbols-outlined">lock</span>
         Cambiar contraseña
       </a>
-      <a class="flex items-center gap-3 px-4 py-3 redondeado-lg texto-secundario texto-label-md hover:bg-superficie-variante transition" href="#">
-        <span class="material-symbols-outlined">logout</span>
-        Cerrar Sesión
-      </a>
+      <form th:action="@{/logout}" method="post" style="margin:0;">
+        <button type="submit" class="flex items-center gap-3 px-4 py-3 redondeado-lg texto-secundario texto-label-md hover:bg-superficie-variante transition" style="width:100%; background:none; border:none; cursor:pointer; font-family:inherit; font-size:inherit;">
+          <span class="material-symbols-outlined">logout</span>
+          Cerrar Sesión
+        </button>
+      </form>
     </div>
   </aside>
 
@@ -307,7 +347,7 @@
       <div class="flex items-center gap-6">
         <div class="flex items-center gap-3 pl-4 border-l borde-variante">
           <p class="texto-label-md texto-primario flex items-center gap-2">
-            Carlos Méndez
+            <span th:text="${nombreUsuario}">Usuario</span>
             <span class="material-symbols-outlined" style="font-size: 20px;">account_circle</span>
           </p>
         </div>
@@ -581,5 +621,17 @@
   </div>
 </div>
 
+<script>
+function toggleAvatarMenu() {
+  var d = document.getElementById('avatar-dropdown');
+  d.classList.toggle('hidden');
+}
+document.addEventListener('click', function(e) {
+  var d = document.getElementById('avatar-dropdown');
+  if (!e.target.closest('.avatar-movil') && !e.target.closest('#avatar-dropdown')) {
+    d.classList.add('hidden');
+  }
+});
+</script>
 </body>
 </html>
