@@ -58,7 +58,7 @@ public class ResultadosController {
     public String mostrarResultados(
             @PathVariable Integer busquedaId,
             @RequestParam(value = "categorias", required = false) List<String> filtroCategorias,
-            @RequestParam(value = "etiqueta", required = false) String etiqueta,
+            @RequestParam(value = "etiquetas", required = false) List<String> filtroEtiquetas,
             @RequestParam(value = "orden", required = false, defaultValue = "default") String orden,
             @RequestParam(value = "inverso", required = false, defaultValue = "false") boolean inverso,
             @RequestParam(value = "soloFavoritos", required = false, defaultValue = "false") boolean soloFavoritos,
@@ -77,6 +77,10 @@ public class ResultadosController {
         if (filtroCategorias != null) {
             resultados = rs.filtrarPorCategoria(resultados, filtroCategorias);
             model.addAttribute("categoriasSeleccionadas", filtroCategorias);
+        }
+        if (filtroEtiquetas != null) {
+            resultados = rs.filtrarPorEtiqueta(resultados, filtroEtiquetas);
+            model.addAttribute("etiquetasSeleccionadas", filtroEtiquetas);
         }
         if (soloFavoritos == true) {
             resultados = rs.filtrarSoloFavoritos(resultados);
@@ -115,7 +119,6 @@ public class ResultadosController {
         model.addAttribute("resultados", resultados);
         model.addAttribute("orden", orden);
         model.addAttribute("inverso", inverso);
-        model.addAttribute("etiqueta", etiqueta);
 
         model.addAttribute("busqueda", busqueda);
         model.addAttribute("resultados", resultados);
@@ -131,7 +134,7 @@ public class ResultadosController {
     public ResponseEntity<byte[]> exportarResultadosCSV(
             @PathVariable Integer busquedaId,
             @RequestParam(value = "categorias", required = false) List<String> filtroCategorias,
-            @RequestParam(value = "etiqueta", required = false) String etiqueta,
+            @RequestParam(value = "etiquetas", required = false) List<String> filtroEtiquetas,
             @RequestParam(value = "orden", required = false, defaultValue = "default") String orden,
             @RequestParam(value = "inverso", required = false, defaultValue = "false") boolean inverso,
             @RequestParam(value = "soloFavoritos", required = false, defaultValue = "false") boolean soloFavoritos,
@@ -142,6 +145,9 @@ public class ResultadosController {
 
         if (filtroCategorias != null) {
             resultados = rs.filtrarPorCategoria(resultados, filtroCategorias);
+        }
+        if (filtroEtiquetas != null) {
+            resultados = rs.filtrarPorEtiqueta(resultados, filtroEtiquetas);
         }
         if (soloFavoritos) {
             resultados = rs.filtrarSoloFavoritos(resultados);
@@ -179,7 +185,7 @@ public class ResultadosController {
     @GetMapping("/favoritos")
     public String mostrarFavoritos(
             @RequestParam(value = "categorias", required = false) List<String> filtroCategorias,
-            @RequestParam(value = "etiqueta", required = false) String etiqueta,
+            @RequestParam(value = "etiquetas", required = false) List<String> filtroEtiquetas,
             @RequestParam(value = "orden", required = false, defaultValue = "default") String orden,
             @RequestParam(value = "inverso", required = false, defaultValue = "false") boolean inverso,
             @RequestParam(value = "valoracionMinima", required = false, defaultValue = "0") int valoracionMinima,
@@ -197,6 +203,10 @@ public class ResultadosController {
         if (filtroCategorias != null) {
             resultados = rs.filtrarPorCategoria(resultados, filtroCategorias);
             model.addAttribute("categoriasSeleccionadas", filtroCategorias);
+        }
+        if (filtroEtiquetas != null) {
+            resultados = rs.filtrarPorEtiqueta(resultados, filtroEtiquetas);
+            model.addAttribute("etiquetasSeleccionadas", filtroEtiquetas);
         }
         if (valoracionMinima > 0)
             resultados = rs.filtrarPorValoracion(resultados, valoracionMinima);
@@ -223,7 +233,6 @@ public class ResultadosController {
         model.addAttribute("resultados", resultados);
         model.addAttribute("orden", orden);
         model.addAttribute("inverso", inverso);
-        model.addAttribute("etiqueta", etiqueta);
 
         model.addAttribute("resultados", resultados);
         model.addAttribute("categorias", categorias);
@@ -236,7 +245,7 @@ public class ResultadosController {
     @GetMapping("/favoritos/exportar/csv")
     public ResponseEntity<byte[]> exportarFavoritosCSV(
             @RequestParam(value = "categorias", required = false) List<String> filtroCategorias,
-            @RequestParam(value = "etiqueta", required = false) String etiqueta,
+            @RequestParam(value = "etiquetas", required = false) List<String> filtroEtiquetas,
             @RequestParam(value = "orden", required = false, defaultValue = "default") String orden,
             @RequestParam(value = "inverso", required = false, defaultValue = "false") boolean inverso,
             @RequestParam(value = "valoracionMinima", required = false, defaultValue = "0") int valoracionMinima,
@@ -246,6 +255,9 @@ public class ResultadosController {
 
         if (filtroCategorias != null) {
             resultados = rs.filtrarPorCategoria(resultados, filtroCategorias);
+        }
+        if (filtroEtiquetas != null) {
+            resultados = rs.filtrarPorEtiqueta(resultados, filtroEtiquetas);
         }
         if (valoracionMinima > 0) {
             resultados = rs.filtrarPorValoracion(resultados, valoracionMinima);

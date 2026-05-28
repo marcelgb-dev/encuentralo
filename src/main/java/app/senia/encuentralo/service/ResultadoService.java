@@ -1,6 +1,7 @@
 package app.senia.encuentralo.service;
 
 import app.senia.encuentralo.model.Categoria;
+import app.senia.encuentralo.model.Etiqueta;
 import app.senia.encuentralo.repository.CategoriaRepository;
 import app.senia.encuentralo.repository.ResultadoRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -132,6 +133,34 @@ public class ResultadoService {
             if (r.isEsFavorito())
                 listaFiltrada.add(r);
         }
+        return listaFiltrada;
+    }
+
+    // Una sola etiqueta
+    public List<Resultado> filtrarPorEtiqueta (List<Resultado> listaResultados, String nombreEtiqueta) {
+        List<Resultado> listaFiltrada = new ArrayList<>();
+
+        for (Resultado r : listaResultados) {
+            List<Etiqueta> etiquetas = r.getEtiquetas();
+            for (Etiqueta e : etiquetas) {
+                if (nombreEtiqueta.equals(e.getNombre())) {
+                    listaFiltrada.add(r);
+                    break;
+                }
+            }
+        }
+        return listaFiltrada;
+    }
+
+    // Una lista de etiquetas
+    public List<Resultado> filtrarPorEtiqueta (List<Resultado> listaResultados, List<String> nombresEtiqueta) {
+        List<Resultado> listaFiltrada = new ArrayList<>();
+
+        for (Resultado r : listaResultados) {
+            if (!Collections.disjoint(Etiqueta.toStringList(r.getEtiquetas()), nombresEtiqueta))
+                listaFiltrada.add(r);
+        }
+
         return listaFiltrada;
     }
 }

@@ -116,7 +116,13 @@
               <span class="material-symbols-outlined">expand_more</span>
             </button>
             <div class="selector-multiple-opciones" id="opciones-etiquetas-movil">
-              <p class="texto-body-sm texto-secundario italic" style="padding: 0.5rem;">Crea etiquetas desde una tarjeta...</p>
+              <div th:each="etq : ${etiquetas}" class="selector-multiple-opcion">
+                <label class="flex items-center" style="gap:0.5rem;width:100%">
+                  <input type="checkbox" name="etiquetas" th:value="${etq.nombre}"
+                         th:checked="${etiquetasSeleccionadas != null and #lists.contains(etiquetasSeleccionadas, etq.nombre)}">
+                  <span th:text="${etq.nombre}">Nombre Etiqueta</span>
+                </label>
+              </div>
             </div>
           </div>
         </div>
@@ -147,7 +153,7 @@
           <input type="hidden" name="soloFavoritos" th:value="${soloFavoritos}">
           <input type="hidden" name="valoracionMinima" th:value="${valoracionMinima}">
           <input th:each="cat : ${categoriasSeleccionadas}" type="hidden" name="categorias" th:value="${cat}">
-          <input th:if="${etiqueta != null}" type="hidden" name="etiqueta" th:value="${etiqueta}">
+          <input th:each="etq : ${etiquetasSeleccionadas}" type="hidden" name="etiquetas" th:value="${etq}">
           <button type="submit" class="boton boton-azul ancho-completo">
             <span class="material-symbols-outlined">download</span>
             Exportar resultados
@@ -411,15 +417,21 @@
         </div>
         <div class="filtro-seccion">
           <label class="filtro-seccion-label">Etiquetas Personalizadas</label>
-          <div class="selector-multiple-contenedor" id="desplegable-etiquetas-escritorio">
-            <button class="selector-multiple-cabecera">
+          <details class="selector-multiple-contenedor" id="desplegable-etiquetas-escritorio">
+            <summary class="selector-multiple-cabecera" style="list-style: none; cursor: pointer;">
               <span class="selector-multiple-texto-seleccionado" id="texto-etiquetas-escritorio">Seleccionar etiquetas...</span>
               <span class="material-symbols-outlined">expand_more</span>
-            </button>
+            </summary>
             <div class="selector-multiple-opciones" id="opciones-etiquetas-escritorio">
-              <p class="texto-body-sm texto-secundario italic" style="padding: 0.5rem;">Crea etiquetas desde una tarjeta...</p>
+              <div th:each="etq : ${etiquetas}" class="selector-multiple-opcion">
+                <label class="flex items-center" style="gap:0.5rem;width:100%">
+                  <input type="checkbox" name="etiquetas" th:value="${etq.nombre}"
+                         th:checked="${etiquetasSeleccionadas != null and #lists.contains(etiquetasSeleccionadas, etq.nombre)}">
+                  <span th:text="${etq.nombre}">Nombre Etiqueta</span>
+                </label>
+              </div>
             </div>
-          </div>
+          </details>
         </div>
         <div class="filtro-seccion">
           <label class="filtro-seccion-label">Valoración Mínima</label>
@@ -482,7 +494,7 @@
         <input type="hidden" name="soloFavoritos" th:value="${soloFavoritos}">
         <input type="hidden" name="valoracionMinima" th:value="${valoracionMinima}">
         <input th:each="cat : ${categoriasSeleccionadas}" type="hidden" name="categorias" th:value="${cat}">
-        <input th:if="${etiqueta != null}" type="hidden" name="etiqueta" th:value="${etiqueta}">
+        <input th:each="etq : ${etiquetasSeleccionadas}" type="hidden" name="etiquetas" th:value="${etq}">
         <button type="submit" class="boton boton-azul ancho-completo">
           <span class="material-symbols-outlined">download</span>
           Exportar resultados
@@ -524,7 +536,7 @@
         <script>
           function actualizarOrdenacion(valor) {
               const inputOrden = document.getElementById('hidden-orden');
-              const form = document.querySelector('aside form'); // Buscamos el form dentro del aside
+              const form = document.querySelector('aside.filtros-laterales-contenedor form');
               if (inputOrden && form) {
                   inputOrden.value = valor;
                   form.submit();
@@ -533,7 +545,7 @@
 
           function toggleInverso() {
               const inputInverso = document.getElementById('hidden-inverso');
-              const form = document.querySelector('aside form');
+              const form = document.querySelector('aside.filtros-laterales-contenedor form');
               if (inputInverso && form) {
                   // Alternamos el valor
                   inputInverso.value = (inputInverso.value === 'true') ? 'false' : 'true';

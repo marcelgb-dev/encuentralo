@@ -1,6 +1,8 @@
 package app.senia.encuentralo.model;
 
 import jakarta.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "Etiqueta") // Se conecta con la tabla Etiqueta
@@ -53,5 +55,13 @@ public class Etiqueta {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    public static List<String> toStringList(List<Etiqueta> etiquetas) {
+        List<String> nombres = new ArrayList<>();
+        for (Etiqueta e : etiquetas) {
+            nombres.add(e.getNombre());
+        }
+        return nombres;
     }
 }
