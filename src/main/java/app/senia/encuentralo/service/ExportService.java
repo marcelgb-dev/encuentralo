@@ -17,7 +17,7 @@ public class ExportService {
         StringWriter stringWriter = new StringWriter();
 
         try (CSVWriter csvWriter = new CSVWriter(stringWriter)) {
-            String[] header = {"ID", "Nombre", "Tel\u00e9fono", "Direcci\u00f3n", "Valoraci\u00f3n", "Num Reviews", "URL", "Categor\u00edas", "Etiquetas"};
+            String[] header = {"ID", "Nombre", "Tel\u00e9fono", "Direcci\u00f3n", "Num Reviews", "Valoraci\u00f3n", "Categor\u00edas", "Etiquetas", "URL"};
             csvWriter.writeNext(header);
 
             for (Resultado r : resultados) {
