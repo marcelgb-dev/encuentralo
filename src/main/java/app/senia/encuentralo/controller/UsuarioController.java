@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
 
@@ -53,7 +52,7 @@ public class UsuarioController {
             @RequestParam("contrasenaAntigua") String contrasenaAntigua,
             @RequestParam("contrasenaNueva") String contrasenaNueva,
             @RequestParam("contrasenaVerificar") String contrasenaVerificar,
-            Principal principal, Model model, RedirectAttributes redirectAttributes) {
+            Principal principal, Model model) {
 
         if (!contrasenaNueva.equals(contrasenaVerificar)) {
             model.addAttribute("error", "Las contraseñas nuevas no coinciden.");
@@ -66,8 +65,7 @@ public class UsuarioController {
 
         try {
             usuarioService.cambiarContrasena(principal.getName(), contrasenaAntigua, contrasenaNueva);
-            redirectAttributes.addFlashAttribute("exito", "Contraseña cambiada con éxito.");
-            return "redirect:/cambiar_contrasena";
+            return "redirect:/buscar";
         } catch (Exception e) {
             model.addAttribute("error", e.getMessage());
             return "password";
