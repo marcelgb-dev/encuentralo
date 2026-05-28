@@ -33,6 +33,7 @@ services:
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=${DB_ROOT_PASSWORD}
       - YELP_API_KEY=${YELP_API_KEY}
+      - MOCK_JSON=${MOCK_JSON}
 
     networks:
       - backend-private
@@ -47,7 +48,7 @@ services:
     volumes:
       - ./docker/nginx/conf.d:/etc/nginx/conf.d:ro
       - ./docker/nginx/html/error.html:/usr/share/nginx/html/error.html:ro
-      #- ./docker/nginx/certs:/etc/nginx/certs:ro
+      - ./docker/nginx/certs:/etc/nginx/certs:ro
     depends_on:
       - app
     networks:
