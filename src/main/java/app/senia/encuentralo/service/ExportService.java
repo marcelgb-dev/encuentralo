@@ -42,11 +42,11 @@ public class ExportService {
                         r.getNombre(),
                         r.getTelefono(),
                         r.getDireccion(),
-                        String.valueOf(r.getValoracion()),
                         r.getNumReviews().toString(),
-                        r.getUrl(),
+                        String.valueOf(r.getValoracion()),
                         categorias,
-                        etiquetas
+                        etiquetas,
+                        r.getUrl()
                 };
                 csvWriter.writeNext(row);
             }
