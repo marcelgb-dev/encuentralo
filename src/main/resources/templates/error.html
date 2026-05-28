@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title th:text="${codigo} + ' - ' + ${mensaje} + ' | Encuéntralo'">Error | Encuéntralo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" th:href="@{/css/style.css}" href="../static/css/style.css">
+</head>
+<body class="bg-fondo min-h-screen flex flex-col">
+
+  <header class="bg-blanco shadow-sm border-b borde-superficie">
+    <div class="flex items-center gap-3 px-margen-movil py-3 max-w-contenedor mx-auto cursor-pointer active:scale-95 transition" onclick="window.location.href='/'">
+      <span class="material-symbols-outlined texto-primario">explore</span>
+      <h1 class="texto-headline-md font-bold texto-primario">Encuéntralo</h1>
+    </div>
+  </header>
+
+  <main class="flex-1 flex items-center justify-center px-margen-movil py-12">
+    <div class="text-center max-w-md">
+      <div class="mb-6">
+        <span class="material-symbols-outlined" style="font-size: 80px;"
+              th:classappend="${codigo == 404 or codigo == 403} ? 'texto-error' : 'texto-secundario'"
+              th:text="${codigo == 404} ? 'search_off' : (${codigo == 403} ? 'lock' : 'error_outline')">error_outline</span>
+      </div>
+
+      <p class="texto-headline-xl font-extrabold texto-primario mb-2" th:text="${codigo}">404</p>
+      <h2 class="texto-headline-md font-bold texto-primario mb-4" th:text="${mensaje}">Página no encontrada</h2>
+      <p class="texto-body-md texto-secundario mb-8" th:text="${descripcion}">La página que buscas no existe o ha sido movida.</p>
+
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="/"
+           class="boton boton-primario px-6 py-3 redondeado-xl texto-label-md flex items-center gap-2">
+          <span class="material-symbols-outlined">home</span>
+          Volver al inicio
+        </a>
+        <button onclick="window.location.reload()"
+                class="boton boton-secundario px-6 py-3 redondeado-xl texto-label-md flex items-center gap-2">
+          <span class="material-symbols-outlined">refresh</span>
+          Reintentar
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <footer class="text-center py-6 texto-body-sm texto-secundario border-t borde-superficie bg-blanco">
+    <p>&copy; 2026 Encuéntralo &mdash; Business Edition</p>
+  </footer>
+
+</body>
+</html>
