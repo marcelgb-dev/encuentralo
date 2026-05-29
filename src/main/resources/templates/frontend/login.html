@@ -13,7 +13,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: #091426;
+            background: linear-gradient(135deg, #091426 0%, #1a2a4a 100%);
             padding: 1.5rem;
         }
 
@@ -35,7 +35,7 @@
             position: relative;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            gap: 2.5rem;
             padding: 3.5rem;
             overflow: hidden;
         }
@@ -46,6 +46,14 @@
             background: radial-gradient(circle at 30% 70%, rgba(80, 95, 118, 0.3) 0%, #091426 70%);
             z-index: 1;
         }
+        .panel-izq::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url('https://boundlessmaps.com/wp-content/uploads/maps/sdb/pune_city-20000-sdb-09e97c-preview-3.png') center / cover no-repeat;
+            opacity: 0.25;
+            z-index: 0;
+        }
         .panel-izq > * {
             position: relative;
             z-index: 2;
@@ -53,33 +61,47 @@
         .panel-izq .logo {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 16px;
         }
         .panel-izq .logo-icon {
-            width: 40px;
-            height: 40px;
-            background: #131b2e;
-            border-radius: 10px;
+            width: 56px;
+            height: 56px;
+            overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
-            color: #bcc7de;
+        }
+        .panel-izq .logo-icon img {
+            width: 80px;
+            height: 80px;
+            flex-shrink: 0;
+        }
+        .panel-izq .logo-brand {
+            display: flex;
+            flex-direction: column;
         }
         .panel-izq .logo-text {
-            font-size: 22px;
+            font-size: 44px;
             font-weight: 700;
             color: #ffffff;
+            line-height: 1.1;
+        }
+        .panel-izq .autores {
+            font-size: 14px;
+            color: #6a7a94;
+            margin-top: 2px;
         }
         .panel-izq .contenido-central {
             max-width: 420px;
+            border-top: 1px solid rgba(255, 255, 255, 0.12);
+            padding-top: 2rem;
         }
         .panel-izq .contenido-central h1 {
             font-size: 36px;
             font-weight: 700;
             color: #ffffff;
             line-height: 1.2;
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
             letter-spacing: -0.02em;
         }
         .panel-izq .contenido-central p {
@@ -90,6 +112,7 @@
         .panel-izq .badges {
             display: flex;
             gap: 2rem;
+            margin-top: auto;
         }
         .panel-izq .badges span {
             font-size: 13px;
@@ -98,6 +121,27 @@
             display: flex;
             align-items: center;
             gap: 6px;
+        }
+        .collaborators {
+            display: flex;
+            align-items: center;
+            margin-top: 2.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e2e5ea;
+        }
+        .collaborators a {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .collaborators img {
+            height: 32px;
+            opacity: 0.55;
+            transition: opacity 150ms;
+        }
+        .collaborators img:hover {
+            opacity: 0.85;
         }
         .panel-izq .badges span::before {
             content: '✓';
@@ -118,6 +162,9 @@
             flex-direction: column;
             justify-content: center;
             padding: 3.5rem;
+        }
+        .logo-mobile {
+            display: none;
         }
         .panel-der .form-header {
             margin-bottom: 2.5rem;
@@ -207,34 +254,77 @@
 
         /* Responsive: móvil */
         @media (max-width: 768px) {
-            body { padding: 1rem; }
+            body { padding: 1rem; flex-direction: column; }
             .login-container {
                 grid-template-columns: 1fr;
                 min-height: auto;
             }
             .panel-izq { display: none; }
             .panel-der { padding: 2.5rem 1.5rem; }
+            .logo-mobile {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 12px;
+                margin-bottom: 2rem;
+            }
+            .logo-mobile .logo-icon {
+                display: flex;
+            }
+            .logo-mobile .logo-icon img {
+                width: 56px;
+                height: 56px;
+            }
+            .logo-mobile .logo-brand {
+                display: flex;
+                flex-direction: column;
+            }
+            .logo-mobile .logo-text {
+                font-size: 40px;
+                font-weight: 700;
+                color: #ffffff;
+                line-height: 1.1;
+            }
+            .logo-mobile .autores {
+                font-size: 15px;
+                color: #9aaccc;
+                margin-top: 2px;
+            }
         }
     </style>
 </head>
 <body>
 
+    <div class="logo-mobile">
+        <div class="logo-icon"><img src="https://i.imgur.com/Qc8kiPf.png" alt="E"></div>
+        <div class="logo-brand">
+            <span class="logo-text">Encuéntralo</span>
+            <p class="autores">By Pablo Barreales &amp; Marcel García</p>
+        </div>
+    </div>
+
     <div class="login-container">
         <!-- Panel izquierdo: branding -->
         <div class="panel-izq">
             <div class="logo">
-                <div class="logo-icon">E</div>
-                <span class="logo-text">Encuéntralo</span>
+                <div class="logo-icon"><img src="https://i.imgur.com/Qc8kiPf.png" alt="E"></div>
+                <div class="logo-brand">
+                    <span class="logo-text">Encuéntralo</span>
+                    <p class="autores">By Pablo Barreales &amp; Marcel García</p>
+                </div>
             </div>
 
             <div class="contenido-central">
-                <h1>Optimización de Prospección Comercial</h1>
-                <p>Analice mercados, identifique oportunidades y exporte datos críticos con la plataforma líder en inteligencia geográfica para empresas.</p>
+                <h1>Búsqueda y gestión de oportunidades comerciales</h1>
+                <p>Herramienta sencilla y directa diseñada para ayudarte a expandir tu negocio. Encuéntralo automatiza el proceso de rastreo en plataformas clave para ofrecerte un listado limpio y organizado de comercios, empresas y clientes potenciales.
+        <br><br>
+                    Filtra por valoración, categoría o etiquetas propias, y encuentra en un clic los datos que necesitas para dar tu siguiente paso comercial.</p>
             </div>
 
             <div class="badges">
-                <span>Precisión Geográfica</span>
-                <span>Special Feria Valencia Edition</span>
+                <span>Geolocalización</span>
+                <span>Responsive</span>
+                <span>Exportación a CSV</span>
             </div>
         </div>
 
@@ -252,14 +342,14 @@
             <div th:if="${param.exito}" class="mensaje-exito">
                 Registro exitoso. Ya puedes entrar.
             </div>
-            <div th:if="${param.logout}" class="mensaje-info">
+            <div th:if="${param.logout}" class="mensaje-exito">
                 Has cerrado sesión correctamente.
             </div>
 
             <form th:action="@{/login}" method="post">
                 <div class="campo">
                     <label for="email">Correo Electrónico</label>
-                    <input id="email" name="username" type="email" placeholder="ejemplo@empresa.com" required>
+                    <input id="email" name="username" type="email" placeholder="user@example.com" required>
                 </div>
 
                 <div class="campo">
@@ -269,8 +359,13 @@
 
                 <button type="submit" class="btn-login">Iniciar Sesión</button>
             </form>
+
+            <div class="collaborators">
+                <a href="https://github.com/marcelgb-dev/encuentralo" target="_blank" rel="noopener"><img src="https://pngimg.com/uploads/github/github_PNG23.png" alt="GitHub" style="height:26px;"></a>
+                <a href="https://www.feriavalencia.com/" target="_blank" rel="noopener"><img src="https://www.feriavalencia.com/wp-content/uploads/2022/09/Logo_azul_degradado_FV_2lineas_FV_logo_v3_2lineas.svg" alt="Feria Valencia"></a>
+                <a href="https://portal.edu.gva.es/46017675/es/bienvenida-2/" target="_blank" rel="noopener"><img src="https://inforsenia.github.io/inforSENIA/cropped-lasenia22-1.png" alt="La Senia"></a>
+            </div>
         </div>
     </div>
-
 </body>
 </html>
