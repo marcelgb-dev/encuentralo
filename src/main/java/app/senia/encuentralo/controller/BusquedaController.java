@@ -28,6 +28,9 @@ public class BusquedaController {
     private final BusquedaService bs;
     private final UsuarioRepository usuarioRepo;
 
+    @Value("${max.results}")
+    private int maxResults;
+
     public BusquedaController(YelpService ys, ResultadoService rs, BusquedaService bs, UsuarioRepository usuarioRepo) {
         this.ys = ys;
         this.rs = rs;
@@ -49,7 +52,7 @@ public class BusquedaController {
     @GetMapping("/buscar")
     public String getIndex(Model model) {
         // Búsqueda de ejemplo
-        SolicitudBusqueda solicitud = new SolicitudBusqueda("Restaurante", 0, 0, 50, 20000);
+        SolicitudBusqueda solicitud = new SolicitudBusqueda("Restaurante", 0, 0, maxResults, 20000);
         model.addAttribute("busqueda", solicitud);
         model.addAttribute("testMode", mocking);
         return "busquedas";
