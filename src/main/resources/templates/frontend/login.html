@@ -252,6 +252,10 @@
             transform: scale(0.98);
         }
 
+        .btn-instalar {
+            display: none;
+        }
+
         /* Responsive: móvil */
         @media (max-width: 768px) {
             body { padding: 1rem; flex-direction: column; }
@@ -263,35 +267,69 @@
             .panel-der { padding: 2.5rem 1.5rem; }
             .logo-mobile {
                 display: flex;
+                flex-direction: column;
                 align-items: center;
                 justify-content: center;
-                gap: 12px;
+                gap: 8px;
                 margin-bottom: 2rem;
             }
             .logo-mobile .logo-icon {
                 display: flex;
             }
             .logo-mobile .logo-icon img {
-                width: 56px;
-                height: 56px;
+                width: 72px;
+                height: 72px;
             }
             .logo-mobile .logo-brand {
                 display: flex;
                 flex-direction: column;
+                align-items: center;
             }
             .logo-mobile .logo-text {
-                font-size: 40px;
+                font-size: 36px;
                 font-weight: 700;
                 color: #ffffff;
                 line-height: 1.1;
             }
             .logo-mobile .autores {
-                font-size: 15px;
+                font-size: 14px;
                 color: #9aaccc;
                 margin-top: 2px;
             }
+            .btn-instalar {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                gap: 8px;
+                width: 100%;
+                max-width: 400px;
+                margin: 1rem auto 0;
+                padding: 14px 20px;
+                background: #ffffff;
+                color: #091426;
+                border: 2px solid #091426;
+                border-radius: 10px;
+                font-size: 15px;
+                font-weight: 700;
+                font-family: inherit;
+                cursor: pointer;
+                transition: background 150ms;
+            }
+            .btn-instalar:hover {
+                background: #f2f4f6;
+            }
+            .btn-instalar:active {
+                transform: scale(0.98);
+            }
+        }
+
+        @media (display-mode: standalone) {
+            .btn-instalar { display: none !important; }
         }
     </style>
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#091426">
+    <script defer src="/js/register.js"></script>
 </head>
 <body>
 
@@ -367,5 +405,10 @@
             </div>
         </div>
     </div>
+
+    <button id="btn-instalar" class="btn-instalar" onclick="installPWA()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18 9l-6 6-6-6h4V3h4v6h4zM4 19h16v2H4v-2z"/></svg>
+        Instalar app
+    </button>
 </body>
 </html>

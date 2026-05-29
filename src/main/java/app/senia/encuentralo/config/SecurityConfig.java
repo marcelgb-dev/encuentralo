@@ -32,7 +32,7 @@ public class SecurityConfig {
                 .cacheControl(cache -> {})
             )
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/login", "/css/**", "/js/**").permitAll()
+                .requestMatchers("/login", "/css/**", "/js/**", "/sw.js", "/manifest.json", "/icons/**", "/offline.html").permitAll()
                 .requestMatchers("/admin", "/admin/**", "/registrar_usuario", "/editar_usuario", "/eliminar_usuario").hasRole("ADMIN")
                 .anyRequest().authenticated()
             )

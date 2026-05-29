@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Sin conexión | Encuéntralo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="bg-fondo min-h-screen flex flex-col">
+
+  <header class="bg-blanco shadow-sm border-b borde-superficie">
+    <div class="flex items-center gap-3 px-margen-movil py-3 max-w-contenedor mx-auto">
+      <span class="material-symbols-outlined texto-primario">explore</span>
+      <h1 class="texto-headline-md font-bold texto-primario">Encuéntralo</h1>
+    </div>
+  </header>
+
+  <main class="flex-1 flex items-center justify-center px-margen-movil py-12">
+    <div class="text-center max-w-md">
+      <div class="mb-6">
+        <span class="material-symbols-outlined" style="font-size: 80px; color: #505f76;">wifi_off</span>
+      </div>
+
+      <p class="texto-headline-xl font-extrabold texto-primario mb-2">Sin conexión</p>
+      <h2 class="texto-headline-md font-bold texto-primario mb-4">No hay conexión a internet</h2>
+      <p class="texto-body-md texto-secundario mb-8">Verifica tu conexión e inténtalo de nuevo. Las páginas que ya has visitado pueden estar disponibles sin conexión.</p>
+
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <button onclick="window.location.reload()"
+                class="boton boton-primario px-6 py-3 redondeado-xl texto-label-md flex items-center gap-2">
+          <span class="material-symbols-outlined">refresh</span>
+          Reintentar
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <footer class="text-center py-6 texto-body-sm texto-secundario border-t borde-superficie bg-blanco">
+    <p>&copy; 2026 Encuéntralo &mdash; Feria Valencia Edition</p>
+  </footer>
+
+</body>
+</html>
