@@ -14,6 +14,7 @@ public class CustomErrorController implements ErrorController {
     public String handleError(HttpServletRequest request, Model model) {
         Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
         Object message = request.getAttribute(RequestDispatcher.ERROR_MESSAGE);
+        Throwable exception = (Throwable) request.getAttribute(RequestDispatcher.ERROR_EXCEPTION);
 
         int codigo = 0;
         if (status != null) {
@@ -22,6 +23,13 @@ public class CustomErrorController implements ErrorController {
 
         String mensaje;
         String descripcion;
+
+        String mensajeReal = null;
+        if (exception != null && exception.getMessage() != null && !exception.getMessage().isBlank()) {
+            mensajeReal = exception.getMessage();
+        } else if (message != null && !message.toString().isEmpty()) {
+            mensajeReal = message.toString();
+        }
 
         switch (codigo) {
             case 404:
@@ -33,17 +41,21 @@ public class CustomErrorController implements ErrorController {
                 descripcion = "No tienes permiso para acceder a este recurso.";
                 break;
             case 500:
-                mensaje = "Error interno del servidor";
-                descripcion = "Algo salió mal. Inténtalo de nuevo más tarde.";
+                mensaje = mensajeReal != null ? mensajeReal : "Error interno del servidor";
+                descripcion = mensajeReal != null
+                        ? "Se produjo un error al procesar la solicitud."
+                        : "Algo salió mal. Inténtalo de nuevo más tarde.";
                 break;
             case 400:
-                mensaje = "Solicitud incorrecta";
-                descripcion = "La solicitud no pudo ser procesada. Revisa los datos e intenta de nuevo.";
+                mensaje = mensajeReal != null ? mensajeReal : "Solicitud incorrecta";
+                descripcion = mensajeReal != null
+                        ? "Revisa los datos e intenta de nuevo."
+                        : "La solicitud no pudo ser procesada. Revisa los datos e intenta de nuevo.";
                 break;
             default:
-                mensaje = "Ha ocurrido un error inesperado";
-                descripcion = (message != null && !message.toString().isEmpty())
-                        ? message.toString()
+                mensaje = mensajeReal != null ? mensajeReal : "Ha ocurrido un error inesperado";
+                descripcion = mensajeReal != null
+                        ? "Si el problema persiste, contacta con soporte."
                         : "Si el problema persiste, contacta con soporte.";
                 break;
         }

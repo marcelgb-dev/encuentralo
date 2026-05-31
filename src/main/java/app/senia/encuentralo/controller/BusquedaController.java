@@ -63,14 +63,20 @@ public class BusquedaController {
     public String nuevaBusqueda(@ModelAttribute("busqueda") SolicitudBusqueda input, RedirectAttributes redirectAttributes, Principal principal) {
 
         // Ejecutamos la llamada a la API externa, que nos devuelve la búsqueda (NO TIENE ID)
-        Busqueda busqueda = ys.llamarApi(
-                obtenerUsuarioId(principal),
-                input.getTermino(),
-                input.getLatitud(),
-                input.getLongitud(),
-                input.getRadio(),
-                input.getLimite()
-        );
+        Busqueda busqueda;
+        try {
+            busqueda = ys.llamarApi(
+                    obtenerUsuarioId(principal),
+                    input.getTermino(),
+                    input.getLatitud(),
+                    input.getLongitud(),
+                    input.getRadio(),
+                    input.getLimite()
+            );
+        } catch (RuntimeException e) {
+            redirectAttributes.addFlashAttribute("errorBusqueda", e.getMessage());
+            return "redirect:/buscar";
+        }
 
         System.out.println("Realizando búsqueda para coords: " + input.getLatitud() + "lat, " + input.getLongitud() + "long");
         System.out.println("Máximo de resultados: " + input.getLimite());

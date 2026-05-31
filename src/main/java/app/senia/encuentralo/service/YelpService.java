@@ -7,7 +7,6 @@ import app.senia.encuentralo.model.Categoria;
 import app.senia.encuentralo.model.Resultado;
 import app.senia.encuentralo.model.Usuario; // Añadido
 import app.senia.encuentralo.repository.UsuarioRepository; // Añadido para recuperar el objeto real
-import ch.qos.logback.core.net.SyslogOutputStream;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
@@ -63,7 +62,7 @@ public class YelpService implements ProviderService {
           .retrieve()
           .body(YelpResponse.class);
 
-          if (response != null && response.businesses() != null) {
+          if (response != null && response.businesses() != null && !response.businesses().isEmpty()) {
           // 1. Buscamos el objeto Usuario real usando el ID
           Usuario usuario = usuarioRepository.findById(idUsuario)
           .orElseThrow(() -> new RuntimeException("Usuario no encontrado con ID: " +
@@ -79,15 +78,10 @@ public class YelpService implements ProviderService {
           busqueda.setResultados(resultados);
           busqueda.setCiudad(obtenerCiudad(busqueda));
 
-          // 4. Guardamos usando los getters de ID correspondientes
-          resultadoService.guardarResultados(busqueda.getId(), usuario.getId(),
-          resultados);
-
           return busqueda;
           }
 
-          System.out.println("ERROR: Respuesta de Yelp vacía");
-          return null;
+          throw new RuntimeException("La API de Yelp no devolvió resultados.");
 
     }
 
@@ -158,10 +152,6 @@ public class YelpService implements ProviderService {
             busqueda.setResultados(resultados);
             busqueda.setCiudad(obtenerCiudad(busqueda));
 
-            // 5. Guardamos llamando al servicio con el ID numérico correcto extraído del
-            // objeto
-            resultadoService.guardarResultados(busqueda.getId(), usuario.getId(), resultados);
-
             return busqueda;
         } catch (IOException e) {
             throw new RuntimeException("No se pudo leer el archivo JSON", e);
@@ -170,6 +160,8 @@ public class YelpService implements ProviderService {
 
     // Ordena los resultados de busqueda por distancia
     private String obtenerCiudad(Busqueda busqueda) {
-        return resultadoService.ordenarPorDistancia(busqueda.getResultados(), false).getFirst().getCiudad();
+        List<Resultado> resultados = busqueda.getResultados();
+        if (resultados == null || resultados.isEmpty()) return "";
+        return resultadoService.ordenarPorDistancia(resultados, false).getFirst().getCiudad();
     }
 }

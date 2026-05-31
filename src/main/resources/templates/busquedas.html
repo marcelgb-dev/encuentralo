@@ -92,6 +92,10 @@
 
         <form id="formulario-busqueda-movil" th:action="@{/buscar/nueva}" method="post" th:object="${busqueda}"
           class="bg-superficie-mas-baja redondeado-2xl shadow-lg border border-borde-superficie p-6 md:p-12 space-y-6">
+          <div th:if="${errorBusqueda}" class="bg-error-contenedor texto-error redondeado-xl p-4 mb-4 texto-body-sm">
+            <span class="material-symbols-outlined align-middle mr-2" style="font-size: 18px;">error</span>
+            <span th:text="${errorBusqueda}">Error</span>
+          </div>
           <div class="space-y-3">
             <label class="texto-label-md texto-variante px-1">Término de búsqueda o categoría</label>
             <div class="relative">
@@ -312,6 +316,10 @@
         </div>
 
         <form id="formulario-busqueda" th:action="@{/buscar/nueva}" method="post" th:object="${busqueda}">
+          <div th:if="${errorBusqueda}" class="bg-error-contenedor texto-error redondeado-xl p-4 mb-4 texto-body-sm">
+            <span class="material-symbols-outlined align-middle mr-2" style="font-size: 18px;">error</span>
+            <span th:text="${errorBusqueda}">Error</span>
+          </div>
           <div class="space-y-6">
             <!-- TÉRMINO -->
             <div class="space-y-2">
