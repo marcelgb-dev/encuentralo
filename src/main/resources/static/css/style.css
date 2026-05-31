@@ -476,6 +476,7 @@ table {
 .hover\:bg-superficie-baja:hover { background-color: var(--color-superficie-baja); }
 .hover\:bg-superficie-variante:hover { background-color: var(--color-superficie-alta); }
 .hover\:bg-error-contenedor:hover { background-color: #ffdad6; }
+.hover\:bg-error-contenedor\/20:hover { background-color: rgba(255, 218, 214, 0.2); }
 .hover\:bg-primario:hover { background-color: var(--color-primario); }
 .hover\:bg-primario-contenedor:hover { background-color: var(--color-primario-contenedor); }
 .hover\:bg-superficie-mas-alta:hover { background-color: var(--color-superficie-mas-alta); }

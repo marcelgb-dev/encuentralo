@@ -16,7 +16,7 @@
 <body class="bg-fondo min-h-screen flex flex-col">
 
   <header class="bg-blanco shadow-sm border-b borde-superficie">
-    <div class="flex items-center gap-3 px-margen-movil py-3 max-w-contenedor mx-auto cursor-pointer active:scale-95 transition" onclick="window.location.href='/'">
+    <div class="flex items-center gap-3 px-margen-movil py-3 max-w-contenedor mx-auto cursor-pointer active:scale-95 transition" th:attr="data-href=${homeUrl}" onclick="window.location.href=this.dataset.href">
       <span class="material-symbols-outlined texto-primario">explore</span>
       <h1 class="texto-headline-md font-bold texto-primario">Encuéntralo</h1>
     </div>
@@ -35,7 +35,7 @@
       <p class="texto-body-md texto-secundario mb-8" th:text="${descripcion}">La página que buscas no existe o ha sido movida.</p>
 
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-        <a href="/"
+        <a th:href="${homeUrl}"
            class="boton boton-primario px-6 py-3 redondeado-xl texto-label-md flex items-center gap-2">
           <span class="material-symbols-outlined">home</span>
           Volver al inicio

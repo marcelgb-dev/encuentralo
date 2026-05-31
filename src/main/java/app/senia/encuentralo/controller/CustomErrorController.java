@@ -3,6 +3,8 @@ package app.senia.encuentralo.controller;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.boot.webmvc.error.ErrorController;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -63,6 +65,15 @@ public class CustomErrorController implements ErrorController {
         model.addAttribute("codigo", codigo);
         model.addAttribute("mensaje", mensaje);
         model.addAttribute("descripcion", descripcion);
+
+        String homeUrl = "/buscar";
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null && auth.isAuthenticated() &&
+            auth.getAuthorities().stream()
+                .anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
+            homeUrl = "/admin";
+        }
+        model.addAttribute("homeUrl", homeUrl);
 
         return "error";
     }
