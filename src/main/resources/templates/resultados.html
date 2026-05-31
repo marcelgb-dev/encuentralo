@@ -660,9 +660,9 @@
           <span th:text="${etq.nombre}">Etiqueta</span>
         </span>
         <div class="etiqueta-modal-acciones">
-          <button type="button" class="etiqueta-asignar-btn" th:onclick="'asignarEtiqueta(' + ${etq.id} + ')'" title="Añadir etiqueta a este resultado">+</button>
-          <button type="button" class="etiqueta-quitar-btn" th:onclick="'quitarEtiqueta(' + ${etq.id} + ')'" title="Quitar etiqueta de este resultado">−</button>
-          <button type="button" class="etiqueta-borrar-btn" th:onclick="'borrarEtiqueta(' + ${etq.id} + ')'" title="Eliminar etiqueta"><span class="material-symbols-outlined" style="font-size: 16px;">delete</span></button>
+          <button type="button" class="etiqueta-asignar-btn" th:onclick="'asignarEtiqueta(' + ${etq.id} + ')'" title="Añadir etiqueta a este resultado"><span class="material-symbols-outlined" style="font-size: 18px;">add_circle</span></button>
+          <button type="button" class="etiqueta-quitar-btn" th:onclick="'quitarEtiqueta(' + ${etq.id} + ')'" title="Quitar etiqueta de este resultado"><span class="material-symbols-outlined" style="font-size: 18px;">do_not_disturb_on</span></button>
+          <button type="button" class="etiqueta-borrar-btn" th:onclick="'borrarEtiqueta(' + ${etq.id} + ')'" title="Eliminar etiqueta"><span class="material-symbols-outlined" style="font-size: 18px;">delete</span></button>
         </div>
       </div>
       <p th:if="${#lists.isEmpty(etiquetas)}" class="texto-body-sm texto-secundario italic" style="padding: 0.5rem 0;">No hay etiquetas creadas. Crea una abajo.</p>
