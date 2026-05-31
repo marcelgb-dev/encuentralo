@@ -7,6 +7,6 @@ import java.util.List;
 
 @Repository
 public interface EtiquetaRepository extends JpaRepository<Etiqueta, Integer> {
-    // Método útil: buscar todas las etiquetas que ha creado un usuario concreto
     List<Etiqueta> findByUsuarioId(Integer idUsuario);
+    void deleteByUsuarioId(Integer usuarioId);
 }

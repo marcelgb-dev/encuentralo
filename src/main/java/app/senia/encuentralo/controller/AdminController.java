@@ -2,6 +2,7 @@ package app.senia.encuentralo.controller;
 
 import app.senia.encuentralo.model.Usuario;
 import app.senia.encuentralo.repository.UsuarioRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import app.senia.encuentralo.service.UsuarioService;
 import org.springframework.ui.Model;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
@@ -86,9 +88,14 @@ public class AdminController {
     }
 
     @PostMapping("/eliminar_usuario")
-    public String eliminarUsuario(@RequestParam("id") Integer id, RedirectAttributes redirectAttributes) {
+    public String eliminarUsuario(@RequestParam("id") Integer id, RedirectAttributes redirectAttributes,
+                                  Principal principal) {
         Optional<Usuario> opt = us.obtenerUsuario(id);
         if (opt.isPresent()) {
+            if (principal.getName().equals(opt.get().getEmail())) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                        "No puedes eliminar tu propia cuenta");
+            }
             String nombre = opt.get().getNombre();
             if (opt.get().getApellidos() != null && !opt.get().getApellidos().isBlank()) {
                 nombre += " " + opt.get().getApellidos();

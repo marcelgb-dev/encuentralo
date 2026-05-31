@@ -8,6 +8,6 @@ import java.util.List;
 
 @Repository
 public interface BusquedaRepository extends JpaRepository<Busqueda, Integer> {
-    // Método útil: ver el historial de búsquedas de un usuario ordenado por fecha
     List<Busqueda> findByUsuarioOrderByFechaDesc(Usuario usuario);
+    void deleteByUsuarioId(Integer usuarioId);
 }

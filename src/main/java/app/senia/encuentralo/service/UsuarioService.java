@@ -1,9 +1,12 @@
 package app.senia.encuentralo.service;
 
 import app.senia.encuentralo.model.Usuario;
+import app.senia.encuentralo.repository.BusquedaRepository;
+import app.senia.encuentralo.repository.EtiquetaRepository;
 import app.senia.encuentralo.repository.UsuarioRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,10 +18,15 @@ public class UsuarioService {
 
     private final UsuarioRepository usuarioRepository;
     private final PasswordEncoder passwordEncoder;
+    private final EtiquetaRepository etiquetaRepository;
+    private final BusquedaRepository busquedaRepository;
 
-    public UsuarioService(UsuarioRepository usuarioRepository, PasswordEncoder passwordEncoder) {
+    public UsuarioService(UsuarioRepository usuarioRepository, PasswordEncoder passwordEncoder,
+                          EtiquetaRepository etiquetaRepository, BusquedaRepository busquedaRepository) {
         this.usuarioRepository = usuarioRepository;
         this.passwordEncoder = passwordEncoder;
+        this.etiquetaRepository = etiquetaRepository;
+        this.busquedaRepository = busquedaRepository;
     }
 
     private static final Pattern EMAIL_PATTERN = Pattern.compile(
@@ -91,7 +99,10 @@ public class UsuarioService {
         return usuarioRepository.findById(usuarioId);
     }
 
+    @Transactional
     public void eliminarUsuario(Integer usuarioId) {
+        etiquetaRepository.deleteByUsuarioId(usuarioId);
+        busquedaRepository.deleteByUsuarioId(usuarioId);
         usuarioRepository.deleteById(usuarioId);
     }
 
