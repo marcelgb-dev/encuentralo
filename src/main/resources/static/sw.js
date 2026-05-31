@@ -1,11 +1,12 @@
-var CACHE = 'encuentralo-v1';
+var CACHE = 'encuentralo-v2';
 
 var STATIC = [
   '/css/style.css',
   '/manifest.json',
   '/icons/icon-192.png',
   '/icons/icon-512.png',
-  '/offline.html'
+  '/offline.html',
+  '/fonts/MaterialSymbolsOutlined.woff2'
 ];
 
 self.addEventListener('install', function (event) {
