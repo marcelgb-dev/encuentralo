@@ -7,7 +7,7 @@ import app.senia.encuentralo.model.Categoria;
 import app.senia.encuentralo.repository.UsuarioRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -32,15 +32,9 @@ public class BusquedaService {
     }
 
     public List<Busqueda> obtenerHistorial(Integer usuarioId) {
-        // Lógica para obtener el historial de búsquedas
         Usuario usuario = usuarioRepo.findById(usuarioId).orElseThrow();
-
-        List<Busqueda> busquedas = busquedaRepo.findByUsuarioOrderByFechaDesc(usuario);
-        for (Busqueda b : busquedas) {
-            System.out.println("ID: " + b.getId());
-        }
-
-        return busquedas;
+        LocalDateTime hace24h = LocalDateTime.now().minusHours(24);
+        return busquedaRepo.findByUsuarioAndFechaAfterOrderByFechaDesc(usuario, hace24h);
     }
 
     // Guarda una Busqueda en la base de datos y la devuelve con los campos autogenerados (el ID)
