@@ -18,11 +18,6 @@ public class CategoriaService {
         this.categoriaRepo = categoriaRepo;
     }
 
-    public List<Categoria> obtenerCategorias(Integer userId) {
-        // Lógica para obtener todas las categorías de un usuario
-        return null;
-    }
-
     public List<Categoria> obtenerCategorias(List<Resultado> resultados) {
         
         List<Categoria> categorias = new ArrayList<Categoria>();
@@ -75,8 +70,4 @@ public class CategoriaService {
         return busqueda;
     } 
 
-    public Categoria guardarCategoria(Categoria categoria) {
-        // Lógica para guardar una nueva categoría y devolver el objeto de la BD
-        return null;
-    }
 }

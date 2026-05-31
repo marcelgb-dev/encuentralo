@@ -32,10 +32,6 @@ public class ResultadoService {
         return resultadoRepo.findByUsuarioIdAndEsFavoritoTrue(idUsuario);
     }
 
-    public void guardarResultados(Integer idBusqueda, Integer idUsuario, List<Resultado> resultados) {
-        // Lógica de guardado
-    }
-
     public void guardarFavorito(Integer resultadoId) {
         // Obtenemos el objeto resultado por la id
         Resultado resultado = resultadoRepo.findById(resultadoId)
