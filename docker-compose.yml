@@ -19,6 +19,12 @@ services:
       - ./docker/mysql/data:/var/lib/mysql
       # INICIALIZACIÓN: Scripts SQL (Dentro de git)
       - ./docker/mysql/init:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
 
   # --- Spring Boot ---
   app:
@@ -26,7 +32,8 @@ services:
     container_name: encuentralo-app
     restart: always
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     environment:
       - DB_HOST=db
       - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/Encuentralo?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=${TIMEZONE}
@@ -38,6 +45,12 @@ services:
 
     networks:
       - backend-private
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost:8080/login"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 60s
   # --- Proxy Inverso (Nginx) ---
   proxy:
     image: nginx:stable-alpine

@@ -11,8 +11,8 @@ RUN mvn dependency:go-offline -B
 COPY src ./src
 RUN mvn clean package -DskipTests
 
-# ETAPA 2: Ejecución (JRE 25 sobre Alpine 3.21)
-FROM eclipse-temurin:25-jre-alpine-3.21
+# ETAPA 2: Ejecución (JRE 21 sobre Alpine)
+FROM eclipse-temurin:21-jre-alpine
 WORKDIR /app
 
 # Copiamos el ejecutable desde la etapa anterior
