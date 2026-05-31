@@ -509,20 +509,7 @@
       <h1 class="texto-headline-md font-extrabold texto-primario">Encuéntralo</h1>
       <p class="texto-body-sm texto-secundario">Feria Valencia Edition</p>
     </div>
-    <nav class="flex-1 espacio-y-1">
-      <a class="flex items-center gap-3 px-4 py-3 redondeado-lg texto-secundario hover:bg-superficie-variante transition texto-label-md" href="#">
-        <span class="material-symbols-outlined">search</span>
-        Búsqueda
-      </a>
-      <a class="flex items-center gap-3 px-4 py-3 redondeado-lg texto-secundario hover:bg-superficie-variante transition texto-label-md" href="#">
-        <span class="material-symbols-outlined">history</span>
-        Historial
-      </a>
-      <a class="flex items-center gap-3 px-4 py-3 redondeado-lg texto-secundario hover:bg-superficie-variante transition texto-label-md" href="#">
-        <span class="material-symbols-outlined">star</span>
-        Favoritos
-      </a>
-    </nav>
+    <nav class="flex-1"></nav>
     <div class="mt-auto espacio-y-1">
       <a th:href="@{/cambiar_contrasena}" class="flex items-center gap-3 px-4 py-3 redondeado-lg texto-secundario hover:bg-superficie-variante transition texto-label-md">
         <span class="material-symbols-outlined">lock</span>
@@ -636,10 +623,6 @@
           <span th:text="${inicialUsuario}">U</span>
         </div>
         <div id="avatar-dropdown" class="avatar-dropdown hidden">
-          <a th:href="@{/buscar}">
-            <span class="material-symbols-outlined">search</span>
-            Realizar Búsqueda
-          </a>
           <a th:href="@{/cambiar_contrasena}">
             <span class="material-symbols-outlined">lock</span>
             Cambiar contraseña
@@ -732,14 +715,6 @@
 
   <footer class="fixed bottom-0 left-0 ancho-completo z-50 bg-superficie-mas-baja sombra-inferior md:hidden">
     <div class="flex justify-around items-center px-4 py-2">
-      <div class="flex flex-col items-center justify-center texto-variante px-3 py-1 hover:bg-superficie-mas-alta cursor-pointer transition">
-        <span class="material-symbols-outlined">search</span>
-        <span class="texto-label-sm">Búsqueda</span>
-      </div>
-      <div class="flex flex-col items-center justify-center texto-variante px-3 py-1 hover:bg-superficie-mas-alta cursor-pointer transition">
-        <span class="material-symbols-outlined">history</span>
-        <span class="texto-label-sm">Historial</span>
-      </div>
       <div class="flex flex-col items-center justify-center bg-primario-contenedor texto-blanco redondeado-xl px-3 py-1 active:scale-95 transition duracion-150">
         <span class="material-symbols-outlined">dashboard</span>
         <span class="texto-label-sm">Panel</span>
