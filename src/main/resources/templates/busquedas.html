@@ -139,8 +139,8 @@
           </script>
 
           <div>
-            <input type="hidden" step="any" id="latitud-movil" th:field="*{latitud}" required>
-            <input type="hidden" step="any" id="longitud-movil" th:field="*{longitud}" required>
+            <input type="hidden" step="any" id="latitud-movil" th:field="*{latitud}">
+            <input type="hidden" step="any" id="longitud-movil" th:field="*{longitud}">
             <input type="hidden" id="limite-movil" th:field="*{limite}" value="50">
           </div>
 
@@ -164,7 +164,7 @@
                 navigator.geolocation.getCurrentPosition(function(pos) {
                   document.getElementById('latitud-movil').value = pos.coords.latitude;
                   document.getElementById('longitud-movil').value = pos.coords.longitude;
-                }, function() {}, { enableHighAccuracy: false, timeout: 10000 });
+                }, function() {}, { enableHighAccuracy: false, timeout: 5000 });
                 return;
               }
               // Escuchar cambio de permiso (usuario aceptó el diálogo)
@@ -173,7 +173,7 @@
                   navigator.geolocation.getCurrentPosition(function(pos) {
                     document.getElementById('latitud-movil').value = pos.coords.latitude;
                     document.getElementById('longitud-movil').value = pos.coords.longitude;
-                  }, function() {}, { enableHighAccuracy: false, timeout: 10000 });
+                  }, function() {}, { enableHighAccuracy: false, timeout: 5000 });
                 }
               };
             });
@@ -208,9 +208,12 @@
                 },
                 function(error) {
                   if (error.code === 1) {
-                    btnEnvio.disabled = false;
-                    btnEnvio.innerHTML = textoOriginal;
-                    alert("Permiso de ubicaci\u00f3n denegado. Act\u00edvalo en la configuraci\u00f3n del navegador.");
+                    btnEnvio.disabled = true;
+                    btnEnvio.innerHTML = '<span class="material-symbols-outlined">location_off</span> Ubicaci\u00f3n requerida';
+                    var errorMsg = document.createElement("div");
+                    errorMsg.className = "bg-error-contenedor texto-error redondeado-xl p-4 mb-4 texto-body-sm";
+                    errorMsg.innerHTML = '<span class="material-symbols-outlined align-middle mr-2" style="font-size: 18px;">error</span><span>Encu\u00e9ntralo necesita acceso a tu ubicaci\u00f3n para funcionar</span>';
+                    form.insertBefore(errorMsg, form.firstChild);
                   } else if (!altaPrecision && (error.code === 3 || error.code === 2)) {
                     // WiFi/torre falló -> reintentar con GPS
                     intentar(true);
@@ -223,7 +226,7 @@
                     alert(mensaje);
                   }
                 },
-                { enableHighAccuracy: altaPrecision, timeout: altaPrecision ? 15000 : 8000 }
+                { enableHighAccuracy: altaPrecision, timeout: altaPrecision ? 8000 : 5000 }
               );
             }
             // Primero intentar sin alta precisión (WiFi, rápido)
@@ -382,8 +385,8 @@
             </script>
             <!-- CAMPOS OCULTOS (LATITUD, LONGITUD, LÍMITE)-->
             <div>
-              <input type="hidden" step="any" id="latitud" th:field="*{latitud}" required>
-              <input type="hidden" step="any" id="longitud" th:field="*{longitud}" required>
+              <input type="hidden" step="any" id="latitud" th:field="*{latitud}">
+              <input type="hidden" step="any" id="longitud" th:field="*{longitud}">
               <input type="hidden" id="limite" th:field="*{limite}" value="50">
             </div>
             <div class="pt-6 border-t borde-superficie">
@@ -405,7 +408,7 @@
                     navigator.geolocation.getCurrentPosition(function(pos) {
                       document.getElementById('latitud').value = pos.coords.latitude;
                       document.getElementById('longitud').value = pos.coords.longitude;
-                    }, function() {}, { enableHighAccuracy: false, timeout: 10000 });
+                    }, function() {}, { enableHighAccuracy: false, timeout: 5000 });
                     return;
                   }
                   result.onchange = function() {
@@ -413,7 +416,7 @@
                       navigator.geolocation.getCurrentPosition(function(pos) {
                         document.getElementById('latitud').value = pos.coords.latitude;
                         document.getElementById('longitud').value = pos.coords.longitude;
-                      }, function() {}, { enableHighAccuracy: false, timeout: 10000 });
+                      }, function() {}, { enableHighAccuracy: false, timeout: 5000 });
                     }
                   };
                 });
@@ -454,9 +457,12 @@
                     },
                     (error) => {
                       if (error.code === 1) {
-                        btnEnvio.disabled = false;
-                        btnEnvio.innerHTML = textoOriginal;
-                        alert("Permiso de ubicación denegado. Actívalo en la configuración del navegador.");
+                        btnEnvio.disabled = true;
+                        btnEnvio.innerHTML = '<span class="material-symbols-outlined">location_off</span> Ubicaci\u00f3n requerida';
+                        var errorMsg = document.createElement("div");
+                        errorMsg.className = "bg-error-contenedor texto-error redondeado-xl p-4 mb-4 texto-body-sm";
+                        errorMsg.innerHTML = '<span class="material-symbols-outlined align-middle mr-2" style="font-size: 18px;">error</span><span>Encu\u00e9ntralo necesita acceso a tu ubicaci\u00f3n para funcionar</span>';
+                        form.insertBefore(errorMsg, form.firstChild);
                       } else if (!altaPrecision && (error.code === 3 || error.code === 2)) {
                         intentar(true);
                       } else {
@@ -468,7 +474,7 @@
                         alert(mensaje);
                       }
                     },
-                    { enableHighAccuracy: altaPrecision, timeout: altaPrecision ? 15000 : 8000 }
+                { enableHighAccuracy: altaPrecision, timeout: altaPrecision ? 8000 : 5000 }
                   );
                 }
 
