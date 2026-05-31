@@ -52,7 +52,7 @@ public class BusquedaController {
     @GetMapping("/buscar")
     public String getIndex(Model model) {
         // Búsqueda de ejemplo
-        SolicitudBusqueda solicitud = new SolicitudBusqueda("Restaurante", 0, 0, maxResults, 20000);
+        SolicitudBusqueda solicitud = new SolicitudBusqueda("", 0, 0, maxResults, 20000);
         model.addAttribute("busqueda", solicitud);
         model.addAttribute("testMode", mocking);
         return "busquedas";
