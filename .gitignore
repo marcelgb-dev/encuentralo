@@ -23,10 +23,7 @@
 hs_err_pid*
 replay_pid*
 
-target/classes/application.properties
 .mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
 *.pem
 *.env
 
@@ -44,5 +41,4 @@ target/classes/application.properties
 /docker/mysql/data/
 /target/
 *.iml
-target/classes/application.properties
 .vscode/launch.json
